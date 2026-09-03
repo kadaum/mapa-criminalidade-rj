@@ -1,0 +1,26 @@
+import fs from 'node:fs/promises';
+
+const snapshot = JSON.parse(await fs.readFile(new URL('../public/data/crime-rio-snapshot.json', import.meta.url), 'utf8'));
+const boundaries = JSON.parse(await fs.readFile(new URL('../public/data/cisp-rio.geojson', import.meta.url), 'utf8'));
+const errors = []; const warnings = [];
+const required = ['roubo_rua', 'roubo_celular', 'roubo_veiculo', 'furto_veiculos', 'letalidade_violenta', 'hom_doloso', 'estupro'];
+const keys = new Set();
+for (const row of snapshot.rows) {
+  const key = `${row.cisp}:${row.period}`; if (keys.has(key)) errors.push(`duplicate:${key}`); keys.add(key);
+  for (const metric of required) { const value = row.values[metric]; if (!Number.isInteger(value) || value < 0) errors.push(`invalid:${key}:${metric}:${value}`); }
+}
+const latestRows = snapshot.rows.filter((row) => row.period === snapshot.latestPeriod);
+const dataCisps = new Set(latestRows.map((row) => Number(row.cisp)));
+const geoCisps = new Set(boundaries.features.map((feature) => Number(feature.properties.cisp)));
+if (dataCisps.size !== 41) errors.push(`latest CISP count is ${dataCisps.size}, expected 41`);
+if (geoCisps.size !== 41) errors.push(`geometry CISP count is ${geoCisps.size}, expected 41`);
+for (const cisp of dataCisps) if (!geoCisps.has(cisp)) errors.push(`missing geometry:${cisp}`);
+for (const cisp of geoCisps) if (!dataCisps.has(cisp)) errors.push(`geometry without latest data:${cisp}`);
+const periodCounts = Object.groupBy(snapshot.rows, (row) => row.period);
+for (const [period, rows] of Object.entries(periodCounts)) if (rows.length !== 41) errors.push(`period ${period} has ${rows.length} rows`);
+const [year, month] = snapshot.latestPeriod.split('-').map(Number); const ageDays = Math.floor((Date.now() - Date.UTC(year, month, 1)) / 86400000);
+if (ageDays > 93) warnings.push(`latest competence is ${ageDays} days old`);
+if (snapshot.latestPhase.includes(2)) warnings.push('latest competence is phase 2 (consolidated without quarterly errata)');
+if (!snapshot.source.sha256 || snapshot.source.sha256.length !== 64) errors.push('missing source SHA-256');
+if (errors.length) { console.error(JSON.stringify({ status: 'failed', errors: [...new Set(errors)], warnings }, null, 2)); process.exit(1); }
+console.log(JSON.stringify({ status: 'passed', latestPeriod: snapshot.latestPeriod, rows: snapshot.rows.length, cispCount: dataCisps.size, geometryCount: geoCisps.size, sourceSha256: snapshot.source.sha256, warnings }, null, 2));
