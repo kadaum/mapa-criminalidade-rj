@@ -11,6 +11,8 @@ O produto responde uma pergunta estreita: **o que mudou nos registros comunicado
 - Limites territoriais: [ISP-RJ](https://www.ispdados.rj.gov.br/Conteudo.html).
 - Relação oficial entre CISP e bairros: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/Relacao_RISPxAISPxCISP.csv).
 - Limites municipais de bairros: [Prefeitura do Rio](https://services1.arcgis.com/OlP4dGNtIcnD3RYf/ArcGIS/rest/services/db_MI_Bairros/FeatureServer/0).
+- População residente por setor censitário: [IBGE, Censo 2022](https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html?edicao=41852&t=resultados).
+- A população por CISP é derivada ao atribuir cada setor à CISP de 2026 com maior área de interseção. Os 13.782 setores somam 6.211.223 residentes, exatamente o total municipal do Censo 2022.
 - O site consulta o CSV oficial e mantém cache por seis horas. Se a fonte falhar, usa o último snapshot validado.
 - O snapshot registra ETag, Last-Modified, SHA-256, bytes e horário de coleta.
 
@@ -25,7 +27,7 @@ npm run dev
 
 ## Validação
 
-`npm run validate:data` bloqueia a publicação se houver duplicidade de CISP/mês, valor negativo ou não inteiro, quebra no conjunto de colunas, CISP sem geometria, geometria sem CISP atual, menos de 41 áreas da capital ou falta do hash da fonte.
+`npm run validate:data` bloqueia a publicação se houver duplicidade de CISP/mês, valor negativo ou não inteiro, quebra no conjunto de colunas, CISP sem geometria, geometria sem CISP atual, menos de 41 áreas da capital, população sem reconciliação ou falta do hash da fonte.
 
 O workflow em `.github/workflows/update-data.yml` consulta a fonte diariamente, valida, recompila e versiona o snapshot apenas quando o arquivo muda.
 
@@ -33,6 +35,8 @@ O workflow em `.github/workflows/update-data.yml` consulta a fonte diariamente, 
 
 - Dizer “registros comunicados à polícia”, não “crimes que aconteceram”.
 - Mostrar competência e fase de revisão.
+- Manter quantidade bruta como leitura principal; taxa por 100 mil é uma comparação auxiliar baseada na população residente do Censo 2022.
+- Explicar que a taxa não corrige população flutuante em áreas centrais, turísticas ou de transporte.
 - Nunca misturar casos e vítimas.
 - Suprimir variação percentual quando as duas janelas somam menos de 20 registros.
 - Não oferecer score, previsão, GPS ou rota segura.
