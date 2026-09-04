@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 import type { ExpressionSpecification, Map as MapLibreMap, MapGeoJSONFeature } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import Link from 'next/link';
@@ -19,6 +20,7 @@ type CispProperties = { cisp: number; aisp?: number; current?: number; previous?
 type HoverState = { x: number; y: number; cisp: number; current: number; change: number | null };
 
 const overviewIds = ['total_roubos', 'total_furtos', 'letalidade_violenta', 'estelionato'] as const;
+maplibregl.setWorkerUrl(maplibreWorkerUrl);
 const mapStyle = {
   version: 8 as const,
   sources: { osm: { type: 'raster' as const, tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap contributors' } },
