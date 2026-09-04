@@ -123,6 +123,7 @@ const populationCheckpoints = new Map([
   [1, 1381],
   [5, 27300],
   [7, 39890],
+  [19, 126703],
   [43, 230698],
 ]);
 for (const [cisp, expected] of populationCheckpoints) {
