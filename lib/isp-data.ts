@@ -2,6 +2,9 @@ const SOURCE_URL = 'https://www.ispdados.rj.gov.br/Arquivos/BaseDPEvolucaoMensal
 const LANDING_PAGE = 'https://www.ispdados.rj.gov.br/EstSeguranca.html';
 
 export const indicators = [
+  { id: 'total_roubos', label: 'Total de roubos', unit: 'casos', note: 'Agregado oficial do ISP-RJ; não somamos novamente seus componentes.' },
+  { id: 'total_furtos', label: 'Total de furtos', unit: 'casos', note: 'Agregado oficial do ISP-RJ; não somamos novamente seus componentes.' },
+  { id: 'estelionato', label: 'Estelionato', unit: 'casos', note: 'A localização do registro não representa necessariamente exposição territorial ao golpe.' },
   { id: 'roubo_rua', label: 'Roubo de rua', unit: 'casos', note: 'Soma oficial de roubo a transeunte, de celular e em coletivo.' },
   { id: 'roubo_celular', label: 'Roubo de celular', unit: 'casos' },
   { id: 'roubo_em_coletivo', label: 'Roubo em coletivo', unit: 'casos' },
@@ -10,7 +13,11 @@ export const indicators = [
   { id: 'furto_celular', label: 'Furto de celular', unit: 'casos' },
   { id: 'letalidade_violenta', label: 'Letalidade violenta', unit: 'vítimas', note: 'Use o agregado fornecido pelo ISP; não reconstruímos a categoria.' },
   { id: 'hom_doloso', label: 'Homicídio doloso', unit: 'vítimas' },
+  { id: 'tentat_hom', label: 'Tentativa de homicídio', unit: 'vítimas' },
+  { id: 'hom_por_interv_policial', label: 'Morte por intervenção de agente do Estado', unit: 'vítimas' },
   { id: 'estupro', label: 'Estupro', unit: 'vítimas' },
+  { id: 'ameaca', label: 'Ameaça', unit: 'vítimas' },
+  { id: 'pessoas_desaparecidas', label: 'Pessoas desaparecidas', unit: 'vítimas', note: 'A CISP do registro não indica onde a pessoa se encontra.' },
 ] as const;
 
 function parseDelimited(text: string) {
