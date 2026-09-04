@@ -48,7 +48,7 @@ O ISP publica `PopulacaoEvolucaoMensalCisp.csv`, mas a série termina em julho d
 
 ## Cadência da população
 
-A população é uma base fixa do Censo 2022, não um feed mensal. O fluxo deve monitorar mudanças no SHP oficial das CISPs e nos arquivos definitivos do IBGE e recalcular somente quando um desses insumos mudar. Atualizar apenas a estimativa municipal não melhoraria a distribuição entre CISPs.
+A população é uma base fixa do Censo 2022, não um feed mensal. O workflow monitora automaticamente `Last-Modified` e `ETag` do SHP oficial das CISPs e bloqueia a rotina quando o limite muda. O recálculo só deve ocorrer com a geometria completa quando um insumo oficial mudar; atualizar apenas a estimativa municipal não melhoraria a distribuição entre CISPs.
 
 ## Definições
 

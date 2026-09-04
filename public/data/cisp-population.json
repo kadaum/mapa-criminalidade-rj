@@ -9,7 +9,8 @@
     "geometryUrl": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/malha_com_atributos/setores/gpkg/UF/RJ/RJ_setores_CD2022.gpkg",
     "methodologyUrl": "https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html?edicao=41852&t=resultados",
     "cispBoundaryUrl": "https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar",
-    "cispBoundaryLastModified": "Fri, 14 Aug 2026 15:12:06 GMT"
+    "cispBoundaryLastModified": "Fri, 14 Aug 2026 15:12:06 GMT",
+    "cispBoundaryEtag": "\"0a7af44ff2bdd1:0\""
   },
   "method": "Os setores do município do Rio foram dissolvidos por CD_SETOR e atribuídos à geometria oficial completa da CISP de 2026 com a maior área de interseção em EPSG:31983. A população V0001 de cada setor foi somada uma única vez; a geometria simplificada de exibição não é usada no cálculo.",
   "audit": {

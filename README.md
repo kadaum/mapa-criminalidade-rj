@@ -31,6 +31,8 @@ npm run dev
 
 O workflow em `.github/workflows/update-data.yml` consulta a fonte diariamente, valida, recompila e versiona o snapshot apenas quando o arquivo muda.
 
+A mesma rotina verifica `Last-Modified` e `ETag` do SHP oficial das CISPs. Se o limite territorial mudar, ela falha de forma explícita e exige o recálculo populacional com a geometria completa antes de aceitar uma nova publicação. A população não é interpolada mensalmente.
+
 ## Princípios editoriais
 
 - Dizer “registros comunicados à polícia”, não “crimes que aconteceram”.
