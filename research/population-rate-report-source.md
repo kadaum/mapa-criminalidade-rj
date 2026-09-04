@@ -4,7 +4,7 @@ Data da verificação: 04/09/2026.
 
 ## Decisão
 
-O mapa deve manter a quantidade bruta como visualização principal e oferecer a taxa por 100 mil residentes como leitura auxiliar. A taxa corrige diferenças de população residente entre CISPs, mas não corrige fluxo diário de trabalhadores, turistas, passageiros ou visitantes.
+O mapa deve abrir na taxa por 100 mil residentes, mantendo quantidade bruta e população usada sempre visíveis. A taxa corrige diferenças de população residente entre CISPs, mas não corrige fluxo diário de trabalhadores, turistas, passageiros ou visitantes.
 
 ## Fonte populacional adotada
 
@@ -12,7 +12,8 @@ O mapa deve manter a quantidade bruta como visualização principal e oferecer a
 - Arquivo básico atualizado em 20/05/2026: `Agregados_por_setores_basico_BR_20260520.zip`.
 - Variável: `V0001`, total de pessoas.
 - Geometria: malha oficial dos setores censitários de 2022 para o Rio de Janeiro.
-- Método: dissolver geometrias multipartes por `CD_SETOR`, atribuir cada setor à CISP de 2026 com a maior área de interseção e somar a população uma única vez.
+- Limite policial: SHP oficial completo das CISPs de 2026, publicado pelo ISP-RJ em `CISPshp.rar`.
+- Método: dissolver geometrias multipartes por `CD_SETOR`, atribuir cada setor à geometria oficial completa da CISP com a maior área de interseção em EPSG:31983 e somar a população uma única vez. A geometria simplificada de exibição não entra no cálculo.
 
 ## Auditoria do cruzamento
 
@@ -20,7 +21,9 @@ O mapa deve manter a quantidade bruta como visualização principal e oferecer a
 - 41 CISPs cobertas.
 - 6.211.223 residentes na origem.
 - 6.211.223 residentes atribuídos.
-- Três setores sem interseção, todos com população zero.
+- Um setor sem interseção, com população zero.
+
+Uma auditoria em 04/09/2026 identificou que a primeira versão havia usado a geometria simplificada do mapa. O recálculo com o SHP oficial completo alterou 22 das 41 distribuições sem mudar o total municipal. Exemplos: CISP 1, 1.652 → 1.381; CISP 5, 26.151 → 27.300; CISP 7, 43.421 → 39.890; CISP 43 permaneceu em 230.698.
 
 O script reprodutível está em `scripts/derive-census-population.py`; o resultado publicado está em `public/data/cisp-population.json` e é verificado por `scripts/validate-data.mjs`.
 
@@ -36,6 +39,17 @@ O ISP publica `PopulacaoEvolucaoMensalCisp.csv`, mas a série termina em julho d
 - Interface: janelas de 1, 3, 6 ou 12 meses e escolha do mês final dentro dos 36 meses carregados.
 - Atualização do produto: consulta automática com cache de seis horas; a competência oficial continua sendo publicada mensalmente.
 
+## Visão geral e agrupamento
+
+- `registro_ocorrencias` é a visão geral oficial dos registros de ocorrência válidos para as estatísticas do ISP.
+- O campo não é “total de crimes”: um registro pode conter mais de um título e também existem fatos não criminais.
+- Total de roubos, total de furtos, roubo de rua e letalidade violenta são agregados que se sobrepõem a seus componentes; nunca devem ser somados.
+- Casos e vítimas também não devem ser combinados.
+
+## Cadência da população
+
+A população é uma base fixa do Censo 2022, não um feed mensal. O fluxo deve monitorar mudanças no SHP oficial das CISPs e nos arquivos definitivos do IBGE e recalcular somente quando um desses insumos mudar. Atualizar apenas a estimativa municipal não melhoraria a distribuição entre CISPs.
+
 ## Definições
 
 - Roubo de rua: roubo a transeunte + roubo de celular + roubo em coletivo.
@@ -49,5 +63,6 @@ O ISP publica `PopulacaoEvolucaoMensalCisp.csv`, mas a série termina em julho d
 - https://www.ispdados.rj.gov.br/metodDivulDados.html
 - https://www.ispdados.rj.gov.br/Populacao.html
 - https://www.ispdados.rj.gov.br/metodologiaCalPopulacao.html
+- https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar
 - https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html?edicao=41852&t=resultados
 - https://www.ibge.gov.br/cidades-e-estados/rj/rio-de-janeiro.html

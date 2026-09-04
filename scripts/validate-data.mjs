@@ -33,6 +33,7 @@ const population = JSON.parse(
 const errors = [];
 const warnings = [];
 const required = [
+  'registro_ocorrencias',
   'total_roubos',
   'total_furtos',
   'estelionato',
@@ -113,6 +114,26 @@ if (population.audit.sectorCount !== 13782)
   errors.push(
     `sector count is ${population.audit.sectorCount}, expected 13782`,
   );
+if (
+  population.source.cispBoundaryUrl !==
+  'https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar'
+)
+  errors.push('population was not derived from the official full CISP shape');
+const populationCheckpoints = new Map([
+  [1, 1381],
+  [5, 27300],
+  [7, 39890],
+  [43, 230698],
+]);
+for (const [cisp, expected] of populationCheckpoints) {
+  const actual = population.records.find(
+    (record) => record.cisp === cisp,
+  )?.population;
+  if (actual !== expected)
+    errors.push(
+      `population checkpoint ${cisp} is ${actual}, expected ${expected}`,
+    );
+}
 if (neighborhoods.features.length < 160)
   errors.push(
     `neighborhood geometry count is ${neighborhoods.features.length}, expected at least 160`,

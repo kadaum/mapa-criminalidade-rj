@@ -15,10 +15,12 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import {
   ArrowDownRight,
   ArrowUpRight,
+  CalendarRange,
   Database,
   FileText,
   Info,
   MapPinned,
+  RotateCcw,
   Share2,
   Users,
 } from 'lucide-react';
@@ -33,7 +35,9 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -136,12 +140,42 @@ type HoverState = {
 type ViewMode = 'quantity' | 'rate' | 'variation';
 
 const overviewIds = [
+  'registro_ocorrencias',
   'total_roubos',
   'total_furtos',
   'letalidade_violenta',
-  'estelionato',
 ] as const;
 const windowOptions = [1, 3, 6, 12] as const;
+const indicatorGroups = [
+  {
+    label: 'Visão geral',
+    ids: ['registro_ocorrencias'],
+  },
+  {
+    label: 'Patrimônio',
+    ids: ['total_roubos', 'total_furtos', 'estelionato'],
+  },
+  {
+    label: 'Tipos de roubo',
+    ids: ['roubo_rua', 'roubo_celular', 'roubo_em_coletivo', 'roubo_veiculo'],
+  },
+  {
+    label: 'Tipos de furto',
+    ids: ['furto_veiculos', 'furto_celular'],
+  },
+  {
+    label: 'Vida e integridade',
+    ids: [
+      'letalidade_violenta',
+      'hom_doloso',
+      'tentat_hom',
+      'hom_por_interv_policial',
+      'estupro',
+      'ameaca',
+    ],
+  },
+  { label: 'Outros alertas', ids: ['pessoas_desaparecidas'] },
+] as const;
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 const mapStyle = {
@@ -240,6 +274,14 @@ function metricColorExpression(
   property: 'current' | 'rate',
   breaks: number[],
 ): ExpressionSpecification {
+  if (!breaks.length) {
+    return [
+      'case',
+      ['>=', ['coalesce', ['get', property], 0], 0],
+      '#e4e1da',
+      '#e4e1da',
+    ];
+  }
   const expression: unknown[] = [
     'step',
     ['coalesce', ['get', property], 0],
@@ -310,9 +352,9 @@ export function CrimeExplorer() {
   );
   const [hover, setHover] = useState<HoverState | null>(null);
   const [loadError, setLoadError] = useState(false);
-  const [indicator, setIndicator] = useState('total_roubos');
+  const [indicator, setIndicator] = useState('registro_ocorrencias');
   const [selectedCisp, setSelectedCisp] = useState(16);
-  const [viewMode, setViewMode] = useState<ViewMode>('quantity');
+  const [viewMode, setViewMode] = useState<ViewMode>('rate');
   const [windowMonths, setWindowMonths] = useState<number>(12);
   const [endPeriod, setEndPeriod] = useState('');
   const [urlReady, setUrlReady] = useState(false);
@@ -332,9 +374,9 @@ export function CrimeExplorer() {
       setViewMode(
         requestedView === 'variacao'
           ? 'variation'
-          : requestedView === 'taxa'
-            ? 'rate'
-            : 'quantity',
+          : requestedView === 'quantidade'
+            ? 'quantity'
+            : 'rate',
       );
       setUrlReady(true);
     }, 0);
@@ -343,10 +385,10 @@ export function CrimeExplorer() {
 
   useEffect(() => {
     const loadSnapshot = async (): Promise<Snapshot> => {
-      const live = await fetch('/api/crime?v=3');
+      const live = await fetch('/api/crime?v=4');
       if (live.ok) {
         const data = (await live.json()) as Snapshot;
-        if (data.indicators.some((item) => item.id === 'total_roubos'))
+        if (data.indicators.some((item) => item.id === 'registro_ocorrencias'))
           return data;
       }
       const fallback = await fetch('/data/crime-rio-snapshot.json');
@@ -391,7 +433,7 @@ export function CrimeExplorer() {
         : [],
     [snapshot],
   );
-  const minimumEndIndex = Math.max(0, windowMonths * 2 - 1);
+  const minimumEndIndex = Math.max(0, windowMonths - 1);
   const requestedEndIndex = endPeriod
     ? periods.indexOf(endPeriod)
     : periods.length - 1;
@@ -419,6 +461,8 @@ export function CrimeExplorer() {
         : [],
     [periods, endIndex, windowMonths],
   );
+  const hasPreviousComparison =
+    previousPeriods.length === currentPeriods.length;
   const availableEndPeriods = periods.slice(minimumEndIndex);
   const periodRange =
     currentPeriods.length === 1
@@ -464,12 +508,7 @@ export function CrimeExplorer() {
     [populationData],
   );
   const stats = useMemo(() => {
-    if (
-      !snapshot ||
-      !populationData ||
-      !currentPeriods.length ||
-      previousPeriods.length !== currentPeriods.length
-    )
+    if (!snapshot || !populationData || !currentPeriods.length)
       return [] as AreaStat[];
     const currentWindow = new Set(currentPeriods);
     const previousWindow = new Set(previousPeriods);
@@ -491,7 +530,7 @@ export function CrimeExplorer() {
           current,
           previous,
           change:
-            current + previous >= 20 && previous > 0
+            hasPreviousComparison && current + previous >= 20 && previous > 0
               ? ((current - previous) / previous) * 100
               : null,
           latest: sum(
@@ -510,6 +549,7 @@ export function CrimeExplorer() {
     indicator,
     effectiveEndPeriod,
     populationByCisp,
+    hasPreviousComparison,
   ]);
 
   const metricProperty = viewMode === 'rate' ? 'rate' : 'current';
@@ -601,7 +641,7 @@ export function CrimeExplorer() {
         source: 'cisp',
         paint: {
           'fill-color': mapColorRef.current,
-          'fill-opacity': 0.7,
+          'fill-opacity': 0.62,
           'fill-color-transition': { duration: reducedMotion ? 0 : 320 },
         },
       });
@@ -740,7 +780,6 @@ export function CrimeExplorer() {
   const territoryByCisp = new Map(
     territories?.records.map((record) => [record.cisp, record]) ?? [],
   );
-  const maxMetric = Math.max(0, ...stats.map((item) => item[metricProperty]));
   const chartPeriods = periods.slice(Math.max(0, endIndex - 11), endIndex + 1);
   const selectedSeries = (
     snapshot?.rows.filter(
@@ -765,7 +804,7 @@ export function CrimeExplorer() {
       label: meta?.label ?? id,
       current,
       change:
-        current + previous >= 20 && previous > 0
+        hasPreviousComparison && current + previous >= 20 && previous > 0
           ? ((current - previous) / previous) * 100
           : null,
     };
@@ -783,6 +822,13 @@ export function CrimeExplorer() {
         url: window.location.href,
       });
     else await navigator.clipboard.writeText(`${text} ${window.location.href}`);
+  }
+
+  function resetView() {
+    setIndicator('registro_ocorrencias');
+    setViewMode('rate');
+    setWindowMonths(12);
+    setEndPeriod('');
   }
 
   if (loadError)
@@ -832,21 +878,21 @@ export function CrimeExplorer() {
         <div className="grid gap-4 border-b border-[#15313d]/15 pb-5 lg:grid-cols-[minmax(260px,0.7fr)_minmax(0,1.3fr)] lg:items-end">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#52717a]">
-              Visão geral da cidade
+              Registros de segurança no Rio
             </p>
             <h1 className="mt-1 max-w-xl font-heading text-3xl font-semibold leading-tight tracking-[-0.035em] md:text-4xl">
-              Onde há mais registros?
+              Compare as regiões de forma mais justa
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-              Comece pela quantidade e, se quiser comparar áreas de tamanhos
-              diferentes, alterne para ocorrências por 100 mil residentes.
+              O mapa começa por registros a cada 100 mil moradores. A quantidade
+              bruta continua sempre visível para dar contexto.
             </p>
           </div>
-          <div className="flex gap-x-6 gap-y-3 overflow-x-auto pb-1 lg:grid lg:grid-cols-4 lg:overflow-visible">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-4 pb-1 lg:grid-cols-4 lg:gap-x-6">
             {overview.map((item) => (
               <div
                 key={item.id}
-                className={`relative min-w-[160px] border-l-2 py-1 pl-3 pr-7 transition-colors ${indicator === item.id ? 'border-[#e2af4a]' : 'border-[#15313d]/18 hover:border-[#52717a]'}`}
+                className={`relative min-w-0 border-l-2 py-1 pl-3 pr-7 transition-colors ${indicator === item.id ? 'border-[#e2af4a]' : 'border-[#15313d]/18 hover:border-[#52717a]'}`}
               >
                 <button
                   type="button"
@@ -883,68 +929,148 @@ export function CrimeExplorer() {
           </div>
         </div>
 
-        <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_350px]">
-          <section className="relative order-1 h-[65vh] min-h-[560px] overflow-hidden border border-[#15313d]/18 bg-[#d9e3e2] lg:h-[calc(100vh-245px)] lg:min-h-[680px]">
-            <div ref={mapNode} className="h-full w-full" />
-            <div className="absolute left-3 right-14 top-3 grid max-w-[850px] grid-cols-2 gap-2 bg-[#f5f1e8]/94 p-3 shadow-sm backdrop-blur md:right-auto md:grid-cols-[minmax(220px,1fr)_104px_142px_auto] md:items-end">
-              <div className="col-span-2 min-w-0 md:col-span-1">
+        <details
+          aria-label="Filtros do mapa"
+          className="group mt-5 border border-[#15313d]/15 bg-card shadow-sm"
+        >
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-4 xl:hidden">
+            <span className="min-w-0">
+              <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                Filtros do mapa
+              </span>
+              <span className="mt-1 block truncate text-sm font-semibold">
+                {selectedIndicator?.label ?? 'Carregando…'} ·{' '}
+                {viewMode === 'rate'
+                  ? 'por 100 mil'
+                  : viewMode === 'quantity'
+                    ? 'quantidade'
+                    : 'mudança'}
+              </span>
+              <span className="block text-xs text-muted-foreground">
+                {windowLabel(windowMonths)} · até{' '}
+                {effectiveEndPeriod ? formatPeriod(effectiveEndPeriod) : '—'}
+              </span>
+            </span>
+            <span className="shrink-0 text-xs font-semibold text-[#315e59] group-open:hidden">
+              Alterar
+            </span>
+            <span className="hidden shrink-0 text-xs font-semibold text-[#315e59] group-open:inline">
+              Fechar
+            </span>
+          </summary>
+          <div className="hidden p-4 pt-0 group-open:block xl:block xl:pt-4">
+            <div className="flex flex-wrap items-start justify-between gap-2 border-b border-[#15313d]/10 pb-3">
+              <div>
+                <p className="text-sm font-semibold">Monte sua comparação</p>
+                <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <CalendarRange className="size-3.5" /> Período analisado:{' '}
+                  {periodRange}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={resetView}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#315e59] hover:underline"
+              >
+                <RotateCcw className="size-3.5" /> Voltar ao padrão
+              </button>
+            </div>
+            <div className="mt-3 grid gap-4 xl:grid-cols-[minmax(240px,1.15fr)_minmax(360px,1.35fr)_minmax(300px,1fr)_170px]">
+              <div className="min-w-0">
                 <label
                   htmlFor="indicator-select"
-                  className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
                 >
-                  Tipo de ocorrência
+                  O que você quer ver?
                 </label>
                 <Select
                   value={indicator}
-                  onValueChange={(value) => setIndicator(String(value))}
+                  onValueChange={(value) => value && setIndicator(value)}
                 >
                   <SelectTrigger
                     id="indicator-select"
-                    className="h-9 w-full border-[#15313d]/20 bg-white/70"
+                    className="h-10 w-full border-[#15313d]/20 bg-background"
                   >
-                    <SelectValue />
+                    <SelectValue>
+                      {selectedIndicator?.label ?? 'Carregando indicadores…'}
+                    </SelectValue>
                   </SelectTrigger>
-                  <SelectContent>
-                    {snapshot?.indicators.map((item) => (
-                      <SelectItem key={item.id} value={item.id}>
-                        {item.label}
-                      </SelectItem>
+                  <SelectContent className="min-w-[280px]">
+                    {indicatorGroups.map((group) => (
+                      <SelectGroup key={group.label}>
+                        <SelectLabel className="font-semibold uppercase tracking-[0.08em]">
+                          {group.label}
+                        </SelectLabel>
+                        {group.ids.map((id) => {
+                          const item = snapshot?.indicators.find(
+                            (candidate) => candidate.id === id,
+                          );
+                          return item ? (
+                            <SelectItem key={item.id} value={item.id}>
+                              {item.label}
+                            </SelectItem>
+                          ) : null;
+                        })}
+                      </SelectGroup>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <label
-                  htmlFor="window-select"
-                  className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
-                >
-                  Período
-                </label>
-                <Select
-                  value={String(windowMonths)}
-                  onValueChange={(value) => setWindowMonths(Number(value))}
-                >
-                  <SelectTrigger
-                    id="window-select"
-                    className="h-9 border-[#15313d]/20 bg-white/70"
+                <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  Como comparar as regiões?
+                </p>
+                <div className="grid min-h-10 grid-cols-3 border border-[#15313d]/20 bg-background p-0.5">
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('rate')}
+                    aria-pressed={viewMode === 'rate'}
+                    className={`px-2 py-1.5 text-[10px] font-semibold leading-4 transition-colors ${viewMode === 'rate' ? 'bg-[#15313d] text-white' : 'text-muted-foreground hover:text-foreground'}`}
                   >
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {windowOptions.map((months) => (
-                      <SelectItem key={months} value={String(months)}>
-                        {windowLabel(months)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                    Por 100 mil moradores
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('quantity')}
+                    aria-pressed={viewMode === 'quantity'}
+                    className={`px-2 py-1.5 text-[10px] font-semibold leading-4 transition-colors ${viewMode === 'quantity' ? 'bg-[#15313d] text-white' : 'text-muted-foreground hover:text-foreground'}`}
+                  >
+                    Quantidade de registros
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('variation')}
+                    aria-pressed={viewMode === 'variation'}
+                    className={`px-2 py-1.5 text-[10px] font-semibold leading-4 transition-colors ${viewMode === 'variation' ? 'bg-[#15313d] text-white' : 'text-muted-foreground hover:text-foreground'}`}
+                  >
+                    Mudança no período
+                  </button>
+                </div>
+              </div>
+              <div>
+                <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  Qual período analisar?
+                </p>
+                <div className="grid h-10 grid-cols-4 border border-[#15313d]/20 bg-background p-0.5">
+                  {windowOptions.map((months) => (
+                    <button
+                      key={months}
+                      type="button"
+                      onClick={() => setWindowMonths(months)}
+                      aria-pressed={windowMonths === months}
+                      className={`px-1 text-[10px] font-semibold transition-colors ${windowMonths === months ? 'bg-[#315e59] text-white' : 'text-muted-foreground hover:text-foreground'}`}
+                    >
+                      {windowLabel(months)}
+                    </button>
+                  ))}
+                </div>
               </div>
               <div>
                 <label
                   htmlFor="end-select"
-                  className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
                 >
-                  Até o mês
+                  Terminando em
                 </label>
                 <Select
                   value={effectiveEndPeriod}
@@ -952,9 +1078,13 @@ export function CrimeExplorer() {
                 >
                   <SelectTrigger
                     id="end-select"
-                    className="h-9 border-[#15313d]/20 bg-white/70"
+                    className="h-10 w-full border-[#15313d]/20 bg-background"
                   >
-                    <SelectValue />
+                    <SelectValue>
+                      {effectiveEndPeriod
+                        ? formatPeriod(effectiveEndPeriod)
+                        : '—'}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {[...availableEndPeriods].reverse().map((period) => (
@@ -965,45 +1095,37 @@ export function CrimeExplorer() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="col-span-2 md:col-span-1">
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Cor do mapa
-                </p>
-                <div className="flex h-9 border border-[#15313d]/20 bg-white/70 p-0.5">
-                  <button
-                    type="button"
-                    onClick={() => setViewMode('quantity')}
-                    aria-pressed={viewMode === 'quantity'}
-                    className={`px-2 text-[10px] font-semibold transition-colors ${viewMode === 'quantity' ? 'bg-[#15313d] text-white' : 'text-muted-foreground hover:text-foreground'}`}
-                  >
-                    Quantidade
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setViewMode('rate')}
-                    aria-pressed={viewMode === 'rate'}
-                    className={`px-2 text-[10px] font-semibold transition-colors ${viewMode === 'rate' ? 'bg-[#15313d] text-white' : 'text-muted-foreground hover:text-foreground'}`}
-                  >
-                    Por 100 mil
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setViewMode('variation')}
-                    aria-pressed={viewMode === 'variation'}
-                    className={`px-2 text-[10px] font-semibold transition-colors ${viewMode === 'variation' ? 'bg-[#15313d] text-white' : 'text-muted-foreground hover:text-foreground'}`}
-                  >
-                    Variação
-                  </button>
-                </div>
-              </div>
             </div>
+            {viewMode === 'rate' && (
+              <p className="mt-3 border-l-2 border-[#e2af4a] pl-3 text-[11px] leading-5 text-muted-foreground">
+                <strong className="text-foreground">
+                  Base de comparação: moradores do Censo 2022.
+                </strong>{' '}
+                A taxa ajuda a comparar áreas de tamanhos diferentes, mas áreas
+                centrais ou turísticas podem receber muito mais pessoas do que
+                as que moram nelas.
+              </p>
+            )}
+            {!hasPreviousComparison && (
+              <p className="mt-3 text-[11px] leading-5 text-muted-foreground">
+                A quantidade e a taxa continuam disponíveis. A mudança
+                percentual não aparece porque este mês não possui uma janela
+                anterior completa dentro dos 36 meses carregados.
+              </p>
+            )}
+          </div>
+        </details>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_350px]">
+          <section className="relative order-1 h-[60vh] min-h-[500px] overflow-hidden border border-[#15313d]/18 bg-[#d9e3e2] lg:h-[calc(100vh-330px)] lg:min-h-[620px]">
+            <div ref={mapNode} className="h-full w-full" />
 
             {hover && (
               <div
                 className="pointer-events-none absolute z-10 min-w-[210px] max-w-[270px] border border-[#15313d]/15 bg-[#15313d] px-3 py-2 text-[#f5f1e8] shadow-xl"
                 style={{
                   left: `min(calc(100% - 280px), ${hover.x + 14}px)`,
-                  top: Math.max(170, hover.y - 28),
+                  top: Math.max(16, hover.y - 28),
                 }}
               >
                 <p className="text-[10px] uppercase tracking-[0.1em] text-[#b9d9de]">
@@ -1048,29 +1170,37 @@ export function CrimeExplorer() {
                 <>
                   <p className="mb-1.5 font-semibold">
                     {viewMode === 'rate'
-                      ? 'Registros por 100 mil residentes'
+                      ? 'Registros por 100 mil moradores'
                       : `Quantidade · ${windowLabel(windowMonths)}`}
                   </p>
-                  <div
-                    className="h-2 w-44"
-                    style={{
-                      background: `linear-gradient(90deg, ${quantityPalette.join(', ')})`,
-                    }}
-                  />
-                  <div className="mt-1 flex justify-between text-[9px] text-muted-foreground">
-                    <span>menos</span>
-                    <span>
-                      {maxMetric.toLocaleString('pt-BR', {
-                        maximumFractionDigits: viewMode === 'rate' ? 1 : 0,
-                      })}
-                      {viewMode === 'rate'
-                        ? ' / 100 mil'
-                        : ` ${selectedIndicator?.unit}`}
-                    </span>
+                  <div className="flex w-52">
+                    {quantityPalette.map((color) => (
+                      <span
+                        key={color}
+                        className="h-2 flex-1"
+                        style={{ backgroundColor: color }}
+                      />
+                    ))}
                   </div>
+                  <div className="mt-1 flex w-52 justify-between text-[9px] text-muted-foreground">
+                    <span>menor faixa</span>
+                    <span>maior faixa</span>
+                  </div>
+                  {breaks.length > 0 && (
+                    <p className="mt-1 max-w-52 text-[9px] leading-4 text-muted-foreground">
+                      Cortes entre faixas:{' '}
+                      {breaks
+                        .map((value) =>
+                          value.toLocaleString('pt-BR', {
+                            maximumFractionDigits: viewMode === 'rate' ? 1 : 0,
+                          }),
+                        )
+                        .join(' · ')}
+                    </p>
+                  )}
                   {viewMode === 'rate' && (
                     <p className="mt-1 text-[9px] text-muted-foreground">
-                      População residente · Censo 2022
+                      Taxa do período · Censo 2022
                     </p>
                   )}
                 </>
@@ -1079,7 +1209,6 @@ export function CrimeExplorer() {
           </section>
 
           <motion.aside
-            key={`${selectedCisp}-${indicator}-${effectiveEndPeriod}-${windowMonths}`}
             initial={reducedMotion ? false : { opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.25 }}
@@ -1088,14 +1217,15 @@ export function CrimeExplorer() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Área selecionada · fase{' '}
-                  {snapshot?.latestPhase?.join('/') ?? '—'}
+                  Região selecionada
                 </p>
-                <h2 className="mt-1 font-heading text-3xl font-semibold tracking-tight">
-                  CISP {selectedCisp}
+                <h2 className="mt-1 font-heading text-xl font-semibold leading-6 tracking-tight">
+                  {selectedTerritory?.territorialUnit ??
+                    `Área da ${selectedCisp}ª delegacia`}
                 </h2>
-                <p className="text-sm text-muted-foreground">
-                  Circunscrição da {selectedCisp}ª DP
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Área da {selectedCisp}ª delegacia · CISP {selectedCisp} ·
+                  dados fase {snapshot?.latestPhase?.join('/') ?? '—'}
                 </p>
               </div>
               <div
@@ -1109,67 +1239,82 @@ export function CrimeExplorer() {
                 {selected ? fmtChange(selected.change) : '—'}
               </div>
             </div>
-            <div className="mt-5 border-l-2 border-[#e2af4a] pl-3">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-                Bairros desta CISP
-              </p>
-              <p className="mt-1 text-sm font-medium leading-5">
-                {selectedTerritory?.territorialUnit ??
-                  'Carregando relação territorial…'}
-              </p>
-              <p className="mt-1 text-[10px] leading-4 text-muted-foreground">
-                Os limites brancos são bairros oficiais. O total criminal
-                permanece agregado para toda a CISP.
-              </p>
-            </div>
-            <div className="mt-6">
+            <div className="mt-5 border-t border-[#15313d]/10 pt-4">
               <div className="flex items-center gap-2">
-                <p className="text-xs text-muted-foreground">
+                <p className="text-sm font-semibold">
                   {selectedIndicator?.label}
                 </p>
                 <IndicatorInfo indicator={selectedIndicator} compact />
               </div>
-              <p className="mt-1 font-heading text-4xl font-semibold tabular-nums">
-                {selected?.current.toLocaleString('pt-BR') ?? '—'}{' '}
-                <span className="text-sm font-normal text-muted-foreground">
-                  {selectedIndicator?.unit}
-                </span>
-              </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                em {periodRange} · contra{' '}
-                {selected?.previous.toLocaleString('pt-BR') ?? '—'} no período
-                equivalente anterior
+                {periodRange}
               </p>
             </div>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <div className="bg-[#edf1ee] p-3">
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <div
+                className={`p-3 ${viewMode === 'rate' ? 'border-2 border-[#315e59] bg-[#e8efed]' : 'border border-[#15313d]/10 bg-[#edf1ee]'}`}
+              >
+                <p className="text-[9px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  Por 100 mil moradores
+                </p>
+                <p className="mt-1 font-heading text-2xl font-semibold tabular-nums">
+                  {selected?.rate.toLocaleString('pt-BR', {
+                    maximumFractionDigits: 1,
+                  }) ?? '—'}
+                </p>
+                <p className="text-[9px] text-muted-foreground">
+                  taxa no período
+                </p>
+              </div>
+              <div
+                className={`p-3 ${viewMode === 'quantity' ? 'border-2 border-[#315e59] bg-[#e8efed]' : 'border border-[#15313d]/10 bg-[#edf1ee]'}`}
+              >
+                <p className="text-[9px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  Quantidade registrada
+                </p>
+                <p className="mt-1 font-heading text-2xl font-semibold tabular-nums">
+                  {selected?.current.toLocaleString('pt-BR') ?? '—'}
+                </p>
+                <p className="text-[9px] text-muted-foreground">
+                  {selectedIndicator?.unit} no período
+                </p>
+              </div>
+              <div className="border border-[#15313d]/10 bg-[#edf1ee] p-3">
                 <p className="flex items-center gap-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                  <Users className="size-3" /> Residentes
+                  <Users className="size-3" /> Moradores
                 </p>
                 <p className="mt-1 font-heading text-lg font-semibold tabular-nums">
                   {selected?.population.toLocaleString('pt-BR') ?? '—'}
                 </p>
                 <p className="text-[9px] text-muted-foreground">Censo 2022</p>
               </div>
-              <div className="bg-[#edf1ee] p-3">
+              <div
+                className={`p-3 ${viewMode === 'variation' ? 'border-2 border-[#315e59] bg-[#e8efed]' : 'border border-[#15313d]/10 bg-[#edf1ee]'}`}
+              >
                 <p className="text-[9px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                  Taxa no período
+                  Mudança
                 </p>
                 <p className="mt-1 font-heading text-lg font-semibold tabular-nums">
-                  {selected?.rate.toLocaleString('pt-BR', {
-                    maximumFractionDigits: 1,
-                  }) ?? '—'}
+                  {selected ? fmtChange(selected.change) : '—'}
                 </p>
                 <p className="text-[9px] text-muted-foreground">
-                  por 100 mil residentes
+                  vs. período anterior
                 </p>
               </div>
             </div>
             <p className="mt-2 text-[10px] leading-4 text-muted-foreground">
-              A taxa ajuda a comparar áreas de populações diferentes, mas pode
-              superestimar regiões centrais, turísticas ou de transporte, onde
-              circulam muitos não residentes.
+              A quantidade anterior foi{' '}
+              {selected?.previous.toLocaleString('pt-BR') ?? '—'}. A população é
+              específica desta CISP; a taxa não mede pessoas em circulação.
             </p>
+            {selected && selected.population < 50000 && (
+              <p className="mt-3 border-l-2 border-[#be714f] bg-[#f7eee8] px-3 py-2 text-[10px] leading-4 text-[#6e3b2d]">
+                <strong>Denominador pequeno:</strong> esta CISP tem apenas{' '}
+                {selected.population.toLocaleString('pt-BR')} moradores no Censo
+                2022. Fluxo de trabalhadores, turistas e passageiros pode elevar
+                muito a taxa; leia sempre junto com a quantidade.
+              </p>
+            )}
             <div className="mt-6 border-y border-[#15313d]/12 py-5">
               <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
                 <span>

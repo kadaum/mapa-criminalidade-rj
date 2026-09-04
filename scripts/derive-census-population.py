@@ -1,10 +1,12 @@
 """Reproduz a população Censo 2022 por CISP.
 
 Uso:
-  python scripts/derive-census-population.py RJ_setores_CD2022.gpkg Agregados_por_setores_basico_BR.csv public/data/cisp-rio.geojson
+  python scripts/derive-census-population.py RJ_setores_CD2022.gpkg Agregados_por_setores_basico_BR.csv /tmp/CISPshp/cisp.shp
 
 Requer geopandas, pandas e pyogrio. O resultado é impresso em JSON para revisão;
 o arquivo publicado permanece versionado e passa pelas validações do projeto.
+Use sempre o SHP oficial completo do ISP no terceiro argumento. A geometria
+simplificada usada pelo site serve apenas para exibição e distorce fronteiras.
 """
 
 from __future__ import annotations

@@ -23,6 +23,14 @@ const KEEP_MONTHS = 36;
 
 const indicators = [
   {
+    id: 'registro_ocorrencias',
+    label: 'Registros de ocorrência',
+    unit: 'casos',
+    definition:
+      'Registros de ocorrência válidos para as estatísticas do ISP no mês. Um registro pode conter mais de um título e também há fatos não criminais; por isso este número não é um “total de crimes”.',
+    note: 'Visão geral oficial do volume de registros policiais. Não some os indicadores abaixo: agregados e componentes se sobrepõem.',
+  },
+  {
     id: 'total_roubos',
     label: 'Total de roubos',
     unit: 'casos',

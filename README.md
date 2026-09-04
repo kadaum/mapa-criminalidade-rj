@@ -12,7 +12,7 @@ O produto responde uma pergunta estreita: **o que mudou nos registros comunicado
 - Relação oficial entre CISP e bairros: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/Relacao_RISPxAISPxCISP.csv).
 - Limites municipais de bairros: [Prefeitura do Rio](https://services1.arcgis.com/OlP4dGNtIcnD3RYf/ArcGIS/rest/services/db_MI_Bairros/FeatureServer/0).
 - População residente por setor censitário: [IBGE, Censo 2022](https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html?edicao=41852&t=resultados).
-- A população por CISP é derivada ao atribuir cada setor à CISP de 2026 com maior área de interseção. Os 13.782 setores somam 6.211.223 residentes, exatamente o total municipal do Censo 2022.
+- A população por CISP é derivada com o [SHP oficial completo das CISPs de 2026](https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar), atribuindo cada setor à CISP com maior área de interseção. Os 13.782 setores somam 6.211.223 residentes, exatamente o total municipal do Censo 2022. A geometria simplificada do mapa nunca entra nesse cálculo.
 - O site consulta o CSV oficial e mantém cache por seis horas. Se a fonte falhar, usa o último snapshot validado.
 - O snapshot registra ETag, Last-Modified, SHA-256, bytes e horário de coleta.
 
@@ -35,7 +35,9 @@ O workflow em `.github/workflows/update-data.yml` consulta a fonte diariamente, 
 
 - Dizer “registros comunicados à polícia”, não “crimes que aconteceram”.
 - Mostrar competência e fase de revisão.
-- Manter quantidade bruta como leitura principal; taxa por 100 mil é uma comparação auxiliar baseada na população residente do Censo 2022.
+- Abrir o mapa em taxa por 100 mil, mantendo quantidade bruta, população usada e ressalva de população flutuante sempre visíveis.
+- Usar `registro_ocorrencias` como visão geral oficial, com o rótulo “Registros de ocorrência”; nunca chamar esse campo de “total de crimes”.
+- Organizar os demais indicadores em grupos de navegação, sem somá-los: agregados e componentes se sobrepõem.
 - Explicar que a taxa não corrige população flutuante em áreas centrais, turísticas ou de transporte.
 - Nunca misturar casos e vítimas.
 - Suprimir variação percentual quando as duas janelas somam menos de 20 registros.

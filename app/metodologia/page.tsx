@@ -123,8 +123,9 @@ export default function Methodology() {
             Cada um dos 13.782 setores do município foi atribuído à CISP de 2026
             com a maior área de interseção, e sua população foi somada uma única
             vez. O resultado cobre as 41 CISPs e reconcilia exatamente com os
-            6.211.223 residentes do município; três setores sem interseção
-            continham zero morador.
+            6.211.223 residentes do município; um setor sem interseção continha
+            zero morador. O cálculo usa o SHP oficial completo da CISP; a
+            geometria simplificada exibida no mapa não entra na atribuição.
           </p>
           <p className="mt-3">
             A taxa é{' '}
@@ -149,6 +150,12 @@ export default function Methodology() {
             >
               CSV atualizado do IBGE
             </a>
+            <a
+              className="source-link"
+              href="https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar"
+            >
+              SHP completo das CISPs
+            </a>
           </div>
         </section>
 
@@ -161,6 +168,14 @@ export default function Methodology() {
             Roubo de rua soma roubo a transeunte, de celular e em coletivo.
             Letalidade violenta soma homicídio doloso, morte por intervenção de
             agente do Estado, latrocínio e lesão corporal seguida de morte.
+          </p>
+          <p className="mt-3">
+            A visão geral usa o campo oficial <code>registro_ocorrencias</code>,
+            que conta registros de ocorrência válidos para as estatísticas. Ele
+            não é um “total de crimes”: um registro pode conter mais de um
+            título, também há fatos não criminais, e os indicadores detalhados
+            se sobrepõem. Por isso o mapa agrupa, mas nunca soma, essas
+            métricas.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
             <a
@@ -218,6 +233,12 @@ export default function Methodology() {
             A fase 2 significa consolidado sem errata; a fase 3 indica que a
             rodada de erratas foi incorporada. Números antigos podem mudar por
             correção de duplicidade, título ou local.
+          </p>
+          <p className="mt-3">
+            A população é uma fotografia fixa do Censo 2022. Ela só deve ser
+            recalculada quando o IBGE revisar o insumo ou quando o ISP mudar os
+            limites oficiais das CISPs; não existe atualização populacional
+            mensal por CISP com a mesma qualidade.
           </p>
         </section>
 
