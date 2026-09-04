@@ -38,7 +38,7 @@ export function CrimeExplorer() {
   const [selectedCisp, setSelectedCisp] = useState(() => { if (typeof window === 'undefined') return 16; const value = Number(new URLSearchParams(window.location.search).get('cisp')); return Number.isFinite(value) && value > 0 ? value : 16; });
 
   useEffect(() => {
-    const loadSnapshot = async (): Promise<Snapshot> => { const live = await fetch('/api/crime'); if (live.ok) return live.json() as Promise<Snapshot>; const fallback = await fetch('/data/crime-rio-snapshot.json'); if (!fallback.ok) throw new Error('No data source'); return fallback.json() as Promise<Snapshot>; };
+    const loadSnapshot = async (): Promise<Snapshot> => { const live = await fetch('/api/crime?v=2'); if (live.ok) { const data = await live.json() as Snapshot; if (data.indicators.some((item) => item.id === 'total_roubos')) return data; } const fallback = await fetch('/data/crime-rio-snapshot.json'); if (!fallback.ok) throw new Error('No data source'); return fallback.json() as Promise<Snapshot>; };
     Promise.all([loadSnapshot(), fetch('/data/cisp-rio.geojson').then((response) => response.json() as Promise<FeatureCollection<Geometry, CispProperties>>)]).then(([data, geo]) => { setSnapshot(data); setBoundaries(geo); }).catch(() => setLoadError(true));
   }, []);
   useEffect(() => { selectedCispRef.current = selectedCisp; const url = new URL(window.location.href); url.searchParams.set('cisp', String(selectedCisp)); url.searchParams.set('indicador', indicator); window.history.replaceState(null, '', url); }, [selectedCisp, indicator]);
