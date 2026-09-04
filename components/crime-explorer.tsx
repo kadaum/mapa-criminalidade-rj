@@ -817,7 +817,7 @@ export function CrimeExplorer() {
     const text = `${selectedIndicator?.label ?? 'Registros'} na CISP ${selectedCisp} (${selectedTerritory?.territorialUnit ?? 'área da delegacia'}): ${selected?.current.toLocaleString('pt-BR') ?? '—'} em ${periodRange}${rateText}. Total da CISP, não de cada bairro. Dados oficiais ISP-RJ.`;
     if (navigator.share)
       await navigator.share({
-        title: 'Mapa Aberto RJ',
+        title: 'Mapa da Criminalidade RJ',
         text,
         url: window.location.href,
       });
@@ -856,7 +856,7 @@ export function CrimeExplorer() {
             </div>
             <div>
               <p className="font-heading text-base font-semibold tracking-tight">
-                Mapa Aberto RJ
+                Mapa da Criminalidade RJ
               </p>
               <p className="text-[11px] text-muted-foreground">
                 Atlas cívico dos registros policiais

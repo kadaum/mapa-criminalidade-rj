@@ -1,4 +1,4 @@
-# Mapa Aberto RJ — pesquisa de interface e experiência cartográfica
+# Mapa da Criminalidade RJ — pesquisa de interface e experiência cartográfica
 
 Data: 4 de setembro de 2026  
 Público: produto, design, engenharia e colaboradores open source  

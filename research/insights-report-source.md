@@ -1,4 +1,4 @@
-# Mapa Aberto RJ — relatório-fonte de insights e evolução visual
+# Mapa da Criminalidade RJ — relatório-fonte de insights e evolução visual
 
 Data da verificação: 04/09/2026.
 
@@ -119,4 +119,3 @@ Arquitetura recomendada: MapLibre para o mapa, CSS/Motion para a interface e D3 
 - [IBGE — dicionário da renda](https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_Rendimento_do_Responsavel/dicionario_de_dados_renda_responsavel_20260508.xlsx)
 - [ISP-RJ — limites oficiais das CISPs](https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar)
 - [Governo do RJ — balanço da Operação Contenção](https://www.rj.gov.br/radioroquettepinto/node/12539)
-

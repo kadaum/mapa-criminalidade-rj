@@ -13,19 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Mapa Aberto RJ — Monitor territorial de registros policiais',
-  description: 'Compare mudanças nos registros policiais por área de delegacia no município do Rio, com fonte, período e limitações visíveis.',
+  title: 'Mapa da Criminalidade RJ — Registros policiais oficiais por região',
+  description: 'Explore a criminalidade registrada por área de delegacia no município do Rio, com dados oficiais, período, população e limitações visíveis.',
   openGraph: {
-    title: 'Mapa Aberto RJ',
-    description: 'O que mudou na segurança da sua região? Registros oficiais por CISP, com contexto e limitações.',
+    title: 'Mapa da Criminalidade RJ',
+    description: 'Registros policiais oficiais por região do Rio, com contexto, período e limitações.',
     type: 'website',
     locale: 'pt_BR',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Mapa Aberto RJ — O que mudou na segurança da sua região?' }],
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Mapa da Criminalidade RJ — Registros policiais oficiais por região' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mapa Aberto RJ',
-    description: 'Registros oficiais por área policial, com período, fonte e limitações visíveis.',
+    title: 'Mapa da Criminalidade RJ',
+    description: 'Registros policiais oficiais por região do Rio, com período, população e limitações visíveis.',
     images: ['/og.png'],
   },
 };

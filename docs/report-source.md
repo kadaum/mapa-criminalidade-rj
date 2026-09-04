@@ -1,4 +1,4 @@
-# Mapa Aberto RJ — relatório-fonte
+# Mapa da Criminalidade RJ — relatório-fonte
 
 **Audiência:** moradores engajados, associações, imprensa local e controle social.  
 **Data:** 03/09/2026.  

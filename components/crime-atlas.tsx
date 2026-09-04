@@ -470,6 +470,12 @@ export function CrimeAtlas() {
     shouldMoveRef.current = false;
   }, [selectedCisp, boundaries, reducedMotion]);
 
+  useEffect(() => {
+    if (display !== 'map') return;
+    const frame = window.requestAnimationFrame(() => mapRef.current?.resize());
+    return () => window.cancelAnimationFrame(frame);
+  }, [display]);
+
   function chooseCisp(cisp: number) {
     shouldMoveRef.current = true;
     setSelectedCisp(cisp);
@@ -499,7 +505,7 @@ export function CrimeAtlas() {
 
   async function share() {
     const text = `${indicatorMeta?.label ?? 'Registros'} em ${selectedTerritory?.territorialUnit ?? `CISP ${selectedCisp}`}: ${selected?.current.toLocaleString('pt-BR') ?? '—'} no período (${selected?.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) ?? '—'} por 100 mil residentes). Dados ISP-RJ.`;
-    if (navigator.share) await navigator.share({ title: 'Mapa Aberto RJ', text, url: window.location.href });
+    if (navigator.share) await navigator.share({ title: 'Mapa da Criminalidade RJ', text, url: window.location.href });
     else await navigator.clipboard.writeText(`${text} ${window.location.href}`);
   }
 
@@ -535,7 +541,7 @@ export function CrimeAtlas() {
     <main className="min-h-screen bg-[#f4f7f8] text-[#14323c]">
       <header className="sticky top-0 z-40 border-b border-[#d8e2e5]/90 bg-[#f4f7f8]/92 px-4 py-3 backdrop-blur-xl md:px-6">
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4">
-          <a href="/" className="flex items-center gap-3 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b6473]"><BrandMark /><span><span className="block text-[15px] font-bold tracking-[-0.02em]">Mapa Aberto <span className="text-[#1b6473]">RJ</span></span><span className="hidden text-xs text-[#6b7f86] sm:block">Informação pública para entender o território</span></span></a>
+          <a href="/" className="flex items-center gap-3 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b6473]"><BrandMark /><span><span className="block text-[15px] font-bold tracking-[-0.02em]">Mapa da Criminalidade <span className="text-[#1b6473]">RJ</span></span><span className="hidden text-xs text-[#6b7f86] sm:block">Registros policiais oficiais por região</span></span></a>
           <nav className="flex items-center gap-2 text-xs">
             <span className="hidden items-center gap-2 rounded-full bg-white px-3 py-2 text-[#5e737c] shadow-[0_1px_0_rgba(20,50,60,.08)] md:flex"><span className="size-2 rounded-full bg-[#4e9f82]" /> Dados até {snapshot ? formatPeriod(snapshot.latestPeriod) : '—'}</span>
             <a href="/metodologia" className="rounded-full px-3 py-2 font-semibold text-[#1b6473] transition hover:bg-white">Método</a>
@@ -546,9 +552,9 @@ export function CrimeAtlas() {
       <div className="mx-auto max-w-[1500px] px-4 pb-10 pt-5 md:px-6 md:pt-7">
         <section className="mb-4 flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div>
-            <p className="mb-1 text-xs font-semibold text-[#1b6473]">Registros de segurança no município do Rio</p>
-            <h1 className="max-w-3xl text-[clamp(1.55rem,3vw,2.25rem)] font-semibold leading-[1.12] tracking-[-0.04em]">Veja como os registros mudam em cada região</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#60757d]">Compare taxas, quantidades e evolução mensal nas 41 áreas de delegacia. O nome dos bairros vem primeiro; a CISP explica o recorte oficial.</p>
+            <p className="mb-1 text-xs font-semibold text-[#1b6473]">Dados oficiais de segurança pública do Rio</p>
+            <h1 className="max-w-3xl text-[clamp(1.55rem,3vw,2.25rem)] font-semibold leading-[1.12] tracking-[-0.04em]">Veja como a criminalidade registrada muda em cada região</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#60757d]">Explore registros policiais oficiais do ISP-RJ por taxa, quantidade e evolução mensal. Os números mostram fatos comunicados à polícia, não toda a criminalidade que ocorreu.</p>
           </div>
           <div className="relative w-full lg:w-[390px]">
             <label htmlFor="area-search" className="sr-only">Busque um bairro ou região</label>
@@ -570,8 +576,8 @@ export function CrimeAtlas() {
         <section className="mt-4 overflow-hidden rounded-[22px] border border-[#d8e2e5] bg-white shadow-[0_22px_65px_rgba(20,50,60,.09)] lg:grid lg:grid-cols-[minmax(0,1fr)_370px]">
           <div className="relative min-h-[560px] lg:min-h-[680px]">
             <div className="absolute left-3 top-3 z-20 flex rounded-xl border border-[#d8e2e5] bg-white/94 p-1 shadow-lg backdrop-blur md:left-4 md:top-4"><button type="button" onClick={() => setDisplay('map')} aria-pressed={display === 'map'} className={`flex min-h-9 items-center gap-2 rounded-lg px-3 text-xs font-semibold ${display === 'map' ? 'bg-[#14323c] text-white' : 'text-[#5e737c]'}`}><MapIcon className="size-3.5" /> Mapa</button><button type="button" onClick={() => setDisplay('list')} aria-pressed={display === 'list'} className={`flex min-h-9 items-center gap-2 rounded-lg px-3 text-xs font-semibold ${display === 'list' ? 'bg-[#14323c] text-white' : 'text-[#5e737c]'}`}><List className="size-3.5" /> Lista</button></div>
+            <div aria-hidden={display !== 'map'} className={`absolute inset-0 transition-opacity duration-200 ${display === 'map' ? 'opacity-100' : 'pointer-events-none opacity-0'}`}><div ref={mapNode} role="application" aria-label={`${indicatorMeta?.label ?? 'Registros'} por CISP, ${periodRange}`} className="h-full w-full" /></div>
             {display === 'map' ? <>
-              <div className="absolute inset-0"><div ref={mapNode} role="application" aria-label={`${indicatorMeta?.label ?? 'Registros'} por CISP, ${periodRange}`} className="h-full w-full" /></div>
               <button type="button" onClick={resetMap} className="absolute right-3 top-3 z-20 grid size-10 place-items-center rounded-xl border border-[#d8e2e5] bg-white/94 text-[#1b6473] shadow-lg backdrop-blur md:right-4 md:top-4" aria-label="Voltar ao mapa inteiro"><RotateCcw className="size-4" /></button>
               {hoverStat && hoveredCisp && <div ref={tooltipRef} style={{ left: 24, top: 80 }} className="pointer-events-none absolute z-30 hidden w-[280px] rounded-2xl bg-[#14323c] p-4 text-white shadow-2xl lg:block"><p className="text-sm font-semibold leading-5">{territoryByCisp.get(hoveredCisp)?.territorialUnit}</p><p className="mt-0.5 text-xs text-white/65">CISP {hoveredCisp}</p><div className="mt-3 flex items-end justify-between"><strong className="text-2xl tabular-nums">{viewMode === 'rate' ? hoverStat.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : hoverStat.current.toLocaleString('pt-BR')}</strong><span className="pb-1 text-xs text-white/65">{viewMode === 'rate' ? 'por 100 mil' : displayUnit}</span></div></div>}
               <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-2xl border border-[#d8e2e5] bg-white/94 p-3 shadow-lg backdrop-blur md:bottom-4 md:left-4">

@@ -37,7 +37,7 @@ export default function Methodology() {
           O que o mapa mede — e o que ele não pode prometer.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          O Mapa Aberto RJ transforma uma série oficial mensal por circunscrição
+          O Mapa da Criminalidade RJ transforma uma série oficial mensal por circunscrição
           policial em comparações auditáveis. Ele não estima a probabilidade de
           uma pessoa sofrer um crime e não recomenda rotas.
         </p>

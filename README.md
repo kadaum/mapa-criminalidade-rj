@@ -1,4 +1,4 @@
-# Mapa Aberto RJ
+# Mapa da Criminalidade RJ
 
 Monitor territorial open source de registros policiais por CISP no município do Rio de Janeiro.
 
