@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
-import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import type { ExpressionSpecification, Map as MapLibreMap, MapGeoJSONFeature } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import Link from 'next/link';
