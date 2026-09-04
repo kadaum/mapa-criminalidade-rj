@@ -12,7 +12,7 @@
     "sync:data": "node scripts/sync-data.mjs",
     "check:population-source": "node scripts/check-population-source.mjs",
     "validate:data": "node scripts/validate-data.mjs",
-    "lint": "oxlint app components/crime-explorer.tsx lib scripts",
+    "lint": "oxlint app components/crime-atlas.tsx lib scripts",
     "format": "oxfmt"
   },
   "dependencies": {
