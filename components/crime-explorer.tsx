@@ -44,9 +44,12 @@ function quantityColorExpression(breaks: number[]): ExpressionSpecification { co
 export function CrimeExplorer() {
   const mapNode = useRef<HTMLDivElement>(null); const mapRef = useRef<MapLibreMap | null>(null); const selectedCispRef = useRef(16); const userSelectedRef = useRef(false); const reducedMotion = useReducedMotion();
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null); const [boundaries, setBoundaries] = useState<FeatureCollection<Geometry, CispProperties> | null>(null); const [neighborhoodBoundaries, setNeighborhoodBoundaries] = useState<FeatureCollection<Geometry, NeighborhoodProperties> | null>(null); const [territories, setTerritories] = useState<TerritoryData | null>(null); const [hover, setHover] = useState<HoverState | null>(null); const [loadError, setLoadError] = useState(false);
-  const [indicator, setIndicator] = useState(() => typeof window === 'undefined' ? 'total_roubos' : new URLSearchParams(window.location.search).get('indicador') || 'total_roubos');
-  const [selectedCisp, setSelectedCisp] = useState(() => { if (typeof window === 'undefined') return 16; const value = Number(new URLSearchParams(window.location.search).get('cisp')); return Number.isFinite(value) && value > 0 ? value : 16; });
-  const [viewMode, setViewMode] = useState<ViewMode>(() => typeof window === 'undefined' || new URLSearchParams(window.location.search).get('visualizacao') !== 'variacao' ? 'quantity' : 'variation');
+  const [indicator, setIndicator] = useState('total_roubos');
+  const [selectedCisp, setSelectedCisp] = useState(16);
+  const [viewMode, setViewMode] = useState<ViewMode>('quantity');
+  const [urlReady, setUrlReady] = useState(false);
+
+  useEffect(() => { const timer = window.setTimeout(() => { const params = new URLSearchParams(window.location.search); const cisp = Number(params.get('cisp')); const requestedIndicator = params.get('indicador'); if (Number.isFinite(cisp) && cisp > 0) setSelectedCisp(cisp); if (requestedIndicator) setIndicator(requestedIndicator); setViewMode(params.get('visualizacao') === 'variacao' ? 'variation' : 'quantity'); setUrlReady(true); }, 0); return () => window.clearTimeout(timer); }, []);
 
   useEffect(() => {
     const loadSnapshot = async (): Promise<Snapshot> => { const live = await fetch('/api/crime?v=2'); if (live.ok) { const data = await live.json() as Snapshot; if (data.indicators.some((item) => item.id === 'total_roubos')) return data; } const fallback = await fetch('/data/crime-rio-snapshot.json'); if (!fallback.ok) throw new Error('No data source'); return fallback.json() as Promise<Snapshot>; };
@@ -57,7 +60,7 @@ export function CrimeExplorer() {
       fetch('/data/cisp-neighborhoods.json').then((response) => response.json() as Promise<TerritoryData>),
     ]).then(([data, geo, neighborhoodGeo, territoryData]) => { setSnapshot(data); setBoundaries(geo); setNeighborhoodBoundaries(neighborhoodGeo); setTerritories(territoryData); }).catch(() => setLoadError(true));
   }, []);
-  useEffect(() => { selectedCispRef.current = selectedCisp; const url = new URL(window.location.href); url.searchParams.set('cisp', String(selectedCisp)); url.searchParams.set('indicador', indicator); url.searchParams.set('visualizacao', viewMode === 'quantity' ? 'quantidade' : 'variacao'); window.history.replaceState(null, '', url); }, [selectedCisp, indicator, viewMode]);
+  useEffect(() => { selectedCispRef.current = selectedCisp; if (!urlReady) return; const url = new URL(window.location.href); url.searchParams.set('cisp', String(selectedCisp)); url.searchParams.set('indicador', indicator); url.searchParams.set('visualizacao', viewMode === 'quantity' ? 'quantidade' : 'variacao'); window.history.replaceState(null, '', url); }, [selectedCisp, indicator, viewMode, urlReady]);
 
   const periods = useMemo(() => snapshot ? [...new Set(snapshot.rows.map((row) => row.period))].sort() : [], [snapshot]); const currentPeriods = useMemo(() => periods.slice(-12), [periods]); const previousPeriods = useMemo(() => periods.slice(-24, -12), [periods]);
   const stats = useMemo(() => {
