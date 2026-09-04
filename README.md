@@ -9,6 +9,8 @@ O produto responde uma pergunta estreita: **o que mudou nos registros comunicado
 - Série mensal por CISP: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/BaseDPEvolucaoMensalCisp.csv).
 - Dicionário: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/BaseDpDicionarioDeVariaveis.xlsx).
 - Limites territoriais: [ISP-RJ](https://www.ispdados.rj.gov.br/Conteudo.html).
+- Relação oficial entre CISP e bairros: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/Relacao_RISPxAISPxCISP.csv).
+- Limites municipais de bairros: [Prefeitura do Rio](https://services1.arcgis.com/OlP4dGNtIcnD3RYf/ArcGIS/rest/services/db_MI_Bairros/FeatureServer/0).
 - O site consulta o CSV oficial e mantém cache por seis horas. Se a fonte falhar, usa o último snapshot validado.
 - O snapshot registra ETag, Last-Modified, SHA-256, bytes e horário de coleta.
 

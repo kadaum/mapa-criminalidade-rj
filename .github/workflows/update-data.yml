@@ -23,12 +23,12 @@ jobs:
       - run: npm run build
       - name: Registrar novo snapshot quando a fonte mudar
         run: |
-          if git diff --quiet -- public/data/crime-rio-snapshot.json; then
+          if git diff --quiet -- public/data/crime-rio-snapshot.json public/data/cisp-neighborhoods.json public/data/neighborhoods-rio.geojson; then
             echo "Sem mudança no arquivo oficial"
             exit 0
           fi
           git config user.name "mapa-aberto-rj-bot"
           git config user.email "mapa-aberto-rj-bot@users.noreply.github.com"
-          git add public/data/crime-rio-snapshot.json
-          git commit -m "data: atualizar snapshot ISP-RJ"
+          git add public/data/crime-rio-snapshot.json public/data/cisp-neighborhoods.json public/data/neighborhoods-rio.geojson
+          git commit -m "data: atualizar dados territoriais do Rio"
           git push
