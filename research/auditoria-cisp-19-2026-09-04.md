@@ -7,7 +7,7 @@ Data da reprodução: 04/09/2026.
 - Região oficial: Alto da Boa Vista e Tijuca (parte), CISP 19.
 - Período: agosto de 2025 a julho de 2026.
 - Registros de ocorrência válidos: 13.075.
-- População usada: 126.703 residentes do Censo 2022.
+- População usada: estimativa de 126.703 residentes derivada dos setores do Censo 2022 cruzados com o limite oficial da CISP.
 - Taxa reproduzida: `13.075 / 126.703 × 100.000 = 10.319,4` registros por 100 mil residentes.
 
 O valor exibido está matematicamente correto. Ele não significa que 10,3% dos moradores sofreram crime: o numerador conta registros, não pessoas únicas, e o denominador não inclui trabalhadores, estudantes, turistas, passageiros ou outros frequentadores.
@@ -33,6 +33,8 @@ O valor exibido está matematicamente correto. Ele não significa que 10,3% dos 
 ## Auditoria espacial da população
 
 Os arquivos oficiais foram baixados novamente e o cruzamento foi reexecutado do zero. Os 299 setores atribuídos à CISP 19 somam 126.703 residentes. O recálculo das 41 CISPs coincidiu integralmente com o arquivo publicado: nenhuma diferença de população ou de quantidade de setores.
+
+O IBGE não publica diretamente uma população para a CISP 19. O valor de 126.703 é uma estimativa produzida pelo projeto a partir de dois insumos oficiais: população por setor censitário do IBGE e polígonos de CISP do ISP-RJ.
 
 Como CISP e setor censitário não têm limites perfeitamente coincidentes, o método atribui cada setor à CISP em que está sua maior área. Na CISP 19, 44 dos 299 setores tocam mais de uma CISP; em 16 setores, que somam 7.205 residentes, a maior sobreposição é menor que 90% do setor. Um teste alternativo distribuindo a população proporcionalmente à área estimou 125.910 residentes, diferença de 0,6%. Isso indica que o arredondamento territorial não explica a taxa elevada.
 
