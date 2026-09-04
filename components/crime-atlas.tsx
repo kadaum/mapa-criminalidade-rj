@@ -122,7 +122,6 @@ maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 const mapStyle = {
   version: 8 as const,
-  glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
   sources: {
     osm: {
       type: 'raster' as const,
@@ -252,6 +251,7 @@ export function CrimeAtlas() {
   const mapRef = useRef<MapLibreMap | null>(null);
   const selectedRef = useRef(16);
   const hoveredRef = useRef<number | null>(null);
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
   const shouldMoveRef = useRef(false);
   const reducedMotion = useReducedMotion();
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
@@ -419,7 +419,6 @@ export function CrimeAtlas() {
       map.addLayer({ id: 'cisp-line', type: 'line', source: 'cisp', paint: { 'line-color': '#254751', 'line-width': 1, 'line-opacity': 0.68 } });
       map.addLayer({ id: 'selected', type: 'line', source: 'cisp', filter: ['==', ['get', 'cisp'], selectedRef.current], paint: { 'line-color': '#d9a441', 'line-width': 4, 'line-blur': 0.2 } });
       map.addLayer({ id: 'cisp-circles', type: 'circle', source: 'points', paint: { 'circle-radius': ['get', 'radius'], 'circle-color': '#1b6473', 'circle-opacity': initialViewModeRef.current === 'quantity' ? 0.82 : 0, 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': initialViewModeRef.current === 'quantity' ? 1 : 0, 'circle-radius-transition': { duration: reducedMotion ? 0 : 260 }, 'circle-opacity-transition': { duration: reducedMotion ? 0 : 220 } } });
-      map.addLayer({ id: 'bairro-label', type: 'symbol', source: 'bairros', minzoom: 10.15, layout: { 'text-field': ['get', 'name'], 'text-size': ['interpolate', ['linear'], ['zoom'], 10.15, 10, 12, 12], 'text-font': ['Open Sans Regular'], 'text-max-width': 9, 'text-allow-overlap': false }, paint: { 'text-color': '#14323c', 'text-halo-color': '#f4f7f8', 'text-halo-width': 1.6 } });
       map.on('click', 'cisp-fill', (event) => {
         const cisp = Number(event.features?.[0]?.properties?.cisp);
         if (cisp) chooseCisp(cisp);
@@ -427,6 +426,16 @@ export function CrimeAtlas() {
       map.on('mousemove', 'cisp-fill', (event) => {
         const cisp = Number(event.features?.[0]?.properties?.cisp);
         if (!cisp) return;
+        const tooltipWidth = 280;
+        const tooltipHeight = 116;
+        const canvas = map.getCanvas();
+        const preferredX = event.point.x + 18;
+        const preferredY = event.point.y + 18;
+        if (tooltipRef.current) {
+          tooltipRef.current.style.left = `${Math.max(12, Math.min(preferredX, canvas.clientWidth - tooltipWidth - 12))}px`;
+          tooltipRef.current.style.top = `${Math.max(12, Math.min(preferredY, canvas.clientHeight - tooltipHeight - 12))}px`;
+        }
+        if (hoveredRef.current === cisp) return;
         if (hoveredRef.current != null) map.setFeatureState({ source: 'cisp', id: hoveredRef.current }, { hover: false });
         hoveredRef.current = cisp;
         map.setFeatureState({ source: 'cisp', id: cisp }, { hover: true });
@@ -564,13 +573,13 @@ export function CrimeAtlas() {
             {display === 'map' ? <>
               <div className="absolute inset-0"><div ref={mapNode} role="application" aria-label={`${indicatorMeta?.label ?? 'Registros'} por CISP, ${periodRange}`} className="h-full w-full" /></div>
               <button type="button" onClick={resetMap} className="absolute right-3 top-3 z-20 grid size-10 place-items-center rounded-xl border border-[#d8e2e5] bg-white/94 text-[#1b6473] shadow-lg backdrop-blur md:right-4 md:top-4" aria-label="Voltar ao mapa inteiro"><RotateCcw className="size-4" /></button>
-              {hoverStat && hoveredCisp && <div className="pointer-events-none absolute left-1/2 top-20 z-30 hidden w-[280px] -translate-x-1/2 rounded-2xl bg-[#14323c] p-4 text-white shadow-2xl md:block"><p className="truncate text-sm font-semibold">{territoryByCisp.get(hoveredCisp)?.territorialUnit}</p><p className="mt-0.5 text-xs text-white/65">CISP {hoveredCisp}</p><div className="mt-3 flex items-end justify-between"><strong className="text-2xl tabular-nums">{viewMode === 'rate' ? hoverStat.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : hoverStat.current.toLocaleString('pt-BR')}</strong><span className="pb-1 text-xs text-white/65">{viewMode === 'rate' ? 'por 100 mil' : indicatorMeta?.unit}</span></div></div>}
+              {hoverStat && hoveredCisp && <div ref={tooltipRef} style={{ left: 24, top: 80 }} className="pointer-events-none absolute z-30 hidden w-[280px] rounded-2xl bg-[#14323c] p-4 text-white shadow-2xl lg:block"><p className="text-sm font-semibold leading-5">{territoryByCisp.get(hoveredCisp)?.territorialUnit}</p><p className="mt-0.5 text-xs text-white/65">CISP {hoveredCisp}</p><div className="mt-3 flex items-end justify-between"><strong className="text-2xl tabular-nums">{viewMode === 'rate' ? hoverStat.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : hoverStat.current.toLocaleString('pt-BR')}</strong><span className="pb-1 text-xs text-white/65">{viewMode === 'rate' ? 'por 100 mil' : displayUnit}</span></div></div>}
               <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-2xl border border-[#d8e2e5] bg-white/94 p-3 shadow-lg backdrop-blur md:bottom-4 md:left-4">
-                <p className="text-xs font-semibold">{viewMode === 'rate' ? 'Registros por 100 mil moradores' : viewMode === 'quantity' ? 'Quantidade de registros' : 'Mudança frente ao período anterior'}</p>
+                <p className="text-xs font-semibold">{viewMode === 'rate' ? `${displayUnit ? displayUnit.charAt(0).toUpperCase() + displayUnit.slice(1) : 'Eventos'} por 100 mil moradores` : viewMode === 'quantity' ? `Quantidade de ${displayUnit ?? 'eventos'}` : 'Mudança frente ao período anterior'}</p>
                 {viewMode === 'variation' ? <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[#60757d]"><span className="flex items-center gap-1.5"><i className="size-3 rounded-sm bg-[#23647a]" /> Caiu</span><span className="flex items-center gap-1.5"><i className="size-3 rounded-sm bg-[#eef1ef]" /> Estável</span><span className="flex items-center gap-1.5"><i className="size-3 rounded-sm bg-[#bc6c3f]" /> Subiu</span><span className="flex items-center gap-1.5"><i className="size-3 rounded-sm bg-[#d7dfe1]" /> Sem comparação</span></div> : viewMode === 'quantity' ? <div className="mt-2 flex items-center gap-2 text-[11px] text-[#60757d]"><span className="size-3 rounded-full border border-white bg-[#1b6473]/80 ring-1 ring-[#1b6473]" /><span className="size-5 rounded-full border border-white bg-[#1b6473]/80 ring-1 ring-[#1b6473]" /><span className="size-8 rounded-full border border-white bg-[#1b6473]/80 ring-1 ring-[#1b6473]" /><span>círculo maior = mais registros</span></div> : <><div className="mt-2 flex w-56 overflow-hidden rounded-full">{palette.map((color) => <i key={color} className="h-2 flex-1" style={{ background: color }} />)}</div><div className="mt-1.5 flex justify-between text-[10px] text-[#60757d]"><span>menor faixa</span><span>maior faixa</span></div>{breaks.length > 0 && <p className="mt-1 text-[10px] text-[#60757d]">Cortes: {breaks.map((value) => value.toLocaleString('pt-BR', { maximumFractionDigits: 1 })).join(' · ')}</p>}</>}
                 <p className="mt-1 text-[10px] text-[#60757d]">Faixas relativas às 41 áreas · {periodRange}</p>
               </div>
-              <motion.button type="button" onClick={() => document.getElementById('region-panel')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })} key={`${selectedCisp}-${indicator}-${viewMode}`} initial={reducedMotion ? false : { y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="absolute inset-x-3 top-16 z-30 rounded-2xl border border-[#d8e2e5] bg-white/96 p-4 text-left shadow-2xl backdrop-blur lg:hidden"><div className="flex items-start justify-between gap-3"><span className="min-w-0"><span className="block truncate text-sm font-semibold">{selectedTerritory?.territorialUnit ?? `CISP ${selectedCisp}`}</span><span className="mt-1 block text-xs text-[#60757d]">{selected?.current.toLocaleString('pt-BR') ?? '—'} {indicatorMeta?.unit} · CISP {selectedCisp}</span></span><strong className="shrink-0 text-xl tabular-nums text-[#1b6473]">{viewMode === 'rate' ? selected?.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : viewMode === 'quantity' ? selected?.current.toLocaleString('pt-BR') : fmtChange(selected?.change ?? null)}<small className="ml-1 text-[10px] font-medium">{viewMode === 'rate' ? '/100 mil' : viewMode === 'quantity' ? indicatorMeta?.unit : 'vs. antes'}</small></strong></div></motion.button>
+              <motion.button type="button" onClick={() => document.getElementById('region-panel')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })} key={`${selectedCisp}-${indicator}-${viewMode}`} initial={reducedMotion ? false : { y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="absolute inset-x-3 top-16 z-30 rounded-2xl border border-[#d8e2e5] bg-white/96 p-4 text-left shadow-2xl backdrop-blur lg:hidden"><div className="flex items-start justify-between gap-3"><span className="min-w-0"><span className="block text-sm font-semibold leading-5">{selectedTerritory?.territorialUnit ?? `CISP ${selectedCisp}`}</span><span className="mt-1 block text-xs text-[#60757d]">{selected?.current.toLocaleString('pt-BR') ?? '—'} {displayUnit} · CISP {selectedCisp}</span></span><strong className="shrink-0 text-xl tabular-nums text-[#1b6473]">{viewMode === 'rate' ? selected?.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : viewMode === 'quantity' ? selected?.current.toLocaleString('pt-BR') : fmtChange(selected?.change ?? null)}<small className="ml-1 text-[10px] font-medium">{viewMode === 'rate' ? '/100 mil' : viewMode === 'quantity' ? displayUnit : 'vs. antes'}</small></strong></div></motion.button>
             </> : <div className="absolute inset-0 overflow-y-auto bg-[#f8faf9] px-3 pb-6 pt-16 md:px-5"><div className="mx-auto max-w-3xl space-y-2">{sorted.map((item, index) => { const territory = territoryByCisp.get(item.cisp); const value = viewMode === 'rate' ? item.rate.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : viewMode === 'quantity' ? item.current.toLocaleString('pt-BR') : fmtChange(item.change); return <button key={item.cisp} type="button" onClick={() => { chooseCisp(item.cisp); setDisplay('map'); }} className={`grid w-full grid-cols-[34px_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border p-3 text-left transition hover:-translate-y-0.5 hover:shadow-md ${item.cisp === selectedCisp ? 'border-[#d9a441] bg-[#fffaf0]' : 'border-[#d8e2e5] bg-white'}`}><span className="text-center text-xs font-semibold text-[#60757d]">{index + 1}</span><span><span className="block truncate text-sm font-semibold">{territory?.territorialUnit ?? `CISP ${item.cisp}`}</span><span className="mt-0.5 block text-xs text-[#60757d]">CISP {item.cisp} · {item.current.toLocaleString('pt-BR')} registros</span></span><strong className="text-base tabular-nums text-[#1b6473]">{value}</strong></button>; })}</div></div>}
           </div>
 

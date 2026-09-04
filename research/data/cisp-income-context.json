@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-04",
+  "status": "exploratory",
+  "source": {
+    "publisher": "Instituto Brasileiro de Geografia e Estatistica",
+    "title": "Agregados por Setores Censitarios - Rendimento do Responsavel",
+    "dataUrl": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_Rendimento_do_Responsavel/Agregados_por_setores_renda_responsavel_BR_20260508_csv.zip",
+    "dictionaryUrl": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios_Rendimento_do_Responsavel/dicionario_de_dados_renda_responsavel_20260508.xlsx",
+    "geometryUrl": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/malha_com_atributos/setores/gpkg/UF/RJ/RJ_setores_CD2022.gpkg",
+    "cispBoundaryUrl": "https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar",
+    "inputSha256": "b14010d500b03317c1f9109404a79fd4d86da97e73b3b5e2769060f1858c2529"
+  },
+  "method": "Cada setor do Rio foi atribuido a geometria oficial da CISP com maior area de intersecao em EPSG:31983. O proxy e a media ponderada por V06001 das medianas setoriais V06006; nao e renda per capita nem mediana oficial da CISP.",
+  "audit": {
+    "municipalityCode": "3304557",
+    "assignedSectorCount": 13781,
+    "cispCount": 41
+  },
+  "records": [
+    {
+      "cisp": 1,
+      "sectorCount": 19,
+      "responsiblePersons": 704,
+      "residentsInOccupiedPrivateHouseholds": 1273,
+      "weightedSectorMeanIncome": 2694.87,
+      "weightedSectorMedianIncomeProxy": 1891.95
+    },
+    {
+      "cisp": 4,
+      "sectorCount": 74,
+      "responsiblePersons": 10616,
+      "residentsInOccupiedPrivateHouseholds": 25317,
+      "weightedSectorMeanIncome": 2288.92,
+      "weightedSectorMedianIncomeProxy": 1674.75
+    },
+    {
+      "cisp": 5,
+      "sectorCount": 93,
+      "responsiblePersons": 14687,
+      "residentsInOccupiedPrivateHouseholds": 27181,
+      "weightedSectorMeanIncome": 4763.35,
+      "weightedSectorMedianIncomeProxy": 3277.43
+    },
+    {
+      "cisp": 6,
+      "sectorCount": 178,
+      "responsiblePersons": 31409,
+      "residentsInOccupiedPrivateHouseholds": 80987,
+      "weightedSectorMeanIncome": 3147.14,
+      "weightedSectorMedianIncomeProxy": 2416.14
+    },
+    {
+      "cisp": 7,
+      "sectorCount": 117,
+      "responsiblePersons": 18270,
+      "residentsInOccupiedPrivateHouseholds": 39684,
+      "weightedSectorMeanIncome": 3835.45,
+      "weightedSectorMedianIncomeProxy": 2773.17
+    },
+    {
+      "cisp": 9,
+      "sectorCount": 316,
+      "responsiblePersons": 57511,
+      "residentsInOccupiedPrivateHouseholds": 119918,
+      "weightedSectorMeanIncome": 9473.15,
+      "weightedSectorMedianIncomeProxy": 7471.32
+    },
+    {
+      "cisp": 10,
+      "sectorCount": 241,
+      "responsiblePersons": 43432,
+      "residentsInOccupiedPrivateHouseholds": 93671,
+      "weightedSectorMeanIncome": 10831.25,
+      "weightedSectorMedianIncomeProxy": 8631.97
+    },
+    {
+      "cisp": 11,
+      "sectorCount": 113,
+      "responsiblePersons": 29532,
+      "residentsInOccupiedPrivateHouseholds": 70122,
+      "weightedSectorMeanIncome": 1761.07,
+      "weightedSectorMedianIncomeProxy": 1384.12
+    },
+    {
+      "cisp": 12,
+      "sectorCount": 265,
+      "responsiblePersons": 39239,
+      "residentsInOccupiedPrivateHouseholds": 79130,
+      "weightedSectorMeanIncome": 9041.38,
+      "weightedSectorMedianIncomeProxy": 6941.6
+    },
+    {
+      "cisp": 13,
+      "sectorCount": 201,
+      "responsiblePersons": 30470,
+      "residentsInOccupiedPrivateHouseholds": 61381,
+      "weightedSectorMeanIncome": 9228.25,
+      "weightedSectorMedianIncomeProxy": 7148.38
+    },
+    {
+      "cisp": 14,
+      "sectorCount": 222,
+      "responsiblePersons": 36523,
+      "residentsInOccupiedPrivateHouseholds": 76395,
+      "weightedSectorMeanIncome": 15393.69,
+      "weightedSectorMedianIncomeProxy": 12139.62
+    },
+    {
+      "cisp": 15,
+      "sectorCount": 186,
+      "responsiblePersons": 31334,
+      "residentsInOccupiedPrivateHouseholds": 72587,
+      "weightedSectorMeanIncome": 12122.41,
+      "weightedSectorMedianIncomeProxy": 9492.91
+    },
+    {
+      "cisp": 16,
+      "sectorCount": 560,
+      "responsiblePersons": 87055,
+      "residentsInOccupiedPrivateHouseholds": 212248,
+      "weightedSectorMeanIncome": 10933.4,
+      "weightedSectorMedianIncomeProxy": 9198.42
+    },
+    {
+      "cisp": 17,
+      "sectorCount": 187,
+      "responsiblePersons": 32614,
+      "residentsInOccupiedPrivateHouseholds": 81549,
+      "weightedSectorMeanIncome": 2459.34,
+      "weightedSectorMedianIncomeProxy": 1883.02
+    },
+    {
+      "cisp": 18,
+      "sectorCount": 133,
+      "responsiblePersons": 25853,
+      "residentsInOccupiedPrivateHouseholds": 58053,
+      "weightedSectorMeanIncome": 8244.12,
+      "weightedSectorMedianIncomeProxy": 6215.76
+    },
+    {
+      "cisp": 19,
+      "sectorCount": 299,
+      "responsiblePersons": 53358,
+      "residentsInOccupiedPrivateHouseholds": 126218,
+      "weightedSectorMeanIncome": 7646.51,
+      "weightedSectorMedianIncomeProxy": 6012.58
+    },
+    {
+      "cisp": 20,
+      "sectorCount": 282,
+      "responsiblePersons": 55612,
+      "residentsInOccupiedPrivateHouseholds": 130276,
+      "weightedSectorMeanIncome": 5979.23,
+      "weightedSectorMedianIncomeProxy": 4372.2
+    },
+    {
+      "cisp": 21,
+      "sectorCount": 488,
+      "responsiblePersons": 91778,
+      "residentsInOccupiedPrivateHouseholds": 239140,
+      "weightedSectorMeanIncome": 2069.55,
+      "weightedSectorMedianIncomeProxy": 1598.35
+    },
+    {
+      "cisp": 22,
+      "sectorCount": 438,
+      "responsiblePersons": 77494,
+      "residentsInOccupiedPrivateHouseholds": 201519,
+      "weightedSectorMeanIncome": 2511.96,
+      "weightedSectorMedianIncomeProxy": 1950.18
+    },
+    {
+      "cisp": 23,
+      "sectorCount": 152,
+      "responsiblePersons": 29746,
+      "residentsInOccupiedPrivateHouseholds": 70654,
+      "weightedSectorMeanIncome": 5042.45,
+      "weightedSectorMedianIncomeProxy": 3927.35
+    },
+    {
+      "cisp": 24,
+      "sectorCount": 193,
+      "responsiblePersons": 38469,
+      "residentsInOccupiedPrivateHouseholds": 95504,
+      "weightedSectorMeanIncome": 3171.05,
+      "weightedSectorMedianIncomeProxy": 2323.79
+    },
+    {
+      "cisp": 25,
+      "sectorCount": 250,
+      "responsiblePersons": 47234,
+      "residentsInOccupiedPrivateHouseholds": 121507,
+      "weightedSectorMeanIncome": 2793.25,
+      "weightedSectorMedianIncomeProxy": 2116.38
+    },
+    {
+      "cisp": 26,
+      "sectorCount": 216,
+      "responsiblePersons": 41460,
+      "residentsInOccupiedPrivateHouseholds": 99388,
+      "weightedSectorMeanIncome": 4621.23,
+      "weightedSectorMedianIncomeProxy": 3459.04
+    },
+    {
+      "cisp": 27,
+      "sectorCount": 344,
+      "responsiblePersons": 65541,
+      "residentsInOccupiedPrivateHouseholds": 166688,
+      "weightedSectorMeanIncome": 3517.54,
+      "weightedSectorMedianIncomeProxy": 2640.8
+    },
+    {
+      "cisp": 28,
+      "sectorCount": 210,
+      "responsiblePersons": 39749,
+      "residentsInOccupiedPrivateHouseholds": 103303,
+      "weightedSectorMeanIncome": 3657.93,
+      "weightedSectorMedianIncomeProxy": 2764.4
+    },
+    {
+      "cisp": 29,
+      "sectorCount": 333,
+      "responsiblePersons": 54018,
+      "residentsInOccupiedPrivateHouseholds": 138333,
+      "weightedSectorMeanIncome": 2752.37,
+      "weightedSectorMedianIncomeProxy": 2051.03
+    },
+    {
+      "cisp": 30,
+      "sectorCount": 240,
+      "responsiblePersons": 44029,
+      "residentsInOccupiedPrivateHouseholds": 113847,
+      "weightedSectorMeanIncome": 3113.75,
+      "weightedSectorMedianIncomeProxy": 2190.74
+    },
+    {
+      "cisp": 31,
+      "sectorCount": 274,
+      "responsiblePersons": 53638,
+      "residentsInOccupiedPrivateHouseholds": 141284,
+      "weightedSectorMeanIncome": 2263.29,
+      "weightedSectorMedianIncomeProxy": 1703.04
+    },
+    {
+      "cisp": 32,
+      "sectorCount": 966,
+      "responsiblePersons": 174115,
+      "residentsInOccupiedPrivateHouseholds": 446856,
+      "weightedSectorMeanIncome": 3973.89,
+      "weightedSectorMedianIncomeProxy": 3165.47
+    },
+    {
+      "cisp": 33,
+      "sectorCount": 491,
+      "responsiblePersons": 85867,
+      "residentsInOccupiedPrivateHouseholds": 225823,
+      "weightedSectorMeanIncome": 2754.35,
+      "weightedSectorMedianIncomeProxy": 2051.61
+    },
+    {
+      "cisp": 34,
+      "sectorCount": 829,
+      "responsiblePersons": 149916,
+      "residentsInOccupiedPrivateHouseholds": 403579,
+      "weightedSectorMeanIncome": 2191.28,
+      "weightedSectorMedianIncomeProxy": 1696.34
+    },
+    {
+      "cisp": 35,
+      "sectorCount": 1290,
+      "responsiblePersons": 221625,
+      "residentsInOccupiedPrivateHouseholds": 601867,
+      "weightedSectorMeanIncome": 2786.58,
+      "weightedSectorMedianIncomeProxy": 2060.61
+    },
+    {
+      "cisp": 36,
+      "sectorCount": 725,
+      "responsiblePersons": 126611,
+      "residentsInOccupiedPrivateHouseholds": 352103,
+      "weightedSectorMeanIncome": 1977.96,
+      "weightedSectorMedianIncomeProxy": 1455.9
+    },
+    {
+      "cisp": 37,
+      "sectorCount": 375,
+      "responsiblePersons": 71809,
+      "residentsInOccupiedPrivateHouseholds": 184410,
+      "weightedSectorMeanIncome": 4180.01,
+      "weightedSectorMedianIncomeProxy": 3091.28
+    },
+    {
+      "cisp": 38,
+      "sectorCount": 375,
+      "responsiblePersons": 65853,
+      "residentsInOccupiedPrivateHouseholds": 168172,
+      "weightedSectorMeanIncome": 2541.13,
+      "weightedSectorMedianIncomeProxy": 1848.86
+    },
+    {
+      "cisp": 39,
+      "sectorCount": 350,
+      "responsiblePersons": 66309,
+      "residentsInOccupiedPrivateHouseholds": 179034,
+      "weightedSectorMeanIncome": 1874.43,
+      "weightedSectorMedianIncomeProxy": 1527.54
+    },
+    {
+      "cisp": 40,
+      "sectorCount": 193,
+      "responsiblePersons": 35633,
+      "residentsInOccupiedPrivateHouseholds": 91919,
+      "weightedSectorMeanIncome": 2460.64,
+      "weightedSectorMedianIncomeProxy": 1729.34
+    },
+    {
+      "cisp": 41,
+      "sectorCount": 310,
+      "responsiblePersons": 55269,
+      "residentsInOccupiedPrivateHouseholds": 140155,
+      "weightedSectorMeanIncome": 5950.02,
+      "weightedSectorMedianIncomeProxy": 4550.87
+    },
+    {
+      "cisp": 42,
+      "sectorCount": 526,
+      "responsiblePersons": 80901,
+      "residentsInOccupiedPrivateHouseholds": 204611,
+      "weightedSectorMeanIncome": 7317.38,
+      "weightedSectorMedianIncomeProxy": 5868.24
+    },
+    {
+      "cisp": 43,
+      "sectorCount": 529,
+      "responsiblePersons": 82698,
+      "residentsInOccupiedPrivateHouseholds": 230198,
+      "weightedSectorMeanIncome": 2127.87,
+      "weightedSectorMedianIncomeProxy": 1521.33
+    },
+    {
+      "cisp": 44,
+      "sectorCount": 198,
+      "responsiblePersons": 38640,
+      "residentsInOccupiedPrivateHouseholds": 97706,
+      "weightedSectorMeanIncome": 2841.7,
+      "weightedSectorMedianIncomeProxy": 2281.68
+    }
+  ]
+}
