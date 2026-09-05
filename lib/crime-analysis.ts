@@ -49,7 +49,10 @@ export function regionMetrics(
     const local = rows.filter((row) => row.cisp === p.cisp);
     const count = periodTotal(local, current, indicator),
       before = periodTotal(local, previous, indicator);
-    const population = p.population > 0 ? p.population : null;
+    const population =
+      Number.isSafeInteger(p.population) && p.population > 0
+        ? p.population
+        : null;
     return {
       cisp: p.cisp,
       count,
@@ -145,7 +148,7 @@ export function factualInsights(metrics: Metric[]) {
   ))
     result.push({
       cisp: item.cisp,
-      kind: 'Maior alta elegível',
+      kind: 'Maior aumento entre os destaques',
       count: item.count!,
       previous: item.previous!,
       change: item.change,
@@ -155,7 +158,7 @@ export function factualInsights(metrics: Metric[]) {
   ))
     result.push({
       cisp: item.cisp,
-      kind: 'Maior queda elegível',
+      kind: 'Maior queda entre os destaques',
       count: item.count!,
       previous: item.previous!,
       change: item.change,
@@ -193,11 +196,13 @@ export function historicalInsights(
       .sort(
         (a, b) => b.old - b.m.rank - (a.old - a.m.rank) || a.m.cisp - b.m.cisp,
       );
-    for (const { m, old } of moves.slice(0, 1))
+    for (const { m, old } of moves.filter(
+      (x) => x.old - x.m.rank === moves[0].old - moves[0].m.rank,
+    ))
       result.push({
         cisp: m.cisp,
         title: 'Mudança de posição',
-        detail: `Da ${old}ª para a ${m.rank}ª maior taxa. Compara duas janelas de ${months} meses; posição não mede risco individual.`,
+        detail: `Da ${old}ª para a ${m.rank}ª maior taxa: ${previousRank.find((p) => p.cisp === m.cisp)!.rate!.toLocaleString('pt-BR', { maximumFractionDigits: 1 })} → ${m.rate!.toLocaleString('pt-BR', { maximumFractionDigits: 1 })} por 100 mil moradores. ${windowPeriods(monthShift(end, -months), months)[0]} a ${monthShift(end, -months)} versus ${windowPeriods(end, months)[0]} a ${end}. Posição não mede risco individual.`,
       });
   }
   const ps = windowPeriods(end, 12);
@@ -215,11 +220,11 @@ export function historicalInsights(
         x.values[11]! >= 20 &&
         x.values[11]! > Math.max(...(x.values.slice(0, 11) as number[])),
     )
-    .sort((a, b) => b.values[11]! - a.values[11]!);
+    .sort((a, b) => b.values[11]! - a.values[11]! || a.cisp - b.cisp);
   for (const x of maxima.slice(0, 1))
     result.push({
       cisp: x.cisp,
-      title: 'Maior valor dos últimos 12 meses',
+      title: 'Máxima mensal em 12 meses · exemplo',
       detail: `${x.values[11]} no mês ${end}, acima de todos os 11 meses anteriores. Refere-se ao mês final, não à soma do período.`,
     });
   const trends = populations
@@ -238,12 +243,15 @@ export function historicalInsights(
         x.v[0]! < x.v[1]! &&
         x.v[1]! < x.v[2]! &&
         x.v[2]! < x.v[3]!,
-    );
+    )
+    .sort((a, b) => b.v[3]! - b.v[0]! - (a.v[3]! - a.v[0]!) || a.cisp - b.cisp);
   for (const x of trends.slice(0, 1))
     result.push({
       cisp: x.cisp,
-      title: 'Três altas mensais consecutivas',
-      detail: `Sequência dos quatro últimos meses: ${x.v.join(' → ')}. Contagens mensais; pode haver influência sazonal.`,
+      title: 'Três altas mensais consecutivas · exemplo',
+      detail: `${windowPeriods(end, 4)
+        .map((p, i) => `${p}: ${x.v[i]}`)
+        .join(' → ')}. Contagens mensais; não ajustadas por sazonalidade.`,
     });
   return result;
 }

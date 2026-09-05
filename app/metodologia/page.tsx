@@ -1,14 +1,15 @@
 import { ArrowLeft, CheckCircle2, Database, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
+import { SiteHeader } from '@/components/site-header';
 
 const checks = [
-  'Download oficial precisa responder e manter tamanho mínimo esperado.',
+  'Download oficial precisa responder e conter as 41 CISPs em cada mês da série.',
   'Chave CISP + ano + mês não pode ter duplicidade.',
   'Contagens precisam ser inteiras, não negativas e sem nulos inesperados.',
   'As 41 CISPs do município precisam casar com os 41 polígonos atuais.',
   'As 41 populações por CISP precisam somar exatamente 6.211.223 residentes.',
-  'O último mês publicado nunca pode retroceder silenciosamente.',
+  'A série consultada precisa manter meses consecutivos; a data disponível fica visível.',
   'Hash, ETag, Last-Modified e horário da coleta ficam registrados.',
   'Indicadores agregados do ISP são preservados; não são recalculados.',
 ];
@@ -16,6 +17,7 @@ const checks = [
 export default function Methodology() {
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
       <header className="border-b bg-background/95 px-4 py-3 md:px-7">
         <div className="mx-auto flex max-w-5xl items-center justify-between">
           <Link
@@ -37,9 +39,9 @@ export default function Methodology() {
           O que o mapa mede — e o que ele não pode prometer.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          O Mapa da Criminalidade RJ transforma uma série oficial mensal por circunscrição
-          policial em comparações auditáveis. Ele não estima a probabilidade de
-          uma pessoa sofrer um crime e não recomenda rotas.
+          O Mapa da Criminalidade RJ transforma uma série oficial mensal por
+          circunscrição policial em comparações auditáveis. Ele não estima a
+          probabilidade de uma pessoa sofrer um crime e não recomenda rotas.
         </p>
 
         <section className="mt-12 grid gap-4 md:grid-cols-2">
@@ -228,6 +230,13 @@ export default function Methodology() {
             interface usa o último snapshot validado incluído na publicação e
             informa que está em contingência. A fonte é mensal, não em tempo
             real.
+          </p>
+          <p className="mt-3">
+            Os insights são recalculados ao carregar a página, sem redação
+            manual ou modelo de IA. “Último mês disponível” acompanha novas
+            publicações; datas históricas permanecem fixas. A aba aberta não
+            consulta continuamente a fonte. O cache pode servir a versão
+            anterior enquanto revalida.
           </p>
           <p className="mt-3">
             A fase 2 significa consolidado sem errata; a fase 3 indica que a

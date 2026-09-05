@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { contextInsights } from '../lib/context-insights.ts';
 import {
   cityMetric,
   rankMetrics,
@@ -121,8 +122,10 @@ check('máxima estrita e tendência mensal', () => {
     '2026-07',
     1,
   );
-  assert(h.some((x) => x.title === 'Maior valor dos últimos 12 meses'));
-  assert(h.some((x) => x.title === 'Três altas mensais consecutivas'));
+  assert(h.some((x) => x.title === 'Máxima mensal em 12 meses · exemplo'));
+  assert(
+    h.some((x) => x.title === 'Três altas mensais consecutivas · exemplo'),
+  );
 });
 check('máxima empatada não é recorde', () => {
   const rows = windowPeriods('2026-07', 12).map((period) => ({
@@ -137,7 +140,7 @@ check('máxima empatada não é recorde', () => {
       'furto',
       '2026-07',
       1,
-    ).some((x) => x.title === 'Maior valor dos últimos 12 meses'),
+    ).some((x) => x.title === 'Máxima mensal em 12 meses · exemplo'),
   );
 });
 const snapshot = JSON.parse(
@@ -168,5 +171,68 @@ check('snapshot real cobre todas as métricas e janelas', () => {
       );
       assert.equal(cityMetric(m).population, 6211223);
     }
+});
+const insights = contextInsights(
+  snapshot.rows,
+  population.records,
+  snapshot.latestPeriod,
+  12,
+);
+check('contraste real Ipanema/Leblon usa taxas e vítimas', () => {
+  const card = insights.find((x) => x.key === 'contrast-14');
+  assert(card);
+  assert(card.evidence.join(' ').includes('4,61'));
+  assert(card.evidence.join(' ').includes('6.559 furtos e 5 vítimas'));
+});
+check('componente não é somado ao agregado', () => {
+  const card = insights.find((x) => x.key === 'component-14');
+  assert(card.evidence.join(' ').includes('74,6%'));
+});
+check('concentração CISP22 não vira piora contínua', () => {
+  const card = insights.find((x) => x.key === 'concentration-22');
+  assert(card.evidence.join(' ').includes('81,3%'));
+  assert(card.evidence.join(' ').includes('28 vítimas'));
+});
+check('panorama independe da ordem dos dados', () => {
+  assert.deepEqual(
+    contextInsights(
+      [...snapshot.rows].reverse(),
+      [...population.records].reverse(),
+      snapshot.latestPeriod,
+      12,
+    ),
+    insights,
+  );
+});
+check('panorama rejeita população não finita ou string', () => {
+  for (const value of [Infinity, '1234', 0])
+    assert.equal(
+      contextInsights(
+        snapshot.rows,
+        population.records.map((p, i) =>
+          i === 0 ? { ...p, population: value } : p,
+        ),
+        snapshot.latestPeriod,
+        12,
+      ).length,
+      0,
+    );
+});
+check('mês ausente ou duplicado não gera card da região', () => {
+  const row = snapshot.rows.find(
+    (r) => r.cisp === 14 && r.period === snapshot.latestPeriod,
+  );
+  for (const rows of [
+    snapshot.rows.filter((r) => r !== row),
+    [...snapshot.rows, row],
+  ])
+    assert(
+      !contextInsights(
+        rows,
+        population.records,
+        snapshot.latestPeriod,
+        12,
+      ).some((x) => x.cisp === 14),
+    );
 });
 console.log(`${passed} avaliações aprovadas`);

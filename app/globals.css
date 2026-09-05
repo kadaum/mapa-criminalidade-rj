@@ -53,13 +53,13 @@ body {
 }
 
 :root {
-  --background: oklch(0.975 0.008 82);
-  --foreground: oklch(0.255 0.035 240);
+  --background: #f3f5fa;
+  --foreground: #172235;
   --card: oklch(0.995 0.004 82);
   --card-foreground: oklch(0.255 0.035 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.39 0.075 238);
+  --primary: #2455dc;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.94 0.02 195);
   --secondary-foreground: oklch(0.205 0 0);
@@ -76,7 +76,7 @@ body {
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.8rem;
+  --radius: 0.6rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -149,8 +149,32 @@ body {
 }
 
 .maplibregl-ctrl-group button {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+}
+
+.atlas-header { background: #111c30; color: white; border-bottom: 1px solid #2c3950; }
+.atlas-header a, .atlas-header span { color: inherit; }
+.explore-nav { background: #111c30; border-color: #2c3950; color: white; }
+.explore-nav a { color: #c5d1e6; border-radius: 0; border-bottom: 3px solid transparent; }
+.explore-nav a:hover { background: #21304a; }
+.explore-nav a[aria-current=page] { background: transparent; color: white; border-bottom-color: #7ca4ff; }
+.atlas-workspace { height: max(420px, calc(100dvh - 270px)); }
+.atlas-map { min-height: 0; height: 100%; }
+.atlas-panel { overflow-y: auto; background: #fff; }
+.atlas-panel :is(.text-xs, .text-\[11px\], .text-\[10px\]) { font-size: 0.875rem; }
+.atlas-page :is(.text-\[10px\], .text-\[11px\]) { font-size: 0.75rem; }
+.explorer-page article { border-radius: 14px; box-shadow: 0 4px 20px #17223505; }
+.explorer-page h1 { letter-spacing: -0.045em; }
+.explorer-page strong { font-variant-numeric: tabular-nums; }
+@media (max-width: 639px) {
+  .explorer-page [aria-label="Filtros"] > div:first-child { grid-column: 1 / -1; }
+  .explorer-page [aria-label="Filtros"] > p { grid-column: 1 / -1; }
+}
+@media (max-width: 1023px) {
+  .atlas-workspace { height: auto; }
+  .atlas-map { height: 54dvh; min-height: 420px; }
+  .atlas-panel { overflow: visible; }
 }
 
 @media (prefers-reduced-motion: reduce) {

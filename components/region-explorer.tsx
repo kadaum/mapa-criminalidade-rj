@@ -3,7 +3,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, MapPin, Share2, TrendingUp } from 'lucide-react';
+import { SiteHeader } from './site-header';
 import { ExploreNavigation } from './explore-navigation';
+import { InsightsPanorama } from './insights-panorama';
 import {
   Select,
   SelectContent,
@@ -57,7 +59,7 @@ const titles = {
   'meu-bairro': 'Sua região, em detalhe',
   comparar: 'Como sua região se compara?',
   rankings: 'As regiões em perspectiva',
-  insights: 'O que mudou nos registros',
+  insights: 'O que os dados revelam',
 };
 function Choice({
   label,
@@ -98,7 +100,8 @@ function Choice({
 }
 export function RegionExplorer({ mode }: { mode: Mode }) {
   const reduced = useReducedMotion();
-  const [showAll,setShowAll]=useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const [insightMode, setInsightMode] = useState('panorama');
   const [data, setData] = useState<Data | null>(null),
     [territories, setTerritories] = useState<Territory[]>([]),
     [pop, setPop] = useState<{ cisp: number; population: number }[]>([]);
@@ -150,7 +153,10 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
         territoryRecords.some(
           (t) =>
             !populationRecords.some(
-              (p) => p.cisp === t.cisp && p.population > 0,
+              (p) =>
+                p.cisp === t.cisp &&
+                Number.isSafeInteger(p.population) &&
+                p.population > 0,
             ),
         )
       )
@@ -271,26 +277,21 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
       ? historicalInsights(data.rows, pop, id, effectiveEnd, Number(months))
       : [];
   return (
-    <main className="min-h-screen bg-[#f4f7f8] text-[#14323c]">
-      <header className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5">
-        <a href="/" className="text-lg font-bold tracking-tight">
-          Mapa da Criminalidade <span className="text-[#1b6473]">RJ</span>
-        </a>
-        <a href="/metodologia" className="text-sm underline underline-offset-4">
-          Sobre os dados
-        </a>
-      </header>
+    <main className="explorer-page min-h-screen bg-[#f3f5fa] text-[#172235]">
+      <SiteHeader date={data ? dateLabel(data.latestPeriod) : undefined} />
       <ExploreNavigation active={`/${mode}`} query={queryString} />
-      <div className="mx-auto max-w-6xl px-5 py-7 md:py-10">
+      <div className="mx-auto max-w-[1320px] px-5 py-7 md:px-8 md:py-10">
         <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
               {titles[mode]}
             </h1>
-            <p className="mt-3 text-base text-[#536b75]">
-              {mode === 'meu-bairro'
-                ? 'Encontre seu bairro e acompanhe os registros da região policial que o atende.'
-                : `${validIndicator?.label ?? 'Dados oficiais do ISP-RJ'} · ${range}`}
+            <p className="mt-3 text-base text-[#526078]">
+              {mode === 'insights'
+                ? 'Compare tipos de ocorrência. Entenda as diferenças entre as regiões.'
+                : mode === 'meu-bairro'
+                  ? 'Encontre seu bairro e acompanhe os registros da região policial que o atende.'
+                  : `${validIndicator?.label ?? 'Dados oficiais do ISP-RJ'} · ${range}`}
             </p>
           </div>
           <span className="rounded-full bg-white px-4 py-2 text-sm">
@@ -319,7 +320,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
               </p>
             )}
             {mode === 'meu-bairro' && (
-              <section className="mb-6 rounded-2xl border border-[#d8e2e5] bg-white p-5 md:p-7">
+              <section className="mb-6 rounded-2xl border border-[#dce2ed] bg-white p-5 md:p-7">
                 <label
                   htmlFor="neighborhood-search"
                   className="mb-3 block text-lg font-semibold"
@@ -343,7 +344,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                       .map((n) => (
                         <button
                           key={n.name}
-                          className="flex min-h-12 items-center justify-between rounded-xl border border-[#d8e2e5] p-3 text-left hover:bg-[#edf3f4]"
+                          className="flex min-h-12 items-center justify-between rounded-xl border border-[#dce2ed] p-3 text-left hover:bg-[#eaf0fc]"
                           onClick={() => {
                             setBairro(n.name);
                             setSearch('');
@@ -373,7 +374,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                       {chosen.cisps.map((area) => (
                         <div
                           key={area}
-                          className={`rounded-xl border p-4 text-left ${cisp === area ? 'border-[#1b6473] bg-[#edf3f4]' : 'border-[#d8e2e5]'}`}
+                          className={`rounded-xl border p-4 text-left ${cisp === area ? 'border-[#2455dc] bg-[#eaf0fc]' : 'border-[#dce2ed]'}`}
                         >
                           <button
                             aria-pressed={cisp === area}
@@ -403,17 +404,33 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
             )}
             <section
               aria-label="Filtros"
-              className="mb-6 grid gap-4 rounded-2xl border border-[#d8e2e5] bg-white p-5 sm:grid-cols-2 lg:grid-cols-4"
+              className="mb-6 grid grid-cols-2 gap-4 rounded-xl border border-[#dce2ed] bg-white p-4 lg:grid-cols-4"
             >
-              <Choice
-                label="Indicador"
-                value={id}
-                onChange={setIndicator}
-                options={data.indicators.map((i) => ({
-                  value: i.id,
-                  label: i.label,
-                }))}
-              />
+              {mode === 'insights' && (
+                <Choice
+                  label="Leitura"
+                  value={insightMode}
+                  onChange={setInsightMode}
+                  options={[
+                    {
+                      value: 'panorama',
+                      label: 'Panorama · cruzar indicadores',
+                    },
+                    { value: 'indicador', label: 'Explorar um indicador' },
+                  ]}
+                />
+              )}
+              {(mode !== 'insights' || insightMode === 'indicador') && (
+                <Choice
+                  label="Indicador"
+                  value={id}
+                  onChange={setIndicator}
+                  options={data.indicators.map((i) => ({
+                    value: i.id,
+                    label: i.label,
+                  }))}
+                />
+              )}
               <Choice
                 label="Período"
                 value={months}
@@ -446,24 +463,29 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   ]}
                 />
               )}
-              <p className="text-sm text-[#536b75] sm:col-span-2 lg:col-span-4">
+              <p className="text-sm text-[#526078] sm:col-span-2 lg:col-span-4">
                 {range} ·{' '}
                 {end === 'latest'
                   ? 'Acompanha automaticamente o último mês publicado.'
                   : 'Período histórico fixo. Escolha “Último mês disponível” para acompanhar novas publicações.'}
               </p>
             </section>
-            <details className="mb-6 text-sm text-[#536b75]">
-              <summary className="cursor-pointer py-2">
-                O que significa {validIndicator?.label.toLowerCase()}?
-              </summary>
-              <p className="max-w-3xl py-3 leading-6">
-                {validIndicator?.definition} Unidade: {validIndicator?.unit}.
-                Taxas usam residentes do Censo 2022; não medem a chance
-                individual de sofrer um crime. Trabalhadores e turistas não
-                entram nessa população.
-              </p>
-            </details>
+            {(mode !== 'insights' || insightMode === 'indicador') && (
+              <details
+                open={mode === 'insights'}
+                className="mb-6 text-sm text-[#526078]"
+              >
+                <summary className="cursor-pointer py-2">
+                  O que significa {validIndicator?.label.toLowerCase()}?
+                </summary>
+                <p className="max-w-3xl py-3 leading-6">
+                  {validIndicator?.definition} Unidade: {validIndicator?.unit}.
+                  Taxas usam residentes do Censo 2022; não medem a chance
+                  individual de sofrer um crime. Trabalhadores e turistas não
+                  entram nessa população.
+                </p>
+              </details>
+            )}
             {(mode === 'comparar' || (mode === 'meu-bairro' && cisp > 0)) && (
               <section className="mb-6 grid gap-4 sm:grid-cols-2">
                 <Choice
@@ -497,11 +519,11 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                 animate={{ opacity: 1, y: 0 }}
                 className="space-y-6"
               >
-                <div className="rounded-2xl bg-[#14323c] p-6 text-white">
-                  <div className="flex items-center gap-2 text-sm text-[#9bc9cf]">
+                <div className="rounded-2xl bg-[#172235] p-6 text-white">
+                  <div className="flex items-center gap-2 text-sm text-[#a9c1ff]">
                     <MapPin className="size-4" /> Região policial CISP {cisp}
                   </div>
-                  <h2 className="mt-2 text-2xl font-semibold">
+                  <h2 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-5xl">
                     {selectedTerritory?.territorialUnit}
                   </h2>
                   <p className="mt-3 text-base text-white/80">
@@ -510,7 +532,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   <div className="mt-6 flex flex-wrap gap-3">
                     <a
                       href={link('/comparar')}
-                      className="rounded-xl bg-white px-4 py-3 font-semibold text-[#14323c]"
+                      className="rounded-xl bg-white px-4 py-3 font-semibold text-[#172235]"
                     >
                       Comparar esta região
                     </a>
@@ -523,62 +545,81 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   </div>
                   <p role="status">{shared}</p>
                 </div>
-                <div className="grid gap-4 md:grid-cols-3">
-                  {data.indicators.filter(meta=>showAll||['total_roubos','total_furtos','letalidade_violenta'].includes(meta.id)).map((meta) => {
-                    const all = regionMetrics(
-                        data.rows,
-                        pop,
-                        meta.id,
-                        effectiveEnd!,
-                        Number(months),
-                      ),
-                      m = all.find((x) => x.cisp === cisp)!,
-                      r = rankMetrics(all, field),
-                      position = r.find((x) => x.cisp === cisp);
-                    return (
-                      <a
-                        key={meta.id}
-                        href={link('/rankings', cisp, meta.id)}
-                        className="rounded-2xl border border-[#d8e2e5] bg-white p-5 transition hover:border-[#1b6473] hover:shadow-sm"
-                      >
-                        <h3 className="text-base font-semibold">
-                          {meta.label}
-                        </h3>
-                        <strong className="mt-4 block text-3xl tabular-nums">
-                          {fmt(m[field], field === 'rate' ? 1 : 0)}
-                        </strong>
-                        <p className="mt-1 text-sm text-[#536b75]">
-                          {field === 'rate'
-                            ? `${meta.unit} por 100 mil`
-                            : meta.unit}
-                        </p>
-                        <p className="mt-4 text-sm">
-                          {position
-                            ? `${position.rank}ª maior ${field === 'rate' ? 'taxa' : 'quantidade'} de ${r.length} regiões${position.tied ? ' · empate' : ''}`
-                            : 'Sem posição disponível'}
-                        </p>
-                        <p className="mt-2 text-sm text-[#536b75]">
-                          {fmt(m.count)} {meta.unit} · {fmt(m.population)}{' '}
-                          moradores
-                        </p>
-                        <p className="mt-2 text-sm text-[#315c68]">
-                          Rio:{' '}
-                          {fmt(
-                            cityMetric(all)[field],
-                            field === 'rate' ? 1 : 0,
-                          )}{' '}
-                          {field === 'rate' ? 'por 100 mil' : meta.unit}
-                        </p>
-                      </a>
-                    );
-                  })}
+                <div className="grid overflow-hidden rounded-xl border border-[#dce2ed] bg-white md:grid-cols-3">
+                  {data.indicators
+                    .filter(
+                      (meta) =>
+                        showAll ||
+                        [
+                          'total_roubos',
+                          'total_furtos',
+                          'letalidade_violenta',
+                        ].includes(meta.id),
+                    )
+                    .map((meta) => {
+                      const all = regionMetrics(
+                          data.rows,
+                          pop,
+                          meta.id,
+                          effectiveEnd!,
+                          Number(months),
+                        ),
+                        m = all.find((x) => x.cisp === cisp)!,
+                        r = rankMetrics(all, field),
+                        position = r.find((x) => x.cisp === cisp);
+                      return (
+                        <a
+                          key={meta.id}
+                          href={link('/rankings', cisp, meta.id)}
+                          className="border-b border-[#dce2ed] p-6 transition hover:bg-[#eef3ff] md:border-r"
+                        >
+                          <h3 className="text-base font-semibold">
+                            {meta.label}
+                          </h3>
+                          <strong className="mt-4 block text-4xl tracking-tight tabular-nums">
+                            {fmt(m[field], field === 'rate' ? 1 : 0)}
+                          </strong>
+                          <p className="mt-1 text-sm text-[#526078]">
+                            {field === 'rate'
+                              ? `${meta.unit} por 100 mil`
+                              : meta.unit}
+                          </p>
+                          <p className="mt-4 text-sm">
+                            {position
+                              ? `${position.rank}ª maior ${field === 'rate' ? 'taxa' : 'quantidade'} de ${r.length} regiões${position.tied ? ' · empate' : ''}`
+                              : 'Sem posição disponível'}
+                          </p>
+                          <p className="mt-2 text-sm text-[#526078]">
+                            {fmt(m.count)} {meta.unit} · {fmt(m.population)}{' '}
+                            moradores
+                          </p>
+                          <p className="mt-2 text-sm text-[#324c86]">
+                            Rio:{' '}
+                            {fmt(
+                              cityMetric(all)[field],
+                              field === 'rate' ? 1 : 0,
+                            )}{' '}
+                            {field === 'rate' ? 'por 100 mil' : meta.unit}
+                          </p>
+                        </a>
+                      );
+                    })}
                 </div>
-                <Button variant="outline" className="h-12 rounded-xl" onClick={()=>setShowAll(!showAll)} aria-expanded={showAll}>{showAll?'Mostrar principais indicadores':'Ver todos os indicadores'}</Button>
+                <Button
+                  variant="outline"
+                  className="h-12 rounded-xl"
+                  onClick={() => setShowAll(!showAll)}
+                  aria-expanded={showAll}
+                >
+                  {showAll
+                    ? 'Mostrar principais indicadores'
+                    : 'Ver todos os indicadores'}
+                </Button>
                 <section className="rounded-2xl bg-white p-6">
                   <h2 className="text-xl font-semibold">
                     Evolução mensal de {validIndicator?.label.toLowerCase()}
                   </h2>
-                  <p className="mt-2 text-sm text-[#536b75]">
+                  <p className="mt-2 text-sm text-[#526078]">
                     {validIndicator?.unit} por mês · últimos 12 meses até{' '}
                     {dateLabel(effectiveEnd!)}
                   </p>
@@ -601,9 +642,9 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                             className="grid grid-cols-[100px_1fr_65px] items-center gap-3 text-sm"
                           >
                             <span>{dateLabel(p)}</span>
-                            <div className="h-5 rounded bg-[#edf3f4]">
+                            <div className="h-5 rounded bg-[#eaf0fc]">
                               <div
-                                className="h-full rounded bg-[#397f8e]"
+                                className="h-full rounded bg-[#3459ad]"
                                 style={{
                                   width: `${n === null ? 0 : (n / max) * 100}%`,
                                 }}
@@ -637,13 +678,13 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                     </p>
                   ) : (
                     <>
-                      <div className="mt-6 grid gap-5 md:grid-cols-2">
+                      <div className="mt-6 grid overflow-hidden rounded-xl border border-[#dce2ed] md:grid-cols-2">
                         {[selected, comparison].map((m, i) => (
                           <div
                             key={i}
-                            className={`rounded-2xl p-6 ${i === 0 ? 'bg-[#14323c] text-white' : 'bg-[#edf3f4]'}`}
+                            className={`border-t-4 p-6 md:p-8 ${i === 0 ? 'border-[#2455dc] bg-white' : 'border-[#8b97ad] bg-[#f7f8fb]'}`}
                           >
-                            <h3 className="text-base font-semibold">
+                            <h3 className="text-base font-semibold text-[#2455dc]">
                               {i === 0
                                 ? `CISP ${cisp}`
                                 : other === 'rio'
@@ -659,7 +700,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                                       (t) => t.cisp === Number(other),
                                     )?.territorialUnit}
                             </p>
-                            <strong className="mt-5 block text-4xl tabular-nums">
+                            <strong className="mt-5 block text-5xl tracking-tight tabular-nums">
                               {fmt(
                                 m?.[field] ?? null,
                                 field === 'rate' ? 1 : 0,
@@ -668,10 +709,10 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                             <p className="mt-2 text-sm">{unit}</p>
                             <div
                               aria-hidden="true"
-                              className="mt-4 h-3 rounded-full bg-[#9bc9cf]/30"
+                              className="mt-4 h-3 rounded-full bg-[#a9c1ff]/30"
                             >
                               <div
-                                className="h-full rounded-full bg-[#70a8b1]"
+                                className="h-full rounded-full bg-[#7094e5]"
                                 style={{
                                   width: `${m?.[field] === null ? 0 : ((m?.[field] ?? 0) / Math.max(1, selected[field] ?? 0, comparison?.[field] ?? 0)) * 100}%`,
                                 }}
@@ -694,7 +735,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                           ? 'A taxa do Rio usa a soma dos registros dividida pela soma dos moradores e inclui a região selecionada.'
                           : ''}
                       </p>
-                      <p className="mt-3 text-sm text-[#536b75]">
+                      <p className="mt-3 text-sm text-[#526078]">
                         Mesma janela de tempo e população do Censo 2022. A taxa
                         não representa a chance individual de sofrer um crime.
                       </p>
@@ -703,13 +744,13 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                 </section>
               ))}
             {mode === 'rankings' && (
-              <section className="overflow-hidden rounded-2xl border border-[#d8e2e5] bg-white">
+              <section className="overflow-hidden rounded-2xl border border-[#dce2ed] bg-white">
                 <div className="p-5">
                   <h2 className="text-xl font-semibold">
                     {ranking.length} regiões · da maior para a menor{' '}
                     {field === 'rate' ? 'taxa' : 'quantidade'}
                   </h2>
-                  <p className="mt-2 text-sm text-[#536b75]">
+                  <p className="mt-2 text-sm text-[#526078]">
                     {unit} · empates compartilham a posição. Cada região aparece
                     uma vez.
                   </p>
@@ -718,7 +759,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   {ranking.map((m) => (
                     <li
                       key={m.cisp}
-                      className={`border-t border-[#d8e2e5] ${m.cisp === cisp ? 'bg-[#fff8e8]' : ''}`}
+                      className={`border-t border-[#dce2ed] transition hover:bg-[#f3f5fa] ${m.cisp === cisp ? 'bg-[#eef3ff]' : ''}`}
                     >
                       <a
                         href={link('/meu-bairro', m.cisp)}
@@ -733,11 +774,22 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                                 ?.territorialUnit
                             }
                           </strong>
-                          <p className="mt-1 text-sm text-[#536b75]">
+                          <p className="mt-1 text-sm text-[#526078]">
                             {fmt(m.count)} {validIndicator?.unit}
                             {m.tied ? ' · empatada' : ''}
                             {m.cisp === cisp ? ' · sua seleção' : ''}
                           </p>
+                          <div
+                            aria-hidden="true"
+                            className="mt-3 h-1.5 w-full bg-[#edf0f5]"
+                          >
+                            <div
+                              className="h-full bg-[#7391cd]"
+                              style={{
+                                width: `${(Math.max(0, m[field] ?? 0) / Math.max(1, ranking[0]?.[field] ?? 0)) * 100}%`,
+                              }}
+                            />
+                          </div>
                         </div>
                         <strong className="col-start-2 text-2xl tabular-nums sm:col-start-auto sm:text-right">
                           {fmt(m[field], field === 'rate' ? 1 : 0)}
@@ -753,9 +805,27 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                 )}
               </section>
             )}
-            {mode === 'insights' && (
+            {mode === 'insights' &&
+              insightMode === 'panorama' &&
+              effectiveEnd && (
+                <InsightsPanorama
+                  followLatest={end === 'latest'}
+                  rows={data.rows}
+                  populations={pop}
+                  territories={territories}
+                  indicators={data.indicators}
+                  end={effectiveEnd}
+                  months={Number(months)}
+                  range={range}
+                  prior={prior}
+                />
+              )}
+            {mode === 'insights' && insightMode === 'indicador' && (
               <section>
-                <p className="mb-5 text-base leading-7 text-[#536b75]">
+                <h2 className="mb-4 text-2xl font-semibold">
+                  Destaques de {validIndicator?.label.toLowerCase()}
+                </h2>
+                <p className="mb-5 text-base leading-7 text-[#526078]">
                   {comparable} de 41 regiões com dados completos nos dois
                   períodos. Comparação de {range} com {prior}. Destaques
                   calculados automaticamente: base anterior de pelo menos 20,
@@ -767,12 +837,15 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   {changes.map((x) => (
                     <article
                       key={`${x.kind}-${x.cisp}`}
-                      className="rounded-2xl border border-[#d8e2e5] bg-white p-6"
+                      className="rounded-2xl border border-[#dce2ed] bg-white p-6"
                     >
+                      <p className="mb-4 text-sm font-semibold text-[#2455dc]">
+                        {validIndicator?.label} · quantidade
+                      </p>
                       <TrendingUp
-                        className={`size-6 text-[#397f8e] ${x.change! < 0 ? 'rotate-90' : ''}`}
+                        className={`size-6 text-[#3459ad] ${x.change! < 0 ? 'rotate-90' : ''}`}
                       />
-                      <p className="mt-4 text-sm font-semibold text-[#397f8e]">
+                      <p className="mt-4 text-sm font-semibold text-[#3459ad]">
                         {x.kind}
                       </p>
                       <h2 className="mt-2 text-xl font-semibold">
@@ -789,9 +862,17 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                         De {fmt(x.previous)} para {fmt(x.count)}{' '}
                         {validIndicator?.unit}.
                       </p>
+                      <p className="mt-2 text-base font-medium">
+                        {fmt(Math.abs(x.count - x.previous))}{' '}
+                        {validIndicator?.unit}{' '}
+                        {x.count > x.previous ? 'a mais' : 'a menos'}.
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-[#526078]">
+                        {range} versus {prior}.
+                      </p>
                       <a
                         href={link('/meu-bairro', x.cisp)}
-                        className="mt-6 inline-flex items-center gap-2 font-semibold text-[#1b6473]"
+                        className="mt-6 inline-flex items-center gap-2 font-semibold text-[#2455dc]"
                       >
                         Explorar região <ArrowRight className="size-4" />
                       </a>
@@ -810,9 +891,12 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   {history.map((x) => (
                     <article
                       key={`${x.title}-${x.cisp}`}
-                      className="rounded-2xl border border-[#d8e2e5] bg-white p-6"
+                      className="rounded-2xl border border-[#dce2ed] bg-white p-6"
                     >
-                      <p className="text-sm font-semibold text-[#397f8e]">
+                      <p className="mb-3 text-sm font-semibold text-[#2455dc]">
+                        {validIndicator?.label}
+                      </p>
+                      <p className="text-sm font-semibold text-[#3459ad]">
                         {x.title}
                       </p>
                       <h2 className="mt-3 text-lg font-semibold">
@@ -834,7 +918,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                     </article>
                   ))}
                 </div>
-                <p className="mt-6 text-sm leading-6 text-[#536b75]">
+                <p className="mt-6 text-sm leading-6 text-[#526078]">
                   Descrevem mudanças nos registros, sem atribuir causas.
                   Revisões da fonte podem alterar os resultados.{' '}
                   <a href="/metodologia" className="underline">

@@ -22,7 +22,7 @@ export function ExploreNavigation({
     <nav
       ref={nav}
       aria-label="Explorar criminalidade"
-      className="flex gap-1 overflow-x-auto border-b border-[#d8e2e5] bg-white px-4 py-2 md:justify-center"
+      className="explore-nav flex gap-2 overflow-x-auto border-b px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:px-6"
     >
       {[
         ['/', 'Mapa'],
@@ -35,7 +35,7 @@ export function ExploreNavigation({
           key={path}
           href={`${path}${query}`}
           aria-current={active === path ? 'page' : undefined}
-          className={`shrink-0 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${active === path ? 'bg-[#14323c] text-white' : 'text-[#315c68] hover:bg-[#edf3f4]'}`}
+          className={`shrink-0 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${active === path ? 'bg-[#172235] text-white' : 'text-[#324c86] hover:bg-[#eaf0fc]'}`}
         >
           {label}
         </a>
