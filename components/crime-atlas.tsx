@@ -26,6 +26,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { ExploreNavigation } from '@/components/explore-navigation';
 import {
   Popover,
   PopoverContent,
@@ -369,9 +370,9 @@ export function CrimeAtlas() {
     url.searchParams.set('indicador', indicator);
     url.searchParams.set('visualizacao', viewMode === 'rate' ? 'taxa' : viewMode === 'quantity' ? 'quantidade' : 'variacao');
     url.searchParams.set('meses', String(windowMonths));
-    url.searchParams.set('fim', effectiveEnd);
+    url.searchParams.set('fim', endPeriod || 'latest');
     window.history.replaceState(null, '', url);
-  }, [selectedCisp, indicator, viewMode, windowMonths, effectiveEnd, urlReady]);
+  }, [selectedCisp, indicator, viewMode, windowMonths, effectiveEnd, endPeriod, urlReady]);
 
   useEffect(() => {
     geoRef.current = enrichedGeo;
@@ -494,7 +495,8 @@ export function CrimeAtlas() {
     const bv = viewMode === 'rate' ? b.rate : viewMode === 'quantity' ? b.current : (b.change ?? -Infinity);
     return bv - av;
   });
-  const rank = sorted.findIndex((item) => item.cisp === selectedCisp) + 1;
+  const rankValue = (item: AreaStat) => viewMode === 'rate' ? item.rate : viewMode === 'quantity' ? item.current : (item.change ?? -Infinity);
+  const rank = selected ? 1 + sorted.filter(item => rankValue(item) > rankValue(selected)).length : 0;
   const searchResults = search.trim() ? (territories?.records ?? []).filter((item) => `${item.cisp} ${item.territorialUnit} ${item.neighborhoods.join(' ')}`.toLowerCase().includes(search.trim().toLowerCase())).slice(0, 6) : [];
   const chartPeriods = periods.slice(Math.max(0, endIndex - 11), endIndex + 1);
   const series = (snapshot?.rows.filter((row) => row.cisp === selectedCisp && chartPeriods.includes(row.period)) ?? []).map((row) => ({ period: row.period, value: row.values[indicator] ?? 0 }));
@@ -529,7 +531,7 @@ export function CrimeAtlas() {
         <div><p className="mb-2 text-xs font-semibold text-[#5e737c]">Período</p><div className="grid grid-cols-4 gap-1 rounded-xl bg-[#edf3f4] p-1">{monthOptions.map((months) => <button key={months} type="button" onClick={() => setWindowMonths(months)} aria-pressed={windowMonths === months} className={`min-h-10 rounded-[9px] text-xs font-semibold transition ${windowMonths === months ? 'bg-[#1b6473] text-white shadow-sm' : 'text-[#60757d] hover:text-[#14323c]'}`}>{months === 1 ? '1 mês' : `${months} meses`}</button>)}</div></div>
         <div>
           <p className="mb-2 block text-xs font-semibold text-[#5e737c]">Mês final</p>
-          <Select value={effectiveEnd} onValueChange={(value) => value && setEndPeriod(value)}><SelectTrigger className="w-full rounded-xl border-[#d8e2e5] bg-white px-3 shadow-none data-[size=default]:h-11"><SelectValue>{effectiveEnd ? formatPeriod(effectiveEnd, true) : '—'}</SelectValue></SelectTrigger><SelectContent className="rounded-xl">{periods.slice(minimumIndex).reverse().map((period) => <SelectItem key={period} value={period}>{formatPeriod(period, true)}</SelectItem>)}</SelectContent></Select>
+          <Select value={endPeriod || 'latest'} onValueChange={(value) => value && setEndPeriod(value)}><SelectTrigger className="w-full rounded-xl border-[#d8e2e5] bg-white px-3 shadow-none data-[size=default]:h-11"><SelectValue>{!endPeriod || endPeriod === 'latest' ? 'Último mês disponível' : effectiveEnd ? formatPeriod(effectiveEnd, true) : '—'}</SelectValue></SelectTrigger><SelectContent className="rounded-xl"><SelectItem value="latest">Último mês disponível</SelectItem>{periods.slice(minimumIndex).reverse().map((period) => <SelectItem key={period} value={period}>{formatPeriod(period, true)}</SelectItem>)}</SelectContent></Select>
         </div>
       </div>
     );
@@ -548,6 +550,7 @@ export function CrimeAtlas() {
           </nav>
         </div>
       </header>
+      <ExploreNavigation query={`?cisp=${selectedCisp}&indicador=${indicator}&meses=${windowMonths}&fim=${endPeriod || 'latest'}&visualizacao=${viewMode === 'quantity' ? 'quantidade' : 'taxa'}`} />
 
       <div className="mx-auto max-w-[1500px] px-4 pb-10 pt-5 md:px-6 md:pt-7">
         <section className="mb-4 flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
