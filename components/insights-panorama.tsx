@@ -53,11 +53,18 @@ export function InsightsPanorama({
                   {meta?.unit}
                 </span>
               </p>
+              <p className="mt-2 text-sm font-medium text-[#526078]">
+                Período: {range}
+              </p>
               <p className="mt-3 text-sm text-[#526078]">
-                Antes: {fmt(m.previous)} ·{' '}
+                Período anterior ({prior}): {fmt(m.previous)} {meta?.unit}.
+              </p>
+              <p className="mt-2 text-sm font-semibold text-[#324c86]">
                 {m.change === null
-                  ? 'Sem comparação'
-                  : `${m.change > 0 ? '+' : ''}${fmt(m.change, 1)}%`}
+                  ? 'Sem dados suficientes para comparar esses períodos.'
+                  : m.change === 0
+                    ? `Sem mudança em relação a ${prior}.`
+                    : `${fmt(Math.abs(m.change), 1)}% ${m.change > 0 ? 'a mais' : 'a menos'} em relação a ${prior}.`}
               </p>
             </div>
           );

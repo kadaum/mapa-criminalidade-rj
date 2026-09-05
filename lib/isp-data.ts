@@ -166,10 +166,37 @@ function toHex(buffer: ArrayBuffer) {
 
 export async function fetchIspSnapshot() {
   const response = await fetch(SOURCE_URL, {
+    signal: AbortSignal.timeout(15000),
     headers: { 'user-agent': 'MapaAbertoRJ/0.1 (+public civic monitor)' },
   });
   if (!response.ok) throw new Error(`ISP download failed: ${response.status}`);
-  const bytes = await response.arrayBuffer();
+  // Bound upstream resource use; neither URL nor limit is controlled by callers.
+  const maxBytes = 32 * 1024 * 1024;
+  if (
+    Number(response.headers.get('content-length')) > maxBytes ||
+    !response.body
+  )
+    throw new Error('ISP response exceeds download limit');
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > maxBytes) {
+      await reader.cancel();
+      throw new Error('ISP response exceeds download limit');
+    }
+    chunks.push(value);
+  }
+  const buffer = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    buffer.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  const bytes = buffer.buffer;
   const sha256 = toHex(await crypto.subtle.digest('SHA-256', bytes));
   const all = parseDelimited(
     new TextDecoder('windows-1252').decode(bytes),
@@ -181,9 +208,17 @@ export async function fetchIspSnapshot() {
   ].sort();
   const selectedPeriods = periods.slice(-36);
   const selected = new Set(selectedPeriods);
-  for (const row of all.filter(row => selected.has(`${row.ano}-${String(row.mes).padStart(2,'0')}`))) {
-    for (const {id} of indicators) {
-      if (row[id] === undefined || row[id].trim() === '' || !Number.isSafeInteger(Number(row[id])) || Number(row[id]) < 0) throw new Error(`Invalid ISP value: ${id}`);
+  for (const row of all.filter((row) =>
+    selected.has(`${row.ano}-${String(row.mes).padStart(2, '0')}`),
+  )) {
+    for (const { id } of indicators) {
+      if (
+        row[id] === undefined ||
+        row[id].trim() === '' ||
+        !Number.isSafeInteger(Number(row[id])) ||
+        Number(row[id]) < 0
+      )
+        throw new Error(`Invalid ISP value: ${id}`);
     }
   }
   const rows = all
@@ -207,10 +242,22 @@ export async function fetchIspSnapshot() {
   if (cispCount !== 41)
     throw new Error(`Expected 41 Rio CISPs; received ${cispCount}`);
   const keys = new Set<string>();
-  const expected = new Set(latestRows.map(row=>row.cisp));
-  for(const row of rows){const key=`${row.cisp}:${row.period}`;if(keys.has(key)||!expected.has(row.cisp))throw new Error('Invalid CISP coverage');keys.add(key);}
-  for(const period of selectedPeriods)if(rows.filter(row=>row.period===period).length!==41)throw new Error('Incomplete monthly coverage');
-  for(let i=1;i<selectedPeriods.length;i++){const previous=new Date(`${selectedPeriods[i-1]}-01T00:00:00Z`);previous.setUTCMonth(previous.getUTCMonth()+1);if(previous.toISOString().slice(0,7)!==selectedPeriods[i])throw new Error('Missing calendar month');}
+  const expected = new Set(latestRows.map((row) => row.cisp));
+  for (const row of rows) {
+    const key = `${row.cisp}:${row.period}`;
+    if (keys.has(key) || !expected.has(row.cisp))
+      throw new Error('Invalid CISP coverage');
+    keys.add(key);
+  }
+  for (const period of selectedPeriods)
+    if (rows.filter((row) => row.period === period).length !== 41)
+      throw new Error('Incomplete monthly coverage');
+  for (let i = 1; i < selectedPeriods.length; i++) {
+    const previous = new Date(`${selectedPeriods[i - 1]}-01T00:00:00Z`);
+    previous.setUTCMonth(previous.getUTCMonth() + 1);
+    if (previous.toISOString().slice(0, 7) !== selectedPeriods[i])
+      throw new Error('Missing calendar month');
+  }
   return {
     schemaVersion: 1,
     live: true,

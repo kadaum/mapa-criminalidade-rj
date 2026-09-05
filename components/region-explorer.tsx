@@ -6,9 +6,12 @@ import { ArrowRight, MapPin, Share2, TrendingUp } from 'lucide-react';
 import { SiteHeader } from './site-header';
 import { ExploreNavigation } from './explore-navigation';
 import { InsightsPanorama } from './insights-panorama';
+import { indicatorGroups } from '@/lib/indicator-groups';
 import {
   Select,
   SelectContent,
+  SelectGroup,
+  SelectLabel,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -66,11 +69,13 @@ function Choice({
   value,
   onChange,
   options,
+  grouped = false,
 }: {
   label: string;
   value: string;
   onChange: (s: string) => void;
   options: { value: string; label: string }[];
+  grouped?: boolean;
 }) {
   const id = `select-${normalizeName(label).replace(/\s/g, '-')}`;
   return (
@@ -88,11 +93,27 @@ function Choice({
           </SelectValue>
         </SelectTrigger>
         <SelectContent className="max-h-80 max-w-[90vw]">
-          {options.map((o) => (
-            <SelectItem key={o.value} value={o.value}>
-              {o.label}
-            </SelectItem>
-          ))}
+          {grouped
+            ? indicatorGroups.map((group) => (
+                <SelectGroup key={group.label}>
+                  <SelectLabel className="text-xs font-semibold text-[#59667b]">
+                    {group.label}
+                  </SelectLabel>
+                  {group.ids.map((id) => {
+                    const o = options.find((o) => o.value === id);
+                    return o ? (
+                      <SelectItem key={id} value={id}>
+                        {o.label}
+                      </SelectItem>
+                    ) : null;
+                  })}
+                </SelectGroup>
+              ))
+            : options.map((o) => (
+                <SelectItem key={o.value} value={o.value}>
+                  {o.label}
+                </SelectItem>
+              ))}
         </SelectContent>
       </Select>
     </div>
@@ -423,6 +444,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
               {(mode !== 'insights' || insightMode === 'indicador') && (
                 <Choice
                   label="Indicador"
+                  grouped
                   value={id}
                   onChange={setIndicator}
                   options={data.indicators.map((i) => ({

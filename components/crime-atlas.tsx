@@ -117,27 +117,7 @@ type ViewMode = 'rate' | 'quantity' | 'variation';
 
 const monthOptions = [1, 3, 6, 12] as const;
 const palette = ['#edf0fc', '#c4d0ef', '#91a8db', '#5b77be', '#294688'];
-const groups = [
-  { label: 'Visão geral', ids: ['registro_ocorrencias'] },
-  { label: 'Patrimônio', ids: ['total_roubos', 'total_furtos', 'estelionato'] },
-  {
-    label: 'Tipos de roubo',
-    ids: ['roubo_rua', 'roubo_celular', 'roubo_em_coletivo', 'roubo_veiculo'],
-  },
-  { label: 'Tipos de furto', ids: ['furto_veiculos', 'furto_celular'] },
-  {
-    label: 'Vida e integridade',
-    ids: [
-      'letalidade_violenta',
-      'hom_doloso',
-      'tentat_hom',
-      'hom_por_interv_policial',
-      'estupro',
-      'ameaca',
-    ],
-  },
-  { label: 'Outros registros', ids: ['pessoas_desaparecidas'] },
-] as const;
+import { indicatorGroups as groups } from '@/lib/indicator-groups';
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
@@ -148,7 +128,7 @@ const mapStyle = {
       type: 'raster' as const,
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
       tileSize: 256,
-      attribution: '© OpenStreetMap contributors',
+      attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',
     },
   },
   layers: [
