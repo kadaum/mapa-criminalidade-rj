@@ -30,6 +30,7 @@ export function ExploreNavigation({
         ['/comparar', 'Comparar'],
         ['/rankings', 'Rankings'],
         ['/insights', 'Insights'],
+        ['/historico', 'Histórico'],
       ].map(([path, label]) => (
         <a
           key={path}
