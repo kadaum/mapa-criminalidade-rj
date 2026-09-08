@@ -5,6 +5,8 @@ import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, MapPin, Share2, TrendingUp } from 'lucide-react';
 import { SiteHeader } from './site-header';
 import { ExploreNavigation } from './explore-navigation';
+import { PeriodPicker } from './period-picker';
+import { monthCount, comparisonRange, type Comparison } from '@/lib/period-range';
 import { InsightsPanorama } from './insights-panorama';
 import { indicatorGroups } from '@/lib/indicator-groups';
 import {
@@ -122,6 +124,7 @@ function Choice({
 export function RegionExplorer({ mode }: { mode: Mode }) {
   const reduced = useReducedMotion();
   const [showAll, setShowAll] = useState(false);
+  const [timeComparison, setComparison] = useState<Comparison>('previous');
   const [insightMode, setInsightMode] = useState('panorama');
   const [data, setData] = useState<Data | null>(null),
     [territories, setTerritories] = useState<Territory[]>([]),
@@ -144,8 +147,10 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
     setOther(p.get('outra') || 'rio');
     setIndicator(p.get('indicador') || 'total_furtos');
     setEnd(p.get('fim') || 'latest');
-    if (['1', '3', '6', '12'].includes(p.get('meses') || ''))
+    if (Number(p.get('meses')) > 0 && Number(p.get('meses')) <= 36 && Number.isInteger(Number(p.get('meses'))))
       setMonths(p.get('meses')!);
+    const compare = p.get('comparacao');
+    if(compare === 'year' || compare === 'none') setComparison(compare);
     setField(p.get('visualizacao') === 'quantidade' ? 'count' : 'rate');
     setReady(true);
     async function load() {
@@ -222,6 +227,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
     indicador: id,
     meses: months,
     fim: end,
+    comparacao: timeComparison,
     visualizacao: field === 'rate' ? 'taxa' : 'quantidade',
     ...(cisp ? { cisp: String(cisp) } : {}),
     ...(bairro ? { bairro } : {}),
@@ -233,7 +239,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
   }, [ready, mode, queryString]);
   const metrics =
     data && effectiveEnd
-      ? regionMetrics(data.rows, pop, id, effectiveEnd, Number(months))
+      ? regionMetrics(data.rows, pop, id, effectiveEnd, Number(months), timeComparison)
       : [];
   const selected = metrics.find((m) => m.cisp === cisp),
     selectedTerritory = territories.find((t) => t.cisp === cisp);
@@ -254,9 +260,8 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
   const range = effectiveEnd
     ? `${dateLabel(monthShift(effectiveEnd, 1 - Number(months)))} – ${dateLabel(effectiveEnd)}`
     : 'Carregando período…';
-  const prior = effectiveEnd
-    ? `${dateLabel(monthShift(effectiveEnd, 1 - 2 * Number(months)))} – ${dateLabel(monthShift(effectiveEnd, -Number(months)))}`
-    : '';
+  const comparisonDates = effectiveEnd ? comparisonRange(monthShift(effectiveEnd, 1-Number(months)), effectiveEnd, timeComparison) : null;
+  const prior = comparisonDates ? `${dateLabel(comparisonDates.start)} – ${dateLabel(comparisonDates.end)}` : 'sem comparação';
   const unit =
     field === 'rate'
       ? `${validIndicator?.unit ?? 'eventos'} por 100 mil moradores`
@@ -295,7 +300,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
   const changes = comparable === 41 ? factualInsights(metrics) : [];
   const history =
     data && effectiveEnd
-      ? historicalInsights(data.rows, pop, id, effectiveEnd, Number(months))
+      ? historicalInsights(data.rows, pop, id, effectiveEnd, Number(months), timeComparison)
       : [];
   return (
     <main className="explorer-page min-h-screen bg-[#f3f5fa] text-[#172235]">
@@ -453,27 +458,12 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   }))}
                 />
               )}
-              <Choice
-                label="Período"
-                value={months}
-                onChange={setMonths}
-                options={['1', '3', '6', '12'].map((m) => ({
-                  value: m,
-                  label: m === '1' ? '1 mês' : `${m} meses`,
-                }))}
-              />
-              <Choice
-                label="Mês final"
-                value={end}
-                onChange={setEnd}
-                options={[
-                  { value: 'latest', label: 'Último mês disponível' },
-                  ...periods
-                    .slice(Number(months) - 1)
-                    .reverse()
-                    .map((p) => ({ value: p, label: dateLabel(p) })),
-                ]}
-              />
+              <div className="col-span-2">
+                <p className="mb-2 text-sm font-semibold">Período e comparação</p>
+                <PeriodPicker min="2003-01" mapFrom={periods[0]} max={periods.at(-1) ?? ''} start={effectiveEnd ? monthShift(effectiveEnd,1-Number(months)) : ''} end={effectiveEnd ?? ''} comparison={timeComparison}
+                  onApply={(a,b,c)=>{if(a < periods[0]) { window.location.assign(`/historico?${new URLSearchParams({indicador:id,inicio:a,fim:b,comparacao:c})}`);return;} setMonths(String(monthCount(a,b)));setEnd(b);setComparison(c);}}
+                  historyHref={`/historico?indicador=${id}`} />
+              </div>
               {mode !== 'insights' && (
                 <Choice
                   label="Mostrar por"
@@ -831,6 +821,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
               insightMode === 'panorama' &&
               effectiveEnd && (
                 <InsightsPanorama
+                  comparison={timeComparison}
                   followLatest={end === 'latest'}
                   rows={data.rows}
                   populations={pop}

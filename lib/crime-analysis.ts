@@ -42,13 +42,14 @@ export function regionMetrics(
   indicator: string,
   end: string,
   months: number,
+  comparison: 'previous' | 'year' | 'none' = 'previous',
 ): Metric[] {
   const current = windowPeriods(end, months),
-    previous = windowPeriods(monthShift(end, -months), months);
+    previous = windowPeriods(monthShift(end, comparison === 'year' ? -12 : -months), months);
   return populations.map((p) => {
     const local = rows.filter((row) => row.cisp === p.cisp);
     const count = periodTotal(local, current, indicator),
-      before = periodTotal(local, previous, indicator);
+      before = comparison === 'none' ? null : periodTotal(local, previous, indicator);
     const population =
       Number.isSafeInteger(p.population) && p.population > 0
         ? p.population
@@ -171,19 +172,22 @@ export function historicalInsights(
   indicator: string,
   end: string,
   months: number,
+  comparison: 'previous' | 'year' | 'none' = 'previous',
 ) {
-  const current = regionMetrics(rows, populations, indicator, end, months);
+  const offset = comparison === 'year' ? -12 : -months;
+  const current = regionMetrics(rows, populations, indicator, end, months, comparison);
   const before = regionMetrics(
     rows,
     populations,
     indicator,
-    monthShift(end, -months),
+    monthShift(end, offset),
     months,
   );
   const ranked = rankMetrics(current, 'rate'),
     previousRank = rankMetrics(before, 'rate');
   const result: { cisp: number; title: string; detail: string }[] = [];
   if (
+    comparison !== 'none' &&
     ranked.length === populations.length &&
     previousRank.length === populations.length
   ) {
@@ -202,7 +206,7 @@ export function historicalInsights(
       result.push({
         cisp: m.cisp,
         title: 'Mudança de posição',
-        detail: `Da ${old}ª para a ${m.rank}ª maior taxa: ${previousRank.find((p) => p.cisp === m.cisp)!.rate!.toLocaleString('pt-BR', { maximumFractionDigits: 1 })} → ${m.rate!.toLocaleString('pt-BR', { maximumFractionDigits: 1 })} por 100 mil moradores. ${windowPeriods(monthShift(end, -months), months)[0]} a ${monthShift(end, -months)} versus ${windowPeriods(end, months)[0]} a ${end}. Posição não mede risco individual.`,
+        detail: `Da ${old}ª para a ${m.rank}ª maior taxa: ${previousRank.find((p) => p.cisp === m.cisp)!.rate!.toLocaleString('pt-BR', { maximumFractionDigits: 1 })} → ${m.rate!.toLocaleString('pt-BR', { maximumFractionDigits: 1 })} por 100 mil moradores. ${windowPeriods(monthShift(end, offset), months)[0]} a ${monthShift(end, offset)} versus ${windowPeriods(end, months)[0]} a ${end}. Posição não mede risco individual.`,
       });
   }
   const ps = windowPeriods(end, 12);

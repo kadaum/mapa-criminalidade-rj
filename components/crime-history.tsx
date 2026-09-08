@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { SiteHeader } from './site-header';
 import { ExploreNavigation } from './explore-navigation';
+import { PeriodPicker } from './period-picker';
+import { comparisonRange, monthCount, validMonth, type Comparison } from '@/lib/period-range';
 
 type Values = Record<string, number | null>;
 type Population = { value: number; kind: string; source: string };
@@ -35,24 +37,53 @@ export function CrimeHistory() {
     [failed, setFailed] = useState(false);
   const [indicator, setIndicator] = useState('letalidade_violenta'),
     [measure, setMeasure] = useState('rate');
-  const [start, setStart] = useState('2003'),
+  const [start, setStart] = useState('2003-01'),
     [end, setEnd] = useState(''),
     [monthly, setMonthly] = useState(false);
+  const [comparison, setComparison] = useState<Comparison>('none');
   useEffect(() => {
     fetch('/data/crime-rio-history.json')
       .then((r) => {
         if (!r.ok) throw Error();
         return r.json();
       })
-      .then((d) => setData(d as History))
+      .then((value) => {
+        const d = value as History;
+        const params = new URLSearchParams(window.location.search);
+        if (d.indicators.some(i => i.id === params.get('indicador'))) setIndicator(params.get('indicador')!);
+        const a = params.get('inicio'), b = params.get('fim');
+        if (a && b && validMonth(a) && validMonth(b) && a >= d.firstPeriod && b <= d.latestPeriod && a <= b) { setStart(a); setEnd(b); }
+        const c = params.get('comparacao');
+        if(c === 'year' || c === 'previous') setComparison(c);
+        setData(d);
+      })
       .catch(() => setFailed(true));
   }, []);
-  const last = data?.years.at(-1)?.year.toString() ?? '';
+  const last = data?.latestPeriod ?? '';
+  useEffect(() => {
+    if(!data) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('inicio', start); url.searchParams.set('fim', end || last);
+    url.searchParams.set('indicador', indicator); url.searchParams.set('comparacao', comparison);
+    window.history.replaceState(null, '', url);
+  }, [data, start, end, last, indicator, comparison]);
   const selected = data?.indicators.find((i) => i.id === indicator);
   const years =
     data?.years.filter(
-      (y) => y.year >= Number(start) && y.year <= Number(end || last),
-    ) ?? [];
+      (y) => y.year >= Number(start.slice(0,4)) && y.year <= Number((end || last).slice(0,4)),
+    ).map(y => {
+      const rows = data.months.filter(m => m.period.startsWith(String(y.year)) && m.period >= start && m.period <= (end || last));
+      const values = Object.fromEntries(data.indicators.map(i => [i.id, rows.every(m => m.values[i.id] != null) ? rows.reduce((sum,m)=>sum+m.values[i.id]!,0) : null]));
+      const complete = rows.length === 12;
+      return { ...y, months: rows.length, complete, values, rates: Object.fromEntries(data.indicators.map(i => [i.id, complete ? y.rates[i.id] : null])) };
+    }) ?? [];
+  const selectedMonths = data?.months.filter(m => m.period >= start && m.period <= (end || last)) ?? [];
+  const baseline = last ? comparisonRange(start, end || last, comparison) : null;
+  const baselineMonths = baseline ? data?.months.filter(m => m.period >= baseline.start && m.period <= baseline.end) ?? [] : [];
+  const total = (rows: History['months']) => rows.length && rows.every(m=>m.values[indicator] != null) ? rows.reduce((sum,m)=>sum+m.values[indicator]!,0) : null;
+  const currentTotal = total(selectedMonths);
+  const priorTotal = baseline && baselineMonths.length === monthCount(baseline.start, baseline.end) ? total(baselineMonths) : null;
+  const change = currentTotal != null && priorTotal != null && priorTotal > 0 ? (currentTotal / priorTotal - 1) * 100 : null;
   // Partial years never enter the annual chart or annual comparisons.
   const chart = years
     .filter((y) => y.complete)
@@ -64,7 +95,7 @@ export function CrimeHistory() {
   return (
     <div className="min-h-screen bg-[#f7f9fc] text-[#172235]">
       <SiteHeader date={data?.latestPeriod} />
-      <ExploreNavigation active="/historico" />
+      <ExploreNavigation active="/historico" query={`?indicador=${indicator}`} />
       <main className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-8">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-[#526b99]">
@@ -112,37 +143,18 @@ export function CrimeHistory() {
                   <option value="count">Quantidade registrada</option>
                 </select>
               </label>
-              <label className="text-sm font-semibold">
-                Ano inicial
-                <select
-                  value={start}
-                  onChange={(e) => {
-                    setStart(e.target.value);
-                    if (Number(e.target.value) > Number(end || last))
-                      setEnd(e.target.value);
-                  }}
-                  className="mt-2 w-full rounded-lg border p-3"
-                >
-                  {data.years.map((y) => (
-                    <option key={y.year}>{y.year}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="text-sm font-semibold">
-                Ano final
-                <select
-                  value={end || last}
-                  onChange={(e) => setEnd(e.target.value)}
-                  className="mt-2 w-full rounded-lg border p-3"
-                >
-                  {data.years
-                    .filter((y) => y.year >= Number(start))
-                    .map((y) => (
-                      <option key={y.year}>{y.year}</option>
-                    ))}
-                </select>
-              </label>
+              <div className="sm:col-span-2">
+                <p className="mb-2 text-sm font-semibold">Período e comparação</p>
+                <PeriodPicker min={data.firstPeriod} max={data.latestPeriod} start={start} end={end || last} comparison={comparison}
+                  onApply={(a,b,c)=>{setStart(a);setEnd(b);setComparison(c);setMonthly(true);}} />
+              </div>
             </div>
+            <section className="rounded-2xl border bg-white p-5" aria-label="Resultado do período">
+              <p className="text-sm text-slate-600">{selected?.label} · {start} a {end || last} · {selectedMonths.length} meses</p>
+              <p className="mt-2 text-3xl font-bold">{fmt(currentTotal)} <span className="text-base font-normal">{selected?.unit}</span></p>
+              {baseline && <p className="mt-3 text-sm">Comparação com {baseline.start} a {baseline.end}: {fmt(priorTotal)}. {change != null ? `${change > 0 ? '+' : ''}${fmt(change,1)}%` : 'Variação indisponível.'}</p>}
+              <p className="mt-2 text-sm text-slate-500">Totais registrados no intervalo selecionado. As taxas por 100 mil aparecem por ano completo abaixo.</p>
+            </section>
             <section
               className="rounded-2xl border bg-white p-5 md:p-7"
               aria-label="Evolução anual"
@@ -262,8 +274,7 @@ export function CrimeHistory() {
                       {data.months
                         .filter(
                           (m) =>
-                            Number(m.period.slice(0, 4)) >= Number(start) &&
-                            Number(m.period.slice(0, 4)) <= Number(end || last),
+                            m.period >= start && m.period <= (end || last),
                         )
                         .map((m) => (
                           <tr className="border-t" key={m.period}>

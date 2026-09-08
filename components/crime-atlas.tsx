@@ -9,6 +9,8 @@ import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
+import { PeriodPicker } from '@/components/period-picker';
+import { comparisonRange, monthCount, type Comparison } from '@/lib/period-range';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -116,7 +118,6 @@ type AreaStat = {
 };
 type ViewMode = 'rate' | 'quantity' | 'variation';
 
-const monthOptions = [1, 3, 6, 12] as const;
 const palette = ['#f3e5b5', '#f7c964', '#ea9b42', '#d96930', '#a43d28'];
 import { indicatorGroups as groups } from '@/lib/indicator-groups';
 
@@ -184,10 +185,6 @@ function formatPeriod(period: string, long = false) {
     .format(new Date(Date.UTC(year, month - 1, 1)))
     .replace('.', '');
   return label.charAt(0).toUpperCase() + label.slice(1);
-}
-
-function periodLabel(months: number) {
-  return months === 1 ? 'Último mês' : `Últimos ${months} meses`;
 }
 
 function fmtChange(value: number | null) {
@@ -328,6 +325,7 @@ export function CrimeAtlas() {
   const [viewMode, setViewMode] = useState<ViewMode>('quantity');
   const [windowMonths, setWindowMonths] = useState<number>(12);
   const [endPeriod, setEndPeriod] = useState('');
+  const [comparisonMode, setComparisonMode] = useState<Comparison>('previous');
   const [selectedCisp, setSelectedCisp] = useState(16);
   const [hoveredCisp, setHoveredCisp] = useState<number | null>(null);
   const [search, setSearch] = useState('');
@@ -345,8 +343,10 @@ export function CrimeAtlas() {
       const months = Number(params.get('meses'));
       if (cisp > 0) setSelectedCisp(cisp);
       if (params.get('indicador')) setIndicator(params.get('indicador')!);
-      if (monthOptions.includes(months as (typeof monthOptions)[number]))
+      if (Number.isInteger(months) && months > 0 && months <= 36)
         setWindowMonths(months);
+      const comparison = params.get('comparacao');
+      if (comparison === 'year' || comparison === 'none') setComparisonMode(comparison);
       if (params.get('fim')) setEndPeriod(params.get('fim')!);
       const view = params.get('visualizacao');
       setViewMode(
@@ -420,17 +420,12 @@ export function CrimeAtlas() {
         : [],
     [periods, endIndex, windowMonths],
   );
-  const previousPeriods = useMemo(
-    () =>
-      endIndex >= 0
-        ? periods.slice(
-            Math.max(0, endIndex - windowMonths * 2 + 1),
-            endIndex - windowMonths + 1,
-          )
-        : [],
-    [periods, endIndex, windowMonths],
-  );
-  const hasComparison = currentPeriods.length === previousPeriods.length;
+  const previousPeriods = useMemo(() => {
+    if (!currentPeriods.length) return [];
+    const range = comparisonRange(currentPeriods[0], effectiveEnd, comparisonMode);
+    return range ? periods.filter(period => period >= range.start && period <= range.end) : [];
+  }, [periods, currentPeriods, effectiveEnd, comparisonMode]);
+  const hasComparison = currentPeriods.length > 0 && currentPeriods.length === previousPeriods.length;
   const periodRange =
     currentPeriods.length === 1
       ? formatPeriod(currentPeriods[0])
@@ -467,7 +462,7 @@ export function CrimeAtlas() {
           current,
           previous,
           change:
-            hasComparison && current + previous >= 20 && previous > 0
+            hasComparison && previous >= 20
               ? ((current - previous) / previous) * 100
               : null,
           population: denominator,
@@ -552,6 +547,7 @@ export function CrimeAtlas() {
     );
     url.searchParams.set('meses', String(windowMonths));
     url.searchParams.set('fim', endPeriod || 'latest');
+    url.searchParams.set('comparacao', comparisonMode);
     window.history.replaceState(null, '', url);
   }, [
     selectedCisp,
@@ -560,6 +556,7 @@ export function CrimeAtlas() {
     windowMonths,
     effectiveEnd,
     endPeriod,
+    comparisonMode,
     urlReady,
   ]);
 
@@ -1081,58 +1078,15 @@ export function CrimeAtlas() {
           </p>
           <ViewToggle
             value={viewMode}
-            onChange={setViewMode}
+            onChange={(mode) => { setViewMode(mode); if(mode === 'variation' && comparisonMode === 'none') setComparisonMode('previous'); }}
             compact={mobile}
           />
         </div>
-        <div>
-          <p className="mb-2 text-xs font-semibold text-[#59667b]">Período</p>
-          <div className="grid grid-cols-4 gap-1 rounded-xl bg-[#eaf0fc] p-1">
-            {monthOptions.map((months) => (
-              <button
-                key={months}
-                type="button"
-                onClick={() => setWindowMonths(months)}
-                aria-pressed={windowMonths === months}
-                className={`min-h-10 rounded-[9px] text-xs font-semibold transition ${windowMonths === months ? 'bg-[#2455dc] text-white shadow-sm' : 'text-[#59667b] hover:text-[#172235]'}`}
-              >
-                {months === 1 ? '1 mês' : `${months} meses`}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p className="mb-2 block text-xs font-semibold text-[#59667b]">
-            Mês final
-          </p>
-          <Select
-            value={endPeriod || 'latest'}
-            onValueChange={(value) => value && setEndPeriod(value)}
-          >
-            <SelectTrigger
-              aria-label="Mês final"
-              className="w-full rounded-xl border-[#dce2ed] bg-white px-3 shadow-none data-[size=default]:h-11"
-            >
-              <SelectValue>
-                {!endPeriod || endPeriod === 'latest'
-                  ? 'Último mês disponível'
-                  : effectiveEnd
-                    ? formatPeriod(effectiveEnd, true)
-                    : '—'}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent className="rounded-xl">
-              <SelectItem value="latest">Último mês disponível</SelectItem>
-              {periods
-                .slice(minimumIndex)
-                .reverse()
-                .map((period) => (
-                  <SelectItem key={period} value={period}>
-                    {formatPeriod(period, true)}
-                  </SelectItem>
-                ))}
-            </SelectContent>
-          </Select>
+        <div className="lg:col-span-2">
+          <p className="mb-2 text-xs font-semibold text-[#59667b]">Período e comparação</p>
+            <PeriodPicker min="2003-01" mapFrom={periods[0]} max={periods.at(-1) ?? ''} start={currentPeriods[0] ?? ''} end={effectiveEnd} comparison={comparisonMode}
+            onApply={(from, to, mode) => { if(from < periods[0]) { window.location.assign(`/historico?${new URLSearchParams({indicador: indicator, inicio: from, fim: to, comparacao: mode})}`); return; } setWindowMonths(monthCount(from, to)); setEndPeriod(to); setComparisonMode(mode); if(mode === 'none' && viewMode === 'variation') setViewMode('quantity'); }}
+            historyHref={`/historico?indicador=${indicator}`} />
         </div>
       </div>
     );
@@ -1157,7 +1111,7 @@ export function CrimeAtlas() {
         date={snapshot ? formatPeriod(snapshot.latestPeriod) : undefined}
       />
       <ExploreNavigation
-        query={`?cisp=${selectedCisp}&indicador=${indicator}&meses=${windowMonths}&fim=${endPeriod || 'latest'}&visualizacao=${viewMode === 'quantity' ? 'quantidade' : 'taxa'}`}
+        query={`?cisp=${selectedCisp}&indicador=${indicator}&meses=${windowMonths}&fim=${endPeriod || 'latest'}&comparacao=${comparisonMode}&visualizacao=${viewMode === 'quantity' ? 'quantidade' : 'taxa'}`}
       />
 
       <div className="mx-auto max-w-[1800px] px-3 pb-8 pt-3 md:px-5">
@@ -1239,7 +1193,7 @@ export function CrimeAtlas() {
             onClick={() => setFiltersOpen(true)}
             className="min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold"
           >
-            {periodLabel(windowMonths)}
+            {periodRange}
           </button>
           <button
             type="button"
@@ -1403,7 +1357,7 @@ export function CrimeAtlas() {
                       ? `${displayUnit ? displayUnit.charAt(0).toUpperCase() + displayUnit.slice(1) : 'Eventos'} por 100 mil moradores`
                       : viewMode === 'quantity'
                         ? `Quantidade de ${displayUnit ?? 'eventos'}`
-                        : 'Mudança frente ao período anterior'}
+                        : comparisonMode === 'year' ? 'Mudança frente ao mesmo período do ano anterior' : 'Mudança frente ao período anterior'}
                   </p>
                   {viewMode === 'variation' ? (
                     <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[#59667b]">
@@ -1584,7 +1538,7 @@ export function CrimeAtlas() {
                     ? 'por 100 mil moradores'
                     : viewMode === 'quantity'
                       ? indicatorMeta?.unit
-                      : 'vs. período anterior'}
+                      : comparisonMode === 'year' ? 'vs. mesmo período do ano anterior' : comparisonMode === 'none' ? 'sem comparação' : 'vs. período anterior'}
                 </span>
               </motion.div>
               <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#eaf0fc] px-3 py-1.5 text-xs font-semibold text-[#324c86]">

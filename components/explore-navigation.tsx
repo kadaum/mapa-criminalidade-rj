@@ -26,9 +26,9 @@ export function ExploreNavigation({
     >
       {[
         ['/', 'Mapa'],
+        ['/rankings', 'Ranking'],
         ['/meu-bairro', 'Meu bairro'],
         ['/comparar', 'Comparar'],
-        ['/rankings', 'Rankings'],
         ['/insights', 'Insights'],
         ['/historico', 'Histórico'],
       ].map(([path, label]) => (
