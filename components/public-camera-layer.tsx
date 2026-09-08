@@ -285,7 +285,7 @@ export function useCameraWorkspace(
         clusterRadius: 45,
         // Keep co-located catalog references grouped at the closest useful zoom.
         clusterMaxZoom: 19,
-        maxzoom: 19,
+        maxzoom: 20,
       });
       map.addSource(selectedSourceId, {
         type: 'geojson',
