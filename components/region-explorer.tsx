@@ -430,7 +430,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
             )}
             <section
               aria-label="Filtros"
-              className="mb-6 grid grid-cols-2 gap-4 rounded-xl border border-[#dce2ed] bg-white p-4 lg:grid-cols-4"
+              className="mb-6 grid grid-cols-1 gap-4 rounded-xl border border-[#dce2ed] bg-white p-4 sm:grid-cols-2 lg:grid-cols-4"
             >
               {mode === 'insights' && (
                 <Choice
@@ -458,7 +458,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   }))}
                 />
               )}
-              <div className="col-span-2">
+              <div className="sm:col-span-2">
                 <p className="mb-2 text-sm font-semibold">Período e comparação</p>
                 <PeriodPicker min="2003-01" mapFrom={periods[0]} max={periods.at(-1) ?? ''} start={effectiveEnd ? monthShift(effectiveEnd,1-Number(months)) : ''} end={effectiveEnd ?? ''} comparison={timeComparison}
                   onApply={(a,b,c)=>{if(a < periods[0]) { window.location.assign(`/historico?${new URLSearchParams({indicador:id,inicio:a,fim:b,comparacao:c})}`);return;} setMonths(String(monthCount(a,b)));setEnd(b);setComparison(c);}}

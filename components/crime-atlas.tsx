@@ -1353,16 +1353,19 @@ export function CrimeAtlas() {
                       <span className="hidden sm:inline">Camadas</span>
                       <span className="sr-only sm:hidden">Camadas</span>
                     </PopoverTrigger>
-                    <PopoverContent align="end" className="w-72 p-5">
+                    <PopoverContent
+                      align="end"
+                      className="max-h-[min(18rem,var(--available-height))] w-[calc(100vw-2rem)] max-w-72 gap-1.5 overflow-y-auto p-3 sm:gap-2.5 sm:p-5"
+                    >
                       <PopoverTitle className="font-semibold">
                         O que aparece no mapa
                       </PopoverTitle>
-                      <PopoverDescription className="mt-1 text-sm">
+                      <PopoverDescription className="mt-1 text-xs leading-4 sm:text-sm">
                         As cores representam dados por CISP.
                       </PopoverDescription>
                       <label
                         htmlFor="layer-cisp"
-                        className="mt-4 flex min-h-11 items-center justify-between gap-3 text-sm"
+                        className="mt-1 flex min-h-10 items-center justify-between gap-3 text-sm"
                       >
                         Limites das CISPs
                         <Switch
@@ -1373,7 +1376,7 @@ export function CrimeAtlas() {
                       </label>
                       <label
                         htmlFor="layer-bairro"
-                        className="flex min-h-11 items-center justify-between gap-3 text-sm"
+                        className="flex min-h-10 items-center justify-between gap-3 text-sm"
                       >
                         Limites dos bairros
                         <Switch
@@ -1384,7 +1387,7 @@ export function CrimeAtlas() {
                       </label>
                       <label
                         htmlFor="layer-base"
-                        className="flex min-h-11 items-center justify-between gap-3 text-sm"
+                        className="flex min-h-10 items-center justify-between gap-3 text-sm"
                       >
                         Mapa de ruas e nomes
                         <Switch
@@ -1393,9 +1396,9 @@ export function CrimeAtlas() {
                           onCheckedChange={setShowBase}
                         />
                       </label>
-                      <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                        Bairros são referências de localização. Os números não
-                        são divididos entre eles.
+                      <p className="mt-1 text-xs leading-4 text-muted-foreground sm:text-sm sm:leading-5">
+                        Bairros servem como referência. Os números continuam
+                        agrupados por CISP.
                       </p>
                     </PopoverContent>
                   </Popover>
