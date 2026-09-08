@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Mapa da Criminalidade RJ — Registros policiais oficiais por região',
   description: 'Explore a criminalidade registrada por área de delegacia no município do Rio, com dados oficiais, período, população e limitações visíveis.',
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'Mapa da Criminalidade RJ',
     description: 'Registros policiais oficiais por região do Rio, com contexto, período e limitações.',
