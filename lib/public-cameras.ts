@@ -24,7 +24,7 @@ export const statusLabels = {
   offline: 'Fonte indica offline',
 };
 export const precisionLabels = {
-  directory: 'Local aproximado do diretório',
+  directory: 'Referência aproximada de diretório',
   intersection: 'Cruzamento de referência',
   address: 'Endereço estimado na via',
   spot: 'Local indicado pelo operador',
@@ -63,7 +63,7 @@ export function cameraReference(camera: PublicCamera): string {
     `Operador: ${camera.operator}`,
     `Fonte do catálogo: ${camera.publisher}`,
     `Local publicado: ${camera.address || camera.neighborhood}`,
-    `Precisão: ${precisionLabels[camera.precision]}. Posição exata do equipamento e campo de visão não confirmados.`,
+    `Precisão: ${precisionLabels[camera.precision]}. ${camera.coordinates ? 'A coordenada indica um local de referência estimado; não confirma a instalação física nem o campo de visão.' : 'Não há coordenada confiável para indicar a instalação física ou o campo de visão.'}`,
     `Fonte: ${camera.source}`,
     `Fonte de localização: ${camera.locationSource || 'Não localizada'}`,
     `Imagem: ${statusLabels[camera.status]}${camera.checkedAt ? ` em ${camera.checkedAt}` : ''}. Existência de gravações não confirmada.`,

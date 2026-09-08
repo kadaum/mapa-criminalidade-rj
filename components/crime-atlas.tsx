@@ -21,6 +21,7 @@ import {
   ArrowUpRight,
   BarChart3,
   CalendarRange,
+  Camera,
   Database,
   FileText,
   Info,
@@ -362,7 +363,7 @@ export function CrimeAtlas() {
     display === 'map',
     (coordinates) => {
       cityViewRef.current = false;
-      mapRef.current?.flyTo({ center: coordinates, zoom: 15, duration: 0 });
+      mapRef.current?.flyTo({ center: coordinates, zoom: 18, duration: 0 });
     },
   );
   const cameraModeRef = useRef(false);
@@ -644,7 +645,7 @@ export function CrimeAtlas() {
       container: mapNode.current,
       style: mapStyle,
       minZoom: 7,
-      maxZoom: 15,
+      maxZoom: 19,
       maxBounds: [
         [-46, -26],
         [-40, -19],
@@ -1510,13 +1511,16 @@ export function CrimeAtlas() {
                       Números agrupam referências de câmeras
                     </p>
                     <p>
-                      <span className="text-teal-700">●</span> Imagem conferida
-                      · <span className="text-blue-600">●</span> Não testada
+                      <Camera className="inline size-3 text-teal-700" /> Imagem
+                      conferida ·{' '}
+                      <Camera className="inline size-3 text-blue-600" /> Não
+                      testada
                     </p>
                     <p>
-                      <span className="text-amber-700">●</span> Falhou no teste
-                      · <span className="text-slate-500">●</span> Fonte indica
-                      offline
+                      <Camera className="inline size-3 text-amber-700" /> Falhou
+                      no teste ·{' '}
+                      <Camera className="inline size-3 text-slate-500" /> Fonte
+                      indica offline
                     </p>
                   </div>
                 ) : (

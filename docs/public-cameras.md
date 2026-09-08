@@ -16,6 +16,16 @@ O catálogo em `public/data/public-cameras.json` contém as referências encontr
 - **Homes in Rio:** Postos 3 e 6 são transmissões distintas, com localização aproximada de diretório. Instituto Mar Urbano é outro operador no Posto 6.
 - **Paineiras Corcovado:** a transmissão encontrada permanece sem marcador até localizar a instalação. Não se usou a coordenada do Cristo como substituta.
 
+### Resultado da auditoria de instalação
+
+Na revisão atual, nenhuma referência tem confirmação física do ponto de montagem. As 962 referências de cruzamento e 473 de endereço em `public/data/camera-location-evidence.json` são pontos derivados do CADLOG: o cruzamento identifica a referência da esquina e o endereço é interpolado na via. As coordenadas não devem ser lidas como posição do poste, prédio ou suporte da câmera.
+
+IDs que compartilham a mesma coordenada, inclusive grupos de três ou mais, podem ser transmissões ou variações do catálogo que receberam a mesma referência derivada. Isso não comprova três equipamentos no mesmo ponto. O Posto 6 da Homes in Rio publica um endereço, mas o marcador continua vindo de diretório e não confirma o local de montagem.
+
+Para classificar uma posição como precisa, será necessária uma confirmação do operador que vincule o ID a um registro de instalação com coordenada levantada, ou uma evidência datada, identificável e georreferenciada que mostre o equipamento. Até lá, a interface e as referências copiáveis devem manter a ressalva de que a posição exata do equipamento não foi confirmada.
+
+Como próxima etapa, pode ser feita uma amostra de 10 a 20 referências, distribuída entre cruzamentos CADLOG, endereços interpolados e endereços publicados por operadores, para tentar obter esse tipo de confirmação diretamente com as fontes. Essa amostra serve para medir a verificabilidade e ajustar os rótulos; não promete cobertura exata do catálogo inteiro.
+
 Diretórios que repetem as mesmas transmissões não entram como novas câmeras. Links removidos, transmissões encerradas, passeios móveis, mapas genéricos e páginas que só prometem câmera futura ficam no inventário de pesquisa. Nenhum endpoint interno ou autenticado compõe a base.
 
 ## Disponibilidade

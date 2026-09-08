@@ -27,16 +27,57 @@ import {
 } from '@/lib/public-cameras';
 
 const sourceId = 'public-camera-points';
+const selectedSourceId = 'selected-camera-point';
+const cameraIconIds = {
+  observed: 'camera-reference-observed',
+  unverified: 'camera-reference-unverified',
+  failed: 'camera-reference-failed',
+  offline: 'camera-reference-offline',
+  selected: 'camera-reference-selected',
+};
 const cameraLayers = [
   'camera-clusters',
   'camera-cluster-count',
   'camera-points',
+  'selected-camera-halo',
+  'selected-camera',
 ];
 const normalize = (value: string) =>
   value
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
+
+function cameraMarkerImage(color: string, selected = false) {
+  const size = 48;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext('2d');
+  if (!context) throw new Error('Canvas unavailable');
+  context.fillStyle = selected ? '#f59e0b' : '#ffffff';
+  context.beginPath();
+  context.arc(24, 25, 22, 0, Math.PI * 2);
+  context.fill();
+  context.fillStyle = '#ffffff';
+  context.beginPath();
+  context.arc(24, 25, selected ? 18 : 20, 0, Math.PI * 2);
+  context.fill();
+  context.fillStyle = color;
+  context.beginPath();
+  context.roundRect(7, 16, 34, 23, 5);
+  context.fill();
+  context.fillRect(14, 11, 11, 7);
+  context.fillStyle = '#ffffff';
+  context.beginPath();
+  context.arc(24, 27.5, 7, 0, Math.PI * 2);
+  context.fill();
+  return context.getImageData(0, 0, size, size);
+}
+
+function coordinateLabel([lng, lat]: [number, number]) {
+  return `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+}
 
 export function useCameraWorkspace(
   map: Map | null,
@@ -131,9 +172,27 @@ export function useCameraWorkspace(
     }),
     [mapped],
   );
+  const selectedGeojson = useMemo(
+    (): FeatureCollection<Point> => ({
+      type: 'FeatureCollection',
+      features:
+        selected?.coordinates == null
+          ? []
+          : [
+              {
+                type: 'Feature',
+                geometry: { type: 'Point', coordinates: selected.coordinates },
+                properties: { id: selected.id, status: selected.status },
+              },
+            ],
+    }),
+    [selected],
+  );
   const dataRef = useRef(geojson);
+  const selectedDataRef = useRef(selectedGeojson);
   const filteredRef = useRef(filtered);
   dataRef.current = geojson;
+  selectedDataRef.current = selectedGeojson;
   filteredRef.current = filtered;
 
   function showCamera(camera: PublicCamera, move: boolean) {
@@ -204,12 +263,26 @@ export function useCameraWorkspace(
     };
     const setup = () => {
       if (disposed || map.getSource(sourceId)) return;
+      const icons: Array<[string, string, boolean?]> = [
+        [cameraIconIds.observed, '#0f766e'],
+        [cameraIconIds.unverified, '#2563eb'],
+        [cameraIconIds.failed, '#b45309'],
+        [cameraIconIds.offline, '#64748b'],
+        [cameraIconIds.selected, '#0f766e', true],
+      ];
+      for (const [id, color, selected] of icons)
+        if (!map.hasImage(id)) map.addImage(id, cameraMarkerImage(color, selected));
       map.addSource(sourceId, {
         type: 'geojson',
         data: dataRef.current,
         cluster: true,
         clusterRadius: 45,
-        clusterMaxZoom: 15,
+        // Keep co-located catalog references grouped at the closest useful zoom.
+        clusterMaxZoom: 19,
+      });
+      map.addSource(selectedSourceId, {
+        type: 'geojson',
+        data: selectedDataRef.current,
       });
       map.addLayer({
         id: 'camera-clusters',
@@ -245,24 +318,47 @@ export function useCameraWorkspace(
       });
       map.addLayer({
         id: 'camera-points',
-        type: 'circle',
+        type: 'symbol',
         source: sourceId,
         filter: ['!', ['has', 'point_count']],
-        paint: {
-          'circle-radius': 9,
-          'circle-color': [
+        layout: {
+          'icon-image': [
             'match',
             ['get', 'status'],
             'observed',
-            '#0f766e',
+            cameraIconIds.observed,
             'failed',
-            '#b45309',
+            cameraIconIds.failed,
             'offline',
-            '#64748b',
-            '#2563eb',
+            cameraIconIds.offline,
+            cameraIconIds.unverified,
           ],
+          'icon-size': 0.67,
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
+        },
+      });
+      map.addLayer({
+        id: 'selected-camera-halo',
+        type: 'circle',
+        source: selectedSourceId,
+        paint: {
+          'circle-radius': 19,
+          'circle-color': '#ffffff',
+          'circle-opacity': 0.92,
           'circle-stroke-width': 3,
-          'circle-stroke-color': '#ffffff',
+          'circle-stroke-color': '#f59e0b',
+        },
+      });
+      map.addLayer({
+        id: 'selected-camera',
+        type: 'symbol',
+        source: selectedSourceId,
+        layout: {
+          'icon-image': cameraIconIds.selected,
+          'icon-size': 0.84,
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
         },
       });
       map.on('click', 'camera-points', selectPoint);
@@ -292,6 +388,7 @@ export function useCameraWorkspace(
         for (const id of [...cameraLayers].reverse())
           if (map.getLayer(id)) map.removeLayer(id);
         if (map.getSource(sourceId)) map.removeSource(sourceId);
+        if (map.getSource(selectedSourceId)) map.removeSource(selectedSourceId);
       }
       resetPointer();
     };
@@ -301,6 +398,11 @@ export function useCameraWorkspace(
       geojson,
     );
   }, [map, geojson]);
+  useEffect(() => {
+    void (
+      map?.getSource(selectedSourceId) as GeoJSONSource | undefined
+    )?.setData(selectedGeojson);
+  }, [map, selectedGeojson]);
   const results = useMemo(
     () =>
       filtered.filter((camera) => {
@@ -324,6 +426,13 @@ export function useCameraWorkspace(
     [catalog],
   );
   const totalMapped = catalog.cameras.filter((c) => c.coordinates).length;
+  const sharedReferenceCount = selected?.coordinates
+    ? catalog.cameras.filter(
+        (camera) =>
+          camera.coordinates?.[0] === selected.coordinates?.[0] &&
+          camera.coordinates?.[1] === selected.coordinates?.[1],
+      ).length
+    : 0;
 
   return {
     active,
@@ -376,6 +485,7 @@ export function useCameraWorkspace(
             <CameraDetail
               key={selected.id}
               camera={selected}
+              sharedReferenceCount={sharedReferenceCount}
               onLocate={() => {
                 if (selected.coordinates) {
                   focus(selected.coordinates);
@@ -510,7 +620,12 @@ export function useCameraWorkspace(
             </label>
             {clusterSelection && (
               <div className="mt-3 rounded-lg bg-teal-50 p-3 text-sm">
-                <strong>{results.length} câmeras neste grupo</strong>
+                <strong>{results.length} referências neste grupo</strong>
+                <p className="mt-1 text-xs leading-5 text-teal-950">
+                  Se várias referências usarem o mesmo ponto, ele é uma
+                  localização aproximada compartilhada; não confirma instalações
+                  separadas.
+                </p>
                 <button
                   className="mt-2 block text-xs underline"
                   type="button"
@@ -610,9 +725,11 @@ export function useCameraWorkspace(
 
 function CameraDetail({
   camera,
+  sharedReferenceCount,
   onLocate,
 }: {
   camera: PublicCamera;
+  sharedReferenceCount: number;
   onLocate: () => void;
 }) {
   const [play, setPlay] = useState(false);
@@ -708,9 +825,18 @@ function CameraDetail({
         <p>
           <strong>{precisionLabels[camera.precision]}.</strong>{' '}
           {camera.coordinates
-            ? 'Não representa posição exata do equipamento ou área filmada.'
+            ? `Coordenadas do marcador: ${coordinateLabel(camera.coordinates)}. Elas indicam um local de referência estimado; não confirmam o suporte, poste, fachada ou área filmada.`
             : 'Ainda não há coordenada confiável para marcar no mapa.'}
         </p>
+        {sharedReferenceCount > 1 && (
+          <p>
+            <strong>
+              {sharedReferenceCount} IDs compartilham esta referência.
+            </strong>{' '}
+            O catálogo não confirma se são instalações diferentes nem onde cada
+            equipamento fica.
+          </p>
+        )}
         {camera.locationSource && (
           <a
             className="block underline"
