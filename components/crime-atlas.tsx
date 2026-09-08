@@ -116,7 +116,7 @@ type AreaStat = {
 type ViewMode = 'rate' | 'quantity' | 'variation';
 
 const monthOptions = [1, 3, 6, 12] as const;
-const palette = ['#edf0fc', '#c4d0ef', '#91a8db', '#5b77be', '#294688'];
+const palette = ['#f3e5b5', '#f7c964', '#ea9b42', '#d96930', '#a43d28'];
 import { indicatorGroups as groups } from '@/lib/indicator-groups';
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
@@ -132,10 +132,12 @@ const mapStyle = {
     },
   },
   layers: [
+    { id: 'ocean', type: 'background' as const, paint: { 'background-color': '#0b2230' } },
     {
       id: 'osm',
       type: 'raster' as const,
       source: 'osm',
+      layout: { visibility: 'none' as const },
       paint: {
         'raster-opacity': 0.56,
         'raster-saturation': -0.86,
@@ -224,11 +226,11 @@ function quantileBreaks(values: number[]) {
   ];
 }
 
-function colorExpression(breaks: number[]): ExpressionSpecification {
+function colorExpression(breaks: number[], property = 'rate'): ExpressionSpecification {
   if (!breaks.length) return ['literal', '#dce7e9'] as ExpressionSpecification;
   const expression: unknown[] = [
     'step',
-    ['coalesce', ['get', 'rate'], 0],
+    ['coalesce', ['get', property], 0],
     palette[0],
   ];
   breaks.forEach((value, index) =>
@@ -321,8 +323,8 @@ export function CrimeAtlas() {
   const [territories, setTerritories] = useState<TerritoryData | null>(null);
   const [population, setPopulation] = useState<PopulationData | null>(null);
   const [loadError, setLoadError] = useState(false);
-  const [indicator, setIndicator] = useState('registro_ocorrencias');
-  const [viewMode, setViewMode] = useState<ViewMode>('rate');
+  const [indicator, setIndicator] = useState('total_roubos');
+  const [viewMode, setViewMode] = useState<ViewMode>('quantity');
   const [windowMonths, setWindowMonths] = useState<number>(12);
   const [endPeriod, setEndPeriod] = useState('');
   const [selectedCisp, setSelectedCisp] = useState(16);
@@ -332,7 +334,7 @@ export function CrimeAtlas() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [showNeighborhoods, setShowNeighborhoods] = useState(false);
   const [showBoundaries, setShowBoundaries] = useState(true);
-  const [showBase, setShowBase] = useState(true);
+  const [showBase, setShowBase] = useState(false);
   const [urlReady, setUrlReady] = useState(false);
 
   useEffect(() => {
@@ -351,7 +353,7 @@ export function CrimeAtlas() {
           ? 'quantity'
           : view === 'variacao'
             ? 'variation'
-            : 'rate',
+            : view === 'taxa' ? 'rate' : 'quantity',
       );
       setUrlReady(true);
     }, 0);
@@ -481,16 +483,14 @@ export function CrimeAtlas() {
   ]);
 
   const breaks = useMemo(
-    () => quantileBreaks(stats.map((item) => item.rate)),
-    [stats],
+    () => quantileBreaks(stats.map((item) => viewMode === 'quantity' ? item.current : item.rate)),
+    [stats, viewMode],
   );
   const mapColor = useMemo<ExpressionSpecification | string>(
     () =>
       viewMode === 'variation'
         ? variationColor
-        : viewMode === 'quantity'
-          ? '#dce7e9'
-          : colorExpression(breaks),
+        : colorExpression(breaks, viewMode === 'quantity' ? 'current' : 'rate'),
     [viewMode, breaks],
   );
   const enrichedGeo = useMemo(() => {
@@ -534,7 +534,6 @@ export function CrimeAtlas() {
   const geoRef = useRef(enrichedGeo);
   const pointRef = useRef(pointGeo);
   const colorRef = useRef(mapColor);
-  const initialViewModeRef = useRef(viewMode);
 
   useEffect(() => {
     selectedRef.current = selectedCisp;
@@ -585,12 +584,12 @@ export function CrimeAtlas() {
     map.setPaintProperty(
       'cisp-circles',
       'circle-opacity',
-      viewMode === 'quantity' ? 0.82 : 0,
+      0,
     );
     map.setPaintProperty(
       'cisp-circles',
       'circle-stroke-opacity',
-      viewMode === 'quantity' ? 1 : 0,
+      0,
     );
   }, [mapColor, viewMode]);
 
@@ -666,7 +665,7 @@ export function CrimeAtlas() {
         id: 'context-mask',
         type: 'fill',
         source: 'context-mask',
-        paint: { 'fill-color': '#f3f5fa', 'fill-opacity': 0.83 },
+        paint: { 'fill-color': '#0b2230', 'fill-opacity': 1 },
       });
       map.addSource('cisp', {
         type: 'geojson',
@@ -684,8 +683,8 @@ export function CrimeAtlas() {
           'fill-opacity': [
             'case',
             ['boolean', ['feature-state', 'hover'], false],
-            0.86,
-            0.67,
+            0.84,
+            1,
           ],
           'fill-color-transition': { duration: reducedMotion ? 0 : 300 },
           'fill-opacity-transition': { duration: reducedMotion ? 0 : 180 },
@@ -716,9 +715,9 @@ export function CrimeAtlas() {
         type: 'line',
         source: 'cisp',
         paint: {
-          'line-color': '#254751',
-          'line-width': 1,
-          'line-opacity': 0.68,
+          'line-color': '#0b2230',
+          'line-width': 1.2,
+          'line-opacity': 0.95,
         },
       });
       map.addLayer({
@@ -733,7 +732,7 @@ export function CrimeAtlas() {
         type: 'line',
         source: 'cisp',
         filter: ['==', ['get', 'cisp'], selectedRef.current],
-        paint: { 'line-color': '#2455dc', 'line-width': 3 },
+        paint: { 'line-color': '#0b2230', 'line-width': 2 },
       });
       map.addLayer({
         id: 'cisp-circles',
@@ -742,12 +741,10 @@ export function CrimeAtlas() {
         paint: {
           'circle-radius': ['get', 'radius'],
           'circle-color': '#2455dc',
-          'circle-opacity':
-            initialViewModeRef.current === 'quantity' ? 0.82 : 0,
+          'circle-opacity': 0,
           'circle-stroke-color': '#ffffff',
           'circle-stroke-width': 1.5,
-          'circle-stroke-opacity':
-            initialViewModeRef.current === 'quantity' ? 1 : 0,
+          'circle-stroke-opacity': 0,
           'circle-radius-transition': { duration: reducedMotion ? 0 : 260 },
           'circle-opacity-transition': { duration: reducedMotion ? 0 : 220 },
         },
@@ -789,6 +786,22 @@ export function CrimeAtlas() {
         map.getCanvas().style.cursor = '';
         setHoveredCisp(null);
       });
+      // Geographic references only: these labels never redistribute police-area data.
+      const labels: { name: string; position: [number, number]; water?: boolean }[] = [
+        { name: 'Campo Grande', position: [-43.557, -22.903] },
+        { name: 'Barra', position: [-43.365, -23.0] },
+        { name: 'Centro', position: [-43.185, -22.906] },
+        { name: 'Zona Sul', position: [-43.22, -22.977] },
+        { name: 'Baía de Guanabara', position: [-43.12, -22.82], water: true },
+        { name: 'Oceano Atlântico', position: [-43.52, -23.09], water: true },
+      ];
+      for (const label of labels) {
+        const element = document.createElement('span');
+        element.className = `atlas-place-label${label.water ? ' atlas-water-label' : ''}`;
+        element.textContent = label.name;
+        element.setAttribute('aria-hidden', 'true');
+        new maplibregl.Marker({ element }).setLngLat(label.position).addTo(map);
+      }
       map.resize();
       fitCity(map, 0);
     });
@@ -974,6 +987,10 @@ export function CrimeAtlas() {
       showBoundaries ? 'visible' : 'none',
     );
     map.setLayoutProperty('osm', 'visibility', showBase ? 'visible' : 'none');
+    map.setPaintProperty('cisp-fill', 'fill-opacity', [
+      'case', ['boolean', ['feature-state', 'hover'], false],
+      showBase ? 0.78 : 0.84, showBase ? 0.62 : 1,
+    ]);
   }, [showNeighborhoods, showBoundaries, showBase]);
 
   function renderFilterFields(mobile = false) {
@@ -1365,13 +1382,6 @@ export function CrimeAtlas() {
                         <i className="size-3 rounded-sm bg-[#d7dfe1]" /> Sem
                         comparação
                       </span>
-                    </div>
-                  ) : viewMode === 'quantity' ? (
-                    <div className="mt-2 flex items-center gap-2 text-[11px] text-[#59667b]">
-                      <span className="size-3 rounded-full border border-white bg-[#2455dc]/80 ring-1 ring-[#2455dc]" />
-                      <span className="size-5 rounded-full border border-white bg-[#2455dc]/80 ring-1 ring-[#2455dc]" />
-                      <span className="size-8 rounded-full border border-white bg-[#2455dc]/80 ring-1 ring-[#2455dc]" />
-                      <span>círculo maior = mais {displayUnit}</span>
                     </div>
                   ) : (
                     <div className="mt-3 grid max-w-72 grid-cols-5 gap-1">

@@ -160,7 +160,10 @@ body {
 .explore-nav a:hover { background: #21304a; }
 .explore-nav a[aria-current=page] { background: transparent; color: white; border-bottom-color: #7ca4ff; }
 .atlas-workspace { height: max(420px, calc(100dvh - 270px)); }
-.atlas-map { min-height: 0; height: 100%; }
+.atlas-map { min-height: 0; height: 100%; background: #0b2230; }
+.atlas-place-label { color: white; font-size: 14px; font-weight: 650; white-space: nowrap; pointer-events: none; text-shadow: -1px -1px 0 #0b2230, 1px -1px 0 #0b2230, -1px 1px 0 #0b2230, 1px 1px 0 #0b2230, 0 2px 5px #0b2230; }
+.atlas-water-label { color: #9db6c1; font-size: 12px; font-weight: 400; }
+@media (max-width: 639px) { .atlas-place-label { font-size: 12px; } .atlas-water-label { display: none; } }
 .atlas-panel { overflow-y: auto; background: #fff; }
 .atlas-panel :is(.text-xs, .text-\[11px\], .text-\[10px\]) { font-size: 0.875rem; }
 .atlas-page :is(.text-\[10px\], .text-\[11px\]) { font-size: 0.75rem; }
