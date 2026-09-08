@@ -479,7 +479,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                 {range} ·{' '}
                 {end === 'latest'
                   ? 'Acompanha automaticamente o último mês publicado.'
-                  : 'Período histórico fixo. Escolha “Último mês disponível” para acompanhar novas publicações.'}
+                  : 'Período fixo. Use “Período e comparação” para escolher outro intervalo.'}
               </p>
             </section>
             {(mode !== 'insights' || insightMode === 'indicador') && (
