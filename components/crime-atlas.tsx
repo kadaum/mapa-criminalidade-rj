@@ -8,6 +8,7 @@ import * as maplibregl from 'maplibre-gl';
 import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
+import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -104,7 +105,7 @@ type CispProperties = {
   population?: number;
   rate?: number;
 };
-type NeighborhoodProperties = { code: number; name: string };
+type NeighborhoodProperties = { code: number; name: string; areaM2?: number };
 type AreaStat = {
   cisp: number;
   current: number;
@@ -787,7 +788,7 @@ export function CrimeAtlas() {
         setHoveredCisp(null);
       });
       // Geographic references only: these labels never redistribute police-area data.
-      const labels: { name: string; position: [number, number]; water?: boolean }[] = [
+      const labels: { name: string; position: [number, number]; water?: boolean; detail?: boolean; minZoom?: number }[] = [
         { name: 'Campo Grande', position: [-43.557, -22.903] },
         { name: 'Barra', position: [-43.365, -23.0] },
         { name: 'Centro', position: [-43.185, -22.906] },
@@ -795,15 +796,52 @@ export function CrimeAtlas() {
         { name: 'Baía de Guanabara', position: [-43.12, -22.82], water: true },
         { name: 'Oceano Atlântico', position: [-43.52, -23.09], water: true },
       ];
-      for (const label of labels) {
+      const neighborhoodLabels = neighborhoods.features.map(feature => ({
+        name: feature.properties.name,
+        position: labelAnchor(feature.geometry),
+        area: Number(feature.properties.areaM2 ?? 0),
+      })).filter(item => item.position !== null).sort((a, b) => b.area - a.area || a.name.localeCompare(b.name));
+      for (const label of neighborhoodLabels) {
+        labels.push({ name: label.name, position: label.position!, detail: true,
+          minZoom: label.area >= 10_000_000 ? 9.8 : label.area >= 2_000_000 ? 10.4 : 11 });
+      }
+      const markers = labels.map(label => {
         const element = document.createElement('span');
         element.className = `atlas-place-label${label.water ? ' atlas-water-label' : ''}`;
         element.textContent = label.name;
         element.setAttribute('aria-hidden', 'true');
-        new maplibregl.Marker({ element }).setLngLat(label.position).addTo(map);
-      }
+        element.style.visibility = 'hidden';
+        const marker = new maplibregl.Marker({ element }).setLngLat(label.position).addTo(map);
+        return { label, element, marker };
+      });
+      const updateLabels = () => {
+        const zoom = map.getZoom();
+        const names = new Set<string>();
+        const candidates = markers.flatMap(({ label, element }, id) => {
+          if ((label.detail && zoom < (label.minZoom ?? 11)) ||
+              (!label.detail && !label.water && zoom >= 11.2) ||
+              (label.water && (zoom >= 11.2 || map.getContainer().clientWidth < 640)) ||
+              names.has(label.name)) return [];
+          names.add(label.name);
+          const point = map.project(label.position);
+          return [{ id, x: point.x, y: point.y, width: element.offsetWidth, height: element.offsetHeight }];
+        });
+        const visible = visibleLabelIds(candidates, map.getContainer().clientWidth, map.getContainer().clientHeight);
+        markers.forEach(({ element }, id) => { element.style.visibility = visible.has(id) ? 'visible' : 'hidden'; });
+      };
+      let labelFrame = 0;
+      const scheduleLabels = () => {
+        if (!labelFrame) labelFrame = requestAnimationFrame(() => { labelFrame = 0; updateLabels(); });
+      };
+      map.on('move', scheduleLabels);
+      map.on('resize', scheduleLabels);
+      map.once('remove', () => {
+        cancelAnimationFrame(labelFrame);
+        markers.forEach(({ marker }) => marker.remove());
+      });
       map.resize();
       fitCity(map, 0);
+      scheduleLabels();
     });
     map.on('dragstart', () => {
       cityViewRef.current = false;
