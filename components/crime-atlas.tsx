@@ -1115,6 +1115,21 @@ export function CrimeAtlas() {
       'visibility',
       showBase || cameras.active ? 'visible' : 'none',
     );
+    map.setPaintProperty(
+      'osm',
+      'raster-opacity',
+      cameras.active ? 1 : 0.56,
+    );
+    map.setPaintProperty(
+      'osm',
+      'raster-saturation',
+      cameras.active ? 0 : -0.86,
+    );
+    map.setPaintProperty(
+      'osm',
+      'raster-contrast',
+      cameras.active ? 0 : -0.08,
+    );
     map.setPaintProperty('cisp-fill', 'fill-opacity', [
       'case',
       ['boolean', ['feature-state', 'hover'], false],

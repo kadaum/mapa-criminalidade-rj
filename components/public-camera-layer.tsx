@@ -79,6 +79,10 @@ function coordinateLabel([lng, lat]: [number, number]) {
   return `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 }
 
+function catalogId(camera: PublicCamera) {
+  return camera.id.replace(/^camerasrj-/, '');
+}
+
 export function useCameraWorkspace(
   map: Map | null,
   visible: boolean,
@@ -262,7 +266,9 @@ export function useCameraWorkspace(
       map.getCanvas().style.cursor = '';
     };
     const setup = () => {
-      if (disposed || map.getSource(sourceId)) return;
+      // The parent may remove and recreate the map when its motion setting
+      // changes. A removed MapLibre instance no longer has a style or images.
+      if (disposed || !map.getStyle() || map.getSource(sourceId)) return;
       const icons: Array<[string, string, boolean?]> = [
         [cameraIconIds.observed, '#0f766e'],
         [cameraIconIds.unverified, '#2563eb'],
@@ -279,6 +285,7 @@ export function useCameraWorkspace(
         clusterRadius: 45,
         // Keep co-located catalog references grouped at the closest useful zoom.
         clusterMaxZoom: 19,
+        maxzoom: 19,
       });
       map.addSource(selectedSourceId, {
         type: 'geojson',
@@ -372,6 +379,7 @@ export function useCameraWorkspace(
       updateBounds();
     };
     // The parent exposes this map only after its initial layers are installed.
+    map.on('load', setup);
     setup();
     map.on('moveend', updateBounds);
     return () => {
@@ -394,14 +402,14 @@ export function useCameraWorkspace(
     };
   }, [map, active]);
   useEffect(() => {
-    void (map?.getSource(sourceId) as GeoJSONSource | undefined)?.setData(
-      geojson,
-    );
+    if (!map?.getStyle()) return;
+    const source = map.getSource(sourceId) as GeoJSONSource | undefined;
+    if (source) void source.setData(geojson);
   }, [map, geojson]);
   useEffect(() => {
-    void (
-      map?.getSource(selectedSourceId) as GeoJSONSource | undefined
-    )?.setData(selectedGeojson);
+    if (!map?.getStyle()) return;
+    const source = map.getSource(selectedSourceId) as GeoJSONSource | undefined;
+    if (source) void source.setData(selectedGeojson);
   }, [map, selectedGeojson]);
   const results = useMemo(
     () =>
@@ -751,7 +759,12 @@ function CameraDetail({
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-semibold leading-6">{camera.name}</h2>
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="text-lg font-semibold leading-6">{camera.name}</h2>
+          <span className="shrink-0 rounded bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
+            ID {catalogId(camera)}
+          </span>
+        </div>
         <p className="mt-2 text-xs leading-5 text-muted-foreground">
           {camera.address || camera.neighborhood}
         </p>
