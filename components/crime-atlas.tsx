@@ -201,6 +201,13 @@ function fmtChange(value: number | null) {
   return `${value > 0 ? '+' : ''}${value.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}%`;
 }
 
+function formatLegendValue(value: number, compact = false) {
+  return value.toLocaleString('pt-BR', {
+    maximumFractionDigits: compact ? 1 : Number.isInteger(value) ? 0 : 1,
+    notation: compact ? 'compact' : 'standard',
+  });
+}
+
 function flattenCoordinates(geometry: Geometry): Position[] {
   if (geometry.type === 'Polygon') return geometry.coordinates.flat();
   if (geometry.type === 'MultiPolygon') return geometry.coordinates.flat(2);
@@ -1443,64 +1450,104 @@ export function CrimeAtlas() {
                     </div>
                   </div>
                 )}
-                <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border border-[#dce2ed] bg-white/94 p-2 shadow-lg backdrop-blur md:bottom-4 md:left-4 md:rounded-2xl md:p-3">
-                  <p className="sr-only text-xs font-semibold md:not-sr-only">
-                    {viewMode === 'rate'
-                      ? `${displayUnit ? displayUnit.charAt(0).toUpperCase() + displayUnit.slice(1) : 'Eventos'} por 100 mil moradores`
-                      : viewMode === 'quantity'
-                        ? `Quantidade de ${displayUnit ?? 'eventos'}`
-                        : comparisonMode === 'year'
-                          ? 'Mudança frente ao mesmo período do ano anterior'
-                          : 'Mudança frente ao período anterior'}
-                  </p>
-                  {viewMode === 'variation' ? (
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-[#59667b] md:mt-2 md:gap-x-3 md:text-[11px]">
-                      <span className="flex items-center gap-1.5">
-                        <i className="size-3 rounded-sm bg-[#23647a]" /> Caiu
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <i className="size-3 rounded-sm bg-[#eef1ef]" /> Estável
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <i className="size-3 rounded-sm bg-[#bc6c3f]" /> Subiu
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <i className="size-3 rounded-sm bg-[#d7dfe1]" /> Sem
-                        comparação
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="grid w-52 grid-cols-5 gap-1 md:mt-3 md:w-auto md:max-w-72">
-                      {palette.slice(0, breaks.length + 1).map((color, i) => (
-                        <div key={color}>
-                          <i
-                            className="block h-2.5"
-                            style={{ background: color }}
-                          />
-                          <span className="mt-1 block text-[10px] leading-3 tabular-nums text-[#526078] md:text-xs md:leading-normal">
-                            {i === 0
-                              ? '0'
-                              : (breaks[i - 1]?.toLocaleString('pt-BR', {
-                                  maximumFractionDigits: 1,
-                                }) ?? '—')}
-                            {i === breaks.length ? '+' : '–'}
+                <Popover>
+                  <div className="absolute bottom-3 left-3 z-20 md:bottom-4 md:left-4">
+                    <PopoverTrigger
+                      aria-label="Abrir legenda do mapa"
+                      className="flex h-9 items-center gap-2 rounded-xl border border-[#dce2ed] bg-white/94 px-2.5 text-[10px] font-medium tabular-nums text-[#526078] shadow-lg backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2455dc] md:h-10 md:text-[11px]"
+                    >
+                      {viewMode === 'variation' ? (
+                        <>
+                          <span>Caiu</span>
+                          <span className="flex h-2.5 w-16 overflow-hidden rounded-full" aria-hidden>
+                            <i className="flex-1 bg-[#23647a]" />
+                            <i className="flex-1 bg-[#eef1ef]" />
+                            <i className="flex-1 bg-[#bc6c3f]" />
                           </span>
-                          {i < breaks.length && (
-                            <span className="block text-[10px] leading-3 tabular-nums text-[#526078] md:text-xs md:leading-normal">
-                              &lt;
-                              {breaks[i]?.toLocaleString('pt-BR', {
-                                maximumFractionDigits: 1,
-                              }) ?? '—'}
+                          <span>Subiu</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>0</span>
+                          <span
+                            className="grid h-2.5 w-20 grid-cols-5 overflow-hidden rounded-full"
+                            aria-hidden
+                          >
+                            {palette.slice(0, breaks.length + 1).map((color) => (
+                              <i key={color} style={{ background: color }} />
+                            ))}
+                          </span>
+                          <span>
+                            {breaks.length
+                              ? formatLegendValue(breaks.at(-1)!, true)
+                              : '—'}+
+                          </span>
+                        </>
+                      )}
+                    </PopoverTrigger>
+                    <PopoverContent
+                      side="top"
+                      align="start"
+                      sideOffset={8}
+                      className="w-[min(252px,calc(100vw-24px))] gap-2 rounded-xl border border-[#dce2ed] bg-white p-3 shadow-xl"
+                    >
+                      <PopoverTitle className="text-xs font-semibold text-[#172235]">
+                        {viewMode === 'rate'
+                          ? 'Casos por 100 mil moradores'
+                          : viewMode === 'quantity'
+                            ? `Quantidade de ${displayUnit ?? 'casos'}`
+                            : comparisonMode === 'year'
+                              ? 'Variação no ano'
+                              : 'Variação no período'}
+                      </PopoverTitle>
+                      <PopoverDescription className="sr-only">
+                        Faixas de cores usadas no mapa.
+                      </PopoverDescription>
+                      {viewMode === 'variation' ? (
+                        <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs text-[#526078]">
+                          {[
+                            ['#23647a', 'Caiu'],
+                            ['#eef1ef', 'Estável'],
+                            ['#bc6c3f', 'Subiu'],
+                            ['#d7dfe1', 'Sem comparação'],
+                          ].map(([color, label]) => (
+                            <span key={label} className="flex items-center gap-2">
+                              <i
+                                className="size-3 shrink-0 rounded-sm"
+                                style={{ background: color }}
+                              />
+                              {label}
                             </span>
-                          )}
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  )}
-                  <p className="mt-1 hidden text-[10px] text-[#59667b] md:block">
-                    Faixas relativas às 41 áreas · {periodRange}
-                  </p>
-                </div>
+                      ) : (
+                        <div className="space-y-1.5">
+                          {palette.slice(0, breaks.length + 1).map((color, i) => (
+                            <div
+                              key={color}
+                              className="flex items-center gap-2 text-xs tabular-nums text-[#526078]"
+                            >
+                              <i
+                                className="h-2.5 w-8 shrink-0 rounded-full"
+                                style={{ background: color }}
+                              />
+                              <span>
+                                {i === 0
+                                  ? `Menos de ${breaks[0] ? formatLegendValue(breaks[0]) : '—'}`
+                                  : i === breaks.length
+                                    ? `${formatLegendValue(breaks[i - 1])} ou mais`
+                                    : `${formatLegendValue(breaks[i - 1])} a ${formatLegendValue(breaks[i])}`}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <p className="border-t border-[#e6eaf0] pt-2 text-[10px] leading-4 text-[#59667b]">
+                        Faixas relativas às 41 áreas · {periodRange}
+                      </p>
+                    </PopoverContent>
+                  </div>
+                </Popover>
               </>
             ) : (
               <div className="absolute inset-0 overflow-y-auto bg-[#f8faf9] px-3 pb-6 pt-16 md:px-5">
