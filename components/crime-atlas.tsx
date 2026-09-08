@@ -10,6 +10,7 @@ import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
 import { PeriodPicker } from '@/components/period-picker';
+import { PublicCameraLayer } from '@/components/public-camera-layer';
 import {
   comparisonRange,
   monthCount,
@@ -322,6 +323,7 @@ function ViewToggle({
 export function CrimeAtlas() {
   const mapNode = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
+  const [cameraMap, setCameraMap] = useState<MapLibreMap | null>(null);
   const selectedRef = useRef(16);
   const hoveredRef = useRef<number | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -921,10 +923,12 @@ export function CrimeAtlas() {
     });
     observer.observe(mapNode.current);
     mapRef.current = map;
+    setCameraMap(map);
     return () => {
       observer.disconnect();
       map.remove();
       mapRef.current = null;
+      setCameraMap(null);
     };
   }, [neighborhoods, reducedMotion]);
 
@@ -1342,6 +1346,7 @@ export function CrimeAtlas() {
             </div>
             <div
               aria-hidden={display !== 'map'}
+              inert={display !== 'map'}
               className={`absolute inset-0 transition-opacity duration-200 ${display === 'map' ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
             >
               <div
@@ -1351,6 +1356,7 @@ export function CrimeAtlas() {
                 className="h-full w-full"
               />
             </div>
+            <PublicCameraLayer map={cameraMap} visible={display === 'map'} />
             {display === 'map' ? (
               <>
                 <div className="absolute right-16 top-3 z-30 md:top-4">
