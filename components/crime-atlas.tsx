@@ -10,7 +10,11 @@ import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
 import { PeriodPicker } from '@/components/period-picker';
-import { comparisonRange, monthCount, type Comparison } from '@/lib/period-range';
+import {
+  comparisonRange,
+  monthCount,
+  type Comparison,
+} from '@/lib/period-range';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -130,11 +134,16 @@ const mapStyle = {
       type: 'raster' as const,
       tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
       tileSize: 256,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',
     },
   },
   layers: [
-    { id: 'ocean', type: 'background' as const, paint: { 'background-color': '#0b2230' } },
+    {
+      id: 'ocean',
+      type: 'background' as const,
+      paint: { 'background-color': '#0b2230' },
+    },
     {
       id: 'osm',
       type: 'raster' as const,
@@ -224,7 +233,10 @@ function quantileBreaks(values: number[]) {
   ];
 }
 
-function colorExpression(breaks: number[], property = 'rate'): ExpressionSpecification {
+function colorExpression(
+  breaks: number[],
+  property = 'rate',
+): ExpressionSpecification {
   if (!breaks.length) return ['literal', '#dce7e9'] as ExpressionSpecification;
   const expression: unknown[] = [
     'step',
@@ -346,7 +358,8 @@ export function CrimeAtlas() {
       if (Number.isInteger(months) && months > 0 && months <= 36)
         setWindowMonths(months);
       const comparison = params.get('comparacao');
-      if (comparison === 'year' || comparison === 'none') setComparisonMode(comparison);
+      if (comparison === 'year' || comparison === 'none')
+        setComparisonMode(comparison);
       if (params.get('fim')) setEndPeriod(params.get('fim')!);
       const view = params.get('visualizacao');
       setViewMode(
@@ -354,7 +367,9 @@ export function CrimeAtlas() {
           ? 'quantity'
           : view === 'variacao'
             ? 'variation'
-            : view === 'taxa' ? 'rate' : 'quantity',
+            : view === 'taxa'
+              ? 'rate'
+              : 'quantity',
       );
       setUrlReady(true);
     }, 0);
@@ -422,10 +437,18 @@ export function CrimeAtlas() {
   );
   const previousPeriods = useMemo(() => {
     if (!currentPeriods.length) return [];
-    const range = comparisonRange(currentPeriods[0], effectiveEnd, comparisonMode);
-    return range ? periods.filter(period => period >= range.start && period <= range.end) : [];
+    const range = comparisonRange(
+      currentPeriods[0],
+      effectiveEnd,
+      comparisonMode,
+    );
+    return range
+      ? periods.filter((period) => period >= range.start && period <= range.end)
+      : [];
   }, [periods, currentPeriods, effectiveEnd, comparisonMode]);
-  const hasComparison = currentPeriods.length > 0 && currentPeriods.length === previousPeriods.length;
+  const hasComparison =
+    currentPeriods.length > 0 &&
+    currentPeriods.length === previousPeriods.length;
   const periodRange =
     currentPeriods.length === 1
       ? formatPeriod(currentPeriods[0])
@@ -479,7 +502,12 @@ export function CrimeAtlas() {
   ]);
 
   const breaks = useMemo(
-    () => quantileBreaks(stats.map((item) => viewMode === 'quantity' ? item.current : item.rate)),
+    () =>
+      quantileBreaks(
+        stats.map((item) =>
+          viewMode === 'quantity' ? item.current : item.rate,
+        ),
+      ),
     [stats, viewMode],
   );
   const mapColor = useMemo<ExpressionSpecification | string>(
@@ -579,16 +607,8 @@ export function CrimeAtlas() {
     const map = mapRef.current;
     if (!map?.getLayer('cisp-fill')) return;
     map.setPaintProperty('cisp-fill', 'fill-color', mapColor);
-    map.setPaintProperty(
-      'cisp-circles',
-      'circle-opacity',
-      0,
-    );
-    map.setPaintProperty(
-      'cisp-circles',
-      'circle-stroke-opacity',
-      0,
-    );
+    map.setPaintProperty('cisp-circles', 'circle-opacity', 0);
+    map.setPaintProperty('cisp-circles', 'circle-stroke-opacity', 0);
   }, [mapColor, viewMode]);
 
   useEffect(() => {
@@ -785,7 +805,13 @@ export function CrimeAtlas() {
         setHoveredCisp(null);
       });
       // Geographic references only: these labels never redistribute police-area data.
-      const labels: { name: string; position: [number, number]; water?: boolean; detail?: boolean; minZoom?: number }[] = [
+      const labels: {
+        name: string;
+        position: [number, number];
+        water?: boolean;
+        detail?: boolean;
+        minZoom?: number;
+      }[] = [
         { name: 'Campo Grande', position: [-43.557, -22.903] },
         { name: 'Barra', position: [-43.365, -23.0] },
         { name: 'Centro', position: [-43.185, -22.906] },
@@ -793,42 +819,78 @@ export function CrimeAtlas() {
         { name: 'Baía de Guanabara', position: [-43.12, -22.82], water: true },
         { name: 'Oceano Atlântico', position: [-43.52, -23.09], water: true },
       ];
-      const neighborhoodLabels = neighborhoods.features.map(feature => ({
-        name: feature.properties.name,
-        position: labelAnchor(feature.geometry),
-        area: Number(feature.properties.areaM2 ?? 0),
-      })).filter(item => item.position !== null).sort((a, b) => b.area - a.area || a.name.localeCompare(b.name));
+      const neighborhoodLabels = neighborhoods.features
+        .map((feature) => ({
+          name: feature.properties.name,
+          position: labelAnchor(feature.geometry),
+          area: Number(feature.properties.areaM2 ?? 0),
+        }))
+        .filter((item) => item.position !== null)
+        .sort((a, b) => b.area - a.area || a.name.localeCompare(b.name));
       for (const label of neighborhoodLabels) {
-        labels.push({ name: label.name, position: label.position!, detail: true,
-          minZoom: label.area >= 10_000_000 ? 9.8 : label.area >= 2_000_000 ? 10.4 : 11 });
+        labels.push({
+          name: label.name,
+          position: label.position!,
+          detail: true,
+          minZoom:
+            label.area >= 10_000_000
+              ? 9.8
+              : label.area >= 2_000_000
+                ? 10.4
+                : 11,
+        });
       }
-      const markers = labels.map(label => {
+      const markers = labels.map((label) => {
         const element = document.createElement('span');
         element.className = `atlas-place-label${label.water ? ' atlas-water-label' : ''}`;
         element.textContent = label.name;
         element.setAttribute('aria-hidden', 'true');
         element.style.visibility = 'hidden';
-        const marker = new maplibregl.Marker({ element }).setLngLat(label.position).addTo(map);
+        const marker = new maplibregl.Marker({ element })
+          .setLngLat(label.position)
+          .addTo(map);
         return { label, element, marker };
       });
       const updateLabels = () => {
         const zoom = map.getZoom();
         const names = new Set<string>();
         const candidates = markers.flatMap(({ label, element }, id) => {
-          if ((label.detail && zoom < (label.minZoom ?? 11)) ||
-              (!label.detail && !label.water && zoom >= 11.2) ||
-              (label.water && (zoom >= 11.2 || map.getContainer().clientWidth < 640)) ||
-              names.has(label.name)) return [];
+          if (
+            (label.detail && zoom < (label.minZoom ?? 11)) ||
+            (!label.detail && !label.water && zoom >= 11.2) ||
+            (label.water &&
+              (zoom >= 11.2 || map.getContainer().clientWidth < 640)) ||
+            names.has(label.name)
+          )
+            return [];
           names.add(label.name);
           const point = map.project(label.position);
-          return [{ id, x: point.x, y: point.y, width: element.offsetWidth, height: element.offsetHeight }];
+          return [
+            {
+              id,
+              x: point.x,
+              y: point.y,
+              width: element.offsetWidth,
+              height: element.offsetHeight,
+            },
+          ];
         });
-        const visible = visibleLabelIds(candidates, map.getContainer().clientWidth, map.getContainer().clientHeight);
-        markers.forEach(({ element }, id) => { element.style.visibility = visible.has(id) ? 'visible' : 'hidden'; });
+        const visible = visibleLabelIds(
+          candidates,
+          map.getContainer().clientWidth,
+          map.getContainer().clientHeight,
+        );
+        markers.forEach(({ element }, id) => {
+          element.style.visibility = visible.has(id) ? 'visible' : 'hidden';
+        });
       };
       let labelFrame = 0;
       const scheduleLabels = () => {
-        if (!labelFrame) labelFrame = requestAnimationFrame(() => { labelFrame = 0; updateLabels(); });
+        if (!labelFrame)
+          labelFrame = requestAnimationFrame(() => {
+            labelFrame = 0;
+            updateLabels();
+          });
       };
       map.on('move', scheduleLabels);
       map.on('resize', scheduleLabels);
@@ -1023,8 +1085,10 @@ export function CrimeAtlas() {
     );
     map.setLayoutProperty('osm', 'visibility', showBase ? 'visible' : 'none');
     map.setPaintProperty('cisp-fill', 'fill-opacity', [
-      'case', ['boolean', ['feature-state', 'hover'], false],
-      showBase ? 0.78 : 0.84, showBase ? 0.62 : 1,
+      'case',
+      ['boolean', ['feature-state', 'hover'], false],
+      showBase ? 0.78 : 0.84,
+      showBase ? 0.62 : 1,
     ]);
   }, [showNeighborhoods, showBoundaries, showBase]);
 
@@ -1078,15 +1142,40 @@ export function CrimeAtlas() {
           </p>
           <ViewToggle
             value={viewMode}
-            onChange={(mode) => { setViewMode(mode); if(mode === 'variation' && comparisonMode === 'none') setComparisonMode('previous'); }}
+            onChange={(mode) => {
+              setViewMode(mode);
+              if (mode === 'variation' && comparisonMode === 'none')
+                setComparisonMode('previous');
+            }}
             compact={mobile}
           />
         </div>
         <div className="lg:col-span-2">
-          <p className="mb-2 text-xs font-semibold text-[#59667b]">Período e comparação</p>
-            <PeriodPicker min="2003-01" mapFrom={periods[0]} max={periods.at(-1) ?? ''} start={currentPeriods[0] ?? ''} end={effectiveEnd} comparison={comparisonMode}
-            onApply={(from, to, mode) => { if(from < periods[0]) { window.location.assign(`/historico?${new URLSearchParams({indicador: indicator, inicio: from, fim: to, comparacao: mode})}`); return; } setWindowMonths(monthCount(from, to)); setEndPeriod(to); setComparisonMode(mode); if(mode === 'none' && viewMode === 'variation') setViewMode('quantity'); }}
-            historyHref={`/historico?indicador=${indicator}`} />
+          <p className="mb-2 text-xs font-semibold text-[#59667b]">
+            Período e comparação
+          </p>
+          <PeriodPicker
+            min="2003-01"
+            mapFrom={periods[0]}
+            max={periods.at(-1) ?? ''}
+            start={currentPeriods[0] ?? ''}
+            end={effectiveEnd}
+            comparison={comparisonMode}
+            onApply={(from, to, mode) => {
+              if (from < periods[0]) {
+                window.location.assign(
+                  `/historico?${new URLSearchParams({ indicador: indicator, inicio: from, fim: to, comparacao: mode })}`,
+                );
+                return;
+              }
+              setWindowMonths(monthCount(from, to));
+              setEndPeriod(to);
+              setComparisonMode(mode);
+              if (mode === 'none' && viewMode === 'variation')
+                setViewMode('quantity');
+            }}
+            historyHref={`/historico?indicador=${indicator}`}
+          />
         </div>
       </div>
     );
@@ -1191,14 +1280,14 @@ export function CrimeAtlas() {
           <button
             type="button"
             onClick={() => setFiltersOpen(true)}
-            className="min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold"
+            className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
           >
             {periodRange}
           </button>
           <button
             type="button"
             onClick={() => setFiltersOpen(true)}
-            className="min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold"
+            className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
           >
             Até {effectiveEnd ? formatPeriod(effectiveEnd) : '—'}
           </button>
@@ -1351,16 +1440,18 @@ export function CrimeAtlas() {
                     </div>
                   </div>
                 )}
-                <div className="absolute bottom-3 left-3 z-20 lg:bottom-4 max-w-[calc(100%-76px)] rounded-2xl border border-[#dce2ed] bg-white/94 p-3 shadow-lg backdrop-blur md:left-4">
-                  <p className="text-xs font-semibold">
+                <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border border-[#dce2ed] bg-white/94 p-2 shadow-lg backdrop-blur md:bottom-4 md:left-4 md:rounded-2xl md:p-3">
+                  <p className="sr-only text-xs font-semibold md:not-sr-only">
                     {viewMode === 'rate'
                       ? `${displayUnit ? displayUnit.charAt(0).toUpperCase() + displayUnit.slice(1) : 'Eventos'} por 100 mil moradores`
                       : viewMode === 'quantity'
                         ? `Quantidade de ${displayUnit ?? 'eventos'}`
-                        : comparisonMode === 'year' ? 'Mudança frente ao mesmo período do ano anterior' : 'Mudança frente ao período anterior'}
+                        : comparisonMode === 'year'
+                          ? 'Mudança frente ao mesmo período do ano anterior'
+                          : 'Mudança frente ao período anterior'}
                   </p>
                   {viewMode === 'variation' ? (
-                    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[#59667b]">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-[#59667b] md:mt-2 md:gap-x-3 md:text-[11px]">
                       <span className="flex items-center gap-1.5">
                         <i className="size-3 rounded-sm bg-[#23647a]" /> Caiu
                       </span>
@@ -1376,14 +1467,14 @@ export function CrimeAtlas() {
                       </span>
                     </div>
                   ) : (
-                    <div className="mt-3 grid max-w-72 grid-cols-5 gap-1">
+                    <div className="grid w-52 grid-cols-5 gap-1 md:mt-3 md:w-auto md:max-w-72">
                       {palette.slice(0, breaks.length + 1).map((color, i) => (
                         <div key={color}>
                           <i
                             className="block h-2.5"
                             style={{ background: color }}
                           />
-                          <span className="mt-1 block text-xs tabular-nums text-[#526078]">
+                          <span className="mt-1 block text-[10px] leading-3 tabular-nums text-[#526078] md:text-xs md:leading-normal">
                             {i === 0
                               ? '0'
                               : (breaks[i - 1]?.toLocaleString('pt-BR', {
@@ -1392,7 +1483,7 @@ export function CrimeAtlas() {
                             {i === breaks.length ? '+' : '–'}
                           </span>
                           {i < breaks.length && (
-                            <span className="block text-xs tabular-nums text-[#526078]">
+                            <span className="block text-[10px] leading-3 tabular-nums text-[#526078] md:text-xs md:leading-normal">
                               &lt;
                               {breaks[i]?.toLocaleString('pt-BR', {
                                 maximumFractionDigits: 1,
@@ -1403,7 +1494,7 @@ export function CrimeAtlas() {
                       ))}
                     </div>
                   )}
-                  <p className="mt-1 text-[10px] text-[#59667b]">
+                  <p className="mt-1 hidden text-[10px] text-[#59667b] md:block">
                     Faixas relativas às 41 áreas · {periodRange}
                   </p>
                 </div>
@@ -1538,7 +1629,11 @@ export function CrimeAtlas() {
                     ? 'por 100 mil moradores'
                     : viewMode === 'quantity'
                       ? indicatorMeta?.unit
-                      : comparisonMode === 'year' ? 'vs. mesmo período do ano anterior' : comparisonMode === 'none' ? 'sem comparação' : 'vs. período anterior'}
+                      : comparisonMode === 'year'
+                        ? 'vs. mesmo período do ano anterior'
+                        : comparisonMode === 'none'
+                          ? 'sem comparação'
+                          : 'vs. período anterior'}
                 </span>
               </motion.div>
               <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#eaf0fc] px-3 py-1.5 text-xs font-semibold text-[#324c86]">
