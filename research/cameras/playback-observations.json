@@ -1,0 +1,28 @@
+[
+  {
+    "id": "homes-posto-6",
+    "observedAt": "2026-09-08",
+    "result": "moving-video-observed",
+    "source": "https://www.youtube.com/watch?v=IhGNK_hImLs",
+    "evidence": "Teste anterior no IAB: relógio 09:53:03→09:53:14 e movimento de ondas e veículos. Player do piloto também reproduziu; screenshot mostra 08/09/2026 12:07:10.",
+    "localArtifact": "output/playwright/camera-player-mobile.png"
+  },
+  {
+    "id": "homes-posto-3",
+    "observedAt": "2026-09-08",
+    "result": "moving-video-observed",
+    "source": "https://www.youtube.com/watch?v=7ecGJrsCv60",
+    "evidence": "Player incorporado no produto reproduziu em desktop e mobile; frame desktop mostra 08/09/2026 13:26:12; currentTime 46860.295608→46860.36129, paused=false, readyState=4. Mobile confirmado via requestVideoFrameCallback: mediaTime=46800.1703, presentedFrames=4, 852x480.",
+    "localArtifacts": [
+      "output/playwright/camera-posto3-desktop.png",
+      "output/playwright/camera-posto3-mobile-playing.png"
+    ]
+  },
+  {
+    "id": "surfconnect-leme",
+    "observedAt": "2026-09-08",
+    "result": "moving-video-with-inconsistent-date",
+    "source": "https://v1.surfconnect.com.br/leme/",
+    "evidence": "Subagente observou ondas em movimento e relógio do player 12:09:27→12:09:34 no IAB; data embutida14/01/2000. Não certifica atualidade."
+  }
+]

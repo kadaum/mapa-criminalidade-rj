@@ -1,0 +1,636 @@
+{
+  "checkedAt": "2026-09-08",
+  "cameras": [
+    {
+      "id": "surfconnect-leme",
+      "name": "Praia do Leme Leme",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/leme/",
+      "coordinates": {
+        "latitude": -22.96408552084031,
+        "longitude": -43.17071385816649
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/leme/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "video_reproduzindo_data_inconsistente",
+      "access": "gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera liberada",
+      "accessSource": "https://v1.surfconnect.com.br/leme/",
+      "playbackEvidence": "IAB 2026-09-08: ondas mudando; player12:09:27->12:09:34; carimbo embutido14-01-2000."
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+      "name": "Praia de Copacabana - Posto 5 Copa P5",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-5-e-6/",
+      "coordinates": {
+        "latitude": -22.97841016639113,
+        "longitude": -43.18856341838534
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-5-e-6/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "cadastro_gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para cadastrados!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-praia-do-diabo",
+      "name": "Praia do Diabo Diabo",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/praia-do-diabo/",
+      "coordinates": {
+        "latitude": -22.98919991165634,
+        "longitude": -43.190587893254076
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/praia-do-diabo/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "cadastro_gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para cadastrados!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-arpoador",
+      "name": "Praia do Arpoador Arpex",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/arpoador/",
+      "coordinates": {
+        "latitude": -22.989746448005217,
+        "longitude": -43.191367737156725
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/arpoador/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-ipanema-posto-8",
+      "name": "Praia de Ipanema - Posto 8 Ipanema",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/ipanema-posto-8/",
+      "coordinates": {
+        "latitude": -22.987466228263322,
+        "longitude": -43.19689134901279
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/ipanema-posto-8/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-ipanema-posto-10",
+      "name": "Praia de Ipanema - Posto 10 Ipanema P10",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/ipanema-posto-10/",
+      "coordinates": {
+        "latitude": -22.986261,
+        "longitude": -43.209605
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/ipanema-posto-10/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-leblon-posto-11",
+      "name": "Praia do Leblon Leblon P11",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/leblon-posto-11/",
+      "coordinates": {
+        "latitude": -22.986885565510555,
+        "longitude": -43.21939267179721
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/leblon-posto-11/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-leblon",
+      "name": "Canto do Leblon Leblon P12",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/leblon/",
+      "coordinates": {
+        "latitude": -22.98826832512302,
+        "longitude": -43.22666145822757
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/leblon/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "cadastro_gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para cadastrados!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo",
+      "name": "Canto Esquerdo Sanca Esquerdo Lateral",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+      "coordinates": {
+        "latitude": -22.998546163471357,
+        "longitude": -43.25576702053223
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera liberada",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-postinho",
+      "name": "Barra da Tijuca Postinho",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/postinho/",
+      "coordinates": {
+        "latitude": -23.01532848375222,
+        "longitude": -43.30665464075321
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/postinho/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-meio-da-barra",
+      "name": "Barra da Tijuca Meio da Barra",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/meio-da-barra/",
+      "coordinates": {
+        "latitude": -23.011217712290918,
+        "longitude": -43.33077078161472
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/meio-da-barra/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera liberada",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-posto6",
+      "name": "Barra da Tijuca Posto 6",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/posto6/",
+      "coordinates": {
+        "latitude": -23.010580765242675,
+        "longitude": -43.34212189016574
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/posto6/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-reserva",
+      "name": "Praia da Reserva Reserva",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/reserva/",
+      "coordinates": {
+        "latitude": -23.011714,
+        "longitude": -43.378128
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/reserva/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-recreio",
+      "name": "Canto do Recreio Recreio",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/recreio/",
+      "coordinates": {
+        "latitude": -23.032283033941873,
+        "longitude": -43.47021768706361
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/recreio/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "cadastro_gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para cadastrados!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-macumba",
+      "name": "Praia da Macumba - 5W Macumba - 5W",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/macumba/",
+      "coordinates": {
+        "latitude": -23.031502838815346,
+        "longitude": -43.4781399057739
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/macumba/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "gratuito",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera liberada",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-macumba-curvao",
+      "name": "Curvão Macumba - Curvão",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/macumba-curvao/",
+      "coordinates": {
+        "latitude": -23.03400917927991,
+        "longitude": -43.48650319575961
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/macumba-curvao/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "assinatura",
+      "embed": "sem_permissao_verificada",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-leme-fixa",
+      "name": "Leme Fixa",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/leme-fixa/",
+      "coordinates": {
+        "latitude": -22.96408552084031,
+        "longitude": -43.17071385816649
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/leme-fixa/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "embed": "sem_permissao_verificada",
+      "access": "gratuito",
+      "accessEvidence": "Câmera liberada",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-6",
+      "name": "Copa P6",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-6/",
+      "coordinates": {
+        "latitude": -22.97841016639113,
+        "longitude": -43.18856341838534
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-6/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "embed": "sem_permissao_verificada",
+      "access": "assinatura",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+      "name": "Sanca Esquerdo Frontal",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo-frontal/",
+      "coordinates": {
+        "latitude": -22.9985,
+        "longitude": -43.25576
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo-frontal/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "embed": "sem_permissao_verificada",
+      "access": "assinatura",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-pepino",
+      "name": "Pepino",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/pepino/",
+      "coordinates": {
+        "latitude": -23.00106,
+        "longitude": -43.27263
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/pepino/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "embed": "sem_permissao_verificada",
+      "access": "gratuito",
+      "accessEvidence": "Câmera liberada",
+      "accessSource": "https://v1.surfconnect.com.br/leme/"
+    },
+    {
+      "id": "surfconnect-prainha",
+      "name": "Prainha",
+      "operator": "SurfConnect",
+      "sourceUrl": "https://v1.surfconnect.com.br/prainha/",
+      "coordinates": {
+        "latitude": -23.03400917927991,
+        "longitude": -43.48650319575961
+      },
+      "coordinateSource": "https://v1.surfconnect.com.br/prainha/",
+      "precision": "pico_no_mapa_do_operador",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "embed": "sem_permissao_verificada",
+      "access": "assinatura",
+      "accessEvidence": "Câmera somente para assinantes!",
+      "accessSource": "https://v1.surfconnect.com.br/leme/",
+      "coordinateWarning": "Coordenada reutilizada de Macumba Curvao; rejeitar pin ate localizacao conferida",
+      "mapEligible": false
+    },
+    {
+      "id": "worldcam-14077",
+      "name": "Rio de Janeiro - Panoramic view",
+      "operator": "Clima ao Vivo",
+      "sourceUrl": "https://www.climaaovivo.com.br/",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/14077-rio-de-janeiro-panoramic-view",
+      "coordinates": {
+        "latitude": -22.9824984,
+        "longitude": -43.322135
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/14077-rio-de-janeiro-panoramic-view",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "a_confirmar",
+      "embed": "sem_permissao_verificada",
+      "mapEligible": false,
+      "notes": "Fonte abre catalogo inteiro; coordenada nao identifica camera especifica."
+    },
+    {
+      "id": "worldcam-1908",
+      "name": "Rio de Janeiro - Christ the Redeemer",
+      "operator": "a_confirmar",
+      "sourceUrl": "http://www.corcovadoaovivo.com.br/",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/1908-rio-de-janeiro-christ-the-redeemer",
+      "coordinates": {
+        "latitude": -22.9517989,
+        "longitude": -43.211769
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/1908-rio-de-janeiro-christ-the-redeemer",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "a_confirmar",
+      "embed": "sem_permissao_verificada"
+    },
+    {
+      "id": "worldcam-24346",
+      "name": "Rio de Janeiro - Pedra Bonita, Rampa Asa",
+      "operator": "a_confirmar",
+      "sourceUrl": "https://streamerhtg.nextcon.com/",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/24346-rio-de-janeiro-pedra-bonita-rampa-asa",
+      "coordinates": {
+        "latitude": -22.9878267,
+        "longitude": -43.2792241
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/24346-rio-de-janeiro-pedra-bonita-rampa-asa",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "a_confirmar",
+      "embed": "sem_permissao_verificada"
+    },
+    {
+      "id": "worldcam-25183",
+      "name": "Rio de Janeiro - Rio de Janeiro/Galeão Interna...",
+      "operator": "AVTV",
+      "sourceUrl": "https://www.youtube.com/@avtv",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/25183-rio-de-janeiro-rio-de-janeiro-galeao-international-airport",
+      "coordinates": {
+        "latitude": -22.8148648,
+        "longitude": -43.2710933
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/25183-rio-de-janeiro-rio-de-janeiro-galeao-international-airport",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "a_confirmar",
+      "embed": "sem_permissao_verificada"
+    },
+    {
+      "id": "worldcam-26875",
+      "name": "Rio de Janeiro - Macumba Beach",
+      "operator": "RicoSurf",
+      "sourceUrl": "https://ricosurf.com.br/",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/26875-rio-de-janeiro-macumba-beach",
+      "coordinates": {
+        "latitude": -23.0311102,
+        "longitude": -43.4768494
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/26875-rio-de-janeiro-macumba-beach",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "a_confirmar",
+      "embed": "sem_permissao_verificada",
+      "notes": "Possivel mesma camera Skyline rico-joint; nao contar sem cotejo."
+    },
+    {
+      "id": "worldcam-29900",
+      "name": "Rio de Janeiro - Copacabana Posto 6",
+      "operator": "a_confirmar",
+      "sourceUrl": "https://surfconnect.com.br/",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/29900-rio-de-janeiro-copacabana-posto-6",
+      "coordinates": {
+        "latitude": -22.9855408,
+        "longitude": -43.1892312
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/29900-rio-de-janeiro-copacabana-posto-6",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "a_confirmar",
+      "embed": "sem_permissao_verificada",
+      "duplicateCandidateOf": "surfconnect-praia-de-copacabana-posto-6",
+      "mapEligible": false,
+      "coordinateWarning": "Diverge da coordenada no catalogo primario; nao duplicar."
+    },
+    {
+      "id": "worldcam-36669",
+      "name": "Rio de Janeiro - Copacabana Posto 6",
+      "operator": "Instituto Mar Urbano",
+      "sourceUrl": "https://institutomarurbano.com.br/live-cam/",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/36669-rio-de-janeiro-copacabana-posto-6",
+      "coordinates": {
+        "latitude": -22.985619,
+        "longitude": -43.1889177
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/36669-rio-de-janeiro-copacabana-posto-6",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "nao_testado",
+      "access": "publico",
+      "embed": "sem_permissao_verificada",
+      "notes": "Fetch direto406; pagina indexada mostra livecam Posto6, playback nao testado."
+    },
+    {
+      "id": "worldcam-40611",
+      "name": "Rio de Janeiro - Copacabana Posto 6",
+      "operator": "HomesInRio",
+      "sourceUrl": "https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/40611-rio-de-janeiro-copacabana-posto-6",
+      "coordinates": {
+        "latitude": -22.9831853,
+        "longitude": -43.1901587
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/40611-rio-de-janeiro-copacabana-posto-6",
+      "precision": "diretorio_aproximada",
+      "address": "Avenida Atlantica3950, Copacabana",
+      "playbackStatus": "confirmado_em_turno_anterior",
+      "access": "publico",
+      "embed": "sem_permissao_verificada",
+      "youtubeId": "IhGNK_hImLs",
+      "duplicateOf": "homesinrio_posto6_existente"
+    },
+    {
+      "id": "worldcam-40612",
+      "name": "Rio de Janeiro - Copacabana Posto 3",
+      "operator": "Homes in Rio",
+      "sourceUrl": "https://www.youtube.com/watch?v=7ecGJrsCv60",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/40612-rio-de-janeiro-copacabana-posto-3",
+      "coordinates": {
+        "latitude": -22.9708061,
+        "longitude": -43.183585
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/40612-rio-de-janeiro-copacabana-posto-3",
+      "precision": "diretorio_aproximada",
+      "address": null,
+      "playbackStatus": "broadcast_live_metadata_sem_frames",
+      "access": "publico_youtube",
+      "embed": "youtube_embed_publicado_por_skyline",
+      "youtubeId": "7ecGJrsCv60",
+      "playbackEvidence": "YouTube titulo Copacabana Posto3; isLiveNow true; frames nao renderizados pois IAB indisponivel."
+    },
+    {
+      "id": "worldcam-36097",
+      "name": "Praia de Sao Conrado",
+      "operator": "a_confirmar",
+      "sourceUrl": "https://www.youtube.com/channel/UCfMOswhx9NN_laZ8Ukcm4-Q",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/36097-rio-de-janeiro-praia-de-sao-conrado",
+      "coordinates": {
+        "latitude": -23.0009667,
+        "longitude": -43.2720249
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/36097-rio-de-janeiro-praia-de-sao-conrado",
+      "precision": "diretorio_aproximada",
+      "playbackStatus": "offline_no_diretorio",
+      "access": "publico_youtube",
+      "embed": "sem_permissao_verificada"
+    },
+    {
+      "id": "worldcam-40819",
+      "name": "Cascatinha Taunay",
+      "operator": "a_confirmar",
+      "sourceUrl": "https://www.youtube.com/@liveriobr",
+      "directoryUrl": "https://worldcam.eu/webcams/south-america/brazil/40819-rio-de-janeiro-tijuca-national-park-cascatinha-taunay",
+      "coordinates": {
+        "latitude": -22.9584152,
+        "longitude": -43.2774987
+      },
+      "coordinateSource": "https://worldcam.eu/webcams/south-america/brazil/40819-rio-de-janeiro-tijuca-national-park-cascatinha-taunay",
+      "precision": "diretorio_aproximada",
+      "playbackStatus": "offline_no_diretorio",
+      "access": "publico_youtube",
+      "embed": "sem_permissao_verificada"
+    }
+  ],
+  "notes": [
+    "SurfConnect source catalog labels free/registration/subscriber today; rotating access may change. Coordinates mark surf spot, not verified physical camera installation. Public playback not yet rendered. Arpoador lateral source slug omitted due apparent embedded credentials; no access attempted."
+  ],
+  "excludedSources": [
+    {
+      "source": "Surfline",
+      "url": "https://www.surfline.com/surf-report/praia-do-recreio-dos-bandeirantes/640a58d2b6d76959e4576795",
+      "reason": "Lista municipal indica No cam, previsao nao e camera."
+    },
+    {
+      "source": "Lineup",
+      "reason": "Busca nao encontrou operador claro de cameras de praia; nao confundir integradora Lineup broadcast."
+    }
+  ],
+  "offlineCandidates": [
+    {
+      "sourceUrl": "https://www.skylinewebcams.com/webcam/brasil/rio-de-janeiro/rio-de-janeiro/praia-de-sao-conrado.html",
+      "name": "Sao Conrado Skyline",
+      "playbackStatus": "offline_na_pagina",
+      "coordinates": null,
+      "mapEligible": false
+    },
+    {
+      "sourceUrl": "https://www.skylinewebcams.com/webcam/brasil/rio-de-janeiro/rio-de-janeiro/rico-joint.html",
+      "name": "Pontal Sernambetiba Skyline",
+      "playbackStatus": "offline_na_pagina",
+      "coordinates": null,
+      "mapEligible": false
+    },
+    {
+      "sourceUrl": "https://www.skylinewebcams.com/webcam/brasil/rio-de-janeiro/rio-de-janeiro/panorama.html",
+      "name": "Panorama Skyline",
+      "playbackStatus": "offline_na_pagina",
+      "coordinates": null,
+      "mapEligible": false
+    },
+    {
+      "sourceUrl": "https://www.skylinewebcams.com/webcam/brasil/rio-de-janeiro/rio-de-janeiro/santos-dumont-airport.html",
+      "name": "Santos Dumont Skyline",
+      "playbackStatus": "offline_na_pagina",
+      "coordinates": null,
+      "mapEligible": false
+    }
+  ],
+  "additionalCandidates": [
+    {
+      "name": "Copacabana Skyline",
+      "sourceUrl": "https://www.skylinewebcams.com/webcam/brasil/rio-de-janeiro/rio-de-janeiro/copacabana-beach.html",
+      "youtubeId": "7ecGJrsCv60",
+      "coordinates": null,
+      "mapEligible": false,
+      "notes": "embedUrl publico emVideoObject; testar e geolocalizar; possivelHomesPosto3"
+    }
+  ]
+}

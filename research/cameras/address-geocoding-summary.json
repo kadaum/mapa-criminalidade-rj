@@ -1,0 +1,26 @@
+{
+  "stats": {
+    "input": 6658,
+    "existing": 962,
+    "pending": 5696,
+    "numberParsed": 2436,
+    "nameNeighborhoodMatch": 1679,
+    "rangeMatch": 473,
+    "resolved": 473,
+    "ambiguous": 139,
+    "outsideMunicipality": 0,
+    "noName": 757,
+    "noRange": 1824,
+    "unsupported": 3260
+  },
+  "cacheRecords": 6727,
+  "output": "/tmp/catalog-geocoded-addresses.json",
+  "cache": "/tmp/cadlog-address-ranges.json",
+  "endpoint": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0/query",
+  "restrictions": [
+    "No municipal CSV/storage feeds used",
+    "Existing coordinates preserved",
+    "No neighborhood-centroid fallback",
+    "Interpolated points are approximate address references"
+  ]
+}

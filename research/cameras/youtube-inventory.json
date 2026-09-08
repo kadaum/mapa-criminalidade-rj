@@ -1,0 +1,147 @@
+{
+  "checkedAt": "2026-09-08",
+  "scope": "Independent public YouTube candidates in municipality of Rio de Janeiro. Research only; no playback verified in this subtask. Do not publish as currently live without rendered playback check.",
+  "cameras": [
+    {
+      "id": "live-rio-cascatinha-taunay",
+      "operator": "Live Rio",
+      "channelUrl": "https://www.youtube.com/@liveriobr/streams",
+      "videoUrl": null,
+      "scene": "Cascatinha Taunay, Parque Nacional da Tijuca, Alto da Boa Vista",
+      "address": null,
+      "coordinates": {
+        "latitude": -22.95833333,
+        "longitude": -43.2775,
+        "precision": "approximate directory location, anonymous contributor; not surveyed camera installation"
+      },
+      "sources": [
+        "https://worldcam.eu/webcams/south-america/brazil/40819-rio-de-janeiro-tijuca-national-park-cascatinha-taunay-waterfall",
+        "https://seetheview.com/cam/1494/cascatinha-taunay-waterfall-live-tijuca-national-park-rio-de-janeiro",
+        "https://seetheview.com/cam/2436/cascatinha-taunay-waterfall-live-tijuca-forest-rio-de-janeiro"
+      ],
+      "status": "Current channel route @liveriobr/streams returns N IOT / @Nxtiot with sensor product videos; no live camera resolved. Directory stale.",
+      "duplicates": [
+        "SeeTheView 1494 and 2436 same operator and scene; merge pending video resolution"
+      ],
+      "nextAction": "Resolve current stream from Live Rio channel; verify live clock and location before adding pin",
+      "coordinateCrosscheck": {
+        "source": "https://www.outdooractive.com.br/br/poi/rio-de-janeiro/cascatinha-taunay/59609842/",
+        "landmarkLatitude": -22.958538,
+        "landmarkLongitude": -43.27748,
+        "interpretation": "Worldcam point within approximately 23 m of named waterfall landmark; supports locality only, not installation"
+      }
+    },
+    {
+      "id": "live-rio-pepino",
+      "operator": "Live Rio",
+      "channelUrl": "https://www.youtube.com/@liveriobr/streams",
+      "videoUrl": "https://www.youtube.com/watch?v=rjMR8NgenTU",
+      "scene": "Praia do Pepino, São Conrado, hang-gliding landing area",
+      "address": null,
+      "coordinates": null,
+      "sources": [
+        "https://seetheview.com/cam/2669/praia-do-pepino-live-s-o-conrado-hang-gliding-landing-beach",
+        "https://seetheview.com/cam/545/rio-de-janeiro-live-webcam-s-o-conrado-beach-hang-gliding-landing-area"
+      ],
+      "status": "YouTube primary public player ERROR: This video has been removed by the uploader (2026-09-08)",
+      "duplicates": [
+        "SeeTheView 545 and 2669 appear same operator and scene"
+      ],
+      "nextAction": "Find actual installation address/coordinate, check potential SurfConnect duplicate, verify playback"
+    },
+    {
+      "id": "live-rio-cristo",
+      "operator": "Paineiras Corcovado (confirmed primary YouTube metadata)",
+      "channelUrl": "https://www.youtube.com/@PaineirasCorcovadoRio",
+      "videoUrl": "https://www.youtube.com/watch?v=aRDuS1iqioU",
+      "scene": "Cristo Redentor; primary description states transmission directly from Centro de Visitantes Paineiras-Corcovado",
+      "address": null,
+      "coordinates": null,
+      "sources": [
+        "https://camerasdomundo.com/cristo-redentor-corcovado-ao-vivo/",
+        "https://seetheview.com/cam/979/cristo-redentor-live-rio-de-janeiro-brazil"
+      ],
+      "status": "YouTube primary metadata isLive=true, lengthSeconds=0, playability OK; rendered playback not checked because iab unavailable",
+      "duplicates": [
+        "Multiple Cristo listings require stream-ID deduplication"
+      ],
+      "nextAction": "Rendered playback and verify actual camera placement; do not automatically pin at statue",
+      "supersededVideo": {
+        "id": "YggB2Se4mO4",
+        "ended": "2026-09-06T21:24:24Z"
+      }
+    },
+    {
+      "id": "rio-world-barata-ribeiro",
+      "operator": "Rio World Live Cam (publisher)",
+      "channelUrl": "https://www.youtube.com/@RioWorldLiveCam",
+      "videoUrl": "https://www.youtube.com/watch?v=7QmgvPXZ2w4",
+      "scene": "Rua Barata Ribeiro x Rua Siqueira Campos, Copacabana",
+      "address": "Rua Barata Ribeiro x Rua Siqueira Campos",
+      "coordinates": null,
+      "sources": [
+        "https://camerasdomundo.com/avenida-barata-ribeiro-copacabana/"
+      ],
+      "status": "YouTube primary metadata isLiveNow=false; stream ended 2026-03-24T02:34:32Z. Channel /live had no player.",
+      "duplicates": [
+        "Potential CamerasRJ 49: same named intersection; do not count separately without view/operator comparison"
+      ],
+      "nextAction": "Resolve current channel stream; deduplicate CamerasRJ 49",
+      "addressEvidence": "Primary video description explicitly confirms fixed camera showing intersection Rua Siqueira Campos x Rua Barata Ribeiro."
+    },
+    {
+      "id": "aviation-tv-santos-dumont",
+      "operator": "Aviation TV",
+      "channelUrl": null,
+      "videoUrl": null,
+      "scene": "Santos Dumont runways and Guanabara Bay",
+      "address": null,
+      "coordinates": null,
+      "sources": [
+        "https://airportlivestreams.com/",
+        "https://www.cxtv.com.br/camera-ao-vivo/aeroporto-santos-dumont",
+        "https://www.panrotas.com.br/aviacao/aeroportos/2021/04/aviation-tv-vai-mostrar-rotina-de-aeroportos-pelo-brasil_180642.html"
+      ],
+      "status": "AirportLivestreams search index reports live start 2026-09-08 00:36; current video ID and playback not verified",
+      "duplicates": [
+        "Old videos eILylrunNRk and Rxpn5B3wWJw are historical references, not new camera points"
+      ],
+      "nextAction": "Resolve current stream; camera installed outside airport per operator interview, so do not position at airport centroid"
+    },
+    {
+      "id": "aviation-tv-galeao",
+      "operator": "Aviation TV",
+      "channelUrl": null,
+      "videoUrl": null,
+      "scene": "Galeão airport, Linha Vermelha and runway 15 view",
+      "address": null,
+      "coordinates": null,
+      "sources": [
+        "https://diariodorio.com/santos-dumont-e-galeao-passam-a-ter-transmissao-ao-vivo-de-suas-pistas/",
+        "https://www.panrotas.com.br/aviacao/aeroportos/2021/04/aviation-tv-vai-mostrar-rotina-de-aeroportos-pelo-brasil_180642.html"
+      ],
+      "status": "historical source only; no current live confirmed",
+      "duplicates": [],
+      "nextAction": "Keep research candidate only; check operator active streams and installation location"
+    }
+  ],
+  "excluded": [
+    {
+      "url": "https://www.youtube.com/watch?v=1ZXDXckvwTo",
+      "reason": "IRL roaming beach stream; no fixed installation location"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JTJSRxz1F4s",
+      "reason": "IRL roaming Ipanema/Leblon/Copacabana; not distinct fixed camera"
+    },
+    {
+      "url": "https://camerasdomundo.com/praia-recreio-dos-bandeirantes-ao-vivo/",
+      "reason": "Actual page says camera coming soon and solicits camera partner, despite SEO title claiming live"
+    },
+    {
+      "url": "https://omnicamapp.com/en/webcam/141818/",
+      "reason": "Embeds BZCEWHdnozc generic Rio World Copacabana with no precise location; potential duplicate, current status unknown"
+    }
+  ],
+  "verificationBlocker": "CUA createBrowserTab iab returned Browser is not available: iab. No external Chrome used. Public HTML metadata reads only."
+}

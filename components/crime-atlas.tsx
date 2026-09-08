@@ -10,7 +10,7 @@ import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
 import { PeriodPicker } from '@/components/period-picker';
-import { PublicCameraLayer } from '@/components/public-camera-layer';
+import { useCameraWorkspace } from '@/components/public-camera-layer';
 import {
   comparisonRange,
   monthCount,
@@ -130,6 +130,7 @@ maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 const mapStyle = {
   version: 8 as const,
+  glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
   sources: {
     osm: {
       type: 'raster' as const,
@@ -356,6 +357,16 @@ export function CrimeAtlas() {
   const [showBoundaries, setShowBoundaries] = useState(true);
   const [showBase, setShowBase] = useState(false);
   const [urlReady, setUrlReady] = useState(false);
+  const cameras = useCameraWorkspace(
+    cameraMap,
+    display === 'map',
+    (coordinates) => {
+      cityViewRef.current = false;
+      mapRef.current?.flyTo({ center: coordinates, zoom: 15, duration: 0 });
+    },
+  );
+  const cameraModeRef = useRef(false);
+  cameraModeRef.current = cameras.active;
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -640,6 +651,7 @@ export function CrimeAtlas() {
       ],
       renderWorldCopies: false,
       cooperativeGestures: true,
+      fadeDuration: 0,
       dragRotate: false,
       pitchWithRotate: false,
       attributionControl: false,
@@ -777,10 +789,12 @@ export function CrimeAtlas() {
         },
       });
       map.on('click', 'cisp-fill', (event) => {
+        if (cameraModeRef.current) return;
         const cisp = Number(event.features?.[0]?.properties?.cisp);
         if (cisp) chooseCisp(cisp);
       });
       map.on('mousemove', 'cisp-fill', (event) => {
+        if (cameraModeRef.current) return;
         const cisp = Number(event.features?.[0]?.properties?.cisp);
         if (!cisp) return;
         const tooltipWidth = 280;
@@ -910,12 +924,14 @@ export function CrimeAtlas() {
       map.resize();
       fitCity(map, 0);
       scheduleLabels();
+      setCameraMap(map);
     });
     map.on('dragstart', () => {
       cityViewRef.current = false;
     });
     map.on('zoomstart', (event) => {
-      if (event.originalEvent) cityViewRef.current = false;
+      if (event.originalEvent || cameraModeRef.current)
+        cityViewRef.current = false;
     });
     const observer = new ResizeObserver(() => {
       map.resize();
@@ -923,7 +939,6 @@ export function CrimeAtlas() {
     });
     observer.observe(mapNode.current);
     mapRef.current = map;
-    setCameraMap(map);
     return () => {
       observer.disconnect();
       map.remove();
@@ -1092,16 +1107,26 @@ export function CrimeAtlas() {
     map.setLayoutProperty(
       'cisp-line',
       'visibility',
-      showBoundaries ? 'visible' : 'none',
+      showBoundaries && !cameras.active ? 'visible' : 'none',
     );
-    map.setLayoutProperty('osm', 'visibility', showBase ? 'visible' : 'none');
+    map.setLayoutProperty(
+      'osm',
+      'visibility',
+      showBase || cameras.active ? 'visible' : 'none',
+    );
     map.setPaintProperty('cisp-fill', 'fill-opacity', [
       'case',
       ['boolean', ['feature-state', 'hover'], false],
-      showBase ? 0.78 : 0.84,
-      showBase ? 0.62 : 1,
+      cameras.active ? 0 : showBase ? 0.78 : 0.84,
+      cameras.active ? 0 : showBase ? 0.62 : 1,
     ]);
-  }, [showNeighborhoods, showBoundaries, showBase]);
+    for (const id of ['selected', 'selected-halo'])
+      map.setLayoutProperty(
+        id,
+        'visibility',
+        cameras.active ? 'none' : 'visible',
+      );
+  }, [showNeighborhoods, showBoundaries, showBase, cameras.active, cameraMap]);
 
   function renderFilterFields(mobile = false) {
     return (
@@ -1218,15 +1243,23 @@ export function CrimeAtlas() {
         <section className="mb-3 flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
           <div>
             <h1 className="text-xl font-semibold tracking-tight">
-              {indicatorMeta?.label ?? 'Mapa de criminalidade'}
+              {cameras.active
+                ? 'Câmeras públicas no mapa'
+                : (indicatorMeta?.label ?? 'Mapa de criminalidade')}
             </h1>
             <p className="mt-1 text-sm text-[#59667b]">
-              {viewMode === 'rate'
-                ? 'Por 100 mil moradores'
-                : viewMode === 'quantity'
-                  ? 'Quantidade'
-                  : 'Variação'}{' '}
-              · {periodRange} · Rio de Janeiro
+              {cameras.active ? (
+                'Transmissões, fontes e locais de referência · Rio de Janeiro'
+              ) : (
+                <>
+                  {viewMode === 'rate'
+                    ? 'Por 100 mil moradores'
+                    : viewMode === 'quantity'
+                      ? 'Quantidade'
+                      : 'Variação'}{' '}
+                  · {periodRange} · Rio de Janeiro
+                </>
+              )}
             </p>
           </div>
           <div className="relative w-full lg:w-[390px]">
@@ -1269,40 +1302,55 @@ export function CrimeAtlas() {
           </div>
         </section>
 
-        <section className="mb-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <button
-            type="button"
-            onClick={() => setFiltersOpen(true)}
-            className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-[#172235] px-4 text-xs font-semibold text-white shadow-sm"
-          >
-            <SlidersHorizontal className="size-4" /> Filtros
-          </button>
-          <button
-            type="button"
-            onClick={() => setFiltersOpen(true)}
-            className="min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold"
-          >
-            {viewMode === 'rate'
-              ? 'Taxa por 100 mil'
-              : viewMode === 'quantity'
-                ? 'Quantidade'
-                : 'Variação'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setFiltersOpen(true)}
-            className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
-          >
-            {periodRange}
-          </button>
-          <button
-            type="button"
-            onClick={() => setFiltersOpen(true)}
-            className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
-          >
-            Até {effectiveEnd ? formatPeriod(effectiveEnd) : '—'}
-          </button>
-        </section>
+        {cameras.active ? (
+          <div className="mb-3 flex min-h-12 items-center justify-between gap-3 text-sm text-[#59667b]">
+            <span>
+              Selecione um grupo no mapa ou procure uma câmera na lista.
+            </span>
+            <button
+              type="button"
+              onClick={cameras.toggle}
+              className="shrink-0 rounded-full border bg-white px-4 py-2 font-semibold text-[#172235]"
+            >
+              Voltar aos registros
+            </button>
+          </div>
+        ) : (
+          <section className="mb-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(true)}
+              className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-[#172235] px-4 text-xs font-semibold text-white shadow-sm"
+            >
+              <SlidersHorizontal className="size-4" /> Filtros
+            </button>
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(true)}
+              className="min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold"
+            >
+              {viewMode === 'rate'
+                ? 'Taxa por 100 mil'
+                : viewMode === 'quantity'
+                  ? 'Quantidade'
+                  : 'Variação'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(true)}
+              className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
+            >
+              {periodRange}
+            </button>
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(true)}
+              className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
+            >
+              Até {effectiveEnd ? formatPeriod(effectiveEnd) : '—'}
+            </button>
+          </section>
+        )}
         <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
           <DialogContent
             className="max-h-[88dvh] overflow-y-auto p-6 sm:max-w-2xl"
@@ -1356,7 +1404,7 @@ export function CrimeAtlas() {
                 className="h-full w-full"
               />
             </div>
-            <PublicCameraLayer map={cameraMap} visible={display === 'map'} />
+            {cameras.controls}
             {display === 'map' ? (
               <>
                 <div className="absolute right-16 top-3 z-30 md:top-4">
@@ -1424,7 +1472,7 @@ export function CrimeAtlas() {
                 >
                   <RotateCcw className="size-4" />
                 </button>
-                {hoverStat && hoveredCisp && (
+                {!cameras.active && hoverStat && hoveredCisp && (
                   <div
                     ref={tooltipRef}
                     style={{ left: 24, top: 80 }}
@@ -1456,104 +1504,137 @@ export function CrimeAtlas() {
                     </div>
                   </div>
                 )}
-                <Popover>
-                  <div className="absolute bottom-3 left-3 z-20 md:bottom-4 md:left-4">
-                    <PopoverTrigger
-                      aria-label="Abrir legenda do mapa"
-                      className="flex h-9 items-center gap-2 rounded-xl border border-[#dce2ed] bg-white/94 px-2.5 text-[10px] font-medium tabular-nums text-[#526078] shadow-lg backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2455dc] md:h-10 md:text-[11px]"
-                    >
-                      {viewMode === 'variation' ? (
-                        <>
-                          <span>Caiu</span>
-                          <span className="flex h-2.5 w-16 overflow-hidden rounded-full" aria-hidden>
-                            <i className="flex-1 bg-[#23647a]" />
-                            <i className="flex-1 bg-[#eef1ef]" />
-                            <i className="flex-1 bg-[#bc6c3f]" />
-                          </span>
-                          <span>Subiu</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>0</span>
-                          <span
-                            className="grid h-2.5 w-20 grid-cols-5 overflow-hidden rounded-full"
-                            aria-hidden
-                          >
-                            {palette.slice(0, breaks.length + 1).map((color) => (
-                              <i key={color} style={{ background: color }} />
-                            ))}
-                          </span>
-                          <span>
-                            {breaks.length
-                              ? formatLegendValue(breaks.at(-1)!, true)
-                              : '—'}+
-                          </span>
-                        </>
-                      )}
-                    </PopoverTrigger>
-                    <PopoverContent
-                      side="top"
-                      align="start"
-                      sideOffset={8}
-                      className="w-[min(252px,calc(100vw-24px))] gap-2 rounded-xl border border-[#dce2ed] bg-white p-3 shadow-xl"
-                    >
-                      <PopoverTitle className="text-xs font-semibold text-[#172235]">
-                        {viewMode === 'rate'
-                          ? 'Casos por 100 mil moradores'
-                          : viewMode === 'quantity'
-                            ? `Quantidade de ${displayUnit ?? 'casos'}`
-                            : comparisonMode === 'year'
-                              ? 'Variação no ano'
-                              : 'Variação no período'}
-                      </PopoverTitle>
-                      <PopoverDescription className="sr-only">
-                        Faixas de cores usadas no mapa.
-                      </PopoverDescription>
-                      {viewMode === 'variation' ? (
-                        <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs text-[#526078]">
-                          {[
-                            ['#23647a', 'Caiu'],
-                            ['#eef1ef', 'Estável'],
-                            ['#bc6c3f', 'Subiu'],
-                            ['#d7dfe1', 'Sem comparação'],
-                          ].map(([color, label]) => (
-                            <span key={label} className="flex items-center gap-2">
-                              <i
-                                className="size-3 shrink-0 rounded-sm"
-                                style={{ background: color }}
-                              />
-                              {label}
-                            </span>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="space-y-1.5">
-                          {palette.slice(0, breaks.length + 1).map((color, i) => (
-                            <div
-                              key={color}
-                              className="flex items-center gap-2 text-xs tabular-nums text-[#526078]"
-                            >
-                              <i
-                                className="h-2.5 w-8 shrink-0 rounded-full"
-                                style={{ background: color }}
-                              />
-                              <span>
-                                {i === 0
-                                  ? `Menos de ${breaks[0] ? formatLegendValue(breaks[0]) : '—'}`
-                                  : i === breaks.length
-                                    ? `${formatLegendValue(breaks[i - 1])} ou mais`
-                                    : `${formatLegendValue(breaks[i - 1])} a ${formatLegendValue(breaks[i])}`}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      <p className="border-t border-[#e6eaf0] pt-2 text-[10px] leading-4 text-[#59667b]">
-                        Faixas relativas às 41 áreas · {periodRange}
-                      </p>
-                    </PopoverContent>
+                {cameras.active ? (
+                  <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
+                    <p className="font-semibold">
+                      Números agrupam referências de câmeras
+                    </p>
+                    <p>
+                      <span className="text-teal-700">●</span> Imagem conferida
+                      · <span className="text-blue-600">●</span> Não testada
+                    </p>
+                    <p>
+                      <span className="text-amber-700">●</span> Falhou no teste
+                      · <span className="text-slate-500">●</span> Fonte indica
+                      offline
+                    </p>
                   </div>
-                </Popover>
+                ) : (
+                  <>
+                    <Popover>
+                      <div className="absolute bottom-3 left-3 z-20 md:bottom-4 md:left-4">
+                        <PopoverTrigger
+                          aria-label="Abrir legenda do mapa"
+                          className="flex h-9 items-center gap-2 rounded-xl border border-[#dce2ed] bg-white/94 px-2.5 text-[10px] font-medium tabular-nums text-[#526078] shadow-lg backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2455dc] md:h-10 md:text-[11px]"
+                        >
+                          {viewMode === 'variation' ? (
+                            <>
+                              <span>Caiu</span>
+                              <span
+                                className="flex h-2.5 w-16 overflow-hidden rounded-full"
+                                aria-hidden
+                              >
+                                <i className="flex-1 bg-[#23647a]" />
+                                <i className="flex-1 bg-[#eef1ef]" />
+                                <i className="flex-1 bg-[#bc6c3f]" />
+                              </span>
+                              <span>Subiu</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>0</span>
+                              <span
+                                className="grid h-2.5 w-20 grid-cols-5 overflow-hidden rounded-full"
+                                aria-hidden
+                              >
+                                {palette
+                                  .slice(0, breaks.length + 1)
+                                  .map((color) => (
+                                    <i
+                                      key={color}
+                                      style={{ background: color }}
+                                    />
+                                  ))}
+                              </span>
+                              <span>
+                                {breaks.length
+                                  ? formatLegendValue(breaks.at(-1)!, true)
+                                  : '—'}
+                                +
+                              </span>
+                            </>
+                          )}
+                        </PopoverTrigger>
+                        <PopoverContent
+                          side="top"
+                          align="start"
+                          sideOffset={8}
+                          className="w-[min(252px,calc(100vw-24px))] gap-2 rounded-xl border border-[#dce2ed] bg-white p-3 shadow-xl"
+                        >
+                          <PopoverTitle className="text-xs font-semibold text-[#172235]">
+                            {viewMode === 'rate'
+                              ? 'Casos por 100 mil moradores'
+                              : viewMode === 'quantity'
+                                ? `Quantidade de ${displayUnit ?? 'casos'}`
+                                : comparisonMode === 'year'
+                                  ? 'Variação no ano'
+                                  : 'Variação no período'}
+                          </PopoverTitle>
+                          <PopoverDescription className="sr-only">
+                            Faixas de cores usadas no mapa.
+                          </PopoverDescription>
+                          {viewMode === 'variation' ? (
+                            <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs text-[#526078]">
+                              {[
+                                ['#23647a', 'Caiu'],
+                                ['#eef1ef', 'Estável'],
+                                ['#bc6c3f', 'Subiu'],
+                                ['#d7dfe1', 'Sem comparação'],
+                              ].map(([color, label]) => (
+                                <span
+                                  key={label}
+                                  className="flex items-center gap-2"
+                                >
+                                  <i
+                                    className="size-3 shrink-0 rounded-sm"
+                                    style={{ background: color }}
+                                  />
+                                  {label}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="space-y-1.5">
+                              {palette
+                                .slice(0, breaks.length + 1)
+                                .map((color, i) => (
+                                  <div
+                                    key={color}
+                                    className="flex items-center gap-2 text-xs tabular-nums text-[#526078]"
+                                  >
+                                    <i
+                                      className="h-2.5 w-8 shrink-0 rounded-full"
+                                      style={{ background: color }}
+                                    />
+                                    <span>
+                                      {i === 0
+                                        ? `Menos de ${breaks[0] ? formatLegendValue(breaks[0]) : '—'}`
+                                        : i === breaks.length
+                                          ? `${formatLegendValue(breaks[i - 1])} ou mais`
+                                          : `${formatLegendValue(breaks[i - 1])} a ${formatLegendValue(breaks[i])}`}
+                                    </span>
+                                  </div>
+                                ))}
+                            </div>
+                          )}
+                          <p className="border-t border-[#e6eaf0] pt-2 text-[10px] leading-4 text-[#59667b]">
+                            Faixas relativas às 41 áreas · {periodRange}
+                          </p>
+                        </PopoverContent>
+                      </div>
+                    </Popover>
+                  </>
+                )}
               </>
             ) : (
               <div className="absolute inset-0 overflow-y-auto bg-[#f8faf9] px-3 pb-6 pt-16 md:px-5">
@@ -1601,249 +1682,259 @@ export function CrimeAtlas() {
             )}
           </div>
 
-          <motion.button
-            type="button"
-            onClick={() =>
-              document.getElementById('region-panel')?.scrollIntoView({
-                behavior: reducedMotion ? 'auto' : 'smooth',
-              })
-            }
-            key={`${selectedCisp}-${indicator}-${viewMode}`}
-            initial={reducedMotion ? false : { y: 12, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="m-3 block w-[calc(100%-24px)] rounded-xl border border-[#dce2ed] bg-white/96 p-4 text-left shadow-2xl backdrop-blur lg:hidden"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className="min-w-0">
-                <span className="block text-sm font-semibold leading-5">
-                  {selectedTerritory?.territorialUnit ?? `CISP ${selectedCisp}`}
-                </span>
-                <span className="mt-1 block text-xs text-[#59667b]">
-                  {selected?.current.toLocaleString('pt-BR') ?? '—'}{' '}
-                  {displayUnit} · CISP {selectedCisp}
-                </span>
-              </span>
-              <strong className="shrink-0 text-xl tabular-nums text-[#2455dc]">
-                {viewMode === 'rate'
-                  ? selected?.rate.toLocaleString('pt-BR', {
-                      maximumFractionDigits: 1,
-                    })
-                  : viewMode === 'quantity'
-                    ? selected?.current.toLocaleString('pt-BR')
-                    : fmtChange(selected?.change ?? null)}
-                <small className="ml-1 text-[10px] font-medium">
-                  {viewMode === 'rate'
-                    ? '/100 mil'
-                    : viewMode === 'quantity'
-                      ? displayUnit
-                      : 'vs. antes'}
-                </small>
-              </strong>
-            </div>
-          </motion.button>
-          <aside
-            id="region-panel"
-            className="atlas-panel border-t border-[#dce2ed] p-5 lg:border-l lg:border-t-0"
-            aria-live="polite"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold text-[#2455dc]">
-                  Região selecionada
-                </p>
-                <h2 className="mt-1 text-xl font-semibold leading-6 tracking-[-0.025em]">
-                  {selectedTerritory?.territorialUnit ??
-                    `Área da ${selectedCisp}ª delegacia`}
-                </h2>
-                <p className="mt-1.5 text-xs text-[#59667b]">
-                  Área da {selectedCisp}ª delegacia · CISP {selectedCisp}
-                </p>
-              </div>
-              <InfoButton indicator={indicatorMeta} />
-            </div>
-            <div className="mt-7">
-              <p className="text-sm font-medium text-[#59667b]">
-                {indicatorMeta?.label} · {periodRange}
-              </p>
-              <motion.div
-                key={`${selectedCisp}-${indicator}-${viewMode}-${effectiveEnd}`}
-                initial={reducedMotion ? false : { opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-2 flex items-end gap-2"
+          {cameras.active ? (
+            cameras.panel
+          ) : (
+            <>
+              <motion.button
+                type="button"
+                onClick={() =>
+                  document.getElementById('region-panel')?.scrollIntoView({
+                    behavior: reducedMotion ? 'auto' : 'smooth',
+                  })
+                }
+                key={`${selectedCisp}-${indicator}-${viewMode}`}
+                initial={reducedMotion ? false : { y: 12, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="m-3 block w-[calc(100%-24px)] rounded-xl border border-[#dce2ed] bg-white/96 p-4 text-left shadow-2xl backdrop-blur lg:hidden"
               >
-                <strong className="text-[42px] font-semibold leading-none tracking-[-0.055em] tabular-nums">
-                  {viewMode === 'rate'
-                    ? selected?.rate.toLocaleString('pt-BR', {
-                        maximumFractionDigits: 1,
-                      })
-                    : viewMode === 'quantity'
-                      ? selected?.current.toLocaleString('pt-BR')
-                      : fmtChange(selected?.change ?? null)}
-                </strong>
-                <span className="max-w-24 pb-1 text-xs leading-4 text-[#59667b]">
-                  {viewMode === 'rate'
-                    ? 'por 100 mil moradores'
-                    : viewMode === 'quantity'
-                      ? indicatorMeta?.unit
-                      : comparisonMode === 'year'
-                        ? 'vs. mesmo período do ano anterior'
-                        : comparisonMode === 'none'
-                          ? 'sem comparação'
-                          : 'vs. período anterior'}
-                </span>
-              </motion.div>
-              <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#eaf0fc] px-3 py-1.5 text-xs font-semibold text-[#324c86]">
-                <BarChart3 className="size-3.5" /> {rank || '—'}ª maior{' '}
-                {viewMode === 'rate'
-                  ? 'taxa'
-                  : viewMode === 'quantity'
-                    ? 'quantidade'
-                    : 'variação'}{' '}
-                entre 41 áreas
-              </p>
-            </div>
-            <div className="mt-6 grid grid-cols-3 border-y border-[#dce2ed] py-4">
-              <div>
-                <p className="text-[11px] text-[#59667b]">Quantidade</p>
-                <strong className="mt-1 block text-base tabular-nums">
-                  {selected?.current.toLocaleString('pt-BR') ?? '—'}
-                </strong>
-              </div>
-              <div className="border-x border-[#dce2ed] px-3">
-                <a
-                  href={population?.source.methodologyUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[11px] text-[#2455dc] underline decoration-[#a9c1ff] underline-offset-2"
-                >
-                  População estimada ↗
-                </a>
-                <strong className="mt-1 block text-base tabular-nums">
-                  {selected?.population.toLocaleString('pt-BR') ?? '—'}
-                </strong>
-              </div>
-              <div className="pl-3">
-                <p className="text-[11px] text-[#59667b]">Variação</p>
-                <strong className="mt-1 flex items-center gap-1 text-base tabular-nums">
-                  {selected?.change != null && selected.change > 0 ? (
-                    <ArrowUpRight className="size-4 text-[#a5653f]" />
-                  ) : selected?.change != null ? (
-                    <ArrowDownRight className="size-4 text-[#3459ad]" />
-                  ) : null}
-                  {selected ? fmtChange(selected.change) : '—'}
-                </strong>
-              </div>
-            </div>
-            {selected && viewMode === 'rate' && (
-              <div className="mt-4 rounded-2xl bg-[#eaf0fc] p-3 text-xs leading-5 text-[#324c86]">
-                <strong>Como esta taxa foi calculada:</strong>{' '}
-                {selected.current.toLocaleString('pt-BR')} {displayUnit} ÷{' '}
-                {selected.population.toLocaleString('pt-BR')} moradores × 100
-                mil ={' '}
-                {selected.rate.toLocaleString('pt-BR', {
-                  maximumFractionDigits: 1,
-                })}
-                . Isso mede eventos ou vítimas registrados, conforme o
-                indicador, não pessoas únicas.
-              </div>
-            )}
-            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] leading-5 text-[#59667b]">
-              <span>
-                Estimativa derivada ·{' '}
-                {selectedPopulation?.sectors.toLocaleString('pt-BR') ?? '—'}{' '}
-                setores do Censo 2022 cruzados com esta CISP
-              </span>
-              <a
-                href={population?.source.dataUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-[#2455dc] underline decoration-[#a9c1ff] underline-offset-2"
+                <div className="flex items-start justify-between gap-3">
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold leading-5">
+                      {selectedTerritory?.territorialUnit ??
+                        `CISP ${selectedCisp}`}
+                    </span>
+                    <span className="mt-1 block text-xs text-[#59667b]">
+                      {selected?.current.toLocaleString('pt-BR') ?? '—'}{' '}
+                      {displayUnit} · CISP {selectedCisp}
+                    </span>
+                  </span>
+                  <strong className="shrink-0 text-xl tabular-nums text-[#2455dc]">
+                    {viewMode === 'rate'
+                      ? selected?.rate.toLocaleString('pt-BR', {
+                          maximumFractionDigits: 1,
+                        })
+                      : viewMode === 'quantity'
+                        ? selected?.current.toLocaleString('pt-BR')
+                        : fmtChange(selected?.change ?? null)}
+                    <small className="ml-1 text-[10px] font-medium">
+                      {viewMode === 'rate'
+                        ? '/100 mil'
+                        : viewMode === 'quantity'
+                          ? displayUnit
+                          : 'vs. antes'}
+                    </small>
+                  </strong>
+                </div>
+              </motion.button>
+              <aside
+                id="region-panel"
+                className="atlas-panel border-t border-[#dce2ed] p-5 lg:border-l lg:border-t-0"
+                aria-live="polite"
               >
-                Base oficial IBGE ↗
-              </a>
-              <a
-                href={population?.source.cispBoundaryUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-[#2455dc] underline decoration-[#a9c1ff] underline-offset-2"
-              >
-                Limite oficial ISP-RJ ↗
-              </a>
-            </div>
-            {selected && selected.population < 50000 && (
-              <div className="mt-4 rounded-2xl bg-[#fff6e6] p-3 text-xs leading-5 text-[#755b2d]">
-                <strong>Leia a taxa com cautela.</strong> Esta área tem{' '}
-                {selected.population.toLocaleString('pt-BR')} moradores no Censo
-                2022; trabalhadores, turistas e passageiros não entram no
-                denominador.
-              </div>
-            )}
-            <div className="mt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold">Evolução mensal</p>
-                  <p className="text-xs text-[#59667b]">
-                    Até {effectiveEnd ? formatPeriod(effectiveEnd, true) : '—'}
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold text-[#2455dc]">
+                      Região selecionada
+                    </p>
+                    <h2 className="mt-1 text-xl font-semibold leading-6 tracking-[-0.025em]">
+                      {selectedTerritory?.territorialUnit ??
+                        `Área da ${selectedCisp}ª delegacia`}
+                    </h2>
+                    <p className="mt-1.5 text-xs text-[#59667b]">
+                      Área da {selectedCisp}ª delegacia · CISP {selectedCisp}
+                    </p>
+                  </div>
+                  <InfoButton indicator={indicatorMeta} />
+                </div>
+                <div className="mt-7">
+                  <p className="text-sm font-medium text-[#59667b]">
+                    {indicatorMeta?.label} · {periodRange}
+                  </p>
+                  <motion.div
+                    key={`${selectedCisp}-${indicator}-${viewMode}-${effectiveEnd}`}
+                    initial={reducedMotion ? false : { opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-2 flex items-end gap-2"
+                  >
+                    <strong className="text-[42px] font-semibold leading-none tracking-[-0.055em] tabular-nums">
+                      {viewMode === 'rate'
+                        ? selected?.rate.toLocaleString('pt-BR', {
+                            maximumFractionDigits: 1,
+                          })
+                        : viewMode === 'quantity'
+                          ? selected?.current.toLocaleString('pt-BR')
+                          : fmtChange(selected?.change ?? null)}
+                    </strong>
+                    <span className="max-w-24 pb-1 text-xs leading-4 text-[#59667b]">
+                      {viewMode === 'rate'
+                        ? 'por 100 mil moradores'
+                        : viewMode === 'quantity'
+                          ? indicatorMeta?.unit
+                          : comparisonMode === 'year'
+                            ? 'vs. mesmo período do ano anterior'
+                            : comparisonMode === 'none'
+                              ? 'sem comparação'
+                              : 'vs. período anterior'}
+                    </span>
+                  </motion.div>
+                  <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#eaf0fc] px-3 py-1.5 text-xs font-semibold text-[#324c86]">
+                    <BarChart3 className="size-3.5" /> {rank || '—'}ª maior{' '}
+                    {viewMode === 'rate'
+                      ? 'taxa'
+                      : viewMode === 'quantity'
+                        ? 'quantidade'
+                        : 'variação'}{' '}
+                    entre 41 áreas
                   </p>
                 </div>
-                <span className="text-xs text-[#59667b]">
-                  {indicatorMeta?.unit}
-                </span>
-              </div>
-              <div
-                className="mt-4 flex h-28 items-end gap-1.5"
-                aria-label="Série mensal dos últimos doze meses"
-              >
-                {series.map((item) => (
-                  <div
-                    key={item.period}
-                    className="group relative flex h-full flex-1 items-end"
+                <div className="mt-6 grid grid-cols-3 border-y border-[#dce2ed] py-4">
+                  <div>
+                    <p className="text-[11px] text-[#59667b]">Quantidade</p>
+                    <strong className="mt-1 block text-base tabular-nums">
+                      {selected?.current.toLocaleString('pt-BR') ?? '—'}
+                    </strong>
+                  </div>
+                  <div className="border-x border-[#dce2ed] px-3">
+                    <a
+                      href={population?.source.methodologyUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[11px] text-[#2455dc] underline decoration-[#a9c1ff] underline-offset-2"
+                    >
+                      População estimada ↗
+                    </a>
+                    <strong className="mt-1 block text-base tabular-nums">
+                      {selected?.population.toLocaleString('pt-BR') ?? '—'}
+                    </strong>
+                  </div>
+                  <div className="pl-3">
+                    <p className="text-[11px] text-[#59667b]">Variação</p>
+                    <strong className="mt-1 flex items-center gap-1 text-base tabular-nums">
+                      {selected?.change != null && selected.change > 0 ? (
+                        <ArrowUpRight className="size-4 text-[#a5653f]" />
+                      ) : selected?.change != null ? (
+                        <ArrowDownRight className="size-4 text-[#3459ad]" />
+                      ) : null}
+                      {selected ? fmtChange(selected.change) : '—'}
+                    </strong>
+                  </div>
+                </div>
+                {selected && viewMode === 'rate' && (
+                  <div className="mt-4 rounded-2xl bg-[#eaf0fc] p-3 text-xs leading-5 text-[#324c86]">
+                    <strong>Como esta taxa foi calculada:</strong>{' '}
+                    {selected.current.toLocaleString('pt-BR')} {displayUnit} ÷{' '}
+                    {selected.population.toLocaleString('pt-BR')} moradores ×
+                    100 mil ={' '}
+                    {selected.rate.toLocaleString('pt-BR', {
+                      maximumFractionDigits: 1,
+                    })}
+                    . Isso mede eventos ou vítimas registrados, conforme o
+                    indicador, não pessoas únicas.
+                  </div>
+                )}
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] leading-5 text-[#59667b]">
+                  <span>
+                    Estimativa derivada ·{' '}
+                    {selectedPopulation?.sectors.toLocaleString('pt-BR') ?? '—'}{' '}
+                    setores do Censo 2022 cruzados com esta CISP
+                  </span>
+                  <a
+                    href={population?.source.dataUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-[#2455dc] underline decoration-[#a9c1ff] underline-offset-2"
                   >
-                    <motion.div
-                      initial={reducedMotion ? false : { height: 0 }}
-                      animate={{
-                        height: `${Math.max(4, (item.value / seriesMax) * 100)}%`,
-                      }}
-                      transition={{ duration: 0.32 }}
-                      className="w-full rounded-t-sm bg-[#7094e5] transition group-hover:bg-[#2455dc]"
-                      title={`${formatPeriod(item.period)}: ${item.value}`}
-                    />
-                    <span className="sr-only">
-                      {formatPeriod(item.period)}: {item.value}
+                    Base oficial IBGE ↗
+                  </a>
+                  <a
+                    href={population?.source.cispBoundaryUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-[#2455dc] underline decoration-[#a9c1ff] underline-offset-2"
+                  >
+                    Limite oficial ISP-RJ ↗
+                  </a>
+                </div>
+                {selected && selected.population < 50000 && (
+                  <div className="mt-4 rounded-2xl bg-[#fff6e6] p-3 text-xs leading-5 text-[#755b2d]">
+                    <strong>Leia a taxa com cautela.</strong> Esta área tem{' '}
+                    {selected.population.toLocaleString('pt-BR')} moradores no
+                    Censo 2022; trabalhadores, turistas e passageiros não entram
+                    no denominador.
+                  </div>
+                )}
+                <div className="mt-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-semibold">Evolução mensal</p>
+                      <p className="text-xs text-[#59667b]">
+                        Até{' '}
+                        {effectiveEnd ? formatPeriod(effectiveEnd, true) : '—'}
+                      </p>
+                    </div>
+                    <span className="text-xs text-[#59667b]">
+                      {indicatorMeta?.unit}
                     </span>
                   </div>
-                ))}
-              </div>
-              <div className="mt-1 flex justify-between text-[10px] text-[#59667b]">
-                <span>{series[0] ? formatPeriod(series[0].period) : ''}</span>
-                <span>
-                  {series.at(-1) ? formatPeriod(series.at(-1)!.period) : ''}
-                </span>
-              </div>
-            </div>
-            <p className="mt-5 text-xs leading-5 text-[#59667b]">
-              A taxa usa a população específica desta CISP, calculada com
-              setores do Censo 2022. Ela mede registros ocorridos na área, não
-              crimes sofridos pelos moradores.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <Button
-                onClick={() => void share()}
-                className="h-10 rounded-xl bg-[#172235] px-4 hover:bg-[#2455dc]"
-              >
-                <Share2 /> Compartilhar
-              </Button>
-              <a
-                href="/metodologia"
-                className={buttonVariants({
-                  variant: 'outline',
-                  className: 'h-10 rounded-xl border-[#dce2ed]',
-                })}
-              >
-                <FileText /> Entenda o dado
-              </a>
-            </div>
-          </aside>
+                  <div
+                    className="mt-4 flex h-28 items-end gap-1.5"
+                    aria-label="Série mensal dos últimos doze meses"
+                  >
+                    {series.map((item) => (
+                      <div
+                        key={item.period}
+                        className="group relative flex h-full flex-1 items-end"
+                      >
+                        <motion.div
+                          initial={reducedMotion ? false : { height: 0 }}
+                          animate={{
+                            height: `${Math.max(4, (item.value / seriesMax) * 100)}%`,
+                          }}
+                          transition={{ duration: 0.32 }}
+                          className="w-full rounded-t-sm bg-[#7094e5] transition group-hover:bg-[#2455dc]"
+                          title={`${formatPeriod(item.period)}: ${item.value}`}
+                        />
+                        <span className="sr-only">
+                          {formatPeriod(item.period)}: {item.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-1 flex justify-between text-[10px] text-[#59667b]">
+                    <span>
+                      {series[0] ? formatPeriod(series[0].period) : ''}
+                    </span>
+                    <span>
+                      {series.at(-1) ? formatPeriod(series.at(-1)!.period) : ''}
+                    </span>
+                  </div>
+                </div>
+                <p className="mt-5 text-xs leading-5 text-[#59667b]">
+                  A taxa usa a população específica desta CISP, calculada com
+                  setores do Censo 2022. Ela mede registros ocorridos na área,
+                  não crimes sofridos pelos moradores.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <Button
+                    onClick={() => void share()}
+                    className="h-10 rounded-xl bg-[#172235] px-4 hover:bg-[#2455dc]"
+                  >
+                    <Share2 /> Compartilhar
+                  </Button>
+                  <a
+                    href="/metodologia"
+                    className={buttonVariants({
+                      variant: 'outline',
+                      className: 'h-10 rounded-xl border-[#dce2ed]',
+                    })}
+                  >
+                    <FileText /> Entenda o dado
+                  </a>
+                </div>
+              </aside>
+            </>
+          )}
         </section>
 
         <section className="mt-8 grid gap-4 lg:grid-cols-[1.3fr_.7fr]">

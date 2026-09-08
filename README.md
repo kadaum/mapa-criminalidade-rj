@@ -49,3 +49,7 @@ A mesma rotina verifica `Last-Modified` e `ETag` do SHP oficial das CISPs. Se o 
 ## Licença
 
 O código é MIT. A base de estatísticas é publicada no catálogo estadual sob Open Data Commons PDDL. Os limites territoriais devem sempre manter atribuição ao ISP-RJ; a licença específica do conjunto cartográfico precisa ser confirmada antes de uma redistribuição pública ampla.
+
+## Câmeras públicas
+
+O mapa inclui uma camada opcional de referências públicas, com agrupamento por proximidade, busca, precisão da localização e fonte. A lista separa coordenadas mapeadas de localização pendente e não confunde catálogo com transmissão funcionando. [Fluxo, fontes e limites](docs/public-cameras.md). Atribuição e licença do catálogo e de cada transmissão são próprias; não herdam MIT/PDDL.
