@@ -1241,7 +1241,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
     );
 
   if (!snapshot || !territories || !population)
-    return <main className="bg-[#f3f5fa] px-4 py-10 text-[#172235]"><output className="mx-auto block max-w-4xl rounded-2xl bg-white p-6 text-base">Carregando o mapa interativo. O resumo oficial, as fichas e os dados permanecem disponíveis acima.</output></main>;
+    return <main className="min-h-[2500px] bg-[#f3f5fa] px-4 py-10 text-[#172235] min-[400px]:min-h-[2400px] sm:min-h-[2250px] md:min-h-[2150px] lg:min-h-[1100px]"><output className="mx-auto block max-w-4xl rounded-2xl bg-white p-6 text-base">Carregando o mapa interativo. O resumo oficial, as fichas e os dados permanecem disponíveis acima.</output></main>;
 
   return (
     <main className="atlas-page min-h-screen bg-[#f3f5fa] text-[#172235]">
