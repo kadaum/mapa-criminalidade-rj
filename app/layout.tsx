@@ -18,7 +18,12 @@ export const metadata: Metadata = {
   title: 'Mapa da Criminalidade RJ — Registros policiais oficiais por região',
   description: 'Explore a criminalidade registrada por área de delegacia no município do Rio, com dados oficiais, período, população e limitações visíveis.',
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
     title: 'Mapa da Criminalidade RJ',

@@ -46,15 +46,23 @@ check('equal comparison windows and rate arithmetic', () => {
 });
 
 const paths=['/','/regioes',...ids.map((id)=>`/regioes/cisp-${id}`),'/indicadores',...snapshot.indicators.map((item)=>`/indicadores/${item.id}`),'/dados','/metodologia','/boletins/2026-08'];
+const home = await page('/');
+check('home description, preview and icon links',()=>{
+  const head=home.html.split('</head>')[0];
+  assert.match(head,/<meta name="description" content="[^"]+"/);
+  for(const asset of ['/og.png','/favicon.ico','/favicon.svg','/apple-touch-icon.png']) assert.ok(head.includes(asset),asset);
+});
 const sitemap=await page('/sitemap.xml');
 check('sitemap is XML with one URL per canonical page',()=>{assert.equal(sitemap.response.status,200);const urls=[...sitemap.html.matchAll(/<loc>(.*?)<\/loc>/g)].map((m)=>m[1]);assert.equal(urls.length,paths.length);assert.deepEqual(new Set(urls).size,paths.length);for(const path of paths)assert.ok(urls.includes(`${published}${path}`),path);});
 for (const path of paths) {
   const {response,html}=await page(path);
   check(`HTTP, canonical, HTML and schema ${path}`,()=>{
+    const head=html.split('</head>')[0];
     assert.equal(response.status,200);
     assert.match(response.headers.get('content-type')||'',/text\/html/);
     assert.ok(/<h1[ >]/.test(html),'missing h1');
-    assert.ok(metadata(html,'canonical').includes(path === '/' ? published : `${published}${path}`),path);
+    assert.match(head,/<meta name="description" content="[^"]+"/);
+    assert.ok(metadata(head,'canonical').includes(path === '/' ? published : `${published}${path}`),path);
     assert.ok(!html.includes('http://localhost:3000/og.png'));
     if (path !== '/metodologia') hasJsonLd(html);
   });
@@ -73,6 +81,10 @@ check('nonexistent CISP returns 404',()=>assert.equal(invalid.response.status,40
 const invalidIndicator=await page('/indicadores/inventado');
 check('nonexistent indicator returns 404',()=>assert.equal(invalidIndicator.response.status,404));
 for(const path of ['/robots.txt','/data/crime-rio-snapshot.json','/data/crime-rio-history-cisp.csv','/llms.txt']) {const result=await page(path);check(`public resource ${path}`,()=>assert.equal(result.response.status,200));}
+for(const [path,contentType,signature] of [['/favicon.ico',/image\/(?:x-icon|vnd\.microsoft\.icon)/,'00000100'],['/apple-touch-icon.png',/image\/png/,'89504e47'],['/favicon.svg',/image\/svg\+xml/,'3c737667'],['/og.png',/image\/png/,'89504e47']]) {
+  const response=await fetch(`${base}${path}`), bytes=Buffer.from(await response.arrayBuffer());
+  check(`preview/icon asset ${path}`,()=>{assert.equal(response.status,200);assert.match(response.headers.get('content-type')||'',contentType);assert.ok(bytes.subarray(0,4).toString('hex')===signature);});
+}
 const api=await page('/api/crime');
 check('API and published snapshot use same month',()=>assert.equal(JSON.parse(api.html).latestPeriod,snapshot.latestPeriod));
 

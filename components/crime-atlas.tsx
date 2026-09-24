@@ -1540,9 +1540,9 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                     <Popover>
                       <div className="absolute bottom-3 left-3 z-20 md:bottom-4 md:left-4">
                         <PopoverTrigger
-                          aria-label="Abrir legenda do mapa"
                           className="flex h-9 items-center gap-2 rounded-xl border border-[#dce2ed] bg-white/94 px-2.5 text-[10px] font-medium tabular-nums text-[#526078] shadow-lg backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2455dc] md:h-10 md:text-[11px]"
                         >
+                          <span className="sr-only">Abrir legenda do mapa: </span>
                           {viewMode === 'variation' ? (
                             <>
                               <span>Caiu</span>
