@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mapa-criminalidade-rj.ricardoguia.com'),
   title: 'Mapa da Criminalidade RJ — Registros policiais oficiais por região',
   description: 'Explore a criminalidade registrada por área de delegacia no município do Rio, com dados oficiais, período, população e limitações visíveis.',
   icons: {

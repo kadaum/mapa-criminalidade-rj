@@ -21,10 +21,13 @@ export function SiteHeader({ date }: { date?: string }) {
             </span>
           </span>
         </a>
-        <div className="flex items-center gap-5 text-sm">
+        <div className="flex items-center gap-3 text-sm sm:gap-5">
           {date && (
             <p className="hidden text-[#c5d1e6] md:block">Fonte até {date}</p>
           )}
+          <a href="/regioes" className="hidden min-h-11 items-center underline-offset-4 hover:underline sm:inline-flex">Regiões</a>
+          <a href="/indicadores" className="hidden min-h-11 items-center underline-offset-4 hover:underline md:inline-flex">Indicadores</a>
+          <a href="/dados" className="hidden min-h-11 items-center underline-offset-4 hover:underline lg:inline-flex">Dados</a>
           <a
             href="/metodologia"
             className="inline-flex min-h-11 items-center text-sm underline-offset-4 hover:underline"

@@ -1,0 +1,18 @@
+/* oxlint-disable next/no-html-link-for-pages */
+import type { Metadata } from 'next';
+import { BreadcrumbLd, JsonLd, PageShell, SourceNote } from '@/components/organic-ui';
+import { ORIGIN, canonical, city, fmt, indicatorById, monthLabel, period, sourceUpdated } from '@/lib/organic-data';
+
+export const metadata: Metadata = { title: 'Boletim: registros policiais até agosto de 2026 | Mapa da Criminalidade RJ', description: 'Comparação factual de janelas equivalentes de 12 meses para indicadores policiais no município do Rio de Janeiro, com método e fonte.', alternates: { canonical: canonical('/boletins/2026-08') } };
+export default function Bulletin() {
+  const keys = ['total_roubos', 'total_furtos', 'letalidade_violenta', 'estelionato'];
+  const lines = keys.map((key) => ({ item: indicatorById(key)!, result: city(key) }));
+  return <PageShell crumbs={[{ label: 'Boletim · agosto de 2026' }]}>
+    <BreadcrumbLd items={[{ name: 'Boletim de agosto de 2026', path: '/boletins/2026-08' }]} />
+    <JsonLd value={{ '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${ORIGIN}/boletins/2026-08#webpage`, url: `${ORIGIN}/boletins/2026-08`, name: 'Boletim de registros policiais até agosto de 2026', dateModified: sourceUpdated, isPartOf: { '@id': `${ORIGIN}/#website` } }} />
+    <p className="text-sm font-semibold uppercase tracking-wide text-[#2455dc]">Levantamento reproduzível · ISP-RJ</p><h1 className="mt-2 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl">Registros policiais no Rio até {monthLabel(period)}</h1><p className="mt-3 max-w-3xl text-base leading-7 text-[#526078]">Comparamos setembro de 2025 a agosto de 2026 com setembro de 2024 a agosto de 2025, somando as 41 CISPs do município. A tabela distingue casos de vítimas e permite abrir cada definição e série mensal.</p>
+    <div className="mt-7 overflow-x-auto rounded-2xl border border-[#dce2ed] bg-white"><table className="w-full min-w-[620px] text-left text-sm"><caption className="p-4 text-left font-semibold">Janelas equivalentes de 12 meses · município do Rio de Janeiro</caption><thead className="bg-[#eaf0fc]"><tr><th className="px-4 py-3" scope="col">Indicador</th><th className="px-4 py-3 text-right" scope="col">Set/24–ago/25</th><th className="px-4 py-3 text-right" scope="col">Set/25–ago/26</th><th className="px-4 py-3 text-right" scope="col">Variação</th></tr></thead><tbody>{lines.map(({ item, result }) => <tr key={item.id} className="border-t border-[#e7ebf2]"><th className="px-4 py-3" scope="row"><a className="font-semibold text-[#2455dc] underline" href={`/indicadores/${item.id}`}>{item.label}</a><span className="block text-[#526078]">{item.unit}</span></th><td className="px-4 py-3 text-right tabular-nums">{fmt(result.previous)}</td><td className="px-4 py-3 text-right tabular-nums">{fmt(result.count)}</td><td className="px-4 py-3 text-right tabular-nums">{result.change == null ? 'Indisponível' : `${fmt(result.change, 1)}%`}</td></tr>)}</tbody></table></div>
+    <p className="mt-5 max-w-4xl text-base leading-7">Estas mudanças descrevem registros recebidos e classificados pelo ISP-RJ. Não medem a incidência real de todos os fatos, nem a probabilidade de uma pessoa ser vítima. As categorias podem se sobrepor; a tabela não tem total geral.</p><p className="mt-3 text-sm text-[#526078]">Arquivo da fonte observado como modificado em {sourceUpdated}. Números calculados diretamente do <a className="underline" href="/data/crime-rio-snapshot.json">snapshot JSON</a>, com <a className="underline" href="/dados">dicionário e downloads</a>.</p>
+    <div className="mt-7"><SourceNote /></div>
+  </PageShell>;
+}

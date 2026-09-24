@@ -322,7 +322,7 @@ function ViewToggle({
   );
 }
 
-export function CrimeAtlas() {
+export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
   const mapNode = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const [cameraMap, setCameraMap] = useState<MapLibreMap | null>(null);
@@ -398,19 +398,13 @@ export function CrimeAtlas() {
   }, []);
 
   useEffect(() => {
-    async function liveData() {
-      const response = await fetch('/api/crime?v=6');
-      if (response.ok) {
-        const data = (await response.json()) as Snapshot;
-        if (data.indicators.some((item) => item.id === 'registro_ocorrencias'))
-          return data;
-      }
-      const fallback = await fetch('/data/crime-rio-snapshot.json');
-      if (!fallback.ok) throw new Error('data unavailable');
-      return fallback.json() as Promise<Snapshot>;
+    async function currentData() {
+      const response = await fetch('/data/crime-rio-snapshot.json');
+      if (!response.ok) throw new Error('snapshot unavailable');
+      return response.json() as Promise<Snapshot>;
     }
     Promise.all([
-      liveData(),
+      currentData(),
       fetch('/data/cisp-rio.geojson').then((r) => r.json()),
       fetch('/data/neighborhoods-rio.geojson').then((r) => r.json()),
       fetch('/data/cisp-neighborhoods.json').then((r) => r.json()),
@@ -1246,11 +1240,14 @@ export function CrimeAtlas() {
       </main>
     );
 
+  if (!snapshot || !territories || !population)
+    return <main className="bg-[#f3f5fa] px-4 py-10 text-[#172235]"><output className="mx-auto block max-w-4xl rounded-2xl bg-white p-6 text-base">Carregando o mapa interativo. O resumo oficial, as fichas e os dados permanecem disponíveis acima.</output></main>;
+
   return (
     <main className="atlas-page min-h-screen bg-[#f3f5fa] text-[#172235]">
-      <SiteHeader
+      {showHeader && <SiteHeader
         date={snapshot ? formatPeriod(snapshot.latestPeriod) : undefined}
-      />
+      />}
       <ExploreNavigation
         query={`?cisp=${selectedCisp}&indicador=${indicator}&meses=${windowMonths}&fim=${endPeriod || 'latest'}&comparacao=${comparisonMode}&visualizacao=${viewMode === 'quantity' ? 'quantidade' : 'taxa'}`}
       />
@@ -1258,11 +1255,11 @@ export function CrimeAtlas() {
       <div className="mx-auto max-w-[1800px] px-3 pb-8 pt-3 md:px-5">
         <section className="mb-3 flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">
+            <h2 className="text-xl font-semibold tracking-tight">
               {cameras.active
                 ? 'Câmeras públicas no mapa'
                 : (indicatorMeta?.label ?? 'Mapa de criminalidade')}
-            </h1>
+            </h2>
             <p className="mt-1 text-sm text-[#59667b]">
               {cameras.active ? (
                 'Transmissões, fontes e locais de referência · Rio de Janeiro'

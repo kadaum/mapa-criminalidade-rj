@@ -1,0 +1,12 @@
+# Mapa da Criminalidade RJ
+
+Dados policiais oficiais por CISP no município do Rio de Janeiro. Conteúdo público igual ao apresentado a pessoas no site.
+
+- Mapa interativo: https://mapa-criminalidade-rj.ricardoguia.com/
+- Diretório das 41 CISPs: https://mapa-criminalidade-rj.ricardoguia.com/regioes
+- Definições e séries dos indicadores: https://mapa-criminalidade-rj.ricardoguia.com/indicadores
+- Dados, dicionário, JSON e CSV: https://mapa-criminalidade-rj.ricardoguia.com/dados
+- Método e limites: https://mapa-criminalidade-rj.ricardoguia.com/metodologia
+- Boletim factual: https://mapa-criminalidade-rj.ricardoguia.com/boletins/2026-08
+
+Uma CISP pode cobrir bairros inteiros ou partes de bairros. Registros comunicados à polícia não abrangem fatos subnotificados. Casos, vítimas e agregados sobrepostos não devem ser somados. Taxas por residentes não representam risco individual.

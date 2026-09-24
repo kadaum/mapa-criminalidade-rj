@@ -121,7 +121,7 @@ function Choice({
     </div>
   );
 }
-export function RegionExplorer({ mode }: { mode: Mode }) {
+export function RegionExplorer({ mode, showHeader = true }: { mode: Mode; showHeader?: boolean }) {
   const reduced = useReducedMotion();
   const [showAll, setShowAll] = useState(false);
   const [timeComparison, setComparison] = useState<Comparison>('previous');
@@ -154,16 +154,9 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
     setField(p.get('visualizacao') === 'quantidade' ? 'count' : 'rate');
     setReady(true);
     async function load() {
-      let snapshot: Data;
-      try {
-        const r = await fetch('/api/crime');
-        if (!r.ok) throw Error();
-        snapshot = await r.json();
-      } catch {
-        const r = await fetch('/data/crime-rio-snapshot.json');
-        if (!r.ok) throw Error();
-        snapshot = { ...(await r.json()), live: false };
-      }
+      const r = await fetch('/data/crime-rio-snapshot.json');
+      if (!r.ok) throw Error('Snapshot indisponível');
+      const snapshot: Data = { ...(await r.json()), live: true };
       const [t, population] = await Promise.all([
         fetch('/data/cisp-neighborhoods.json').then((r) => r.json()),
         fetch('/data/cisp-population.json').then((r) => r.json()),
@@ -304,7 +297,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
       : [];
   return (
     <main className="explorer-page min-h-screen bg-[#f3f5fa] text-[#172235]">
-      <SiteHeader date={data ? dateLabel(data.latestPeriod) : undefined} />
+      {showHeader && <SiteHeader date={data ? dateLabel(data.latestPeriod) : undefined} />}
       <ExploreNavigation active={`/${mode}`} query={queryString} />
       <div className="mx-auto max-w-[1320px] px-5 py-7 md:px-8 md:py-10">
         <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
