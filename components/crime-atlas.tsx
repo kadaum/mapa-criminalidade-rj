@@ -369,7 +369,16 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
       cityViewRef.current = false;
       mapRef.current?.flyTo({ center: coordinates, zoom: 18, duration: 0 });
     },
+    revealCameraPanel,
   );
+  function revealCameraPanel() {
+    setMapExpanded(false);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const panel = document.getElementById('camera-panel');
+      panel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      panel?.focus({ preventScroll: true });
+    }));
+  }
   const cameraModeRef = useRef(false);
   cameraModeRef.current = cameras.active;
 
@@ -994,7 +1003,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const onEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMapExpanded(false);
+      if (event.key === 'Escape' && !document.querySelector('dialog[open]')) setMapExpanded(false);
     };
     window.addEventListener('keydown', onEscape);
     const map = mapRef.current;
@@ -1427,7 +1436,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
               </button>
               <button
                 type="button"
-                onClick={() => { setDisplay('list'); setMapExpanded(false); }}
+                onClick={() => { if (cameras.active) revealCameraPanel(); else { setDisplay('list'); setMapExpanded(false); } }}
                 aria-pressed={display === 'list'}
                 className={`flex min-h-9 items-center gap-2 rounded-lg px-3 text-xs font-semibold ${display === 'list' ? 'bg-[#172235] text-white' : 'text-[#59667b]'}`}
               >

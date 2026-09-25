@@ -2,9 +2,11 @@
 
 A camada é parte do mapa existente. Ativar **Câmeras** mostra ruas e referências geográficas, agrupadas conforme o zoom. A consulta de estatísticas mantém seus filtros e pode ser retomada por **Voltar aos registros**.
 
-No computador, lista e detalhe ficam ao lado do mapa. No celular, aparecem abaixo, com atalhos entre mapa e detalhe. A busca aceita câmera, rua e bairro; os filtros distinguem fonte, área visível, acesso sem cadastro e imagens conferidas. Pontos próximos se agrupam; no zoom máximo, selecionar um grupo lista seus IDs individuais. A lista é paginada, e nenhum player carrega até o visitante pedir.
+No computador, a lista fica ao lado do mapa; no celular, abaixo, com atalhos que saem do mapa ampliado. Selecionar uma câmera abre um diálogo nativo acima do mapa, inclusive ampliado. A lista, sua rolagem, os filtros e o zoom permanecem no lugar ao fechar. Localizar no mapa é uma ação separada. A busca aceita câmera, rua e bairro; os filtros distinguem fonte, área visível, acesso sem cadastro e imagens conferidas. Pontos próximos se agrupam; no zoom máximo, selecionar um grupo lista seus IDs individuais. A lista é paginada, e nenhum player carrega antes da seleção.
 
-O detalhe mostra fonte, operador quando conhecido, precisão da referência e status de reprodução. Players YouTube usam incorporação oficial; outras fontes abrem em sua página pública. Voltar ou desativar a camada remove o iframe. Não há captura, armazenamento ou análise de vídeo.
+O detalhe mostra fonte, operador quando conhecido, precisão da referência e a observação histórica separada do estado atual. YouTube e o player público CamerasRJ são incorporados. O CamerasRJ exige origem HTTPS, caminho e ID permitidos; seus eventos são aceitos somente do iframe atual, com origem e ID correspondentes. Há estados de conexão, imagem recebida, falha e interrupção; após 25 segundos sem resposta, oferecemos nova tentativa. O carregamento do iframe YouTube não é tratado como confirmação de vídeo. Ele inicia sem som e permite reprodução inline no celular. Fechar ou desativar a camada desmonta o player.
+
+Outras fontes continuam externas, com essa limitação indicada antes do clique. As páginas SurfConnect do Leme redirecionam para HTTP, incompatível com incorporação no site HTTPS. Cadastro e assinatura continuam sob controle dos operadores. Não há captura, armazenamento ou análise de vídeo.
 
 ## Cobertura e precisão
 
@@ -31,6 +33,10 @@ Diretórios que repetem as mesmas transmissões não entram como novas câmeras.
 ## Disponibilidade
 
 Imagem conferida significa reprodução observada na data indicada, não disponibilidade contínua. As observações ficam em `research/cameras/playback-observations.json`. Homes Postos 3 e 6 reproduziram no produto. Leme reproduziu com data embutida 14/01/2000; a ressalva de horário inconsistente permanece visível. Os demais sinais não receberam selo de imagem conferida só por existirem em catálogo.
+
+Na revisão de 25/09/2026, o player CamerasRJ 49 recebeu vídeo no produto, com buffering durante a amostra. A transmissão antiga do Posto 6 estava indisponível; o novo ID foi localizado no canal oficial Homes in Rio e testado com avanço de vídeo. Atualizações individuais ficam em `research/cameras/reviewed-updates.json`, aplicadas também pelo montador do catálogo. A data geral do levantamento não implica revisão de todas as 6.683 referências. Eventos do YouTube indicam reprodução, término e falhas; respostas de oEmbed e carregamento do iframe sozinhos não confirmam transmissão.
+
+Verificação da interface em Chrome com telas 320×667, 390×844 e 1440×900: diálogo acima do mapa ampliado, fechar/Escape, preservação de busca/rolagem/zoom, ausência de overflow e desmontagem do iframe. Teste controlado do protocolo: rejeição de origem e ID incorretos, reprodução, interrupção, timeout e nova tentativa. Emulação de celular não substitui teste em aparelho físico.
 
 ## Referência à polícia
 

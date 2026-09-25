@@ -209,3 +209,12 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Native top layer keeps playback above the expanded map on all screen sizes. */
+.camera-viewer { margin: auto; padding: 0; border: 0; border-radius: 16px; width: min(860px, calc(100vw - 24px)); max-width: none; max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; background: white; color: #172235; }
+.camera-viewer::backdrop { background: rgb(15 23 42 / 65%); }
+.camera-viewer-content { min-width: 0; }
+@media (max-width: 639px) {
+  .camera-viewer { width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; }
+  .camera-viewer-content { padding-bottom: env(safe-area-inset-bottom); }
+}

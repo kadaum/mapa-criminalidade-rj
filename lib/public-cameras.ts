@@ -49,10 +49,10 @@ export const publicCameras: PublicCamera[] = [
       'https://worldcam.eu/webcams/south-america/brazil/40611-rio-de-janeiro-copacabana-posto-6',
     source:
       'https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam',
-    youtubeId: 'IhGNK_hImLs',
+    youtubeId: 'Hr7c0XuEgm0',
     access: 'public',
     status: 'observed',
-    checkedAt: '08/09/2026',
+    checkedAt: '25/09/2026',
     note: 'A câmera muda de direção. O endereço é publicado pelo operador; o marcador vem de um diretório.',
   },
 ];

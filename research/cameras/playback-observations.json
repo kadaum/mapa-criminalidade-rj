@@ -24,5 +24,28 @@
     "result": "moving-video-with-inconsistent-date",
     "source": "https://v1.surfconnect.com.br/leme/",
     "evidence": "Subagente observou ondas em movimento e relógio do player 12:09:27→12:09:34 no IAB; data embutida14/01/2000. Não certifica atualidade."
+  },
+  {
+    "id": "homes-posto-6",
+    "observedAt": "2026-09-25",
+    "result": "moving-video-observed",
+    "source": "https://www.youtube.com/watch?v=Hr7c0XuEgm0",
+    "discoveredAt": "https://www.youtube.com/@homesinrio3840/streams",
+    "evidence": "Chrome: 852x480, readyState=4, paused=false, currentTime14531.37287→14533.384403 em2 segundos. Substitui transmissão antiga IhGNK_hImLs indisponível."
+  },
+  {
+    "id": "camerasrj-49",
+    "observedAt": "2026-09-25",
+    "result": "video-received",
+    "source": "https://player.camerasrj.com.br/camera/49/",
+    "evidence": "Player incorporado no app: estado playing, vídeo1920x1080, readyState=4, paused=false, currentTime9.583. Houve buffering na amostra; não representa garantia de estabilidade."
+  },
+  {
+    "id": "homes-posto-3",
+    "observedAt": "2026-09-25",
+    "result": "moving-video-observed",
+    "source": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
+    "discoveredAt": "https://www.youtube.com/@homesinrio3840/streams",
+    "evidence": "Chrome: 852x480, readyState=4, paused=false, currentTime46813.256841→46815.278399 em2 segundos. Substitui7ecGJrsCv60 indisponível; erro150 desse ID foi recebido e mostrado pelo player do app."
   }
 ]

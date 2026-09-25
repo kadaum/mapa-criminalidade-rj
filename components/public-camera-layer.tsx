@@ -6,16 +6,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { GeoJSONSource, Map, MapLayerMouseEvent } from 'maplibre-gl';
 import type { FeatureCollection, Point } from 'geojson';
-import {
-  ArrowLeft,
-  Camera,
-  Copy,
-  ExternalLink,
-  MapPin,
-  Play,
-  Search,
-} from 'lucide-react';
+import { Camera, Copy, MapPin, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CameraPlayer } from '@/components/camera-player';
 import {
   cameraReference,
   publicCameras,
@@ -87,7 +80,9 @@ export function useCameraWorkspace(
   map: Map | null,
   visible: boolean,
   focus: (coordinates: [number, number]) => void,
+  revealPanel: () => void,
 ) {
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const [enabled, setEnabled] = useState(false);
   const [catalog, setCatalog] = useState<CameraCatalog>({
     reviewedAt: '08/09/2026',
@@ -120,6 +115,7 @@ export function useCameraWorkspace(
   function toggle() {
     const next = !enabled;
     setEnabled(next);
+    setSelected(null);
     const url = new URL(window.location.href);
     if (next) url.searchParams.set('cameras', '1');
     else url.searchParams.delete('cameras');
@@ -146,7 +142,7 @@ export function useCameraWorkspace(
         if (!controller.signal.aborted) setLoadState('error');
       });
     return () => controller.abort();
-  }, [enabled]);
+  }, [enabled, loadAttempt]);
 
   const filtered = useMemo(() => {
     const needle = normalize(query.trim());
@@ -199,16 +195,11 @@ export function useCameraWorkspace(
   selectedDataRef.current = selectedGeojson;
   filteredRef.current = filtered;
 
-  function showCamera(camera: PublicCamera, move: boolean) {
+  function showCamera(camera: PublicCamera) {
     setSelected(camera);
-    if (move && camera.coordinates) focus(camera.coordinates);
-    if (window.matchMedia('(max-width: 1023px)').matches)
-      requestAnimationFrame(() =>
-        document
-          .getElementById('camera-panel')
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-      );
   }
+  const revealRef = useRef(revealPanel);
+  revealRef.current = revealPanel;
   const showRef = useRef(showCamera);
   showRef.current = showCamera;
 
@@ -222,7 +213,7 @@ export function useCameraWorkspace(
     const selectPoint = (event: MapLayerMouseEvent) => {
       const id = event.features?.[0]?.properties?.id;
       const camera = filteredRef.current.find((c) => c.id === id);
-      if (camera) showRef.current(camera, false);
+      if (camera) showRef.current(camera);
     };
     const expandCluster = async (event: MapLayerMouseEvent) => {
       const feature = event.features?.[0];
@@ -242,10 +233,7 @@ export function useCameraWorkspace(
           setLocation('mapped');
           setClusterSelection(leaves.map((f) => String(f.properties?.id)));
           setLimit(60);
-          if (window.matchMedia('(max-width: 1023px)').matches)
-            document
-              .getElementById('camera-panel')
-              ?.scrollIntoView({ behavior: 'smooth' });
+          revealRef.current();
         } else {
           const zoom = await source.getClusterExpansionZoom(id);
           if (!disposed)
@@ -277,7 +265,8 @@ export function useCameraWorkspace(
         [cameraIconIds.selected, '#0f766e', true],
       ];
       for (const [id, color, selected] of icons)
-        if (!map.hasImage(id)) map.addImage(id, cameraMarkerImage(color, selected));
+        if (!map.hasImage(id))
+          map.addImage(id, cameraMarkerImage(color, selected));
       map.addSource(sourceId, {
         type: 'geojson',
         data: dataRef.current,
@@ -463,11 +452,7 @@ export function useCameraWorkspace(
         {enabled && (
           <button
             type="button"
-            onClick={() =>
-              document
-                .getElementById('camera-panel')
-                ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-            }
+            onClick={revealPanel}
             className="min-h-11 border-l px-3 text-xs font-semibold lg:hidden"
           >
             Ver lista
@@ -478,257 +463,305 @@ export function useCameraWorkspace(
     panel: (
       <aside
         id="camera-panel"
+        tabIndex={-1}
         className="atlas-panel camera-panel border-t border-[#dce2ed] bg-white p-4 lg:border-l lg:border-t-0"
         aria-label="Explorar câmeras"
       >
-        {selected ? (
-          <>
+        {active && selected && (
+          <CameraViewer
+            key={selected.id}
+            camera={selected}
+            sharedReferenceCount={sharedReferenceCount}
+            onClose={() => setSelected(null)}
+            onLocate={() => {
+              if (selected.coordinates) {
+                focus(selected.coordinates);
+                setSelected(null);
+                map
+                  ?.getContainer()
+                  .scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
+          />
+        )}
+        <>
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h2 className="text-lg font-semibold">Câmeras no Rio</h2>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                {totalMapped.toLocaleString('pt-BR')} referências no mapa ·{' '}
+                {(catalog.cameras.length - totalMapped).toLocaleString('pt-BR')}{' '}
+                com localização pendente
+              </p>
+            </div>
+            <Camera className="mt-1 size-5 shrink-0 text-teal-800" />
+          </div>
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">
+            Escolha um ponto ou procure abaixo. Os marcadores indicam locais de
+            referência, não a área filmada.
+          </p>
+          {loadState === 'loading' && (
+            <output className="mt-3 block text-xs">Carregando catálogo…</output>
+          )}
+          {loadState === 'error' && (
+            <p role="alert" className="mt-3 rounded border p-3 text-xs">
+              O catálogo completo não carregou. Mostrando apenas o ponto
+              inicial.
+              <button
+                type="button"
+                className="mt-2 block min-h-10 font-semibold underline"
+                onClick={() => setLoadAttempt((attempt) => attempt + 1)}
+              >
+                Tentar carregar novamente
+              </button>
+            </p>
+          )}
+          <label className="relative mt-4 block">
+            <span className="sr-only">Buscar câmera, bairro ou rua</span>
+            <Search className="absolute left-3 top-3 size-4 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(event) => {
+                setClusterSelection(null);
+                setInView(!event.target.value.trim());
+                setQuery(event.target.value);
+                setLimit(60);
+              }}
+              placeholder="Câmera, bairro ou rua"
+              className="h-11 w-full rounded-lg border bg-white pl-9 pr-3 text-sm"
+            />
+          </label>
+          <label className="mt-3 block text-xs font-medium">
+            Fonte
+            <select
+              value={publisher}
+              onChange={(event) => {
+                setClusterSelection(null);
+                setPublisher(event.target.value);
+                setLimit(60);
+              }}
+              className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-sm"
+            >
+              <option value="all">Todas as fontes</option>
+              {publishers.map((p) => (
+                <option key={p}>{p}</option>
+              ))}
+            </select>
+          </label>
+          <div className="mt-3 flex rounded-lg border p-1 text-xs">
             <button
               type="button"
-              className="mb-4 flex min-h-10 items-center gap-2 text-sm font-semibold text-teal-800"
-              onClick={() => setSelected(null)}
-            >
-              <ArrowLeft className="size-4" /> Voltar às câmeras
-            </button>
-            <CameraDetail
-              key={selected.id}
-              camera={selected}
-              sharedReferenceCount={sharedReferenceCount}
-              onLocate={() => {
-                if (selected.coordinates) {
-                  focus(selected.coordinates);
-                  map
-                    ?.getContainer()
-                    .scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+              aria-pressed={location === 'mapped'}
+              onClick={() => {
+                setClusterSelection(null);
+                setLocation('mapped');
+                setLimit(60);
               }}
-            />
-          </>
-        ) : (
-          <>
-            <div className="flex items-start justify-between gap-2">
-              <div>
-                <h2 className="text-lg font-semibold">Câmeras no Rio</h2>
-                <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                  {totalMapped.toLocaleString('pt-BR')} referências no mapa ·{' '}
-                  {(catalog.cameras.length - totalMapped).toLocaleString(
-                    'pt-BR',
-                  )}{' '}
-                  com localização pendente
-                </p>
-              </div>
-              <Camera className="mt-1 size-5 shrink-0 text-teal-800" />
-            </div>
-            <p className="mt-3 text-xs leading-5 text-muted-foreground">
-              Escolha um ponto ou procure abaixo. Os marcadores indicam locais
-              de referência, não a área filmada.
-            </p>
-            {loadState === 'loading' && (
-              <output className="mt-3 block text-xs">
-                Carregando catálogo…
-              </output>
-            )}
-            {loadState === 'error' && (
-              <p role="alert" className="mt-3 rounded border p-3 text-xs">
-                O catálogo completo não carregou. Mostrando apenas o ponto
-                inicial. Desative e ative Câmeras para tentar novamente.
-              </p>
-            )}
-            <label className="relative mt-4 block">
-              <span className="sr-only">Buscar câmera, bairro ou rua</span>
-              <Search className="absolute left-3 top-3 size-4 text-muted-foreground" />
-              <input
-                value={query}
-                onChange={(event) => {
-                  setClusterSelection(null);
-                  setInView(!event.target.value.trim());
-                  setQuery(event.target.value);
-                  setLimit(60);
-                }}
-                placeholder="Câmera, bairro ou rua"
-                className="h-11 w-full rounded-lg border bg-white pl-9 pr-3 text-sm"
-              />
-            </label>
-            <label className="mt-3 block text-xs font-medium">
-              Fonte
-              <select
-                value={publisher}
-                onChange={(event) => {
-                  setClusterSelection(null);
-                  setPublisher(event.target.value);
-                  setLimit(60);
-                }}
-                className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-sm"
-              >
-                <option value="all">Todas as fontes</option>
-                {publishers.map((p) => (
-                  <option key={p}>{p}</option>
-                ))}
-              </select>
-            </label>
-            <div className="mt-3 flex rounded-lg border p-1 text-xs">
-              <button
-                type="button"
-                aria-pressed={location === 'mapped'}
-                onClick={() => {
-                  setClusterSelection(null);
-                  setLocation('mapped');
-                  setLimit(60);
-                }}
-                className={`min-h-10 flex-1 rounded px-2 ${location === 'mapped' ? 'bg-teal-800 text-white' : ''}`}
-              >
-                No mapa ({mapped.length.toLocaleString('pt-BR')})
-              </button>
-              <button
-                type="button"
-                aria-pressed={location === 'pending'}
-                onClick={() => {
-                  setClusterSelection(null);
-                  setLocation('pending');
-                  setLimit(60);
-                }}
-                className={`min-h-10 flex-1 rounded px-2 ${location === 'pending' ? 'bg-teal-800 text-white' : ''}`}
-              >
-                Localização pendente (
-                {(filtered.length - mapped.length).toLocaleString('pt-BR')})
-              </button>
-            </div>
-            <label className="mt-3 flex min-h-8 items-center gap-2 text-xs">
+              className={`min-h-10 flex-1 rounded px-2 ${location === 'mapped' ? 'bg-teal-800 text-white' : ''}`}
+            >
+              No mapa ({mapped.length.toLocaleString('pt-BR')})
+            </button>
+            <button
+              type="button"
+              aria-pressed={location === 'pending'}
+              onClick={() => {
+                setClusterSelection(null);
+                setLocation('pending');
+                setLimit(60);
+              }}
+              className={`min-h-10 flex-1 rounded px-2 ${location === 'pending' ? 'bg-teal-800 text-white' : ''}`}
+            >
+              Localização pendente (
+              {(filtered.length - mapped.length).toLocaleString('pt-BR')})
+            </button>
+          </div>
+          <label className="mt-3 flex min-h-8 items-center gap-2 text-xs">
+            <input
+              type="checkbox"
+              checked={onlyPublic}
+              onChange={(e) => setOnlyPublic(e.target.checked)}
+            />{' '}
+            Sem cadastro ou assinatura
+          </label>
+          {location === 'mapped' && (
+            <label className="flex min-h-8 items-center gap-2 text-xs">
               <input
                 type="checkbox"
-                checked={onlyPublic}
-                onChange={(e) => setOnlyPublic(e.target.checked)}
+                checked={inView}
+                onChange={(e) => setInView(e.target.checked)}
               />{' '}
-              Sem cadastro ou assinatura
+              Apenas na área visível do mapa
             </label>
-            {location === 'mapped' && (
-              <label className="flex min-h-8 items-center gap-2 text-xs">
-                <input
-                  type="checkbox"
-                  checked={inView}
-                  onChange={(e) => setInView(e.target.checked)}
-                />{' '}
-                Apenas na área visível do mapa
-              </label>
-            )}
-            <p className="mt-3 text-xs text-muted-foreground">
-              {results.length.toLocaleString('pt-BR')} referências encontradas ·
-              reprodução depende da fonte
-            </p>
-            <label className="mt-2 flex min-h-8 items-center gap-2 text-xs">
-              <input
-                type="checkbox"
-                checked={onlyObserved}
-                onChange={(e) => {
-                  setOnlyObserved(e.target.checked);
-                  setClusterSelection(null);
-                }}
-              />{' '}
-              Apenas imagens conferidas no levantamento
-            </label>
-            {clusterSelection && (
-              <div className="mt-3 rounded-lg bg-teal-50 p-3 text-sm">
-                <strong>{results.length} referências neste grupo</strong>
-                <p className="mt-1 text-xs leading-5 text-teal-950">
-                  Se várias referências usarem o mesmo ponto, ele é uma
-                  localização aproximada compartilhada; não confirma instalações
-                  separadas.
-                </p>
-                <button
-                  className="mt-2 block text-xs underline"
-                  type="button"
-                  onClick={() => setClusterSelection(null)}
-                >
-                  Voltar à área do mapa
-                </button>
-              </div>
-            )}
-            <div className="mt-3 space-y-2">
-              {results.slice(0, limit).map((camera) => (
-                <button
-                  key={camera.id}
-                  type="button"
-                  onClick={() => showCamera(camera, true)}
-                  className="w-full rounded-xl border bg-white p-3 text-left hover:border-teal-700 hover:bg-teal-50 focus-visible:outline-2"
-                >
-                  <span className="block text-sm font-semibold">
-                    {camera.name}
-                  </span>
-                  <span className="mt-1 block text-xs text-muted-foreground">
-                    {camera.neighborhood} · {camera.publisher}
-                  </span>
-                  <span
-                    className={`mt-2 inline-block rounded px-2 py-1 text-[11px] ${camera.status === 'observed' ? 'bg-teal-50 text-teal-800' : camera.status === 'failed' ? 'bg-amber-50 text-amber-900' : 'bg-slate-100 text-slate-700'}`}
-                  >
-                    {statusLabels[camera.status]}
-                  </span>
-                  {camera.access !== 'public' && (
-                    <span className="ml-1 text-xs">
-                      {accessLabels[camera.access]}
-                    </span>
-                  )}
-                </button>
-              ))}
+          )}
+          <p className="mt-3 text-xs text-muted-foreground">
+            {results.length.toLocaleString('pt-BR')} referências encontradas ·
+            reprodução depende da fonte
+          </p>
+          <label className="mt-2 flex min-h-8 items-center gap-2 text-xs">
+            <input
+              type="checkbox"
+              checked={onlyObserved}
+              onChange={(e) => {
+                setOnlyObserved(e.target.checked);
+                setClusterSelection(null);
+              }}
+            />{' '}
+            Apenas imagens conferidas no levantamento
+          </label>
+          {clusterSelection && (
+            <div className="mt-3 rounded-lg bg-teal-50 p-3 text-sm">
+              <strong>{results.length} referências neste grupo</strong>
+              <p className="mt-1 text-xs leading-5 text-teal-950">
+                Se várias referências usarem o mesmo ponto, ele é uma
+                localização aproximada compartilhada; não confirma instalações
+                separadas.
+              </p>
+              <button
+                className="mt-2 block text-xs underline"
+                type="button"
+                onClick={() => setClusterSelection(null)}
+              >
+                Voltar à área do mapa
+              </button>
             </div>
-            {!results.length && (
-              <p className="mt-4 rounded-xl border p-4 text-sm">
-                Nenhuma referência corresponde a estes filtros.
-                {inView && location === 'mapped'
-                  ? ' Afaste o zoom ou desmarque o filtro da área visível.'
-                  : ' Tente outro nome ou fonte.'}{' '}
-                Isso não significa ausência de câmeras no local.
-              </p>
-            )}
-            {results.length > limit && (
-              <Button
-                className="mt-3 w-full"
-                variant="outline"
-                onClick={() => setLimit(limit + 60)}
+          )}
+          <div className="mt-3 space-y-2">
+            {results.slice(0, limit).map((camera) => (
+              <button
+                key={camera.id}
+                type="button"
+                onClick={() => showCamera(camera)}
+                className="w-full rounded-xl border bg-white p-3 text-left hover:border-teal-700 hover:bg-teal-50 focus-visible:outline-2"
               >
-                Mostrar mais 60
-              </Button>
-            )}
-            <details className="mt-5 border-t pt-4 text-xs leading-5 text-muted-foreground">
-              <summary className="cursor-pointer font-semibold text-foreground">
-                Fontes e limites do catálogo
-              </summary>
-              <p className="mt-2">
-                Levantamento de {catalog.reviewedAt}. IDs distintos podem
-                representar câmeras no mesmo suporte ou imagens semelhantes. Uma
-                referência publicada não confirma transmissão funcionando agora.
-                Coordenadas derivadas de ruas indicam o cruzamento ou endereço;
-                não medem a posição do equipamento.
-              </p>
-              <a
-                className="mt-2 block underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.camerasrj.com.br/metodologia/"
-              >
-                Metodologia CamerasRJ
-              </a>
-              <a
-                className="mt-2 block underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0"
-              >
-                Base de logradouros da Prefeitura
-              </a>
-              <a
-                className="mt-2 block underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="/data/public-cameras.json"
-              >
-                Baixar referências e fontes consultadas
-              </a>
-            </details>
-          </>
-        )}
+                <span className="block text-sm font-semibold">
+                  {camera.name}
+                </span>
+                <span className="mt-1 block text-xs text-muted-foreground">
+                  {camera.neighborhood} · {camera.publisher}
+                </span>
+                <span
+                  className={`mt-2 inline-block rounded px-2 py-1 text-[11px] ${camera.status === 'observed' ? 'bg-teal-50 text-teal-800' : camera.status === 'failed' ? 'bg-amber-50 text-amber-900' : 'bg-slate-100 text-slate-700'}`}
+                >
+                  {camera.access === 'public' &&
+                  (camera.youtubeId || camera.publisher === 'CamerasRJ')
+                    ? 'Abrir vídeo aqui'
+                    : 'Ver acesso na fonte'}
+                </span>
+                {camera.access !== 'public' && (
+                  <span className="ml-1 text-xs">
+                    {accessLabels[camera.access]}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+          {!results.length && (
+            <p className="mt-4 rounded-xl border p-4 text-sm">
+              Nenhuma referência corresponde a estes filtros.
+              {inView && location === 'mapped'
+                ? ' Afaste o zoom ou desmarque o filtro da área visível.'
+                : ' Tente outro nome ou fonte.'}{' '}
+              Isso não significa ausência de câmeras no local.
+            </p>
+          )}
+          {results.length > limit && (
+            <Button
+              className="mt-3 w-full"
+              variant="outline"
+              onClick={() => setLimit(limit + 60)}
+            >
+              Mostrar mais 60
+            </Button>
+          )}
+          <details className="mt-5 border-t pt-4 text-xs leading-5 text-muted-foreground">
+            <summary className="cursor-pointer font-semibold text-foreground">
+              Fontes e limites do catálogo
+            </summary>
+            <p className="mt-2">
+              Levantamento de {catalog.reviewedAt}. IDs distintos podem
+              representar câmeras no mesmo suporte ou imagens semelhantes. Uma
+              referência publicada não confirma transmissão funcionando agora.
+              Coordenadas derivadas de ruas indicam o cruzamento ou endereço;
+              não medem a posição do equipamento.
+            </p>
+            <a
+              className="mt-2 block underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.camerasrj.com.br/metodologia/"
+            >
+              Metodologia CamerasRJ
+            </a>
+            <a
+              className="mt-2 block underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0"
+            >
+              Base de logradouros da Prefeitura
+            </a>
+            <a
+              className="mt-2 block underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="/data/public-cameras.json"
+            >
+              Baixar referências e fontes consultadas
+            </a>
+          </details>
+        </>
       </aside>
     ),
   };
+}
+
+function CameraViewer({
+  camera,
+  sharedReferenceCount,
+  onClose,
+  onLocate,
+}: {
+  camera: PublicCamera;
+  sharedReferenceCount: number;
+  onClose: () => void;
+  onLocate: () => void;
+}) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    dialog?.showModal();
+    return () => {
+      dialog?.close();
+      previousFocus?.focus({ preventScroll: true });
+    };
+  }, []);
+  return (
+    <dialog
+      ref={dialogRef}
+      className="camera-viewer"
+      aria-label={'Câmera: ' + camera.name}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
+      <div className="camera-viewer-content">
+        <div className="sticky top-0 z-10 flex justify-end border-b bg-white px-4 py-2">
+          <Button autoFocus variant="outline" onClick={onClose}>
+            <X className="size-4" /> Fechar vídeo
+          </Button>
+        </div>
+        <div className="p-4 sm:p-6">
+          <CameraDetail
+            camera={camera}
+            sharedReferenceCount={sharedReferenceCount}
+            onLocate={onLocate}
+          />
+        </div>
+      </div>
+    </dialog>
+  );
 }
 
 function CameraDetail({
@@ -740,7 +773,6 @@ function CameraDetail({
   sharedReferenceCount: number;
   onLocate: () => void;
 }) {
-  const [play, setPlay] = useState(false);
   const [referenceOpen, setReferenceOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
   const reference = cameraReference(camera);
@@ -774,62 +806,14 @@ function CameraDetail({
       </div>
       <div className="flex flex-wrap gap-2 text-xs">
         <span className="rounded bg-slate-100 px-2 py-1">
-          {statusLabels[camera.status]}
+          Levantamento: {statusLabels[camera.status]}
           {camera.checkedAt ? ` em ${camera.checkedAt}` : ''}
         </span>
         <span className="rounded bg-slate-100 px-2 py-1">
           {accessLabels[camera.access]}
         </span>
       </div>
-      {camera.youtubeId && camera.access === 'public' ? (
-        <div className="aspect-video overflow-hidden rounded-xl bg-[#172235] text-white">
-          {play ? (
-            <iframe
-              className="h-full w-full"
-              title={`Transmissão ${camera.name}`}
-              src={`https://www.youtube-nocookie.com/embed/${camera.youtubeId}?autoplay=1`}
-              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
-          ) : (
-            <button
-              type="button"
-              onClick={() => setPlay(true)}
-              className="flex h-full w-full flex-col items-center justify-center gap-2 p-3"
-            >
-              <Play className="size-6" />
-              <span className="text-sm font-semibold">Abrir transmissão</span>
-              <span className="text-xs text-white/70">
-                Carrega o player do YouTube
-              </span>
-            </button>
-          )}
-        </div>
-      ) : (
-        <a
-          href={camera.watchUrl || camera.source}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex min-h-14 items-center justify-center gap-2 rounded-xl bg-teal-800 p-3 text-center text-sm font-semibold text-white"
-        >
-          {camera.access === 'public'
-            ? 'Abrir câmera na fonte'
-            : 'Consultar acesso na fonte'}
-          <ExternalLink className="size-4 shrink-0" />
-        </a>
-      )}
-      {camera.youtubeId && (
-        <a
-          href={camera.source}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs font-semibold underline"
-        >
-          Abrir no site da fonte
-          <ExternalLink className="size-3" />
-        </a>
-      )}
+      <CameraPlayer camera={camera} />
       <div className="space-y-2 text-xs leading-5 text-muted-foreground">
         <p>
           {camera.note ||
