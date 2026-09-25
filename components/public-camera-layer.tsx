@@ -4,7 +4,12 @@
 /* oxlint-disable react/react-compiler */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { GeoJSONSource, Map, MapLayerMouseEvent } from 'maplibre-gl';
+import {
+  Popup,
+  type GeoJSONSource,
+  type Map,
+  type MapLayerMouseEvent,
+} from 'maplibre-gl';
 import type { FeatureCollection, Point } from 'geojson';
 import { Camera, Copy, MapPin, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -105,6 +110,7 @@ export function useCameraWorkspace(
     null,
   );
   const [limit, setLimit] = useState(60);
+  const popupRef = useRef<Popup | null>(null);
   const active = enabled && visible;
   const loaded = useRef(false);
 
@@ -210,10 +216,76 @@ export function useCameraWorkspace(
       const b = map.getBounds();
       setBounds([b.getWest(), b.getSouth(), b.getEast(), b.getNorth()]);
     };
+    let popup: Popup | null = null;
+    const closePopup = () => {
+      popup?.remove();
+      popup = null;
+    };
+    const showOnMap = (
+      coordinates: [number, number],
+      cameras: PublicCamera[],
+    ) => {
+      closePopup();
+      const content = document.createElement('div');
+      content.className = 'camera-map-preview';
+      const heading = document.createElement('h3');
+      heading.textContent =
+        cameras.length === 1
+          ? cameras[0].name
+          : cameras.length + ' câmeras neste ponto';
+      content.appendChild(heading);
+      const note = document.createElement('p');
+      const sameLocation = cameras.every(
+        (camera) =>
+          camera.coordinates?.[0] === cameras[0].coordinates?.[0] &&
+          camera.coordinates?.[1] === cameras[0].coordinates?.[1],
+      );
+      if (cameras.length > 1 && !sameLocation)
+        heading.textContent = cameras.length + ' câmeras nesta área';
+      note.textContent =
+        cameras.length > 1 && sameLocation
+          ? 'Estas câmeras compartilham a mesma referência aproximada. Escolha qual imagem abrir.'
+          : 'Localização aproximada do catálogo. Escolha a imagem para abrir.';
+      content.appendChild(note);
+      const list = document.createElement('div');
+      list.className = 'camera-map-preview-list';
+      cameras.forEach((camera) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        const name = document.createElement('strong');
+        name.textContent = cameras.length === 1 ? 'Abrir vídeo' : camera.name;
+        const detail = document.createElement('span');
+        detail.textContent =
+          'ID ' + catalogId(camera) + ' · ' + camera.neighborhood;
+        button.appendChild(name);
+        button.appendChild(detail);
+        button.addEventListener('click', () => {
+          showRef.current(camera);
+        });
+        list.appendChild(button);
+      });
+      content.appendChild(list);
+      popup = new Popup({
+        className: 'camera-map-popup',
+        closeButton: true,
+        closeOnClick: true,
+        maxWidth: '280px',
+        offset: 22,
+        focusAfterOpen: true,
+      })
+        .setLngLat(coordinates)
+        .setDOMContent(content)
+        .addTo(map);
+      popupRef.current = popup;
+      popup
+        .getElement()
+        .querySelector('button.maplibregl-popup-close-button')
+        ?.setAttribute('aria-label', 'Fechar câmeras deste ponto');
+    };
     const selectPoint = (event: MapLayerMouseEvent) => {
       const id = event.features?.[0]?.properties?.id;
       const camera = filteredRef.current.find((c) => c.id === id);
-      if (camera) showRef.current(camera);
+      if (camera?.coordinates) showOnMap(camera.coordinates, [camera]);
     };
     const expandCluster = async (event: MapLayerMouseEvent) => {
       const feature = event.features?.[0];
@@ -222,26 +294,40 @@ export function useCameraWorkspace(
       const coords = feature.geometry.coordinates as [number, number];
       try {
         const id = Number(feature.properties.cluster_id);
-        if (map.getZoom() >= 14) {
-          const leaves = await source.getClusterLeaves(
-            id,
-            Number(feature.properties.point_count),
-            0,
-          );
-          if (disposed) return;
-          setSelected(null);
-          setLocation('mapped');
-          setClusterSelection(leaves.map((f) => String(f.properties?.id)));
-          setLimit(60);
-          revealRef.current();
-        } else {
-          const zoom = await source.getClusterExpansionZoom(id);
-          if (!disposed)
+        const zoom = await source.getClusterExpansionZoom(id);
+        if (disposed) return;
+        // Never divert to the sidebar at street zoom. Continue until points
+        // separate; references sharing coordinates need a chooser on the map.
+        if (zoom <= map.getMaxZoom() && map.getZoom() < map.getMaxZoom()) {
+          closePopup();
+          map.easeTo({
+            center: coords,
+            zoom: Math.min(map.getMaxZoom(), Math.max(zoom, map.getZoom() + 1)),
+            duration: window.matchMedia('(prefers-reduced-motion: reduce)')
+              .matches
+              ? 0
+              : 350,
+          });
+          return;
+        }
+        const leaves = await source.getClusterLeaves(
+          id,
+          Number(feature.properties.point_count),
+          0,
+        );
+        if (disposed) return;
+        const ids = new Set(leaves.map((f) => String(f.properties?.id)));
+        const cameras = filteredRef.current.filter((camera) =>
+          ids.has(camera.id),
+        );
+        if (cameras.length) {
+          if (map.getZoom() < 17)
             map.easeTo({
               center: coords,
-              zoom: Math.min(15, zoom),
+              zoom: Math.min(17, map.getMaxZoom()),
               duration: 0,
             });
+          showOnMap(coords, cameras);
         }
       } catch {
         /* A rapid filter change can remove the old cluster. */
@@ -373,6 +459,7 @@ export function useCameraWorkspace(
     map.on('moveend', updateBounds);
     return () => {
       disposed = true;
+      closePopup();
       map.off('load', setup);
       map.off('moveend', updateBounds);
       map.off('click', 'camera-points', selectPoint);
@@ -391,6 +478,7 @@ export function useCameraWorkspace(
     };
   }, [map, active]);
   useEffect(() => {
+    popupRef.current?.remove();
     if (!map?.getStyle()) return;
     const source = map.getSource(sourceId) as GeoJSONSource | undefined;
     if (source) void source.setData(geojson);

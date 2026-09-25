@@ -218,3 +218,14 @@ body {
   .camera-viewer { width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; }
   .camera-viewer-content { padding-bottom: env(safe-area-inset-bottom); }
 }
+
+.camera-map-preview { width: 238px; max-width: calc(100vw - 72px); padding: 10px 2px 2px; color: #172235; }
+.camera-map-popup { z-index: 40; }
+.camera-map-preview h3 { padding-right: 16px; font-size: 14px; line-height: 1.4; font-weight: 700; }
+.camera-map-preview p { margin: 8px 0; font-size: 12px; line-height: 1.5; color: #59667b; }
+.camera-map-preview-list { max-height: min(220px, 35dvh); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.camera-map-preview-list button { display: block; width: 100%; min-height: 48px; margin-top: 6px; padding: 10px; text-align: left; border: 1px solid #dce2ed; border-radius: 8px; background: #f0fdfa; cursor: pointer; }
+.camera-map-preview-list button:focus-visible { outline: 2px solid #0f766e; outline-offset: -2px; }
+.camera-map-preview-list strong, .camera-map-preview-list span { display: block; font-size: 12px; line-height: 1.4; }
+.camera-map-preview-list span { margin-top: 4px; color: #59667b; }
+.maplibregl-popup:has(.camera-map-preview) .maplibregl-popup-close-button { width: 32px; height: 32px; font-size: 22px; }

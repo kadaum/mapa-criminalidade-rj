@@ -10,6 +10,8 @@ Outras fontes continuam externas, com essa limitação indicada antes do clique.
 
 ## Cobertura e precisão
 
+Os números no mapa aproximam os agrupamentos até separar as referências. Quando a expansão ultrapassaria o zoom permitido (incluindo coordenadas compartilhadas), um seletor ancorado ao ponto mostra nomes e IDs. Não deslocamos marcadores para simular locais distintos. Câmeras individuais mostram nome e ação de vídeo no próprio mapa. O fluxo não exige abrir a lista lateral. Verificado por cliques no canvas em desktop e celular emulado, incluindo expansão além do zoom 14, grupo de três referências no mesmo ponto e abertura/fechamento do vídeo.
+
 O catálogo em `public/data/public-cameras.json` contém as referências encontradas nas fontes consultadas. Não representa todas as câmeras instaladas na cidade nem todas as transmissões funcionando. A contagem é por ID de catálogo, não por suporte físico. As coordenadas não representam campo de visão.
 
 - **CamerasRJ:** catálogo público com 6.658 IDs e 146 grupos de bairros, incluindo um grupo indefinido. Não se atribui ao agregador a operação dos equipamentos. As referências podem falhar por origem, rede ou compatibilidade de codec.

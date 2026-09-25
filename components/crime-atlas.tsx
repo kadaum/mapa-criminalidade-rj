@@ -1361,7 +1361,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         {cameras.active ? (
           <div className="mb-3 flex min-h-12 items-center justify-between gap-3 text-sm text-[#59667b]">
             <span>
-              Selecione um grupo no mapa ou procure uma câmera na lista.
+              Toque nos números para aproximar. Selecione uma câmera no mapa para ver o local e abrir o vídeo.
             </span>
             <button
               type="button"
@@ -1510,7 +1510,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                 {cameras.active ? (
                   <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
                     <p className="font-semibold">
-                      Números agrupam referências de câmeras
+                      Toque nos números para explorar as câmeras
                     </p>
                     <p>
                       <Camera className="inline size-3 text-teal-700" /> Imagem
