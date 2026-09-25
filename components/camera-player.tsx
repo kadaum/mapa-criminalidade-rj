@@ -108,10 +108,14 @@ function EmbeddedPlayer({
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<PlayerState>('connecting');
   const [message, setMessage] = useState('');
+  // Providers may reconnect indefinitely after reporting an error. Keep a
+  // failed attempt closed until the visitor explicitly retries.
+  const failedAttempt = useRef(false);
 
   useEffect(() => {
     let handshake: ReturnType<typeof setInterval> | undefined;
     function receive(event: MessageEvent) {
+      if (failedAttempt.current) return;
       if (
         event.origin !==
           (source.kind === 'youtube' ? youtubeOrigin : cameraOrigin) ||
@@ -132,6 +136,7 @@ function EmbeddedPlayer({
         if (data.event === 'onReady') {
           setState((value) => (value === 'connecting' ? 'ready' : value));
         } else if (data.event === 'onError') {
+          failedAttempt.current = true;
           clearInterval(handshake);
           setState('error');
           setMessage(
@@ -149,6 +154,7 @@ function EmbeddedPlayer({
           } else if (data.info === 3) setState('connecting');
           else if (data.info === 2 || data.info === 5) setState('ready');
           else if (data.info === 0) {
+            failedAttempt.current = true;
             setState('interrupted');
             setMessage(
               'A transmissão terminou. Consulte a fonte ou escolha outra câmera.',
@@ -166,9 +172,44 @@ function EmbeddedPlayer({
       )
         return;
       if (
-        !['connecting', 'playing', 'error', 'interrupted'].includes(data.state)
-      )
+        data.state === 'metric' &&
+        data.metric &&
+        typeof data.metric === 'object'
+      ) {
+        const metric = data.metric;
+        if (
+          metric.outcome === 'playing' &&
+          ['first-frame', 'playing-event'].includes(metric.phase)
+        ) {
+          setState('playing');
+          setMessage('');
+        } else if (
+          metric.outcome === 'error' ||
+          metric.outcome === 'interrupted'
+        ) {
+          const reasons: Record<string, string> = {
+            codec:
+              'O formato de vídeo desta câmera não é compatível com este navegador ou dispositivo.',
+            offline: 'Esta câmera está offline ou sem sinal na fonte.',
+            notFound: 'A fonte não encontrou esta câmera.',
+            timeout: 'A fonte não enviou imagem a tempo.',
+            unavailable:
+              'O serviço de câmeras está temporariamente indisponível.',
+          };
+          failedAttempt.current = true;
+          setState(metric.outcome);
+          setMessage(
+            reasons[metric.reason] ||
+              'A fonte não conseguiu fornecer uma imagem desta câmera.',
+          );
+        }
         return;
+      }
+      // A plain playing event only confirms a media track, not a decoded frame.
+      if (data.state === 'playing') return;
+      if (!['connecting', 'error', 'interrupted'].includes(data.state)) return;
+      if (data.state === 'error' || data.state === 'interrupted')
+        failedAttempt.current = true;
       setState(data.state);
       setMessage(
         typeof data.message === 'string' ? data.message.slice(0, 240) : '',
@@ -207,6 +248,7 @@ function EmbeddedPlayer({
   useEffect(() => {
     if (state !== 'connecting') return;
     const timeout = window.setTimeout(() => {
+      failedAttempt.current = true;
       setState('error');
       setMessage(
         'A fonte demorou para responder. Tente novamente ou abra a câmera na fonte.',
@@ -216,6 +258,7 @@ function EmbeddedPlayer({
   }, [state, attempt]);
 
   function retry() {
+    failedAttempt.current = false;
     setMessage('');
     setState('connecting');
     setAttempt((value) => value + 1);
@@ -236,32 +279,57 @@ function EmbeddedPlayer({
 
   return (
     <section aria-label={`Vídeo de ${camera.name}`} className="space-y-3">
-      <div className="aspect-video overflow-hidden rounded-xl bg-slate-950">
-        <iframe
-          key={attempt}
-          ref={iframe}
-          className="h-full w-full border-0"
-          src={source.url}
-          title={`Transmissão: ${camera.name}`}
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
-          onLoad={() => {
-            // Loading an iframe does not prove that a video is playing.
-            if (source.kind === 'youtube')
-              setState((value) => (value === 'connecting' ? 'ready' : value));
-          }}
-          onError={() => {
-            setState('error');
-            setMessage(
-              'O player não carregou. Verifique a conexão e tente novamente.',
-            );
-          }}
-        />
+      <div className="relative aspect-video overflow-hidden rounded-xl bg-slate-950">
+        {failed ? (
+          <div className="flex h-full min-h-36 flex-col items-center justify-center gap-2 bg-slate-100 p-5 text-center text-slate-800">
+            <strong className="text-base">
+              Não foi possível exibir a imagem
+            </strong>
+            <p className="max-w-lg text-sm leading-5">{statusText}</p>
+          </div>
+        ) : (
+          <iframe
+            key={attempt}
+            ref={iframe}
+            className="h-full w-full border-0"
+            src={source.url}
+            title={`Transmissão: ${camera.name}`}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            onLoad={() => {
+              // Loading an iframe does not prove that a video is playing.
+              if (source.kind === 'youtube')
+                setState((value) => (value === 'connecting' ? 'ready' : value));
+            }}
+            onError={() => {
+              failedAttempt.current = true;
+              setState('error');
+              setMessage(
+                'O player não carregou. Verifique a conexão e tente novamente.',
+              );
+            }}
+          />
+        )}
+        {source.kind === 'camerasrj' && state === 'connecting' && (
+          <div
+            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-100 p-5 text-center text-slate-700"
+            aria-hidden="true"
+          >
+            <LoaderCircle className="size-6 animate-spin motion-reduce:animate-none" />
+            <span className="text-sm">
+              Aguardando a primeira imagem da câmera…
+            </span>
+          </div>
+        )}
       </div>
       <output
         aria-live="polite"
-        className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm leading-5 ${failed ? 'bg-amber-50 text-amber-950' : 'bg-slate-100 text-slate-700'}`}
+        className={
+          failed
+            ? 'sr-only'
+            : 'flex items-start gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm leading-5 text-slate-700'
+        }
       >
         {state === 'connecting' && (
           <LoaderCircle
