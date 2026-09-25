@@ -13,6 +13,14 @@ async function page(path) { const response = await fetch(`${base}${path}`); retu
 function metadata(html, key) { return [...html.matchAll(/<link\s+[^>]*>/g)].map((item) => item[0]).find((tag) => tag.includes(`rel="${key}"`)) || ''; }
 function hasJsonLd(html) { const scripts = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1])); assert.ok(scripts.length); return scripts; }
 function format(value) { return value.toLocaleString('pt-BR'); }
+function rateData(indicator, id) {
+  const totals = population.records.map((record) => {
+    const count = snapshot.rows.filter((row) => row.cisp === record.cisp && months.slice(-12).includes(row.period)).reduce((sum, row) => sum + row.values[indicator], 0);
+    return { cisp: record.cisp, count, rate: count / record.population * 100000 };
+  });
+  const current = totals.find((row) => row.cisp === id);
+  return { ...current, rank: 1 + totals.filter((row) => row.rate > current.rate).length };
+}
 
 check('snapshot schema and source hash', () => { assert.equal(snapshot.schemaVersion, 1); assert.match(snapshot.source.sha256, /^[a-f0-9]{64}$/); assert.equal(snapshot.latestPeriod, '2026-08'); });
 const ids = [...new Set(snapshot.rows.map((row) => row.cisp))].sort((a,b)=>a-b);
@@ -70,6 +78,18 @@ for (const path of paths) {
     const id=Number(path.split('-').at(-1));
     const count=snapshot.rows.filter((r)=>r.cisp===id&&months.slice(-12).includes(r.period)).reduce((sum,r)=>sum+r.values.total_roubos,0);
     check(`CISP ${id} has current real count and official territory`,()=>{assert.ok(html.includes(format(count)),`${id}:${count}`);assert.ok(html.includes(territory.records.find((r)=>r.cisp===id).territorialUnit));});
+    check(`CISP ${id} has correct rates and rate positions`,()=>{
+      assert.ok(html.includes('Posição por quantidade'));
+      assert.ok(html.includes('Comparação com o município'));
+      for (const indicator of snapshot.indicators) {
+        const result=rateData(indicator.id,id);
+        const row=html.match(new RegExp(`<tr[^>]*data-indicator="${indicator.id}"[^>]*>([\\s\\S]*?)<\\/tr>`));
+        assert.ok(row,indicator.id);
+        assert.ok(row[1].includes(format(result.count)),`${indicator.id}: count`);
+        assert.ok(row[1].includes(result.rate.toLocaleString('pt-BR',{maximumFractionDigits:1})),`${indicator.id}: rate`);
+        assert.ok(row[1].includes(`${result.rank}ª de 41`),`${indicator.id}: rank`);
+      }
+    });
   }
 }
 for(const path of ['/meu-bairro?cisp=16&indicador=total_roubos','/rankings','/comparar?cisp=16']) {
