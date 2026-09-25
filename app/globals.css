@@ -176,8 +176,9 @@ body {
 }
 @media (max-width: 1023px) {
   .atlas-workspace { height: auto; }
-  .atlas-map { height: 54dvh; min-height: 420px; }
+  .atlas-map { height: clamp(420px, 66dvh, 640px); }
   .atlas-panel { overflow: visible; }
+  .atlas-map-expanded { position: fixed; inset: 0; z-index: 80; width: 100vw; height: 100dvh; min-height: 0; border-radius: 0; }
 }
 
 .atlas-camera-marker {

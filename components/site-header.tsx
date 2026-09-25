@@ -14,7 +14,7 @@ export function SiteHeader({ date }: { date?: string }) {
           />
           <span>
             <span className="block text-base font-semibold tracking-tight">
-              Mapa da Criminalidade RJ
+              <span className="min-[360px]:hidden">Mapa RJ</span><span className="hidden min-[360px]:inline">Mapa da Criminalidade RJ</span>
             </span>
             <span className="hidden text-xs opacity-70 sm:block">
               Registros policiais oficiais por região

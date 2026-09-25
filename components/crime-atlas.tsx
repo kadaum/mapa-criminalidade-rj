@@ -28,6 +28,8 @@ import {
   Layers3,
   List,
   Map as MapIcon,
+  Maximize2,
+  Minimize2,
   RotateCcw,
   Search,
   Share2,
@@ -345,7 +347,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
   const [population, setPopulation] = useState<PopulationData | null>(null);
   const [loadError, setLoadError] = useState(false);
   const [indicator, setIndicator] = useState('total_roubos');
-  const [viewMode, setViewMode] = useState<ViewMode>('quantity');
+  const [viewMode, setViewMode] = useState<ViewMode>('rate');
   const [windowMonths, setWindowMonths] = useState<number>(12);
   const [endPeriod, setEndPeriod] = useState('');
   const [comparisonMode, setComparisonMode] = useState<Comparison>('previous');
@@ -354,6 +356,8 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
   const [search, setSearch] = useState('');
   const [display, setDisplay] = useState<'map' | 'list'>('map');
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [layersOpen, setLayersOpen] = useState(false);
+  const [mapExpanded, setMapExpanded] = useState(false);
   const [showNeighborhoods, setShowNeighborhoods] = useState(false);
   const [showBoundaries, setShowBoundaries] = useState(true);
   const [showBase, setShowBase] = useState(false);
@@ -368,6 +372,10 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
   );
   const cameraModeRef = useRef(false);
   cameraModeRef.current = cameras.active;
+
+  useEffect(() => {
+    if (cameras.active) setMapExpanded(false);
+  }, [cameras.active]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -390,7 +398,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
             ? 'variation'
             : view === 'taxa'
               ? 'rate'
-              : 'quantity',
+              : 'rate',
       );
       setUrlReady(true);
     }, 0);
@@ -645,7 +653,8 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         [-40, -19],
       ],
       renderWorldCopies: false,
-      cooperativeGestures: true,
+      cooperativeGestures: window.matchMedia('(pointer: coarse)').matches,
+      touchPitch: false,
       fadeDuration: 0,
       dragRotate: false,
       pitchWithRotate: false,
@@ -864,25 +873,29 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         element.textContent = label.name;
         element.setAttribute('aria-hidden', 'true');
         element.style.visibility = 'hidden';
-        const marker = new maplibregl.Marker({ element })
-          .setLngLat(label.position)
-          .addTo(map);
-        return { label, element, marker };
+        const marker = new maplibregl.Marker({ element }).setLngLat(label.position);
+        return { label, element, marker, added: false };
       });
       const updateLabels = () => {
         const zoom = map.getZoom();
         const names = new Set<string>();
-        const candidates = markers.flatMap(({ label, element }, id) => {
-          if (
+        const width = map.getContainer().clientWidth;
+        const height = map.getContainer().clientHeight;
+        const candidates = markers.flatMap((entry, id) => {
+          const { label, element } = entry;
+          const eligible = !(
             (label.detail && zoom < (label.minZoom ?? 11)) ||
             (!label.detail && !label.water && zoom >= 11.2) ||
             (label.water &&
-              (zoom >= 11.2 || map.getContainer().clientWidth < 640)) ||
-            names.has(label.name)
-          )
+              (zoom >= 11.2 || width < 640))
+          );
+          const point = eligible ? map.project(label.position) : null;
+          if (!point || point.x < -100 || point.x > width + 100 || point.y < -50 || point.y > height + 50 || names.has(label.name)) {
+            if (entry.added) { entry.marker.remove(); entry.added = false; }
             return [];
+          }
           names.add(label.name);
-          const point = map.project(label.position);
+          if (!entry.added) { entry.marker.addTo(map); entry.added = true; }
           return [
             {
               id,
@@ -895,11 +908,11 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         });
         const visible = visibleLabelIds(
           candidates,
-          map.getContainer().clientWidth,
-          map.getContainer().clientHeight,
+          width,
+          height,
         );
-        markers.forEach(({ element }, id) => {
-          element.style.visibility = visible.has(id) ? 'visible' : 'hidden';
+        markers.forEach(({ element, added }, id) => {
+          if (added) element.style.visibility = visible.has(id) ? 'visible' : 'hidden';
         });
       };
       let labelFrame = 0;
@@ -910,7 +923,8 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
             updateLabels();
           });
       };
-      map.on('move', scheduleLabels);
+      // Keep only nearby labels mounted; recalculate collisions after movement.
+      map.on('moveend', scheduleLabels);
       map.on('resize', scheduleLabels);
       map.once('remove', () => {
         cancelAnimationFrame(labelFrame);
@@ -961,7 +975,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         ),
       );
       map.fitBounds(bounds, {
-        padding: 72,
+      padding: map.getContainer().clientWidth < 640 ? 32 : 72,
         maxZoom: 11.6,
         duration: reducedMotion ? 0 : 500,
       });
@@ -974,6 +988,27 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
     const frame = window.requestAnimationFrame(() => mapRef.current?.resize());
     return () => window.cancelAnimationFrame(frame);
   }, [display]);
+
+  useEffect(() => {
+    if (!mapExpanded) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMapExpanded(false);
+    };
+    window.addEventListener('keydown', onEscape);
+    const map = mapRef.current;
+    map?.cooperativeGestures.disable();
+    const frame = window.requestAnimationFrame(() => map?.resize());
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('keydown', onEscape);
+      document.body.style.overflow = previousOverflow;
+      if (window.matchMedia('(pointer: coarse)').matches)
+        map?.cooperativeGestures.enable();
+      window.requestAnimationFrame(() => map?.resize());
+    };
+  }, [mapExpanded]);
 
   function chooseCisp(cisp: number) {
     cityViewRef.current = false;
@@ -1081,7 +1116,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
       ),
     );
     map.fitBounds(bounds, {
-      padding: { top: 70, bottom: 145, left: 28, right: 28 },
+      padding: { top: 38, bottom: 38, left: 24, right: 24 },
       duration,
     });
   }
@@ -1249,7 +1284,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         date={snapshot ? formatPeriod(snapshot.latestPeriod) : undefined}
       />}
       <ExploreNavigation
-        query={`?cisp=${selectedCisp}&indicador=${indicator}&meses=${windowMonths}&fim=${endPeriod || 'latest'}&comparacao=${comparisonMode}&visualizacao=${viewMode === 'quantity' ? 'quantidade' : 'taxa'}`}
+        query={`?cisp=${selectedCisp}&indicador=${indicator}&meses=${windowMonths}&fim=${endPeriod || 'latest'}&comparacao=${comparisonMode}&visualizacao=${viewMode === 'quantity' ? 'quantidade' : viewMode === 'variation' ? 'variacao' : 'taxa'}`}
       />
 
       <div className="mx-auto max-w-[1800px] px-3 pb-8 pt-3 md:px-5">
@@ -1265,12 +1300,11 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                 'Transmissões, fontes e locais de referência · Rio de Janeiro'
               ) : (
                 <>
-                  {viewMode === 'rate'
+                  <span className="hidden sm:inline">{viewMode === 'rate'
                     ? 'Por 100 mil moradores'
                     : viewMode === 'quantity'
                       ? 'Quantidade'
-                      : 'Variação'}{' '}
-                  · {periodRange} · Rio de Janeiro
+                      : 'Variação'} · </span>{periodRange}<span className="hidden sm:inline"> · Rio de Janeiro</span>
                 </>
               )}
             </p>
@@ -1329,40 +1363,34 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
             </button>
           </div>
         ) : (
-          <section className="mb-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <button
-              type="button"
-              onClick={() => setFiltersOpen(true)}
-              className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-[#172235] px-4 text-xs font-semibold text-white shadow-sm"
-            >
-              <SlidersHorizontal className="size-4" /> Filtros
-            </button>
-            <button
-              type="button"
-              onClick={() => setFiltersOpen(true)}
-              className="min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold"
-            >
-              {viewMode === 'rate'
-                ? 'Taxa por 100 mil'
-                : viewMode === 'quantity'
-                  ? 'Quantidade'
-                  : 'Variação'}
-            </button>
-            <button
-              type="button"
-              onClick={() => setFiltersOpen(true)}
-              className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
-            >
-              {periodRange}
-            </button>
-            <button
-              type="button"
-              onClick={() => setFiltersOpen(true)}
-              className="hidden min-h-11 shrink-0 rounded-full border border-[#dce2ed] bg-white px-4 text-xs font-semibold sm:block"
-            >
-              Até {effectiveEnd ? formatPeriod(effectiveEnd) : '—'}
-            </button>
-          </section>
+          <div className="mb-3 space-y-3 rounded-2xl border border-[#dce2ed] bg-white p-3 sm:p-4">
+            <div className="grid gap-3 lg:grid-cols-[minmax(190px,1fr)_minmax(280px,1fr)_auto] lg:items-end">
+              <div className="min-w-0">
+                <label className="mb-1.5 block text-xs font-semibold text-[#526078]" htmlFor="atlas-indicator">Indicador</label>
+                <Select value={indicator} onValueChange={(value) => value && setIndicator(value)}>
+                  <SelectTrigger id="atlas-indicator" aria-label="Indicador do mapa" className="w-full rounded-xl border-[#dce2ed] bg-white data-[size=default]:h-11"><SelectValue>{indicatorMeta?.label ?? 'Carregando…'}</SelectValue></SelectTrigger>
+                  <SelectContent className="min-w-[min(290px,calc(100vw-32px))] rounded-xl">
+                    {groups.map((group) => <SelectGroup key={group.label}><SelectLabel>{group.label}</SelectLabel>{group.ids.map((key) => { const item = snapshot?.indicators.find((candidate) => candidate.id === key); return item ? <SelectItem key={key} value={key}>{item.label}</SelectItem> : null; })}</SelectGroup>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <p className="mb-1.5 text-xs font-semibold text-[#526078]">Mostrar no mapa</p>
+                <ViewToggle value={viewMode} onChange={(mode) => { setViewMode(mode); if (mode === 'variation' && comparisonMode === 'none') setComparisonMode('previous'); }} compact />
+              </div>
+              <div className="flex flex-wrap gap-2 lg:pb-0.5">
+                <button type="button" onClick={() => setFiltersOpen(true)} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#dce2ed] px-3 text-sm font-semibold text-[#172235]"><SlidersHorizontal className="size-4" /><span className="sm:hidden">Filtros</span><span className="hidden sm:inline">Período e filtros</span></button>
+                <button type="button" onClick={() => setLayersOpen((open) => !open)} aria-expanded={layersOpen} aria-controls="atlas-layer-options" className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3 text-sm font-semibold ${layersOpen ? 'border-[#2455dc] bg-[#eaf0fc] text-[#172235]' : 'border-[#dce2ed] text-[#172235]'}`}><Layers3 className="size-4" /> Camadas</button>
+              </div>
+            </div>
+            {viewMode === 'rate' && <p className="text-xs leading-5 text-[#526078]">Taxa = {indicatorMeta?.unit ?? 'registros'} ÷ moradores (Censo 2022) × 100 mil. Veja também a quantidade.</p>}
+            {layersOpen && <div id="atlas-layer-options" className="grid gap-2 border-t border-[#dce2ed] pt-3 sm:grid-cols-3">
+              <label htmlFor="layer-cisp" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Limites das CISPs <Switch id="layer-cisp" checked={showBoundaries} onCheckedChange={setShowBoundaries} /></label>
+              <label htmlFor="layer-bairro" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Limites dos bairros <Switch id="layer-bairro" checked={showNeighborhoods} onCheckedChange={setShowNeighborhoods} /></label>
+              <label htmlFor="layer-base" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Mapa de ruas e nomes <Switch id="layer-base" checked={showBase} onCheckedChange={setShowBase} /></label>
+              <p className="text-xs leading-5 text-[#526078] sm:col-span-3">Bairros servem como referência; os dados continuam agrupados por CISP.</p>
+            </div>}
+          </div>
         )}
         <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
           <DialogContent
@@ -1385,8 +1413,9 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
           </DialogContent>
         </Dialog>
 
+        <p className="mb-2 text-xs leading-5 text-[#526078] lg:hidden">Amplie para mover com um dedo. No mapa compacto, use dois dedos.</p>
         <section className="atlas-workspace overflow-hidden rounded-xl border border-[#dce2ed] bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_350px]">
-          <div className="atlas-map relative">
+          <div className={`atlas-map relative ${mapExpanded ? 'atlas-map-expanded' : ''}`}>
             <div className="absolute left-3 top-3 z-20 flex rounded-xl border border-[#dce2ed] bg-white/94 p-1 shadow-lg backdrop-blur md:left-4 md:top-4">
               <button
                 type="button"
@@ -1398,7 +1427,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
               </button>
               <button
                 type="button"
-                onClick={() => setDisplay('list')}
+                onClick={() => { setDisplay('list'); setMapExpanded(false); }}
                 aria-pressed={display === 'list'}
                 className={`flex min-h-9 items-center gap-2 rounded-lg px-3 text-xs font-semibold ${display === 'list' ? 'bg-[#172235] text-white' : 'text-[#59667b]'}`}
               >
@@ -1420,63 +1449,15 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
             {cameras.controls}
             {display === 'map' ? (
               <>
-                <div className="absolute right-16 top-3 z-30 md:top-4">
-                  <Popover>
-                    <PopoverTrigger className="flex min-h-11 items-center gap-2 rounded-lg border bg-white px-3 text-sm font-semibold shadow-sm">
-                      <Layers3 className="size-4" />
-                      <span className="hidden sm:inline">Camadas</span>
-                      <span className="sr-only sm:hidden">Camadas</span>
-                    </PopoverTrigger>
-                    <PopoverContent
-                      align="end"
-                      className="max-h-[min(18rem,var(--available-height))] w-[calc(100vw-2rem)] max-w-72 gap-1.5 overflow-y-auto p-3 sm:gap-2.5 sm:p-5"
-                    >
-                      <PopoverTitle className="font-semibold">
-                        O que aparece no mapa
-                      </PopoverTitle>
-                      <PopoverDescription className="mt-1 text-xs leading-4 sm:text-sm">
-                        As cores representam dados por CISP.
-                      </PopoverDescription>
-                      <label
-                        htmlFor="layer-cisp"
-                        className="mt-1 flex min-h-10 items-center justify-between gap-3 text-sm"
-                      >
-                        Limites das CISPs
-                        <Switch
-                          id="layer-cisp"
-                          checked={showBoundaries}
-                          onCheckedChange={setShowBoundaries}
-                        />
-                      </label>
-                      <label
-                        htmlFor="layer-bairro"
-                        className="flex min-h-10 items-center justify-between gap-3 text-sm"
-                      >
-                        Limites dos bairros
-                        <Switch
-                          id="layer-bairro"
-                          checked={showNeighborhoods}
-                          onCheckedChange={setShowNeighborhoods}
-                        />
-                      </label>
-                      <label
-                        htmlFor="layer-base"
-                        className="flex min-h-10 items-center justify-between gap-3 text-sm"
-                      >
-                        Mapa de ruas e nomes
-                        <Switch
-                          id="layer-base"
-                          checked={showBase}
-                          onCheckedChange={setShowBase}
-                        />
-                      </label>
-                      <p className="mt-1 text-xs leading-4 text-muted-foreground sm:text-sm sm:leading-5">
-                        Bairros servem como referência. Os números continuam
-                        agrupados por CISP.
-                      </p>
-                    </PopoverContent>
-                  </Popover>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setMapExpanded((expanded) => !expanded)}
+                  className="absolute right-14 top-3 z-20 grid size-10 place-items-center rounded-xl border border-[#dce2ed] bg-white/94 text-[#2455dc] shadow-lg backdrop-blur md:right-16 md:top-4 lg:hidden"
+                  aria-label={mapExpanded ? 'Fechar mapa ampliado' : 'Ampliar mapa para navegar com um dedo'}
+                  aria-pressed={mapExpanded}
+                >
+                  {mapExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+                </button>
                 <button
                   type="button"
                   onClick={resetMap}
