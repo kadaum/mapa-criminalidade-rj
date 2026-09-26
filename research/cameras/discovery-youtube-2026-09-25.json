@@ -1,0 +1,107 @@
+{
+  "checkedAt": "2026-09-26T01:04:53.067Z",
+  "scope": "Novas câmeras públicas no município do Rio de Janeiro; pesquisa comparada ao catálogo existente. Nenhuma edição do produto.",
+  "method": "Busca web, inspeção dos canais oficiais em Chrome sem login, iframe YouTube externo em página localhost e comparação currentTime/frames após4s; capturas visuais conferidas.",
+  "candidates": [
+    {
+      "id": "aviation-tv-santos-dumont",
+      "name": "Aeroporto Santos Dumont — Aviation TV",
+      "operator": "Aviation TV",
+      "publisher": "Aviation TV",
+      "neighborhood": "Centro",
+      "source": "https://www.youtube.com/@avtv/streams",
+      "watchUrl": "https://www.youtube.com/watch?v=oWUc9q-w7j4",
+      "youtubeId": "oWUc9q-w7j4",
+      "coordinates": null,
+      "precision": "unresolved",
+      "locationSource": "",
+      "access": "public",
+      "status": "observed",
+      "checkedAt": "25/09/2026",
+      "isLiveNow": true,
+      "liveStartedAt": "2026-09-25T20:50:49+00:00",
+      "playableInEmbed": true,
+      "playbackEvidence": {
+        "resolution": [
+          1280,
+          720
+        ],
+        "readyState": 4,
+        "paused": false,
+        "beforeSeconds": 15107.241343,
+        "afterSeconds": 15111.251317,
+        "beforeFrames": 219,
+        "afterFrames": 339,
+        "screenshot": ".perf-tools/discovery-sdu.png",
+        "visual": "Vista noturna real do aeroporto, relógio25/09/2026 22:02BRT; SDU pista com baía ao fundo; GIG terminais e via expressa no primeiro plano."
+      },
+      "deduplication": "ID e operador ausentes do catálogo atual; aeroportos distintos, imagens conferidas.",
+      "note": "A localização da instalação não foi publicada; não colocar marcador no centro do aeroporto. O canal inicia novos IDs aproximadamente a cada12horas; resolver transmissão atual por título ou marcar replay ao terminar. Não foi encontrado player estável por aeroporto. O site avtv.com.br retornou apenas bem-vindo.",
+      "licensing": "Player oficial oferece playableInEmbed=true e reproduziu sem login. Descrição exige contato/licença para uso das imagens; não baixar, re-hospedar nem remover identificação do operador."
+    },
+    {
+      "id": "aviation-tv-galeao",
+      "name": "Aeroporto do Galeão — Aviation TV",
+      "operator": "Aviation TV",
+      "publisher": "Aviation TV",
+      "neighborhood": "Galeão",
+      "source": "https://www.youtube.com/@avtv/streams",
+      "watchUrl": "https://www.youtube.com/watch?v=Ovs0e52kN28",
+      "youtubeId": "Ovs0e52kN28",
+      "coordinates": null,
+      "precision": "unresolved",
+      "locationSource": "",
+      "access": "public",
+      "status": "observed",
+      "checkedAt": "25/09/2026",
+      "isLiveNow": true,
+      "liveStartedAt": "2026-09-25T14:50:59+00:00",
+      "playableInEmbed": true,
+      "playbackEvidence": {
+        "resolution": [
+          1280,
+          720
+        ],
+        "readyState": 4,
+        "paused": false,
+        "beforeSeconds": 36695.736205,
+        "afterSeconds": 36699.744838,
+        "beforeFrames": 212,
+        "afterFrames": 332,
+        "screenshot": ".perf-tools/discovery-gig.png",
+        "visual": "Vista noturna real do aeroporto, relógio25/09/2026 22:02BRT; SDU pista com baía ao fundo; GIG terminais e via expressa no primeiro plano."
+      },
+      "deduplication": "ID e operador ausentes do catálogo atual; aeroportos distintos, imagens conferidas.",
+      "note": "A localização da instalação não foi publicada; não colocar marcador no centro do aeroporto. O canal inicia novos IDs aproximadamente a cada12horas; resolver transmissão atual por título ou marcar replay ao terminar. Não foi encontrado player estável por aeroporto. O site avtv.com.br retornou apenas bem-vindo.",
+      "licensing": "Player oficial oferece playableInEmbed=true e reproduziu sem login. Descrição exige contato/licença para uso das imagens; não baixar, re-hospedar nem remover identificação do operador."
+    }
+  ],
+  "rejected": [
+    {
+      "source": "https://www.youtube.com/@PaineirasCorcovadoRio/streams",
+      "reason": "Já existe no catálogo. Na verificação canal semLIVE; último vídeo I5SJLdV56hg terminou2h antes. Não atualizar como câmera atual só por títuloAO VIVO."
+    },
+    {
+      "source": "https://www.youtube.com/@RioWorldLiveCam/streams",
+      "reason": "Canal semLIVE; último vídeo -qId5PU7j9Y de26/03 exibido como transmitido há5meses. Não adicionar replay como câmera."
+    },
+    {
+      "source": "https://www.youtube.com/@liveriobr/streams",
+      "reason": "Página404. As câmeras Pepino/Cascatinha de diretórios não resolveram fonte atual."
+    },
+    {
+      "source": "https://www.youtube.com/watch?v=6QoLEltTzIM",
+      "reason": "EarthCam declara parceriaHOMESinRIO; provável mesma instalação Copacabana já no catálogo, não contar como nova câmera."
+    },
+    {
+      "source": "https://sugarloaf1.click2stream.com/",
+      "embed": "https://v.angelcam.com/iframe?v=17rd3kvgle&autoplay=1",
+      "reason": "Fonte pública descoberta, mas reprodução incorporada não confirmada. Não classificar como disponível."
+    },
+    {
+      "source": "https://www.cxtvlive.com/live-camera/aeroporto-internacional-do-galeao",
+      "reason": "Diretório incorporava TQO3PhwHQVw, replay anterior. Usar canal primário para resolver live atual."
+    }
+  ],
+  "authenticationBlocker": null
+}

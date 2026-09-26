@@ -1,0 +1,465 @@
+{
+  "checkedAt": "2026-09-26T01:06:57.784Z",
+  "base": "https://mapa-criminalidade-rj.ricardoguia.com/?cameras=1",
+  "method": "Chrome headless desktop/mobile viewport emulation, real public app UI; two HTMLVideoElement measurements 3 seconds apart after 18s; no stream URLs/tokens recorded. Mobile emulation is not physical iOS/Android codec validation.",
+  "results": [
+    {
+      "id": "homes-posto-3",
+      "name": "Copacabana · Posto 3",
+      "neighborhood": "Copacabana",
+      "mode": "desktop",
+      "checkedAt": "2026-09-26T01:01:29.432Z",
+      "source": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
+      "watchUrl": null,
+      "appStatus": "Imagem recebida da fonte.",
+      "embed": "https://www.youtube-nocookie.com/embed/k2QzfrPLQSg?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1",
+      "first": [
+        {
+          "url": "nullblank",
+          "text": "",
+          "videos": []
+        },
+        {
+          "url": "https://www.youtube-nocookie.com/embed/k2QzfrPLQSg",
+          "text": "",
+          "videos": [
+            {
+              "time": 28696.950174,
+              "width": 852,
+              "height": 480,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 501
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "nullblank",
+          "text": "",
+          "videos": []
+        },
+        {
+          "url": "https://www.youtube-nocookie.com/embed/k2QzfrPLQSg",
+          "text": "",
+          "videos": [
+            {
+              "time": 28699.965649,
+              "width": 852,
+              "height": 480,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 591
+            }
+          ]
+        }
+      ],
+      "playable": true,
+      "classification": "video-progress-confirmed"
+    },
+    {
+      "id": "homes-posto-6",
+      "name": "Copacabana · Posto 6",
+      "neighborhood": "Copacabana",
+      "mode": "mobile-emulated",
+      "checkedAt": "2026-09-26T01:01:53.364Z",
+      "source": "https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam",
+      "watchUrl": "https://www.youtube.com/watch?v=Hr7c0XuEgm0",
+      "appStatus": "Imagem recebida da fonte.",
+      "embed": "https://www.youtube-nocookie.com/embed/Hr7c0XuEgm0?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1",
+      "first": [
+        {
+          "url": "https://www.youtube-nocookie.com/embed/Hr7c0XuEgm0",
+          "text": "",
+          "videos": [
+            {
+              "time": 46813.491474,
+              "width": 852,
+              "height": 480,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 526
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://www.youtube-nocookie.com/embed/Hr7c0XuEgm0",
+          "text": "",
+          "videos": [
+            {
+              "time": 46816.496679,
+              "width": 852,
+              "height": 480,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 616
+            }
+          ]
+        }
+      ],
+      "playable": true,
+      "classification": "video-progress-confirmed"
+    },
+    {
+      "id": "paineiras-corcovado",
+      "name": "Paineiras Corcovado",
+      "neighborhood": "Alto da Boa Vista",
+      "mode": "desktop",
+      "checkedAt": "2026-09-26T01:02:15.896Z",
+      "source": "https://www.youtube.com/watch?v=aRDuS1iqioU",
+      "watchUrl": null,
+      "appStatus": "Imagem recebida da fonte.",
+      "embed": "https://www.youtube-nocookie.com/embed/aRDuS1iqioU?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1",
+      "first": [
+        {
+          "url": "https://www.youtube-nocookie.com/embed/aRDuS1iqioU",
+          "text": "",
+          "videos": [
+            {
+              "time": 17.140782,
+              "width": 854,
+              "height": 480,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 519
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://www.youtube-nocookie.com/embed/aRDuS1iqioU",
+          "text": "",
+          "videos": [
+            {
+              "time": 20.145928,
+              "width": 854,
+              "height": 480,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 609
+            }
+          ]
+        }
+      ],
+      "playable": true,
+      "classification": "replay-progress-confirmed",
+      "liveStatusEvidence": {
+        "checkedAt": "2026-09-26T01:04:29.978Z",
+        "source": "https://www.youtube.com/watch?v=aRDuS1iqioU",
+        "videoDetails": {
+          "title": "Paineiras Corcovado AO VIVO / Cristo Redentor",
+          "isLiveContent": true,
+          "lengthSeconds": "42899"
+        },
+        "liveBroadcastDetails": {
+          "isLiveNow": false,
+          "startTimestamp": "2026-09-08T09:53:23+00:00",
+          "endTimestamp": "2026-09-08T22:38:04+00:00"
+        },
+        "playabilityStatus": "OK"
+      },
+      "liveNow": false
+    },
+    {
+      "id": "mar-urbano-posto-6",
+      "name": "Copacabana · Posto 6 (Mar Urbano)",
+      "neighborhood": "Copacabana",
+      "mode": "mobile-emulated",
+      "checkedAt": "2026-09-26T01:03:08.010Z",
+      "source": "https://institutomarurbano.com.br/live-cam/",
+      "watchUrl": null,
+      "appStatus": "Fechar vídeo\nCopacabana · Posto 6 (Mar Urbano)\nID mar-urbano-posto-6\n\nPosto 6, Copacabana\n\nFonte: Instituto Mar Urbano · Operador: Instituto Mar Urbano\n\nLevantamento: Imagem não testada\nAcesso público\n\nEsta fonte oferece a imagem no site do operador. A reprodução aqui ainda não está disponível.\n\nAbrir fonte em outra aba\n\nLocalização aproximada publicada por diretório. Instalação e reprodução ainda não confirmadas.\n\nReferência aproximada de diretório. Coordenadas do marcador: -22.98562, -43.18892. Elas indicam um local de referência estimado; não confirmam o suporte, poste, fachada ou área filmada.\n\nVer fonte de localização\nLocalizar no mapa\nP",
+      "embed": null,
+      "first": [],
+      "second": [],
+      "playable": false,
+      "classification": "external-only",
+      "externalSourceCheck": {
+        "source": "https://institutomarurbano.com.br/live-cam/",
+        "method": "Chrome source page after12s",
+        "video": {
+          "time": 0,
+          "width": 0,
+          "readyState": 0
+        },
+        "inlineOpportunity": "Official page has video element but no functioning source was confirmed; official menu points to /live-cam-imu/ for further review."
+      }
+    },
+    {
+      "id": "camerasrj-373",
+      "name": "AV DOM HELDER CAMARA X R. FERREIRA LEITE",
+      "neighborhood": "Abolição",
+      "mode": "desktop",
+      "checkedAt": "2026-09-26T01:03:32.595Z",
+      "source": "https://www.camerasrj.com.br/?bairro=Aboli%C3%A7%C3%A3o&camera=373",
+      "watchUrl": "https://player.camerasrj.com.br/camera/373/",
+      "appStatus": "Conectando à câmera…",
+      "embed": "https://player.camerasrj.com.br/camera/373/",
+      "first": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/373/",
+          "text": "000373 - AV DOM HELDER CAMARA X R. FERREIRA LEITE",
+          "videos": [
+            {
+              "time": 0,
+              "width": 0,
+              "height": 0,
+              "ready": 0,
+              "paused": false,
+              "error": null,
+              "frames": 0
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/373/",
+          "text": "000373 - AV DOM HELDER CAMARA X R. FERREIRA LEITE",
+          "videos": [
+            {
+              "time": 0,
+              "width": 0,
+              "height": 0,
+              "ready": 0,
+              "paused": false,
+              "error": null,
+              "frames": 0
+            }
+          ]
+        }
+      ],
+      "playable": false,
+      "classification": "not-playing-in-tested-browser",
+      "longerDiagnostic": {
+        "checkedAt": "2026-09-26T01:05:59.570Z",
+        "source": "https://player.camerasrj.com.br/camera/373/",
+        "log": [],
+        "text": "000373 - AV DOM HELDER CAMARA X R. FERREIRA LEITE",
+        "videos": [
+          {
+            "time": 0,
+            "width": 0,
+            "ready": 0,
+            "frames": 0,
+            "error": null
+          }
+        ],
+        "codecSupport": {
+          "avc": true,
+          "hevc": true
+        }
+      }
+    },
+    {
+      "id": "camerasrj-1516",
+      "name": "AV. MERITI, 2114 - FIXA",
+      "neighborhood": "Brás de Pina",
+      "mode": "mobile-emulated",
+      "checkedAt": "2026-09-26T01:04:25.886Z",
+      "source": "https://www.camerasrj.com.br/?bairro=Br%C3%A1s+de+Pina&camera=1516",
+      "watchUrl": "https://player.camerasrj.com.br/camera/1516/",
+      "appStatus": "Conectando à câmera…",
+      "embed": "https://player.camerasrj.com.br/camera/1516/",
+      "first": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/1516/",
+          "text": "001516 - AV. MERITI, 2114 - FIXA",
+          "videos": [
+            {
+              "time": 0,
+              "width": 0,
+              "height": 0,
+              "ready": 0,
+              "paused": false,
+              "error": null,
+              "frames": 0
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/1516/",
+          "text": "001516 - AV. MERITI, 2114 - FIXA",
+          "videos": [
+            {
+              "time": 0,
+              "width": 0,
+              "height": 0,
+              "ready": 0,
+              "paused": false,
+              "error": null,
+              "frames": 0
+            }
+          ]
+        }
+      ],
+      "playable": false,
+      "classification": "not-playing-in-tested-browser"
+    },
+    {
+      "id": "camerasrj-7237",
+      "name": "AV. PRES. VARGAS, ALT. SAMBóDROMO",
+      "neighborhood": "Cidade Nova",
+      "mode": "desktop",
+      "checkedAt": "2026-09-26T01:04:49.992Z",
+      "source": "https://www.camerasrj.com.br/?bairro=Cidade+Nova&camera=7237",
+      "watchUrl": "https://player.camerasrj.com.br/camera/7237/",
+      "appStatus": "Imagem recebida da fonte.",
+      "embed": "https://player.camerasrj.com.br/camera/7237/",
+      "first": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/7237/",
+          "text": "007237 - AV. PRES. VARGAS, ALT. SAMBÓDROMO",
+          "videos": [
+            {
+              "time": 7.697,
+              "width": 1920,
+              "height": 1080,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 103
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/7237/",
+          "text": "007237 - AV. PRES. VARGAS, ALT. SAMBÓDROMO",
+          "videos": [
+            {
+              "time": 10.706,
+              "width": 1920,
+              "height": 1080,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 136
+            }
+          ]
+        }
+      ],
+      "playable": true,
+      "classification": "video-progress-confirmed"
+    },
+    {
+      "id": "camerasrj-1967",
+      "name": "AV. AUGUSTO SEVERO N 1755",
+      "neighborhood": "Glória",
+      "mode": "mobile-emulated",
+      "checkedAt": "2026-09-26T01:05:42.983Z",
+      "source": "https://www.camerasrj.com.br/?bairro=Gl%C3%B3ria&camera=1967",
+      "watchUrl": "https://player.camerasrj.com.br/camera/1967/",
+      "appStatus": "Imagem recebida da fonte.",
+      "embed": "https://player.camerasrj.com.br/camera/1967/",
+      "first": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/1967/",
+          "text": "001967 - AV. AUGUSTO SEVERO N 1755",
+          "videos": [
+            {
+              "time": 11.754,
+              "width": 1920,
+              "height": 1080,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 75
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/1967/",
+          "text": "001967 - AV. AUGUSTO SEVERO N 1755",
+          "videos": [
+            {
+              "time": 15.926,
+              "width": 1920,
+              "height": 1080,
+              "ready": 4,
+              "paused": false,
+              "error": null,
+              "frames": 99
+            }
+          ]
+        }
+      ],
+      "playable": true,
+      "classification": "video-progress-confirmed"
+    },
+    {
+      "id": "camerasrj-1631",
+      "name": "AV. GABRIELA PRADO MAIA RIBEIRO, 289B - FIXA",
+      "neighborhood": "Tijuca",
+      "mode": "desktop",
+      "checkedAt": "2026-09-26T01:06:05.493Z",
+      "source": "https://www.camerasrj.com.br/?bairro=Tijuca&camera=1631",
+      "watchUrl": "https://player.camerasrj.com.br/camera/1631/",
+      "appStatus": "Conectando à câmera…",
+      "embed": "https://player.camerasrj.com.br/camera/1631/",
+      "first": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/1631/",
+          "text": "001631 - AV. GABRIELA PRADO MAIA RIBEIRO, 289B - FIXA",
+          "videos": [
+            {
+              "time": 0,
+              "width": 0,
+              "height": 0,
+              "ready": 0,
+              "paused": false,
+              "error": null,
+              "frames": 0
+            }
+          ]
+        }
+      ],
+      "second": [
+        {
+          "url": "https://player.camerasrj.com.br/camera/1631/",
+          "text": "001631 - AV. GABRIELA PRADO MAIA RIBEIRO, 289B - FIXA",
+          "videos": [
+            {
+              "time": 0,
+              "width": 0,
+              "height": 0,
+              "ready": 0,
+              "paused": false,
+              "error": null,
+              "frames": 0
+            }
+          ]
+        }
+      ],
+      "playable": false,
+      "classification": "not-playing-in-tested-browser"
+    }
+  ],
+  "limitations": [
+    "Playback progression proves decoded moving video, not live freshness; a replay can pass.",
+    "Mobile viewport/touch emulation uses desktop Chrome codecs; physical iPhone/Android were not tested.",
+    "No-frame results are inconclusive for offline vs codec unless explicit errors are available.",
+    "This is a nine-camera convenience sample, not a catalog-wide availability estimate."
+  ],
+  "summary": {
+    "video-progress-confirmed": 4,
+    "replay-progress-confirmed": 1,
+    "external-only": 1,
+    "not-playing-in-tested-browser": 3
+  }
+}

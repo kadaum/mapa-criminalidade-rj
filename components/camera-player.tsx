@@ -108,6 +108,11 @@ function EmbeddedPlayer({
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<PlayerState>('connecting');
   const [message, setMessage] = useState('');
+  const operatorSource = externalSource({
+    ...camera,
+    youtubeId: undefined,
+    watchUrl: undefined,
+  });
   // Providers may reconnect indefinitely after reporting an error. Keep a
   // failed attempt closed until the visitor explicitly retries.
   const failedAttempt = useRef(false);
@@ -269,7 +274,9 @@ function EmbeddedPlayer({
     state === 'connecting'
       ? 'Conectando à câmera…'
       : state === 'playing'
-        ? 'Imagem recebida da fonte.'
+        ? camera.recording
+          ? 'Reproduzindo gravação da fonte; não é ao vivo.'
+          : 'Imagem recebida da fonte.'
         : state === 'ready'
           ? 'Player do YouTube carregado. Se o vídeo não começar, toque em reproduzir.'
           : message ||
@@ -362,6 +369,17 @@ function EmbeddedPlayer({
           ? 'O vídeo começa sem som. Use os controles do player para ativar o áudio ou ampliar.'
           : 'Use o controle do player para ampliar o vídeo. A disponibilidade depende da fonte.'}
       </p>
+      {operatorSource && operatorSource !== external && (
+        <a
+          href={operatorSource}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-teal-800 underline"
+        >
+          Canal ou site do operador{' '}
+          <ExternalLink aria-hidden="true" className="size-3" />
+        </a>
+      )}
     </section>
   );
 }

@@ -1,0 +1,91 @@
+{
+  "reviewedAt": "2026-09-25",
+  "scope": "Public operator sources for webcams in the municipality of Rio de Janeiro, beyond additional YouTube streams",
+  "method": "Public website inspection, HTTP framing/redirect checks, Chrome headless page/video inspection. No login, private API, credential extraction, proxying or bypass used. A 200 response and an advertisement playing are not camera playback confirmation.",
+  "productFilesChanged": false,
+  "summary": "No new non-YouTube source qualified for immediate reliable inline playback in this bounded review. Two new operator references could be considered as external links; existing sources have substantive embedding or availability limitations.",
+  "candidates": [
+    {
+      "name": "Pestana Atlantica / Copacabana — earthTV",
+      "municipality": "Rio de Janeiro",
+      "source": "https://www.earthtv.com/en/webcam/rio-de-janeiro-copacabana",
+      "operator": "earthTV",
+      "alreadyInCatalog": false,
+      "coordinates": [-43.1877, -22.9751],
+      "coordinateEvidence": "Public page structured data explicitly publishes latitude -22.9751 and longitude -43.1877; text locates camera atop Pestana Atlantica Hotel. Treat as operator reference, not independently surveyed installation.",
+      "httpsPage": true,
+      "framingHeaders": { "xFrameOptions": null, "contentSecurityPolicy": null },
+      "playback": "not_confirmed_camera",
+      "observations": ["Page currently labels the item TIME TRAVEL, not a guaranteed current live feed.", "Public Play Video button loaded a 1280-pixel advertisement advancing to 8.107313 seconds; advertisement playback does not validate the camera.", "Player configuration includes a signed embed URL; no token stored or proposed for catalog use."],
+      "recommendation": "External reference only unless operator supplies stable supported embed and current camera playback is validated. Do not market historical/time-travel video as live."
+    },
+    {
+      "name": "Praia Barra da Tijuca — PraiaBarra",
+      "municipality": "Rio de Janeiro",
+      "source": "https://www.praiabarra.com.br/",
+      "operator": "PraiaBarra",
+      "alreadyInCatalog": false,
+      "coordinates": null,
+      "coordinateEvidence": "Page names Barra da Tijuca beach, but weather map center does not establish camera installation; no coordinates proposed.",
+      "httpsPage": true,
+      "playerOrigin": "https://player.jmvstream.com",
+      "playback": "not_confirmed",
+      "observations": ["Public page embeds a JMVStream HTTPS player.", "Operator explicitly states streaming access is exclusive through praiabarra.com.br and restricts reproduction of site content.", "Passive Chrome inspection did not expose a playing camera video."],
+      "recommendation": "External reference only. Obtain operator authorization and a supported embed before inline integration; do not reuse the iframe merely because it exists."
+    },
+    {
+      "name": "Instituto Mar Urbano — Copacabana Posto 6",
+      "municipality": "Rio de Janeiro",
+      "source": "https://institutomarurbano.com.br/live-cam/",
+      "operator": "Instituto Mar Urbano",
+      "alreadyInCatalog": true,
+      "catalogId": "mar-urbano-posto-6",
+      "coordinates": null,
+      "coordinateEvidence": "Official page identifies Copacabana Posto 6 but does not identify measured installation coordinates.",
+      "httpsPage": true,
+      "playback": "failed_current_page",
+      "browserEvidence": { "waitSeconds": 12, "videoWidth": 0, "videoHeight": 0, "currentTime": 0, "paused": true, "readyState": 0, "sourcePresent": false },
+      "observations": ["Public HTML at /live-cam/ contains video#videojs_player but no media source was attached after page load.", "New menu route https://institutomarurbano.com.br/live-cam-imu/ also inspected in Chrome: media blob source attached, but playback failed with MEDIA_ERR_SRC_NOT_SUPPORTED code 4, readyState 0, videoWidth 0, currentTime 0; player reports server/network failure or unsupported format. No functional inline media confirmed."],
+      "recommendation": "Keep external with unavailability qualification; no legitimate functioning inline URL discovered."
+    },
+    {
+      "name": "SurfConnect — Leme and Leme Fixa",
+      "municipality": "Rio de Janeiro",
+      "sources": ["https://v1.surfconnect.com.br/leme/", "https://v1.surfconnect.com.br/leme-fixa/", "https://www.surfconnect.com.br/"],
+      "operator": "SurfConnect",
+      "alreadyInCatalog": true,
+      "catalogIds": ["surfconnect-leme", "surfconnect-leme-fixa"],
+      "coordinates": null,
+      "coordinateEvidence": "Existing catalog has operator beach-reference coordinates; no more precise position established in this review.",
+      "playback": "no_supported_https_embed_found",
+      "observations": ["Legacy HTTPS Leme and Leme Fixa pages redirect to HTTP.", "Legacy public Leme camera iframe HTTPS /spot/camera/id/8/ also redirects to HTTP; embedding on HTTPS would encounter mixed-content restrictions.", "Current commercial site advertises five rotating free cameras and premium access; this does not establish a stable unauthenticated third-party embed."],
+      "recommendation": "Keep external operator flow. Do not downgrade security or bypass registration/subscription. Ask operator for HTTPS public embed partnership if desired."
+    },
+    {
+      "name": "Paineiras Corcovado — official operator",
+      "municipality": "Rio de Janeiro",
+      "sources": ["https://www.paineirascorcovado.com.br/", "https://grupocataratas.com/cristo-redentor-e-morro-dois-irmaos-ao-vivo/"],
+      "operator": "Paineiras Corcovado / Grupo Cataratas",
+      "alreadyInCatalog": true,
+      "catalogId": "paineiras-corcovado",
+      "coordinates": null,
+      "coordinateEvidence": "Official operator article identifies Centro de Visitantes Paineiras; no measured camera coordinate found. Do not use monument coordinates as camera position.",
+      "playback": "no_new_non_youtube_source",
+      "observations": ["Operator group article from 2020 contains historical YouTube embeds omhwVDDIS54 and Ba9v-GN5cyc.", "Current official website links the YouTube channel UCAThQaz8B3AWOQwA8j-Arnw; no independent non-YouTube camera player found."],
+      "recommendation": "Use current official YouTube stream only after independent playback validation; do not add old article embeds or claim they are additional cameras."
+    },
+    {
+      "name": "SkylineWebcams — Copacabana promenade",
+      "municipality": "Rio de Janeiro",
+      "source": "https://www.skylinewebcams.com/en/webcam/brasil/rio-de-janeiro/rio-de-janeiro/copacabana-beach.html",
+      "operator": "SkylineWebcams directory / Homes in Rio stream",
+      "alreadyInCatalog": true,
+      "catalogId": "homes-posto-3",
+      "coordinates": null,
+      "playback": "duplicate_existing_youtube",
+      "framingHeaders": { "xFrameOptions": "SAMEORIGIN" },
+      "observations": ["Page structured data points to YouTube k2QzfrPLQSg, already identified as Homes in Rio Posto 3.", "The directory page itself blocks cross-origin framing."],
+      "recommendation": "Do not add as another camera. Keep existing operator-linked YouTube record."
+    }
+  ]
+}

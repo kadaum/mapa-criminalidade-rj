@@ -34,6 +34,14 @@ Diretórios que repetem as mesmas transmissões não entram como novas câmeras.
 
 ## Disponibilidade
 
+### Busca ampliada de 25/09/2026
+
+Dois novos sinais Aviation TV (Santos Dumont e Galeão) foram encontrados no canal oficial, sem duplicatas no catálogo. Ambos tinham metadados de transmissão em andamento e reproduziram pelo player oficial incorporado; o produto também confirmou avanço de tempo e quadros em telas de 390 e 1440 px. As instalações não têm coordenadas verificadas, portanto os vídeos são acessíveis pelo bloco de reprodução conferida, sem marcador fictício no aeroporto. IDs do canal mudam periodicamente: a data da conferência e o link permanente do operador são exibidos; não há promessa de atualização automática desses IDs.
+
+A amostra independente de nove referências confirmou vídeo em Homes Postos 3/6 e CamerasRJ 7237/1967. Paineiras reproduz uma gravação encerrada em 08/09, agora identificada como tal. Três CamerasRJ da amostra não entregaram quadros no navegador testado; não há evidência para rotular todas como offline ou falha de codec. Mar Urbano não reproduziu nas duas páginas públicas verificadas. Nenhuma fonte além do YouTube adicional foi aprovada nesta rodada. As evidências, candidatas rejeitadas e restrições estão nos arquivos `research/cameras/*2026-09-25.json`; não extrapolar a amostra para todo o catálogo.
+
+O catálogo passa a 6.685 referências, mantendo 1.458 pontos no mapa. `reviewed-additions.json` preserva as novas entradas na regeneração. A revisão comparativa e o cálculo dos cones do God's Eye estão em `docs/gods-eye-review.md`.
+
 Na investigação de telas pretas em 25/09/2026, as amostras CamerasRJ 1192, 1193 e 1173 retornaram erro de formato incompatível em Chrome com emulação móvel. A fonte pode alternar erro e reconexão automaticamente. O produto agora mantém a falha até uma tentativa explícita, desmonta o iframe e mostra a explicação no lugar do vídeo. O evento simples `playing` não confirma imagem: a confirmação usa a métrica de primeiro quadro do player (ou seu fallback após dados decodificados). Enquanto aguarda, há uma mensagem visível; o limite de 25 segundos encerra tentativas sem confirmação. O teste controlado cobre erro seguido de reconexão, descarte do evento simples, primeiro quadro, retry e timeout. Uma câmera transmitir em uma amostra não comprova disponibilidade permanente ou compatibilidade em outro aparelho.
 
 Imagem conferida significa reprodução observada na data indicada, não disponibilidade contínua. As observações ficam em `research/cameras/playback-observations.json`. Homes Postos 3 e 6 reproduziram no produto. Leme reproduziu com data embutida 14/01/2000; a ressalva de horário inconsistente permanece visível. Os demais sinais não receberam selo de imagem conferida só por existirem em catálogo.

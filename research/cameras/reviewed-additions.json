@@ -1,0 +1,38 @@
+[
+  {
+    "id": "aviation-tv-santos-dumont",
+    "name": "Aeroporto Santos Dumont — Aviation TV",
+    "operator": "Aviation TV",
+    "publisher": "Aviation TV",
+    "neighborhood": "Centro",
+    "address": "Vista do Aeroporto Santos Dumont; posição da instalação não confirmada.",
+    "source": "https://www.youtube.com/@avtv/streams",
+    "watchUrl": "https://www.youtube.com/watch?v=oWUc9q-w7j4",
+    "youtubeId": "oWUc9q-w7j4",
+    "coordinates": null,
+    "precision": "unresolved",
+    "locationSource": "",
+    "access": "public",
+    "status": "observed",
+    "checkedAt": "25/09/2026",
+    "note": "Vídeo em movimento e transmissão ao vivo confirmados em 25/09/2026 no player oficial Aviation TV. O canal troca os links periodicamente; este vídeo pode terminar ou virar gravação. Consulte o canal do operador para a transmissão atual. A posição do equipamento não foi publicada, portanto não há marcador no mapa."
+  },
+  {
+    "id": "aviation-tv-galeao",
+    "name": "Aeroporto do Galeão — Aviation TV",
+    "operator": "Aviation TV",
+    "publisher": "Aviation TV",
+    "neighborhood": "Galeão",
+    "address": "Vista do Aeroporto Internacional do Galeão; posição da instalação não confirmada.",
+    "source": "https://www.youtube.com/@avtv/streams",
+    "watchUrl": "https://www.youtube.com/watch?v=Ovs0e52kN28",
+    "youtubeId": "Ovs0e52kN28",
+    "coordinates": null,
+    "precision": "unresolved",
+    "locationSource": "",
+    "access": "public",
+    "status": "observed",
+    "checkedAt": "25/09/2026",
+    "note": "Vídeo em movimento e transmissão ao vivo confirmados em 25/09/2026 no player oficial Aviation TV. O canal troca os links periodicamente; este vídeo pode terminar ou virar gravação. Consulte o canal do operador para a transmissão atual. A posição do equipamento não foi publicada, portanto não há marcador no mapa."
+  }
+]

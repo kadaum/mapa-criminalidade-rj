@@ -25,6 +25,13 @@ for c in web['cameras']:
         cameras.append(dict(id='homes-posto-3' if home else 'mar-urbano-posto-6',**({'youtubeId':'7ecGJrsCv60'} if home else {}),name='Copacabana · Posto 3' if home else 'Copacabana · Posto 6 (Mar Urbano)',neighborhood='Copacabana',operator='Homes in Rio' if home else 'Instituto Mar Urbano',publisher='Homes in Rio' if home else 'Instituto Mar Urbano',address='Posto 3, Copacabana' if home else 'Posto 6, Copacabana',coordinates=[coord['longitude'],coord['latitude']],precision='directory',locationSource=c['coordinateSource'],source='https://www.youtube.com/watch?v=7ecGJrsCv60' if home else c['sourceUrl'],access='public',status='observed' if home else 'unverified',**({'checkedAt':'08/09/2026'} if home else {}),note='Vídeo reproduziu no levantamento. Localização aproximada do diretório; posição da instalação não confirmada.' if home else 'Localização aproximada publicada por diretório. Instalação e reprodução ainda não confirmadas.'))
 cameras.append(dict(id='paineiras-corcovado',name='Paineiras Corcovado',neighborhood='Alto da Boa Vista',operator='Paineiras Corcovado',publisher='Paineiras Corcovado',address='Centro de Visitantes Paineiras-Corcovado (descrição do canal)',coordinates=None,precision='unresolved',locationSource='',source='https://www.youtube.com/watch?v=aRDuS1iqioU',youtubeId='aRDuS1iqioU',access='public',status='unverified',note='YouTube indicava transmissão ao vivo no levantamento. Posição da câmera e imagem em movimento ainda não verificadas; não foi usado o ponto da estátua como localização.'))
 # Sort our own presentation independently of source catalog organization.
+additions_path=pathlib.Path('research/cameras/reviewed-additions.json')
+if additions_path.exists():
+    known_ids={c['id'] for c in cameras}
+    for camera in json.loads(additions_path.read_text(encoding='utf-8')):
+        if camera['id'] not in known_ids:
+            cameras.append(camera)
+            known_ids.add(camera['id'])
 # Preserve individually verified replacements when regenerating an older inventory.
 updates_path=pathlib.Path('research/cameras/reviewed-updates.json')
 if updates_path.exists():

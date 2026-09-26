@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-09-26T01:05:59.570Z",
+  "source": "https://player.camerasrj.com.br/camera/373/",
+  "log": [],
+  "text": "000373 - AV DOM HELDER CAMARA X R. FERREIRA LEITE",
+  "videos": [
+    {
+      "time": 0,
+      "width": 0,
+      "ready": 0,
+      "frames": 0,
+      "error": null
+    }
+  ],
+  "codecSupport": {
+    "avc": true,
+    "hevc": true
+  }
+}

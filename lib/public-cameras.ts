@@ -11,6 +11,7 @@ export type PublicCamera = {
   source: string;
   watchUrl?: string;
   youtubeId?: string;
+  recording?: boolean;
   access: 'public' | 'registration' | 'subscription';
   status: 'observed' | 'unverified' | 'failed' | 'offline';
   checkedAt?: string;

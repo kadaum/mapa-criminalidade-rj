@@ -245,7 +245,10 @@ export function useCameraWorkspace(
       note.textContent =
         cameras.length > 1 && sameLocation
           ? 'Estas câmeras compartilham a mesma referência aproximada. Escolha qual imagem abrir.'
-          : 'Localização aproximada do catálogo. Escolha a imagem para abrir.';
+          : cameras.length === 1
+            ? precisionLabels[cameras[0].precision] +
+              '. O ponto não confirma a posição do equipamento nem a área filmada.'
+            : 'Localização aproximada do catálogo. Escolha a imagem para abrir.';
       content.appendChild(note);
       const list = document.createElement('div');
       list.className = 'camera-map-preview-list';
@@ -588,6 +591,47 @@ export function useCameraWorkspace(
             Escolha um ponto ou procure abaixo. Os marcadores indicam locais de
             referência, não a área filmada.
           </p>
+          {loadState === 'ready' && (
+            <details
+              className="mt-3 rounded-xl border border-teal-200 bg-teal-50 p-3"
+              open
+            >
+              <summary className="cursor-pointer text-sm font-semibold text-teal-950">
+                Vídeos com reprodução conferida
+              </summary>
+              <p className="mt-2 text-xs leading-5 text-teal-950">
+                Abrem aqui no site. A conferência é da data indicada; a fonte
+                pode interromper a transmissão.
+              </p>
+              <div className="mt-2 grid gap-2">
+                {catalog.cameras
+                  .filter(
+                    (camera) =>
+                      camera.status === 'observed' &&
+                      camera.access === 'public' &&
+                      !camera.recording &&
+                      (camera.youtubeId || camera.publisher === 'CamerasRJ'),
+                  )
+                  .slice(0, 8)
+                  .map((camera) => (
+                    <button
+                      key={camera.id}
+                      type="button"
+                      onClick={() => showCamera(camera)}
+                      className="min-h-11 rounded-lg border border-teal-200 bg-white p-3 text-left text-xs hover:border-teal-700"
+                    >
+                      <strong className="block">{camera.name}</strong>
+                      <span className="mt-1 block text-muted-foreground">
+                        Conferido em {camera.checkedAt}
+                        {!camera.coordinates
+                          ? ' · posição da câmera ainda não confirmada'
+                          : ''}
+                      </span>
+                    </button>
+                  ))}
+              </div>
+            </details>
+          )}
           {loadState === 'loading' && (
             <output className="mt-3 block text-xs">Carregando catálogo…</output>
           )}
@@ -893,6 +937,11 @@ function CameraDetail({
         </p>
       </div>
       <div className="flex flex-wrap gap-2 text-xs">
+        {camera.recording && (
+          <span className="rounded bg-amber-100 px-2 py-1 font-semibold text-amber-950">
+            Gravação · não é ao vivo
+          </span>
+        )}
         <span className="rounded bg-slate-100 px-2 py-1">
           Levantamento: {statusLabels[camera.status]}
           {camera.checkedAt ? ` em ${camera.checkedAt}` : ''}

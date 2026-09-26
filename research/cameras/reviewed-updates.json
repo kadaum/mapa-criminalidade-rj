@@ -12,5 +12,22 @@
     "source": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
     "status": "observed",
     "checkedAt": "25/09/2026"
+  },
+  {
+    "id": "paineiras-corcovado",
+    "recording": true,
+    "note": "A referência é uma gravação de 08/09/2026, conferida em 25/09/2026. O vídeo reproduz, mas não é transmissão ao vivo. A posição da câmera continua não confirmada."
+  },
+  {
+    "id": "camerasrj-7237",
+    "status": "observed",
+    "checkedAt": "25/09/2026",
+    "note": "Vídeo com avanço de quadros confirmado no site em 25/09/2026. Disponibilidade depende da fonte e do navegador. A coordenada continua uma referência aproximada; não confirma instalação ou campo de visão."
+  },
+  {
+    "id": "camerasrj-1967",
+    "status": "observed",
+    "checkedAt": "25/09/2026",
+    "note": "Vídeo com avanço de quadros confirmado no site em 25/09/2026. Disponibilidade depende da fonte e do navegador. A coordenada continua uma referência aproximada; não confirma instalação ou campo de visão."
   }
 ]
