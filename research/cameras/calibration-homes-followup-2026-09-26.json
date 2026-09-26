@@ -1,0 +1,130 @@
+{
+  "reviewedAt": "2026-09-26",
+  "purpose": "Follow-up calibration of Homes in Rio cameras only. Use landmark bearing evidence without converting landmark sightlines into an unsupported optical axis, FOV, or visible range.",
+  "method": "Visual inspection of the original audit screenshots, operator pages, and available catalog location evidence. Landmark bearings calculated geodesically from the catalog building/pin coordinate to published landmark coordinates. No video downloaded. A landmark azimuth indicates the direction to that landmark, not necessarily the camera optical center.",
+  "cameras": [
+    {
+      "id": "homes-posto-3",
+      "status": "insufficient_axis_and_fov",
+      "imagePath": ".perf-tools/audit-other-homes-posto-3.png",
+      "imageObservation": "O quadro mostra a orla de Copacabana, trecho de Leme e maciço rochoso no horizonte à esquerda. O operador atribui a vista ao apartamento no Edifício Chopin e diz que a câmera está voltada ao nordeste, em direção à Praia do Leme e ao Pão de Açúcar.",
+      "sourceEvidence": [
+        {
+          "url": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+          "supports": "Fonte primária do operador: identifica o edifício Chopin e declara orientação nordeste em direção a Leme e Sugarloaf."
+        },
+        {
+          "url": "https://homesinrio.com/wp-content/uploads/2021/09/map2.png",
+          "supports": "Mapa de localização associado pelo operador à webcam do Chopin; localiza o imóvel, não a lente."
+        },
+        {
+          "url": "https://ambienteclima2.prefeitura.rio/wp-content/uploads/sites/118/2023/05/Plano-de-Manejo-MONA-Pao-de-Acucar_compressed.pdf",
+          "supports": "Plano de manejo municipal citado como fonte das coordenadas dos marcos Pão de Açúcar e Morro da Urca."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
+          "supports": "Feed público; captura examinada em .perf-tools/audit-other-homes-posto-3.png."
+        }
+      ],
+      "origin": {
+        "precision": "building_reference",
+        "coordinates": [
+          -43.1795625,
+          -22.9676875
+        ],
+        "description": "Centro aproximado do Edifício Chopin, Av. Atlântica 1782; posição e altura da lente não publicadas."
+      },
+      "landmarkSightlines": [
+        {
+          "landmark": "Morro da Urca",
+          "coordinates": [
+            -43.1640611,
+            -22.9516083
+          ],
+          "bearingDeg": 41.6,
+          "distanceMeters": 2391
+        },
+        {
+          "landmark": "Pão de Açúcar",
+          "coordinates": [
+            -43.1561111,
+            -22.9495583
+          ],
+          "bearingDeg": 50.0,
+          "distanceMeters": 3135
+        }
+      ],
+      "directionAssessment": "Evidência concreta de setor NE pela declaração do operador e pelos marcos georreferenciados: Morro da Urca a 41.6° e Pão de Açúcar a 50.0° a partir do ponto aproximado do Chopin. O screenshot confirma a cena costeira e o maciço, mas os marcos aparecem fora do centro do quadro; portanto [41.6°,50.0°] é o intervalo de azimutes aos marcos, não uma estimativa do eixo óptico. Direção geral NE: alta confiança; bearing central: não resolvido.",
+      "bearingDeg": null,
+      "opticalBearingIntervalDeg": null,
+      "bearingReferenceIntervalDeg": [
+        41.6,
+        50.0
+      ],
+      "horizontalFovDeg": null,
+      "horizontalFovLowerBoundDeg": null,
+      "rangeMeters": null,
+      "visibleLandmarkDistanceMeters": [
+        2391,
+        3135
+      ],
+      "coverageProposal": "Não desenhar cone numérico. É verificável que a câmera mira o setor NE e inclui marcos entre 41.6° e 50.0°; isso não define centro, bordas do quadro, FOV ou visibilidade além dos próprios marcos. Os 2.4–3.1 km são distâncias até marcos nomeados, não um raio de cobertura.",
+      "confidence": "high_for_reported_NE_and_landmark_bearings; low_for_optical_axis",
+      "ptz": "not_determined"
+    },
+    {
+      "id": "homes-posto-6",
+      "status": "ptz_or_panorama_no_fixed_axis",
+      "imagePath": ".perf-tools/audit-other-homes-posto-6.png",
+      "imageObservation": "O frame mostra um recorte próximo de quiosques, areia, pessoas e mar. Não há marco distante inequívoco para orientar o eixo a partir da imagem.",
+      "sourceEvidence": [
+        {
+          "url": "https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam",
+          "supports": "Fonte primária identifica a webcam panorâmica no Posto 6, descreve a baía curva até o Pão de Açúcar e dá o endereço Avenida Atlântica 3950."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=Hr7c0XuEgm0",
+          "supports": "Feed público; captura examinada em .perf-tools/audit-other-homes-posto-6.png."
+        },
+        {
+          "url": "https://worldcam.eu/webcams/south-america/brazil/40611-rio-de-janeiro-copacabana-posto-6",
+          "supports": "Diretório que sustenta o pin aproximado do catálogo."
+        }
+      ],
+      "origin": {
+        "precision": "directory_pin",
+        "coordinates": [
+          -43.19027778,
+          -22.98305556
+        ],
+        "description": "Pin aproximado para Posto 6; operador publica endereço Av. Atlântica 3950, mas não posição da lente."
+      },
+      "landmarkSightlines": [
+        {
+          "landmark": "Pão de Açúcar",
+          "coordinates": [
+            -43.1561111,
+            -22.9495583
+          ],
+          "bearingDeg": 43.2,
+          "distanceMeters": 5110
+        }
+      ],
+      "directionAssessment": "O rumo 43.2° é somente a linha do pin aproximado do Posto 6 ao Pão de Açúcar, que o operador diz ser visível na panorâmica da baía. A captura atual está muito aproximada e não mostra o marco; não pode calibrar o azimute do frame. A anotação atual do catálogo informa que a câmera muda de direção. Com essa evidência de pan, nenhum bearing único representa sua cobertura atual.",
+      "bearingDeg": null,
+      "opticalBearingIntervalDeg": null,
+      "bearingReferenceIntervalDeg": [
+        43.2,
+        43.2
+      ],
+      "horizontalFovDeg": null,
+      "horizontalFovLowerBoundDeg": null,
+      "rangeMeters": null,
+      "visibleLandmarkDistanceMeters": null,
+      "coverageProposal": "Não desenhar cone fixo. A panorâmica cobre direções variáveis; o alcance/FOV e limites do pan não estão documentados. 5.1 km é apenas a distância geodésica do pin ao Pão de Açúcar, não alcance observável.",
+      "confidence": "medium_for_panorama_description; low_for_dynamic_pan_without_retained_frame_sequence",
+      "ptz": "dynamic_pan_reported_in_catalog; angle_limits_unverified",
+      "dynamicEvidence": "Nota atual em public/data/public-cameras.json: “A câmera muda de direção.” O audit público confirmou playback, porém guardou um único screenshot e não um par visual de cenas; limite do pan não demonstrado."
+    }
+  ]
+}

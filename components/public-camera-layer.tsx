@@ -372,10 +372,14 @@ export function useCameraWorkspace(
           for (const member of members.flat()) ids.add(String(member.properties?.id));
         } catch { return; /* Filters may replace a cluster while it resolves. */ }
       }
-      const cameras = catalogSnapshot.filter(c => c.coordinates && c.coverage && ids.has(c.id));
+      const cameras = catalogSnapshot.filter(c => c.coordinates && (c.coverage || c.directionSymbol) && ids.has(c.id));
       const entries = cameras.map(camera => ({
         camera,
-        parameters: normalizeCoverageParameters(camera.coverage!),
+        parameters: normalizeCoverageParameters(camera.coverage || {
+          bearingDeg: camera.directionSymbol!.bearingDeg,
+          fovDeg: camera.directionSymbol!.spreadDeg,
+          rangeMeters: camera.directionSymbol!.displayLengthMeters,
+        }),
       }));
       const signature = JSON.stringify(entries.map(({ camera, parameters }) => [camera.id, camera.coordinates, parameters]));
       if (signature === coverageSignature) return;
@@ -1033,7 +1037,7 @@ function CameraDetail({
       <p className="text-xs leading-5 text-slate-600">
         {camera.coverage
           ? camera.coverage.note
-          : 'Campo de visão ainda não calibrado. O marcador indica apenas o local de referência.'}
+          : camera.directionSymbol?.note || 'Direção de visualização desconhecida. O marcador indica apenas o local de referência.'}
       </p>
       <CameraPlayer camera={camera} />
       <div className="space-y-2 text-xs leading-5 text-muted-foreground">

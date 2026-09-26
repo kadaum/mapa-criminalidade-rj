@@ -1,0 +1,58 @@
+{
+  "reviewedAt": "2026-09-26",
+  "scope": "Homes in Rio camera 3; no production or catalogue changes",
+  "method": "Compared the saved live screenshot with the operator's published view description and geodesic landmark bearings from the approximate Chopin building coordinate. Bearings use initial geodesic azimuth. Pixel-to-landmark identity is not sufficiently certain for optical calibration.",
+  "cameras": [
+    {
+      "id": "homes-posto-3",
+      "status": "bearing_estimated_fov_unresolved",
+      "imagePath": ".perf-tools/audit-other-homes-posto-3.png",
+      "origin": {
+        "coordinates": [-43.1795625, -22.9676875],
+        "precision": "building_reference",
+        "note": "Edifício Chopin centroid approximation. Exact camera lens position and height are unpublished."
+      },
+      "evidence": [
+        {
+          "url": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+          "type": "operator_primary_source",
+          "supports": "Identifies the Chopin building and describes the camera as directed northeast toward Leme beach and Sugarloaf. This is broad orientation evidence, not optical metadata."
+        },
+        {
+          "url": "https://ambienteclima2.prefeitura.rio/wp-content/uploads/sites/118/2023/05/Plano-de-Manejo-MONA-Pao-de-Acucar_compressed.pdf",
+          "type": "municipal_management_plan",
+          "supports": "Landmark coordinate source cited by the prior review for Morro da Urca and Pão de Açúcar."
+        },
+        {
+          "url": "https://peakbagger.com/peak.aspx?pid=8774",
+          "type": "topographic_reference",
+          "supports": "Morro do Leme summit location; used only as a geospatial cross-check, not as evidence of camera direction."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
+          "type": "public_feed",
+          "supports": "Screenshot saved and examined at imagePath."
+        }
+      ],
+      "imageObservation": "Frame shows Copacabana shoreline receding to the left, open Atlantic on the right, and a rocky headland/massif on the horizon. More than one ridge silhouette is visible, but the screenshot alone does not securely distinguish Morro do Leme, Babilônia, Urca, and Sugarloaf peaks at pixel-level. Do not label the tallest silhouette as Sugarloaf solely from the operator description.",
+      "geographicReferences": [
+        {"landmark":"Morro da Babilônia (OSM feature centroid)","coordinates":[-43.1698023,-22.9573942],"bearingDeg":41.1,"distanceMeters":1519,"uncertainty":"feature centroid is not a surveyed summit point"},
+        {"landmark":"Morro da Urca","coordinates":[-43.1640611,-22.9516083],"bearingDeg":41.6,"distanceMeters":2391},
+        {"landmark":"Pão de Açúcar","coordinates":[-43.1561111,-22.9495583],"bearingDeg":50.0,"distanceMeters":3135},
+        {"landmark":"Morro do Leme","coordinates":[-43.161842,-22.96337],"bearingDeg":75.2,"distanceMeters":1877,"uncertainty":"summit coordinate from topographic reference; feature extent makes exact sightline uncertain"}
+      ],
+      "bearingDeg": 58,
+      "bearingIntervalDeg": [41, 76],
+      "bearingBasis": "The operator's northeast description plus the mapped landmark sightlines from the building define a broad NE sector. 58° is the midpoint of the cited Urca/Sugarloaf/Leme sightline envelope, used as an explicitly estimated sector representative, not a measured optical axis. The frame does not locate the optical center within that sector.",
+      "bearingConfidence": "low_to_medium_for_sector; low_for_single_axis",
+      "fovDeg": null,
+      "fovReason": "No trustworthy pixel correspondences for two distinct georeferenced terrain points could be established from the screenshot; the terrain silhouette identities and exact points on each ridge are ambiguous. Inferring FOV from apparent screen spacing would be fabricated.",
+      "rangeMeters": null,
+      "symbolicCone": {"allowed": true, "note": "If a map display requires a graphic, use a dashed wedge spanning 41°–76° with arbitrary display length explicitly marked symbolic. It must not imply a visibility radius or calibrated FOV."},
+      "ptz": "not_determined",
+      "references": {
+        "Babilonia_OSM_search": "https://nominatim.openstreetmap.org/search?q=Babilonia%2C%20Rio%20de%20Janeiro&format=jsonv2&limit=10"
+      }
+    }
+  ]
+}

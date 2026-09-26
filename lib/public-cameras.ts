@@ -6,6 +6,15 @@ export type PublicCamera = {
   publisher: string;
   address: string;
   coordinates: [number, number] | null;
+  /** Schematic direction symbol; its dimensions are NOT optical FOV or range. */
+  directionSymbol?: {
+    bearingDeg: number;
+    spreadDeg: number;
+    displayLengthMeters: number;
+    source: string;
+    assessedAt: string;
+    note: string;
+  };
   /** Editorial parameters from verified research; never visitor preferences. */
   coverage?: {
     bearingDeg: number;

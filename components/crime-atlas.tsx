@@ -1607,7 +1607,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                       Toque na câmera, no cone ou no número
                     </p>
                     <p>
-                      <span className="block font-medium text-amber-800">Cone somente com orientação estimada</span>
+                      <span className="block font-medium text-amber-800">Cone tracejado: direção de referência, sem alcance medido</span>
                       <Camera className="inline size-3 text-teal-700" /> Imagem
                       conferida ·{' '}
                       <Camera className="inline size-3 text-blue-600" /> Não

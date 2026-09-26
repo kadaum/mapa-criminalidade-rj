@@ -20,7 +20,15 @@
     ],
     "precision": "spot",
     "locationSource": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
-    "note": "Edifício identificado pelo operador; marcador aproxima o prédio, não a posição exata da lente. Direção nordeste informada pelo operador e compatível com a presença de Leme no quadro."
+    "note": "Edifício identificado pelo operador; marcador aproxima o prédio, não a posição exata da lente. Direção nordeste informada pelo operador e compatível com a presença de Leme no quadro.",
+    "directionSymbol": {
+      "bearingDeg": 58.5,
+      "spreadDeg": 35,
+      "displayLengthMeters": 180,
+      "source": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+      "assessedAt": "2026-09-26",
+      "note": "Cone esquemático de direção: nordeste, conforme descrição do operador e referências geográficas de Leme e Pão de Açúcar. A abertura e o comprimento do desenho não representam o campo de visão nem o alcance da câmera. Posição aproximada do prédio."
+    }
   },
   {
     "id": "paineiras-corcovado",

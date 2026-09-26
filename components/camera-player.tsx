@@ -108,6 +108,7 @@ function EmbeddedPlayer({
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<PlayerState>('connecting');
   const [message, setMessage] = useState('');
+  const [slowConnection, setSlowConnection] = useState(false);
   const operatorSource = externalSource({
     ...camera,
     youtubeId: undefined,
@@ -252,17 +253,23 @@ function EmbeddedPlayer({
 
   useEffect(() => {
     if (state !== 'connecting') return;
+    const slow = window.setTimeout(() => setSlowConnection(true), 12_000);
     const timeout = window.setTimeout(() => {
       failedAttempt.current = true;
       setState('error');
       setMessage(
         'A fonte demorou para responder. Tente novamente ou abra a câmera na fonte.',
       );
-    }, 25_000);
-    return () => window.clearTimeout(timeout);
-  }, [state, attempt]);
+    // Audited public streams can need almost 40 seconds to deliver a frame.
+    }, source.kind === 'camerasrj' ? 45_000 : 25_000);
+    return () => {
+      window.clearTimeout(slow);
+      window.clearTimeout(timeout);
+    };
+  }, [state, attempt, source.kind]);
 
   function retry() {
+    setSlowConnection(false);
     failedAttempt.current = false;
     setMessage('');
     setState('connecting');
@@ -325,7 +332,9 @@ function EmbeddedPlayer({
           >
             <LoaderCircle className="size-6 animate-spin motion-reduce:animate-none" />
             <span className="text-sm">
-              Aguardando a primeira imagem da câmera…
+              {slowConnection
+                ? 'A fonte está demorando. Continuamos tentando receber a imagem…'
+                : 'Aguardando a primeira imagem da câmera…'}
             </span>
           </div>
         )}

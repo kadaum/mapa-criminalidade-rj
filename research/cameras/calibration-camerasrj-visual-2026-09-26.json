@@ -1,0 +1,223 @@
+{
+  "reviewedAt": "2026-09-26",
+  "scope": "Six playback-confirmed CamerasRJ IDs in one Estrada do Tingui address cluster: 7656, 7657, 7658, 7652, 7653, 7648. No full inventory scan was repeated.",
+  "method": "Reviewed catalog/inventory and audit records, attempted fresh public player capture in one sequential Chrome browser using isolated local iframe wrapper, and inspected every captured screenshot. Successful playback metadata confirms moving streams but was not used as visual evidence. Failed fresh captures remain individually labeled.",
+  "comparison": "7656/7657 share exact catalog name/address/coordinates but separate published player IDs. 7656 yielded a roadway image; 7657 did not render a frame in this visual review. Therefore whether they duplicate one physical feed is unresolved. The separately captured 7653 image is a different scene from 7656, but its address differs and it does not answer the 7656/7657 duplicate question. No direction or FOV inferred from playback metadata.",
+  "cameras": [
+    {
+      "id": "camerasrj-7656",
+      "name": "ESTR. DO TINGUI, 2370 - FIXA",
+      "status": "visual_reviewed_axis_only",
+      "auditOutcome": "playback_confirmed",
+      "auditCheckedAt": "2026-09-26T14:03:56.010Z",
+      "auditVideo": {
+        "framesTo": 52,
+        "timeFromSeconds": 0.115,
+        "framesFrom": 7,
+        "timeToSeconds": 3.101,
+        "liveTracks": 1,
+        "resolution": "1920x1080",
+        "nonblackPixelsFrom": 573,
+        "nonblackPixelsTo": 573
+      },
+      "source": "https://player.camerasrj.com.br/camera/7656/",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0/query?where=cod_trecho%3D152328&outFields=cod_trecho%2Ccompleto%2Cnp_ini_par%2Cnp_fin_par&returnGeometry=true&outSR=4326&f=pjson",
+      "framePath": ".perf-tools/camerasrj-7656-visual-local-2026-09-26.png",
+      "frameObservation": "Rua urbana vista em perspectiva, alinhamento do pavimento recuando para a parte superior do quadro; muro/vegetação à esquerda, fachadas e carros estacionados à direita. Sem placa, cruzamento ou marco geográfico identificável.",
+      "cameraPosition": {
+        "note": "Ponto de endereço, não posição/altura exata da lente.",
+        "coordinates": [
+          -43.58821541370206,
+          -22.88063492905385
+        ],
+        "precision": "address_interpolated"
+      },
+      "streetAxisEvidence": {
+        "nearbySegmentEndpoints": [
+          [
+            -43.588177237922345,
+            -22.88062767562257
+          ],
+          [
+            -43.58849345276083,
+            -22.88068459440909
+          ]
+        ],
+        "service": "CadLog Trechos_Logradouros municipal ArcGIS",
+        "bearingCandidatesDeg": [
+          78.9,
+          258.9
+        ],
+        "featureId": 152328,
+        "interpretation": "O eixo local da Estrada do Tingui é compatível com a perspectiva da rua na imagem. A cena não contém referência que selecione um dos dois sentidos."
+      },
+      "bearingDeg": null,
+      "bearingCandidatesDeg": [
+        78.9,
+        258.9
+      ],
+      "horizontalFovDeg": null,
+      "rangeMeters": null,
+      "cone": "Não calculável: orientação dirigida ambígua e FOV/alcance desconhecidos.",
+      "duplicateAssessment": "Comparação pendente: há quadro para 7656; ainda sem quadro comparável para 7657."
+    },
+    {
+      "id": "camerasrj-7657",
+      "name": "ESTR. DO TINGUI, 2370 - FIXA",
+      "status": "audit_video_confirmed_visual_frame_unavailable",
+      "auditOutcome": "playback_confirmed",
+      "auditCheckedAt": "2026-09-26T14:03:57.905Z",
+      "auditVideo": {
+        "framesTo": 50,
+        "timeFromSeconds": 0.081,
+        "framesFrom": 4,
+        "timeToSeconds": 3.106,
+        "liveTracks": 1,
+        "resolution": "1920x1080",
+        "nonblackPixelsFrom": 564,
+        "nonblackPixelsTo": 575
+      },
+      "source": "https://player.camerasrj.com.br/camera/7657/",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0/query?where=cod_trecho%3D152328&outFields=cod_trecho%2Ccompleto%2Cnp_ini_par%2Cnp_fin_par&returnGeometry=true&outSR=4326&f=pjson",
+      "framePath": ".perf-tools/camerasrj-7657-visual-local-2026-09-26.png",
+      "visualCapture": "No fresh image decoded in the separate visual browser across 24 seconds; player reported reproduction failure, video stayed 0x0 despite a live WebRTC track. Captured screenshot is black. The audit metrics above are prior playback evidence only and cannot establish scene, direction, or duplication.",
+      "cameraPosition": {
+        "note": "Same catalog reference as 7656; not evidence of shared physical camera.",
+        "coordinates": [
+          -43.58821541370206,
+          -22.88063492905385
+        ],
+        "precision": "address_interpolated"
+      },
+      "bearingDeg": null,
+      "horizontalFovDeg": null,
+      "rangeMeters": null,
+      "cone": "Unresolved; no visual frame.",
+      "duplicateAssessment": "unknown; exact same catalog address/coordinates and distinct player ID are compatible with either two sensors or duplicate listing/feed. No image comparison possible."
+    },
+    {
+      "id": "camerasrj-7658",
+      "name": "ESTR. DO TINGUI, 2350 - FIXA",
+      "status": "audit_video_confirmed_visual_frame_unavailable",
+      "auditOutcome": "playback_confirmed",
+      "auditCheckedAt": "2026-09-26T14:03:33.958Z",
+      "source": "https://player.camerasrj.com.br/camera/7658/",
+      "framePath": ".perf-tools/camerasrj-7658-visual-local-2026-09-26.png",
+      "visualCapture": "No usable frame: video stayed 0x0 or briefly reported 16x16 placeholder dimensions while the public player displayed reproduction failure. The screenshot is black.",
+      "cameraPosition": {
+        "note": "Within about 0.5 m of 7656/7657 catalog pin; repeated address interpolation does not confirm co-location.",
+        "coordinates": [
+          -43.588219681891175,
+          -22.880635698948726
+        ],
+        "precision": "address_interpolated"
+      },
+      "bearingDeg": null,
+      "horizontalFovDeg": null,
+      "rangeMeters": null,
+      "cone": "Unresolved; no usable visual frame.",
+      "duplicateAssessment": "unknown; no image to compare with 7656/7657."
+    },
+    {
+      "id": "camerasrj-7652",
+      "name": "ESTR. DO TINGUI, 3423 - FIXA",
+      "status": "audit_video_confirmed_visual_frame_unavailable",
+      "auditOutcome": "playback_confirmed",
+      "auditCheckedAt": "2026-09-26T14:04:55.577Z",
+      "source": "https://player.camerasrj.com.br/camera/7652/",
+      "framePath": ".perf-tools/camerasrj-7652-visual-local-2026-09-26.png",
+      "visualCapture": "No usable frame; fresh player capture remained black with video element 0x0 and reproduction failure.",
+      "cameraPosition": {
+        "coordinates": [
+          -43.589837636520066,
+          -22.880594978151493
+        ],
+        "precision": "address_interpolated"
+      },
+      "bearingDeg": null,
+      "horizontalFovDeg": null,
+      "rangeMeters": null,
+      "cone": "Unresolved; no visual frame.",
+      "duplicateAssessment": "Possible same-address peer 7653, but no visual comparison."
+    },
+    {
+      "id": "camerasrj-7653",
+      "name": "ESTR. DO TINGUI, 3423 - FIXA",
+      "status": "visual_reviewed_axis_only",
+      "auditOutcome": "playback_confirmed",
+      "auditCheckedAt": "2026-09-26T14:04:56.113Z",
+      "auditVideo": {
+        "framesTo": 58,
+        "timeFromSeconds": 0.707,
+        "framesFrom": 13,
+        "timeToSeconds": 3.787,
+        "liveTracks": 1,
+        "resolution": "1920x1080",
+        "nonblackPixelsFrom": 575,
+        "nonblackPixelsTo": 575
+      },
+      "source": "https://player.camerasrj.com.br/camera/7653/",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0/query?where=cod_trecho%3D86031&outFields=cod_trecho%2Ccompleto%2Cnp_ini_par%2Cnp_fin_par&returnGeometry=true&outSR=4326&f=pjson",
+      "framePath": ".perf-tools/camerasrj-7653-visual-local-2026-09-26.png",
+      "frameObservation": "Perspectiva ao longo de rua comercial, faixa central dupla amarela, casas/lojas baixas e fiação aérea. Cena difere visualmente do quadro do ID 7656; sem placa/local inequívoco que georreferencie a direção.",
+      "cameraPosition": {
+        "coordinates": [
+          -43.589837636520066,
+          -22.880594978151493
+        ],
+        "precision": "address_interpolated"
+      },
+      "streetAxisEvidence": {
+        "nearbySegmentEndpoints": [
+          [
+            -43.589853359262555,
+            -22.880592124720067
+          ],
+          [
+            -43.59078008577579,
+            -22.88041867251128
+          ]
+        ],
+        "service": "CadLog Trechos_Logradouros municipal ArcGIS",
+        "bearingCandidatesDeg": [
+          101.5,
+          281.5
+        ],
+        "featureId": 86031,
+        "interpretation": "Imagem alinha-se aproximadamente ao eixo da rua; nenhuma referência visual distingue o sentido cardinal."
+      },
+      "bearingDeg": null,
+      "bearingCandidatesDeg": [
+        101.5,
+        281.5
+      ],
+      "horizontalFovDeg": null,
+      "rangeMeters": null,
+      "cone": "Não calculável: eixo sem sentido definido; FOV/alcance desconhecidos.",
+      "duplicateAssessment": "7652 e 7653 compartilham endereço e coordenadas no catálogo; 7653 tem quadro, 7652 não. Duplicidade não pode ser estabelecida."
+    },
+    {
+      "id": "camerasrj-7648",
+      "name": "ESTR. DO TINGUI, 3500 - FIXA",
+      "status": "audit_video_confirmed_visual_frame_unavailable",
+      "auditOutcome": "playback_confirmed",
+      "auditCheckedAt": "2026-09-26T14:04:56.597Z",
+      "source": "https://player.camerasrj.com.br/camera/7648/",
+      "framePath": ".perf-tools/camerasrj-7648-visual-local-2026-09-26.png",
+      "visualCapture": "No usable frame; fresh player capture remained black with video element 0x0 and reproduction failure.",
+      "cameraPosition": {
+        "note": "Catalog pin is within about 3 m of 7652/7653 pin despite the differing address number; do not use pin overlap to claim same camera.",
+        "coordinates": [
+          -43.589810633352734,
+          -22.880600212611625
+        ],
+        "precision": "address_interpolated"
+      },
+      "bearingDeg": null,
+      "horizontalFovDeg": null,
+      "rangeMeters": null,
+      "cone": "Unresolved; no visual frame.",
+      "duplicateAssessment": "unknown; no image to compare."
+    }
+  ]
+}
