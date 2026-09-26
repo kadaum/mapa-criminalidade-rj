@@ -10,6 +10,12 @@ Outras fontes continuam externas, com essa limitação indicada antes do clique.
 
 ## Cobertura e precisão
 
+### Simulação manual de campo de visão
+
+Uma referência com coordenadas permite abrir **Simular campo de visão no mapa**, tanto pelo detalhe do vídeo quanto pela identificação de uma câmera individual no mapa. O setor tem direção, abertura horizontal e raio editáveis; a direção também pode ser apontada no mapa. É sempre rotulado como simulação manual não calibrada. Os parâmetros iniciais são exemplos, não dados da instalação, e não há análise de obstáculos ou altura. Salvar grava apenas os parâmetros locais no navegador. Câmeras sem coordenadas não oferecem esse comando. Fechar remove o setor e retoma os cliques normais nos agrupamentos.
+
+No modo câmeras, **Ruas/Satélite** e **2D/Perspectiva** ficam na barra acima do mapa. O satélite é opcional e não é imagem ao vivo. A perspectiva inclina a base, sem criar prédios3D. A vista geral e a saída do modo câmeras retornam à vista superior. O cone fica abaixo dos marcadores, com contorno tracejado; seu painel substitui a legenda para evitar sobreposição.
+
 Os números no mapa aproximam os agrupamentos até separar as referências. Quando a expansão ultrapassaria o zoom permitido (incluindo coordenadas compartilhadas), um seletor ancorado ao ponto mostra nomes e IDs. Não deslocamos marcadores para simular locais distintos. Câmeras individuais mostram nome e ação de vídeo no próprio mapa. O fluxo não exige abrir a lista lateral. Verificado por cliques no canvas em desktop e celular emulado, incluindo expansão além do zoom 14, grupo de três referências no mesmo ponto e abertura/fechamento do vídeo.
 
 O catálogo em `public/data/public-cameras.json` contém as referências encontradas nas fontes consultadas. Não representa todas as câmeras instaladas na cidade nem todas as transmissões funcionando. A contagem é por ID de catálogo, não por suporte físico. As coordenadas não representam campo de visão.

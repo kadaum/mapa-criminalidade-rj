@@ -14,6 +14,7 @@ import type { FeatureCollection, Point } from 'geojson';
 import { Camera, Copy, MapPin, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CameraPlayer } from '@/components/camera-player';
+import { CameraCoverage } from '@/components/camera-coverage';
 import {
   cameraReference,
   publicCameras,
@@ -86,6 +87,8 @@ export function useCameraWorkspace(
   visible: boolean,
   focus: (coordinates: [number, number]) => void,
   revealPanel: () => void,
+  expandMap: () => void,
+  mapExpanded: boolean,
 ) {
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [enabled, setEnabled] = useState(false);
@@ -97,6 +100,11 @@ export function useCameraWorkspace(
     'idle' | 'loading' | 'ready' | 'error'
   >('idle');
   const [selected, setSelected] = useState<PublicCamera | null>(null);
+  const [coverageCamera, setCoverageCamera] = useState<PublicCamera | null>(
+    null,
+  );
+  const coverageRef = useRef<PublicCamera | null>(null);
+  coverageRef.current = coverageCamera;
   const [query, setQuery] = useState('');
   const [publisher, setPublisher] = useState('all');
   const [onlyObserved, setOnlyObserved] = useState(false);
@@ -122,6 +130,7 @@ export function useCameraWorkspace(
     const next = !enabled;
     setEnabled(next);
     setSelected(null);
+    setCoverageCamera(null);
     const url = new URL(window.location.href);
     if (next) url.searchParams.set('cameras', '1');
     else url.searchParams.delete('cameras');
@@ -178,21 +187,22 @@ export function useCameraWorkspace(
     }),
     [mapped],
   );
+  const highlightedCamera = selected || coverageCamera;
   const selectedGeojson = useMemo(
     (): FeatureCollection<Point> => ({
       type: 'FeatureCollection',
       features:
-        selected?.coordinates == null
+        highlightedCamera?.coordinates == null
           ? []
           : [
               {
                 type: 'Feature',
-                geometry: { type: 'Point', coordinates: selected.coordinates },
-                properties: { id: selected.id, status: selected.status },
+                geometry: { type: 'Point', coordinates: highlightedCamera.coordinates },
+                properties: { id: highlightedCamera.id, status: highlightedCamera.status },
               },
             ],
     }),
-    [selected],
+    [highlightedCamera],
   );
   const dataRef = useRef(geojson);
   const selectedDataRef = useRef(selectedGeojson);
@@ -206,6 +216,19 @@ export function useCameraWorkspace(
   }
   const revealRef = useRef(revealPanel);
   revealRef.current = revealPanel;
+  function simulateCoverage(camera: PublicCamera) {
+    if (!camera.coordinates) return;
+    setSelected(null);
+    popupRef.current?.remove();
+    setCoverageCamera(camera);
+    requestAnimationFrame(() =>
+      map
+        ?.getContainer()
+        .scrollIntoView({ behavior: 'smooth', block: 'center' }),
+    );
+  }
+  const simulateRef = useRef(simulateCoverage);
+  simulateRef.current = simulateCoverage;
   const showRef = useRef(showCamera);
   showRef.current = showCamera;
 
@@ -268,6 +291,17 @@ export function useCameraWorkspace(
         list.appendChild(button);
       });
       content.appendChild(list);
+      if (cameras.length === 1) {
+        const simulate = document.createElement('button');
+        simulate.type = 'button';
+        simulate.className =
+          'mt-2 min-h-11 w-full rounded-lg border border-amber-300 bg-amber-50 p-2 text-xs font-semibold';
+        simulate.textContent = 'Simular campo de visão';
+        simulate.addEventListener('click', () =>
+          simulateRef.current(cameras[0]),
+        );
+        content.appendChild(simulate);
+      }
       popup = new Popup({
         className: 'camera-map-popup',
         closeButton: true,
@@ -286,11 +320,13 @@ export function useCameraWorkspace(
         ?.setAttribute('aria-label', 'Fechar câmeras deste ponto');
     };
     const selectPoint = (event: MapLayerMouseEvent) => {
+      if (coverageRef.current) return;
       const id = event.features?.[0]?.properties?.id;
       const camera = filteredRef.current.find((c) => c.id === id);
       if (camera?.coordinates) showOnMap(camera.coordinates, [camera]);
     };
     const expandCluster = async (event: MapLayerMouseEvent) => {
+      if (coverageRef.current) return;
       const feature = event.features?.[0];
       const source = map.getSource(sourceId) as GeoJSONSource | undefined;
       if (!feature || !source || feature.geometry.type !== 'Point') return;
@@ -524,32 +560,46 @@ export function useCameraWorkspace(
 
   return {
     active,
+    coverageActive: active && !!coverageCamera,
     toggle,
     controls: visible && (
-      <div className="absolute left-3 top-17 z-20 flex overflow-hidden rounded-lg border border-[#dce2ed] bg-white shadow-lg md:left-4 md:top-18">
-        <button
-          type="button"
-          aria-pressed={enabled}
-          onClick={toggle}
-          className={`flex min-h-11 items-center gap-2 px-3 text-xs font-semibold ${enabled ? 'bg-teal-800 text-white' : 'text-[#172235]'}`}
-        >
-          <Camera className="size-4" /> Câmeras{' '}
-          {enabled && (
-            <span className="rounded bg-white/15 px-1.5">
-              {mapped.length.toLocaleString('pt-BR')}
-            </span>
-          )}
-        </button>
-        {enabled && (
+      <>
+        {active && coverageCamera?.coordinates && map && (
+          <CameraCoverage
+            key={coverageCamera.id}
+            map={map}
+            camera={coverageCamera}
+            onClose={() => setCoverageCamera(null)}
+              onOpenVideo={() => setSelected(coverageCamera)}
+              onExpandMap={expandMap}
+              mapExpanded={mapExpanded}
+          />
+        )}
+        <div className="absolute left-3 top-17 z-20 flex overflow-hidden rounded-lg border border-[#dce2ed] bg-white shadow-lg md:left-4 md:top-18">
           <button
             type="button"
-            onClick={revealPanel}
-            className="min-h-11 border-l px-3 text-xs font-semibold lg:hidden"
+            aria-pressed={enabled}
+            onClick={toggle}
+            className={`flex min-h-11 items-center gap-2 px-3 text-xs font-semibold ${enabled ? 'bg-teal-800 text-white' : 'text-[#172235]'}`}
           >
-            Ver lista
+            <Camera className="size-4" /> Câmeras{' '}
+            {enabled && (
+              <span className="rounded bg-white/15 px-1.5">
+                {mapped.length.toLocaleString('pt-BR')}
+              </span>
+            )}
           </button>
-        )}
-      </div>
+          {enabled && (
+            <button
+              type="button"
+              onClick={revealPanel}
+              className="min-h-11 border-l px-3 text-xs font-semibold lg:hidden"
+            >
+              Ver lista
+            </button>
+          )}
+        </div>
+      </>
     ),
     panel: (
       <aside
@@ -564,6 +614,7 @@ export function useCameraWorkspace(
             camera={selected}
             sharedReferenceCount={sharedReferenceCount}
             onClose={() => setSelected(null)}
+            onSimulate={() => simulateCoverage(selected)}
             onLocate={() => {
               if (selected.coordinates) {
                 focus(selected.coordinates);
@@ -852,11 +903,13 @@ function CameraViewer({
   sharedReferenceCount,
   onClose,
   onLocate,
+  onSimulate,
 }: {
   camera: PublicCamera;
   sharedReferenceCount: number;
   onClose: () => void;
   onLocate: () => void;
+  onSimulate: () => void;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -889,6 +942,7 @@ function CameraViewer({
             camera={camera}
             sharedReferenceCount={sharedReferenceCount}
             onLocate={onLocate}
+            onSimulate={onSimulate}
           />
         </div>
       </div>
@@ -900,10 +954,12 @@ function CameraDetail({
   camera,
   sharedReferenceCount,
   onLocate,
+  onSimulate,
 }: {
   camera: PublicCamera;
   sharedReferenceCount: number;
   onLocate: () => void;
+  onSimulate: () => void;
 }) {
   const [referenceOpen, setReferenceOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
@@ -950,6 +1006,15 @@ function CameraDetail({
           {accessLabels[camera.access]}
         </span>
       </div>
+      {camera.coordinates && (
+        <Button
+          variant="outline"
+          className="min-h-11 w-full border-amber-300 text-amber-950"
+          onClick={onSimulate}
+        >
+          Simular campo de visão no mapa
+        </Button>
+      )}
       <CameraPlayer camera={camera} />
       <div className="space-y-2 text-xs leading-5 text-muted-foreground">
         <p>

@@ -32,7 +32,11 @@ Referências: [geometria](https://github.com/bilawalsidhu/gods-eye-view/blob/mai
 
 ## Aplicação nesta rodada
 
-Manter MapLibre e o mapa 2D responsivo nesta rodada. Adotar clareza de origem/precisão, acesso rápido a vídeos conferidos, estado de reprodução e preservação do contexto. Investigar uma visualização 3D somente depois de obter posições e orientações verificáveis e medir seu custo em celulares. Não copiar o estilo de vigilância ou efeitos visuais como se fossem dados reais.
+Mantemos MapLibre. A rodada seguinte, solicitada pelo usuário, implementa mapa de ruas e imagem de satélite opcional (Esri World Imagery), além de uma perspectiva inclinada até45°. Essa inclinação é uma apresentação do mapa, não uma reconstrução fotogramétrica de prédios.
+
+O botão **Simular campo de visão** desenha um setor horizontal geodésico, desativado até uma ação explícita. A origem é o ponto aproximado do catálogo. Direção, abertura e raio são ajustáveis, com opção de apontar a direção tocando no mapa. Os valores iniciais norte/60°/250m são ilustrativos. A etiqueta **Simulação manual · não calibrada** permanece junto do desenho. Não há análise de obstáculos, altura, zoom, identificação de objetos ou acompanhamento de PTZ. Nenhuma câmera ganhou cobertura apresentada como confirmada.
+
+O usuário pode salvar parâmetros localmente neste navegador e redefini-los. Isso não altera coordenadas do catálogo nem equivale a uma calibração verificada. Só uma câmera gera geometria por vez; ao fechar a simulação, suas camadas e listeners são removidos. A imagem de satélite tem atribuição e volta ao mapa de ruas em caso de falha de carregamento. Fontes primárias consultadas: [Esri World Imagery](https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer) e [raster com MapLibre](https://developers.arcgis.com/maplibre-gl-js/maps/display-a-map/).
 
 O código do projeto é MIT, com atribuição exigida se houver reutilização de código. Dados e imagens de terceiros têm condições próprias. Esta revisão aproveita conceitos; não incorpora código nem dados do projeto.
 

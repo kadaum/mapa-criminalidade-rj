@@ -142,6 +142,16 @@ const mapStyle = {
       attribution:
         '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',
     },
+    'satellite-imagery': {
+      type: 'raster' as const,
+      tiles: [
+        'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      ],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution:
+        'Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community',
+    },
   },
   layers: [
     {
@@ -160,6 +170,13 @@ const mapStyle = {
         'raster-contrast': -0.08,
         'raster-brightness-max': 0.97,
       },
+    },
+    {
+      id: 'satellite-imagery',
+      type: 'raster' as const,
+      source: 'satellite-imagery',
+      layout: { visibility: 'none' as const },
+      paint: { 'raster-opacity': 1 },
     },
   ],
 };
@@ -361,6 +378,11 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
   const [showNeighborhoods, setShowNeighborhoods] = useState(false);
   const [showBoundaries, setShowBoundaries] = useState(true);
   const [showBase, setShowBase] = useState(false);
+  const [cameraBasemap, setCameraBasemap] = useState<'streets' | 'satellite'>(
+    'streets',
+  );
+  const [imageryError, setImageryError] = useState(false);
+  const [perspective, setPerspective] = useState(false);
   const [urlReady, setUrlReady] = useState(false);
   const cameras = useCameraWorkspace(
     cameraMap,
@@ -370,6 +392,8 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
       mapRef.current?.flyTo({ center: coordinates, zoom: 18, duration: 0 });
     },
     revealCameraPanel,
+    () => setMapExpanded(true),
+    mapExpanded,
   );
   function revealCameraPanel() {
     setMapExpanded(false);
@@ -657,6 +681,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
       style: mapStyle,
       minZoom: 7,
       maxZoom: 19,
+      maxPitch: 45,
       maxBounds: [
         [-46, -26],
         [-40, -19],
@@ -944,6 +969,15 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
       scheduleLabels();
       setCameraMap(map);
     });
+    map.on('error', (event) => {
+      if (
+        (event as maplibregl.ErrorEvent & { sourceId?: string }).sourceId ===
+        'satellite-imagery'
+      ) {
+        setImageryError(true);
+        setCameraBasemap('streets');
+      }
+    });
     map.on('dragstart', () => {
       cityViewRef.current = false;
     });
@@ -1126,13 +1160,18 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
     );
     map.fitBounds(bounds, {
       padding: { top: 38, bottom: 38, left: 24, right: 24 },
+      pitch: 0,
+      bearing: 0,
       duration,
     });
   }
 
   function resetMap() {
     cityViewRef.current = true;
-    if (mapRef.current) fitCity(mapRef.current, reducedMotion ? 0 : 480);
+    setPerspective(false);
+    if (mapRef.current) {
+      fitCity(mapRef.current, reducedMotion ? 0 : 480);
+    }
   }
 
   useEffect(() => {
@@ -1151,7 +1190,17 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
     map.setLayoutProperty(
       'osm',
       'visibility',
-      showBase || cameras.active ? 'visible' : 'none',
+      (showBase || cameras.active) &&
+        (!cameras.active || cameraBasemap === 'streets')
+        ? 'visible'
+        : 'none',
+    );
+    map.setLayoutProperty(
+      'satellite-imagery',
+      'visibility',
+      cameras.active && cameraBasemap === 'satellite' && !imageryError
+        ? 'visible'
+        : 'none',
     );
     map.setPaintProperty(
       'osm',
@@ -1180,7 +1229,14 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         'visibility',
         cameras.active ? 'none' : 'visible',
       );
-  }, [showNeighborhoods, showBoundaries, showBase, cameras.active, cameraMap]);
+  }, [showNeighborhoods, showBoundaries, showBase, cameras.active, cameraMap, cameraBasemap, imageryError]);
+
+  useEffect(() => {
+    if (!cameras.active) {
+      cameraMap?.jumpTo({ pitch: 0, bearing: 0 });
+      setPerspective(false);
+    }
+  }, [cameras.active, cameraMap]);
 
   function renderFilterFields(mobile = false) {
     return (
@@ -1359,17 +1415,57 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
         </section>
 
         {cameras.active ? (
-          <div className="mb-3 flex min-h-12 items-center justify-between gap-3 text-sm text-[#59667b]">
-            <span>
+          <div className="mb-3 flex flex-col gap-2 rounded-2xl border border-[#dce2ed] bg-white p-3 text-sm text-[#59667b] sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-xs leading-5">
               Toque nos números para aproximar. Selecione uma câmera no mapa para ver o local e abrir o vídeo.
             </span>
-            <button
-              type="button"
-              onClick={cameras.toggle}
-              className="shrink-0 rounded-full border bg-white px-4 py-2 font-semibold text-[#172235]"
-            >
-              Voltar aos registros
-            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex rounded-xl border border-[#dce2ed] p-1" aria-label="Estilo do mapa de câmeras">
+                {(['streets', 'satellite'] as const).map((style) => (
+                  <button
+                    key={style}
+                    type="button"
+                    aria-pressed={cameraBasemap === style}
+                    onClick={() => {
+                      setImageryError(false);
+                      setCameraBasemap(style);
+                    }}
+                    className={`min-h-9 rounded-lg px-3 text-xs font-semibold ${cameraBasemap === style ? 'bg-[#172235] text-white' : 'text-[#59667b] hover:bg-[#f3f5fa]'}`}
+                  >
+                    {style === 'streets' ? 'Ruas' : 'Satélite'}
+                  </button>
+                ))}
+              </div>
+              <div className="inline-flex rounded-xl border border-[#dce2ed] p-1" aria-label="Inclinação do mapa">
+                {([false, true] as const).map((tilted) => (
+                  <button
+                    key={String(tilted)}
+                    type="button"
+                    aria-pressed={perspective === tilted}
+                    onClick={() => {
+                      setPerspective(tilted);
+                      cityViewRef.current = false;
+                      mapRef.current?.easeTo({ pitch: tilted ? 45 : 0, duration: reducedMotion ? 0 : 320 });
+                    }}
+                    className={`min-h-9 rounded-lg px-3 text-xs font-semibold ${perspective === tilted ? 'bg-[#eaf0fc] text-[#172235]' : 'text-[#59667b] hover:bg-[#f3f5fa]'}`}
+                  >
+                    {tilted ? 'Perspectiva' : '2D'}
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={cameras.toggle}
+                className="min-h-10 shrink-0 rounded-full border bg-white px-4 text-xs font-semibold text-[#172235]"
+              >
+                Voltar aos registros
+              </button>
+            </div>
+            {imageryError && (
+              <p aria-live="polite" className="basis-full text-xs text-amber-800 sm:order-last">
+                Imagens de satélite indisponíveis. O mapa de ruas foi restaurado; selecione Satélite para tentar novamente.
+              </p>
+            )}
           </div>
         ) : (
           <div className="mb-3 space-y-3 rounded-2xl border border-[#dce2ed] bg-white p-3 sm:p-4">
@@ -1508,6 +1604,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                   </div>
                 )}
                 {cameras.active ? (
+                  cameras.coverageActive ? null : (
                   <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
                     <p className="font-semibold">
                       Toque nos números para explorar as câmeras
@@ -1525,6 +1622,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                       indica offline
                     </p>
                   </div>
+                  )
                 ) : (
                   <>
                     <Popover>
