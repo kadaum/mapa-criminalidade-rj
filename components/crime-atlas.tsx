@@ -1607,9 +1607,10 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                   cameras.coverageActive ? null : (
                   <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
                     <p className="font-semibold">
-                      Toque nos números para explorar as câmeras
+                      Aproxime para ver câmeras e cones
                     </p>
                     <p>
+                      <span className="block font-medium text-amber-800">Cones ilustrativos · direção não calibrada</span>
                       <Camera className="inline size-3 text-teal-700" /> Imagem
                       conferida ·{' '}
                       <Camera className="inline size-3 text-blue-600" /> Não

@@ -15,6 +15,7 @@ import { Camera, Copy, MapPin, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CameraPlayer } from '@/components/camera-player';
 import { CameraCoverage } from '@/components/camera-coverage';
+import { cameraCoverageFeatureCollection, normalizeCoverageParameters } from '@/lib/camera-coverage';
 import {
   cameraReference,
   publicCameras,
@@ -27,6 +28,7 @@ import {
 
 const sourceId = 'public-camera-points';
 const selectedSourceId = 'selected-camera-point';
+const automaticCoverageSource = 'camera-automatic-coverage';
 const cameraIconIds = {
   observed: 'camera-reference-observed',
   unverified: 'camera-reference-unverified',
@@ -35,6 +37,8 @@ const cameraIconIds = {
   selected: 'camera-reference-selected',
 };
 const cameraLayers = [
+  'camera-automatic-coverage-fill',
+  'camera-automatic-coverage-line',
   'camera-clusters',
   'camera-cluster-count',
   'camera-points',
@@ -296,7 +300,7 @@ export function useCameraWorkspace(
         simulate.type = 'button';
         simulate.className =
           'mt-2 min-h-11 w-full rounded-lg border border-amber-300 bg-amber-50 p-2 text-xs font-semibold';
-        simulate.textContent = 'Simular campo de visão';
+        simulate.textContent = 'Ajustar cone';
         simulate.addEventListener('click', () =>
           simulateRef.current(cameras[0]),
         );
@@ -378,6 +382,28 @@ export function useCameraWorkspace(
     const resetPointer = () => {
       map.getCanvas().style.cursor = '';
     };
+    let coverageSignature = '';
+    const updateAutomaticCoverage = () => {
+      if (disposed || !map.getLayer('camera-points')) return;
+      const source = map.getSource(automaticCoverageSource) as GeoJSONSource | undefined;
+      if (!source) return;
+      const ids = new Set(map.queryRenderedFeatures({ layers: ['camera-points'] }).map(f => String(f.properties.id)));
+      const cameras = filteredRef.current.filter(c => ids.has(c.id) && c.coordinates && c.id !== coverageRef.current?.id);
+      const entries = cameras.map(camera => {
+        let parameters = { bearingDeg: 0, fovDeg: 60, rangeMeters: 250 };
+        try {
+          const saved = JSON.parse(localStorage.getItem('mapa-rj:coverage:v1:' + camera.id) || 'null');
+          if (saved?.kind === 'manual-simulation') parameters = normalizeCoverageParameters(saved.parameters || parameters);
+        } catch { /* Optional local settings. */ }
+        return { camera, parameters };
+      });
+      const signature = JSON.stringify(entries.map(({ camera, parameters }) => [camera.id, camera.coordinates, parameters]));
+      if (signature === coverageSignature) return;
+      coverageSignature = signature;
+      void source.setData({ type: 'FeatureCollection', features: entries.flatMap(({ camera, parameters }) =>
+        cameraCoverageFeatureCollection(camera.coordinates!, parameters, 20).features.map(feature => ({ ...feature, properties: { ...feature.properties, cameraId: camera.id } }))
+      ) });
+    };
     const setup = () => {
       // The parent may remove and recreate the map when its motion setting
       // changes. A removed MapLibre instance no longer has a style or images.
@@ -404,6 +430,16 @@ export function useCameraWorkspace(
       map.addSource(selectedSourceId, {
         type: 'geojson',
         data: selectedDataRef.current,
+      });
+      map.addSource(automaticCoverageSource, { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addLayer({
+        id: 'camera-automatic-coverage-fill', type: 'fill', source: automaticCoverageSource,
+        filter: ['==', ['geometry-type'], 'Polygon'],
+        paint: { 'fill-color': '#f59e0b', 'fill-opacity': 0.14 },
+      });
+      map.addLayer({
+        id: 'camera-automatic-coverage-line', type: 'line', source: automaticCoverageSource,
+        paint: { 'line-color': '#b45309', 'line-opacity': 0.65, 'line-width': 1.5, 'line-dasharray': [3, 2] },
       });
       map.addLayer({
         id: 'camera-clusters',
@@ -496,11 +532,13 @@ export function useCameraWorkspace(
     map.on('load', setup);
     setup();
     map.on('moveend', updateBounds);
+    map.on('idle', updateAutomaticCoverage);
     return () => {
       disposed = true;
       closePopup();
       map.off('load', setup);
       map.off('moveend', updateBounds);
+      map.off('idle', updateAutomaticCoverage);
       map.off('click', 'camera-points', selectPoint);
       map.off('click', 'camera-clusters', expandCluster);
       map.off('mouseenter', 'camera-points', pointer);
@@ -510,6 +548,7 @@ export function useCameraWorkspace(
       if (map.getStyle()) {
         for (const id of [...cameraLayers].reverse())
           if (map.getLayer(id)) map.removeLayer(id);
+        if (map.getSource(automaticCoverageSource)) map.removeSource(automaticCoverageSource);
         if (map.getSource(sourceId)) map.removeSource(sourceId);
         if (map.getSource(selectedSourceId)) map.removeSource(selectedSourceId);
       }
@@ -1012,7 +1051,7 @@ function CameraDetail({
           className="min-h-11 w-full border-amber-300 text-amber-950"
           onClick={onSimulate}
         >
-          Simular campo de visão no mapa
+          Ajustar cone no mapa
         </Button>
       )}
       <CameraPlayer camera={camera} />
