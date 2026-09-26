@@ -1,0 +1,382 @@
+{
+  "reviewedAt": "2026-09-26",
+  "scope": "Dez referências CamerasRJ no Centro solicitadas; sem alterações no catálogo ou produto.",
+  "method": "Abertura individual do player oficial em um único navegador adicional; espera de até 45 s por feed e captura de screenshot. Os dez itens não renderizaram uma cena. Uma trilha live ou contador interno de frames não foi tratado como evidência visual. Endereços servem apenas para identificar cruzamentos e candidatos a duplicidade, nunca para inferir rumo.",
+  "summary": {
+    "total": 10,
+    "imageUnavailable": 10,
+    "bearingEstimated": 0,
+    "fovEstimated": 0,
+    "rangeEstimated": 0
+  },
+  "cameras": [
+    {
+      "id": "camerasrj-815",
+      "name": "AV. NILO PEÇANHA X AV. PRESIDENTE ANTÔNIO CARLOS",
+      "coordinates": [
+        -43.173431,
+        -22.906105
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/815/",
+      "checkedAt": "2026-09-26T15:35:51.671Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-815-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 0,
+          "height": 0,
+          "frames": 0,
+          "readyState": 0,
+          "paused": false,
+          "liveTrack": true
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-7877",
+        "camerasrj-7878",
+        "camerasrj-7888"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-7877",
+      "name": "AV. NILO PEÇANHA X AV. PRESIDENTE ANTÔNIO CARLOS - FIXA",
+      "coordinates": [
+        -43.173431,
+        -22.906105
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/7877/",
+      "checkedAt": "2026-09-26T15:36:36.799Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-7877-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 0,
+          "height": 0,
+          "frames": 0,
+          "readyState": 0,
+          "paused": false,
+          "liveTrack": true
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-815",
+        "camerasrj-7878",
+        "camerasrj-7888"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-7878",
+      "name": "AV. NILO PEÇANHA X AV. PRESIDENTE ANTÔNIO CARLOS - FIXA",
+      "coordinates": [
+        -43.173431,
+        -22.906105
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/7878/",
+      "checkedAt": "2026-09-26T15:37:21.918Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-7878-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 16,
+          "height": 16,
+          "frames": 171093,
+          "readyState": 1,
+          "paused": false,
+          "liveTrack": false
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-815",
+        "camerasrj-7877",
+        "camerasrj-7888"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-7888",
+      "name": "AV. NILO PEÇANHA X AV. PRESIDENTE ANTÔNIO CARLOS - FIXA",
+      "coordinates": [
+        -43.173431,
+        -22.906105
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/7888/",
+      "checkedAt": "2026-09-26T15:38:07.020Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-7888-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 0,
+          "height": 0,
+          "frames": 0,
+          "readyState": 0,
+          "paused": false,
+          "liveTrack": true
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-815",
+        "camerasrj-7877",
+        "camerasrj-7878"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-5215",
+      "name": "AV. PRESIDENTE ANTÔNIO CARLOS X ARAÚJO PORTO ALEGRE - FIXA",
+      "coordinates": [
+        -43.172804,
+        -22.908285
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/5215/",
+      "checkedAt": "2026-09-26T15:38:52.115Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-5215-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 0,
+          "height": 0,
+          "frames": 0,
+          "readyState": 0,
+          "paused": false,
+          "liveTrack": true
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-5216"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-5216",
+      "name": "AV. PRESIDENTE ANTÔNIO CARLOS X ARAÚJO PORTO ALEGRE - FIXA",
+      "coordinates": [
+        -43.172804,
+        -22.908285
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/5216/",
+      "checkedAt": "2026-09-26T15:39:37.213Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-5216-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 16,
+          "height": 16,
+          "frames": 141885,
+          "readyState": 4,
+          "paused": false,
+          "liveTrack": false
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-5215"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-5227",
+      "name": "AV. PRESIDENTE ANTÔNIO CARLOS X RUA SANTA LUZIA - FIXA",
+      "coordinates": [
+        -43.172054,
+        -22.909285
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/5227/",
+      "checkedAt": "2026-09-26T15:40:22.312Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-5227-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 0,
+          "height": 0,
+          "frames": 0,
+          "readyState": 0,
+          "paused": false,
+          "liveTrack": true
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-5228"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-5228",
+      "name": "AV. PRESIDENTE ANTÔNIO CARLOS X RUA SANTA LUZIA - FIXA",
+      "coordinates": [
+        -43.172054,
+        -22.909285
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/5228/",
+      "checkedAt": "2026-09-26T15:41:07.403Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-5228-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 0,
+          "height": 0,
+          "frames": 0,
+          "readyState": 0,
+          "paused": false,
+          "liveTrack": true
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-5227"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-6368",
+      "name": "AV. RIO BRANCO X AV. PRESIDENTE VARGAS - FIXA",
+      "coordinates": [
+        -43.179052,
+        -22.901511
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/6368/",
+      "checkedAt": "2026-09-26T15:41:52.494Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-6368-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 16,
+          "height": 16,
+          "frames": 41768,
+          "readyState": 1,
+          "paused": false,
+          "liveTrack": false
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-6369"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    },
+    {
+      "id": "camerasrj-6369",
+      "name": "AV. RIO BRANCO X AV. PRESIDENTE VARGAS - FIXA",
+      "coordinates": [
+        -43.179052,
+        -22.901511
+      ],
+      "originPrecision": "intersection",
+      "locationSource": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/CadLog/Trechos_Logradouros/MapServer/0",
+      "status": "image_unavailable",
+      "source": "https://player.camerasrj.com.br/camera/6369/",
+      "checkedAt": "2026-09-26T15:42:37.611Z",
+      "waitSeconds": 45,
+      "screenshot": ".perf-tools/calibration-centro-6369-45s.png",
+      "visualObservation": "Após 45 s, o screenshot mostra somente fundo preto e identificação textual da câmera; nenhum marco, rua ou cena observável.",
+      "playbackObservation": {
+        "inventoryCheck": "playback_confirmed",
+        "videoElement": {
+          "width": 16,
+          "height": 16,
+          "frames": 49027,
+          "readyState": 1,
+          "paused": false,
+          "liveTrack": false
+        }
+      },
+      "bearingDeg": null,
+      "bearingIntervalDeg": null,
+      "fovDeg": null,
+      "rangeMeters": null,
+      "reason": "O sinal não entregou imagem de cena visualizável neste navegador. Endereço/cruzamento não determina a orientação do equipamento; nenhuma estimativa defensável de eixo, FOV ou alcance é possível.",
+      "possibleDuplicateIds": [
+        "camerasrj-6368"
+      ],
+      "duplicateAssessment": "Candidato a cadastro duplicado pelo mesmo nome/endereço e coordenadas do cruzamento. Não confirmado visualmente porque os frames de cena estão indisponíveis."
+    }
+  ]
+}

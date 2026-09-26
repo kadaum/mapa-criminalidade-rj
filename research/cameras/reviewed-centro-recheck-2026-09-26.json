@@ -1,0 +1,92 @@
+[
+  {
+    "id": "camerasrj-815",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:35:51.671Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-7877",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:36:36.799Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-7878",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:37:21.918Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-7888",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:38:07.020Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-5215",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:38:52.115Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-5216",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:39:37.213Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-5227",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:40:22.312Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-5228",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:41:07.403Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-6368",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:41:52.494Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  },
+  {
+    "id": "camerasrj-6369",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T15:42:37.611Z",
+      "outcome": "inconclusive",
+      "reason": "Houve reprodução em teste anterior, mas a revisão visual mais recente não recebeu uma imagem utilizável em 45 segundos. A disponibilidade continua incerta.",
+      "method": "Revisão individual no player público em Chrome, com captura de tela e inspeção do vídeo; trilha live ou placeholder não foram considerados imagem."
+    }
+  }
+]
