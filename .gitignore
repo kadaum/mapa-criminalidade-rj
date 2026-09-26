@@ -36,3 +36,9 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Mutable playback audit checkpoints; publish reviewed snapshots instead.
+/research/cameras/full-audit-camerasrj-*.jsonl
+/research/cameras/full-audit-camerasrj-*.json
+/research/cameras/full-audit-camerasrj-*.log
+/research/cameras/full-audit-camerasrj-*.stop

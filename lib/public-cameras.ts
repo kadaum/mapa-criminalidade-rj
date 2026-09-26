@@ -15,13 +15,23 @@ export type PublicCamera = {
   access: 'public' | 'registration' | 'subscription';
   status: 'observed' | 'unverified' | 'failed' | 'offline';
   checkedAt?: string;
+  playbackCheck?: {
+    checkedAt: string;
+    outcome: 'playing' | 'failed' | 'inconclusive' | 'restricted' | 'external';
+    reason: string;
+    method: string;
+  };
   note?: string;
 };
-export type CameraCatalog = { reviewedAt: string; cameras: PublicCamera[] };
+export type CameraCatalog = {
+  reviewedAt: string;
+  cameras: PublicCamera[];
+  playbackAudit?: { total: number; checked: number; complete: boolean; updatedAt: string; counts: Record<string, number> };
+};
 export const statusLabels = {
-  observed: 'Imagem conferida',
-  unverified: 'Imagem não testada',
-  failed: 'Falhou no teste',
+  observed: 'Reprodução confirmada no teste',
+  unverified: 'Disponibilidade não confirmada',
+  failed: 'Não reproduziu no teste',
   offline: 'Fonte indica offline',
 };
 export const precisionLabels = {
@@ -77,4 +87,27 @@ export function cameraReference(camera: PublicCamera): string {
     'Solicito avaliar se essa câmera pode ter registrado o ocorrido e, se cabível, solicitar as imagens ao responsável.',
     'Esta referência não comprova que o fato foi filmado. O Mapa de Criminalidade RJ não armazena nem fornece gravações.',
   ].join('\n');
+}
+
+/** Order playback choices without treating a shared address as the same camera. */
+export function compareCameraPlayback(a: PublicCamera, b: PublicCamera) {
+  const score = (c: PublicCamera) => c.access !== 'public' ? -1 : c.status === 'observed' ? 3 : c.status === 'unverified' ? 2 : 1;
+  return score(b) - score(a) || (b.playbackCheck?.checkedAt || '').localeCompare(a.playbackCheck?.checkedAt || '') || a.name.localeCompare(b.name, 'pt-BR');
+}
+
+export function cameraSignalKey(camera: PublicCamera): string | null {
+  if (camera.youtubeId) return 'youtube:' + camera.youtubeId;
+  if (!camera.watchUrl) return null;
+  try {
+    const url = new URL(camera.watchUrl);
+    url.hash = '';
+    return url.href.replace(/\/$/, '');
+  } catch { return null; }
+}
+
+export function preferredCameraSource(camera: PublicCamera, catalog: PublicCamera[]) {
+  const key = cameraSignalKey(camera);
+  if (!key) return camera;
+  const candidates = catalog.filter(c => cameraSignalKey(c) === key && c.access === 'public' && c.status === 'observed');
+  return candidates.sort(compareCameraPlayback)[0] || camera;
 }

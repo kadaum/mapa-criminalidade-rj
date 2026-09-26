@@ -1,0 +1,2093 @@
+{
+  "startedAt": "2026-09-26T13:23:39.608Z",
+  "updatedAt": "2026-09-26T13:29:04.883Z",
+  "scope": "Every non-CamerasRJ catalog entry; no authentication; external pages tested at their public source, YouTube tested embedded.",
+  "total": 27,
+  "completed": 27,
+  "method": "Chrome headless fresh context. Two video snapshots 4 seconds apart. Source screenshots retained for visual verification. Restricted entries visited but playback not attempted. HTTP200 alone never counts as working.",
+  "results": [
+    {
+      "id": "aviation-tv-galeao",
+      "name": "Aeroporto do Galeão — Aviation TV",
+      "publisher": "Aviation TV",
+      "source": "https://www.youtube.com/@avtv/streams",
+      "access": "public",
+      "youtubeId": "Ovs0e52kN28",
+      "checkedAt": "2026-09-26T13:28:48.606Z",
+      "httpStatus": 200,
+      "sourcePageText": "",
+      "frameUrls": [
+        "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FOvs0e52kN28%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+        "https://www.youtube-nocookie.com/embed/Ovs0e52kN28"
+      ],
+      "before": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FOvs0e52kN28%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/Ovs0e52kN28",
+          "text": "",
+          "videos": [
+            {
+              "time": 11.420664,
+              "duration": 42898.761,
+              "ready": 4,
+              "paused": false,
+              "width": 1280,
+              "height": 720,
+              "frames": 347,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FOvs0e52kN28%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/Ovs0e52kN28",
+          "text": "",
+          "videos": [
+            {
+              "time": 15.421886,
+              "duration": 42898.761,
+              "ready": 4,
+              "paused": false,
+              "width": 1280,
+              "height": 720,
+              "frames": 467,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-aviation-tv-galeao.png",
+      "youtubeMetadata": {
+        "id": "aviation-tv-galeao",
+        "checkedAt": "2026-09-26T13:21:55.337Z",
+        "videoId": "Ovs0e52kN28",
+        "playability": {
+          "status": "OK",
+          "playableInEmbed": true,
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "live": {
+          "isLiveNow": false,
+          "startTimestamp": "2026-09-25T14:50:59+00:00",
+          "endTimestamp": "2026-09-26T02:51:11+00:00"
+        },
+        "details": {
+          "title": "25-09-2026 (TARDE E NOITE) - AEROPORTO INTERNACIONAL DO GALEÃO / RIO DE JANEIRO - BRASIL GIG SBGL",
+          "lengthSeconds": "42899"
+        }
+      },
+      "recording": true,
+      "replacement": {
+        "youtubeId": "CmUjaXaHqUU",
+        "checkedAt": "2026-09-26T13:24:41.282Z",
+        "before": [
+          {
+            "time": 38011.574698,
+            "frames": 349,
+            "width": 1280,
+            "height": 720,
+            "paused": false,
+            "ready": 4
+          }
+        ],
+        "after": [
+          {
+            "time": 38015.594325,
+            "frames": 469,
+            "width": 1280,
+            "height": 720,
+            "paused": false,
+            "ready": 4
+          }
+        ],
+        "live": {
+          "isLiveNow": true,
+          "startTimestamp": "2026-09-26T02:50:54+00:00"
+        },
+        "playability": {
+          "status": "OK",
+          "playableInEmbed": true,
+          "liveStreamability": {
+            "liveStreamabilityRenderer": {
+              "videoId": "CmUjaXaHqUU",
+              "broadcastId": "1",
+              "pollDelayMs": "15000"
+            }
+          },
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "title": "AO VIVO - AEROPORTO INTERNACIONAL DO GALEÃO / RIO DE JANEIRO - BRASIL GIG SBGL",
+        "screenshot": ".perf-tools/audit-replacement-CmUjaXaHqUU.png"
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:24:41.282Z",
+        "outcome": "playing",
+        "reason": "Transmissão atual em movimento confirmada; o link anterior virou gravação.",
+        "method": "Chrome: novo player YouTube incorporado,1280×720,120quadros adicionais em4segundos; liveNowtrue."
+      }
+    },
+    {
+      "id": "aviation-tv-santos-dumont",
+      "name": "Aeroporto Santos Dumont — Aviation TV",
+      "publisher": "Aviation TV",
+      "source": "https://www.youtube.com/@avtv/streams",
+      "access": "public",
+      "youtubeId": "oWUc9q-w7j4",
+      "checkedAt": "2026-09-26T13:28:32.291Z",
+      "httpStatus": 200,
+      "sourcePageText": "",
+      "frameUrls": [
+        "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FoWUc9q-w7j4%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+        "https://www.youtube-nocookie.com/embed/oWUc9q-w7j4"
+      ],
+      "before": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FoWUc9q-w7j4%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/oWUc9q-w7j4",
+          "text": "",
+          "videos": [
+            {
+              "time": 10.283248,
+              "duration": 42898.561,
+              "ready": 4,
+              "paused": false,
+              "width": 1280,
+              "height": 720,
+              "frames": 314,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FoWUc9q-w7j4%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/oWUc9q-w7j4",
+          "text": "",
+          "videos": [
+            {
+              "time": 14.294474,
+              "duration": 42898.561,
+              "ready": 4,
+              "paused": false,
+              "width": 1280,
+              "height": 720,
+              "frames": 434,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-aviation-tv-santos-dumont.png",
+      "youtubeMetadata": {
+        "id": "aviation-tv-santos-dumont",
+        "checkedAt": "2026-09-26T13:21:54.590Z",
+        "videoId": "oWUc9q-w7j4",
+        "playability": {
+          "status": "OK",
+          "playableInEmbed": true,
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "live": {
+          "isLiveNow": false,
+          "startTimestamp": "2026-09-25T20:50:49+00:00",
+          "endTimestamp": "2026-09-26T08:51:13+00:00"
+        },
+        "details": {
+          "title": "25-09-2026 (NOITE) - AEROPORTO SANTOS DUMONT / RIO DE JANEIRO - BRASIL SDU SBRJ",
+          "lengthSeconds": "42899"
+        }
+      },
+      "recording": true,
+      "replacement": {
+        "youtubeId": "0khziup_vfw",
+        "checkedAt": "2026-09-26T13:24:23.901Z",
+        "before": [
+          {
+            "time": 13397.910666,
+            "frames": 57,
+            "width": 426,
+            "height": 240,
+            "paused": false,
+            "ready": 2
+          }
+        ],
+        "after": [
+          {
+            "time": 13397.910666,
+            "frames": 57,
+            "width": 426,
+            "height": 240,
+            "paused": false,
+            "ready": 2
+          }
+        ],
+        "live": {
+          "isLiveNow": true,
+          "startTimestamp": "2026-09-26T08:50:51+00:00"
+        },
+        "playability": {
+          "status": "OK",
+          "reason": "We're experiencing technical difficulties.",
+          "playableInEmbed": true,
+          "liveStreamability": {
+            "liveStreamabilityRenderer": {
+              "videoId": "0khziup_vfw",
+              "broadcastId": "1",
+              "pollDelayMs": "15000"
+            }
+          },
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "title": "LIVE - AEROPORTO SANTOS DUMONT / RIO DE JANEIRO - BRASIL SDU SBRJ",
+        "screenshot": ".perf-tools/audit-replacement-0khziup_vfw.png"
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:28:32.291Z",
+        "outcome": "playing",
+        "reason": "O vídeo reproduz uma gravação; esta transmissão já foi encerrada.",
+        "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+      }
+    },
+    {
+      "id": "homes-posto-3",
+      "name": "Copacabana · Posto 3",
+      "publisher": "Homes in Rio",
+      "source": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
+      "access": "public",
+      "youtubeId": "k2QzfrPLQSg",
+      "checkedAt": "2026-09-26T13:21:22.354Z",
+      "httpStatus": 200,
+      "sourcePageText": "",
+      "frameUrls": [
+        "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2Fk2QzfrPLQSg%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+        "https://www.youtube-nocookie.com/embed/k2QzfrPLQSg"
+      ],
+      "before": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2Fk2QzfrPLQSg%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/k2QzfrPLQSg",
+          "text": "",
+          "videos": [
+            {
+              "time": 46811.315987,
+              "duration": 50400.100000000006,
+              "ready": 4,
+              "paused": false,
+              "width": 1278,
+              "height": 720,
+              "frames": 342,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2Fk2QzfrPLQSg%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/k2QzfrPLQSg",
+          "text": "",
+          "videos": [
+            {
+              "time": 46815.324703,
+              "duration": 50400.100000000006,
+              "ready": 4,
+              "paused": false,
+              "width": 1278,
+              "height": 720,
+              "frames": 462,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-homes-posto-3.png",
+      "youtubeMetadata": {
+        "id": "homes-posto-3",
+        "checkedAt": "2026-09-26T13:21:52.406Z",
+        "videoId": "k2QzfrPLQSg",
+        "playability": {
+          "status": "OK",
+          "playableInEmbed": true,
+          "liveStreamability": {
+            "liveStreamabilityRenderer": {
+              "videoId": "k2QzfrPLQSg",
+              "broadcastId": "11",
+              "pollDelayMs": "15000"
+            }
+          },
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "live": {
+          "isLiveNow": true,
+          "startTimestamp": "2026-09-17T02:11:43+00:00"
+        },
+        "details": {
+          "title": "Rio de Janeiro Cam - Copacabana Posto 3",
+          "isLive": true,
+          "lengthSeconds": "0"
+        }
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:21:22.354Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento confirmado no teste.",
+        "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+      }
+    },
+    {
+      "id": "homes-posto-6",
+      "name": "Copacabana · Posto 6",
+      "publisher": "Homes in Rio",
+      "source": "https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam",
+      "access": "public",
+      "youtubeId": "Hr7c0XuEgm0",
+      "checkedAt": "2026-09-26T13:21:38.807Z",
+      "httpStatus": 200,
+      "sourcePageText": "",
+      "frameUrls": [
+        "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FHr7c0XuEgm0%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+        "https://www.youtube-nocookie.com/embed/Hr7c0XuEgm0"
+      ],
+      "before": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FHr7c0XuEgm0%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/Hr7c0XuEgm0",
+          "text": "",
+          "videos": [
+            {
+              "time": 46807.393016,
+              "duration": 50396.10066666668,
+              "ready": 4,
+              "paused": false,
+              "width": 1278,
+              "height": 720,
+              "frames": 345,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FHr7c0XuEgm0%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/Hr7c0XuEgm0",
+          "text": "",
+          "videos": [
+            {
+              "time": 46811.40534,
+              "duration": 50396.10066666668,
+              "ready": 4,
+              "paused": false,
+              "width": 1278,
+              "height": 720,
+              "frames": 465,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-homes-posto-6.png",
+      "youtubeMetadata": {
+        "id": "homes-posto-6",
+        "checkedAt": "2026-09-26T13:21:53.080Z",
+        "videoId": "Hr7c0XuEgm0",
+        "playability": {
+          "status": "OK",
+          "playableInEmbed": true,
+          "liveStreamability": {
+            "liveStreamabilityRenderer": {
+              "videoId": "Hr7c0XuEgm0",
+              "broadcastId": "13",
+              "pollDelayMs": "15000"
+            }
+          },
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "live": {
+          "isLiveNow": true,
+          "startTimestamp": "2026-09-17T02:04:22+00:00"
+        },
+        "details": {
+          "title": "Webcam Rio de Janeiro Copacabana Posto 6",
+          "isLive": true,
+          "lengthSeconds": "0"
+        }
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:21:38.807Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento confirmado no teste.",
+        "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+      }
+    },
+    {
+      "id": "mar-urbano-posto-6",
+      "name": "Copacabana · Posto 6 (Mar Urbano)",
+      "publisher": "Instituto Mar Urbano",
+      "source": "https://institutomarurbano.com.br/live-cam/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:02.824Z",
+      "httpStatus": 200,
+      "sourcePageText": "Pular para o conteúdo\nInstituto Mar Urbano\nHome\nO Instituto\nQuem Somos\nRelatórios\nProjetos\nAções\nDocumentários\nMídia\nLive Cam\nFaça Parte!\nLIVE CAM COPACABANA\n\nAcompanhe ao vivo o mar de Copacabana, Posto 6.\n\nvimeo\n \nfacebook\n \nyoutube\n \ninstagram",
+      "frameUrls": [
+        "https://institutomarurbano.com.br/live-cam/"
+      ],
+      "before": [
+        {
+          "frame": "https://institutomarurbano.com.br/live-cam/",
+          "text": "Pular para o conteúdo\nInstituto Mar Urbano\nHome\nO Instituto\nQuem Somos\nRelatórios\nProjetos\nAções\nDocumentários\nMídia\nLive Cam\nFaça Parte!\nLIVE CAM COPACABANA\n\nAcompanhe ao vivo o mar de Copacabana, Posto 6.\n\nvimeo\n \nfacebook\n \nyoutube\n \ninstagram",
+          "videos": [
+            {
+              "time": 0,
+              "duration": null,
+              "ready": 0,
+              "paused": false,
+              "width": 0,
+              "height": 0,
+              "frames": 0,
+              "source": "",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "https://institutomarurbano.com.br/live-cam/",
+          "text": "Pular para o conteúdo\nInstituto Mar Urbano\nHome\nO Instituto\nQuem Somos\nRelatórios\nProjetos\nAções\nDocumentários\nMídia\nLive Cam\nFaça Parte!\nLIVE CAM COPACABANA\n\nAcompanhe ao vivo o mar de Copacabana, Posto 6.\n\nvimeo\n \nfacebook\n \nyoutube\n \ninstagram",
+          "videos": [
+            {
+              "time": 0,
+              "duration": null,
+              "ready": 0,
+              "paused": false,
+              "width": 0,
+              "height": 0,
+              "frames": 0,
+              "source": "",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "no_playback_confirmed",
+      "reason": "No qualifying video advanced in observation window.",
+      "screenshot": ".perf-tools/audit-other-mar-urbano-posto-6.png",
+      "visualReview": "Página Live Cam mostra retângulo preto, vídeo semsrc,0frames e resolução0×0.",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:02.824Z",
+        "outcome": "failed",
+        "reason": "Nenhuma imagem em movimento foi recebida durante o teste na fonte.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "paineiras-corcovado",
+      "name": "Paineiras Corcovado",
+      "publisher": "Paineiras Corcovado",
+      "source": "https://www.youtube.com/watch?v=aRDuS1iqioU",
+      "access": "public",
+      "youtubeId": "aRDuS1iqioU",
+      "checkedAt": "2026-09-26T13:23:58.781Z",
+      "httpStatus": 200,
+      "sourcePageText": "",
+      "frameUrls": [
+        "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FaRDuS1iqioU%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+        "https://www.youtube-nocookie.com/embed/aRDuS1iqioU"
+      ],
+      "before": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FaRDuS1iqioU%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/aRDuS1iqioU",
+          "text": "",
+          "videos": [
+            {
+              "time": 11.423989,
+              "duration": 42898.881,
+              "ready": 4,
+              "paused": false,
+              "width": 854,
+              "height": 480,
+              "frames": 348,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://127.0.0.1:3228/https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2FaRDuS1iqioU%3Fautoplay%3D1%26mute%3D1%26playsinline%3D1",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.youtube-nocookie.com/embed/aRDuS1iqioU",
+          "text": "",
+          "videos": [
+            {
+              "time": 15.433458,
+              "duration": 42898.881,
+              "ready": 4,
+              "paused": false,
+              "width": 854,
+              "height": 480,
+              "frames": 467,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-paineiras-corcovado.png",
+      "youtubeMetadata": {
+        "id": "paineiras-corcovado",
+        "checkedAt": "2026-09-26T13:21:53.787Z",
+        "videoId": "aRDuS1iqioU",
+        "playability": {
+          "status": "OK",
+          "playableInEmbed": true,
+          "miniplayer": {
+            "miniplayerRenderer": {
+              "playbackMode": "PLAYBACK_MODE_ALLOW"
+            }
+          },
+          "contextParams": "Q0FFU0FnZ0M="
+        },
+        "live": {
+          "isLiveNow": false,
+          "startTimestamp": "2026-09-08T09:53:23+00:00",
+          "endTimestamp": "2026-09-08T22:38:04+00:00"
+        },
+        "details": {
+          "title": "Paineiras Corcovado AO VIVO / Cristo Redentor",
+          "lengthSeconds": "42899"
+        }
+      },
+      "recording": true,
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:23:58.781Z",
+        "outcome": "playing",
+        "reason": "O vídeo reproduz uma gravação; esta transmissão já foi encerrada.",
+        "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+      }
+    },
+    {
+      "id": "surfconnect-arpoador",
+      "name": "Praia do Arpoador Arpex",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/arpoador/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:42.935Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nPraia do Arpoador\nArpex\n FAVORITO  COMPARTILHAR  TWEETAR\n\nConsiderado como o berço do surf carioca, a praia do Arpoador fica localizada no canto esquerdo da praia de Ipanema. Sua onda é considerada uma das melhores esquerdas do país, longa e manobrável. O crowd do pico pode assustar, pois o surf ali é constante e conta com várias escolas de surf. As ondas funcionam desde marolas até 3 metros consistentes. Além do surf, a praia é muito conhecida por seu belissímo visual além de um pôr do sol de tirar o folêgo! \n\nÉ a primeira praia do Brasil a possuir holofotes que possibilitam o surf noturno! \n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: SE, E | Vento favorável: N, NE | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/arpoador/",
+        "http://v1.surfconnect.com.br/spot/camera/id/1/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-arpoador",
+        "checkedAt": "2026-09-26T13:26:49.122Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/1/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:42.935Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-ipanema-posto-10",
+      "name": "Praia de Ipanema - Posto 10 Ipanema P10",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/ipanema-posto-10/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:29.104Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  23 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nPraia de Ipanema - Posto 10\nIpanema P10\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Posto 10 em Ipanema fica localizado entre as ruas mais famosas do bairro. Em relação as suas ondas, temos um beachbreak (direitas e esquerdas) e elas quebram geralmente perto da areia, atraindo bodyboarders, surfistas de peito e surfistas mais aventureiros. É uma onda rápida e tubular, e que quando o swell não está alinhado forma ondas irregulares fechando. O visual do morro dos dois irmãos nas ondas da direita como na foto acima é um clássico e faz ipanema ser um dos picos mais fotogênicos do Rio. \n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE e E | Vento favorável: N, NE | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/ipanema-posto-10/",
+        "http://v1.surfconnect.com.br/spot/camera/id/34/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-ipanema-posto-10",
+        "checkedAt": "2026-09-26T13:26:43.407Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/34/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:29.104Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-ipanema-posto-8",
+      "name": "Praia de Ipanema - Posto 8 Ipanema",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/ipanema-posto-8/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:36.002Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nSE   3.11 kts\n Multispot\nPraia de Ipanema - Posto 8\nIpanema\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Posto 8 em Ipanema fica no começo da Av. Vieira Souto, próximo ao Arpoador. As ondas são curtas, tubulares e rápidas e que quebram perto da areia. Por ser um beachbreak, tem direitas e esquerdas. Nos dias grandes é possível surfar o famoso Castelinho, laje que fica a cerca de 100 metros da praia que rolam tubos bem ocos pra direita. Quando o mar ganha muito tamanho Ipanema não consegue segurar bem a ondulação, tornando as ondas irregulares e fechando (famoso \"quebra coco\") , então o ideal nesses dias é procurar os cantos da praia (Arpoador ou Leblon).\n\n\n\nAlém do Surf, nos dias sem ondulação o stand up paddle ganha destaque pois o Posto 8 serve como ponto de partida para remada até o arquipélago das Cagarras\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE, E | Vento favorável: N,NE | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/ipanema-posto-8/",
+        "http://v1.surfconnect.com.br/spot/camera/id/10/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-ipanema-posto-8",
+        "checkedAt": "2026-09-26T13:26:46.248Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/10/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:36.002Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-leblon",
+      "name": "Canto do Leblon Leblon P12",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/leblon/",
+      "access": "registration",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:56.757Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nCanto do Leblon\nLeblon P12\n FAVORITO  COMPARTILHAR  TWEETAR\n\nFamoso pela sua direita tubular e manobrável, o pontão do Leblon funciona muito bem nos dias de grande swell. No dias de menor ondulação, rende uma brincadeira divertida. É um dos poucos picos no Rio de Janeiro protegido pelo vento sudoeste. Quanto mais corrente de leste entrar antes do swell chegar, mais longa fica direita em função da melhora do fundo.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE e E | Vento favorável: N, NE | Melhor maré: Enchendo\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\n\t\nSolarGrid\nPor um mundo mais eficiente, conectado e sustentável.\nAcesse: http://www.solargrid.com.br/\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/leblon/",
+        "http://v1.surfconnect.com.br/spot/camera/id/9/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires registration; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-leblon",
+        "checkedAt": "2026-09-26T13:26:54.843Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/9/",
+            "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:56.757Z",
+        "outcome": "restricted",
+        "reason": "O operador exige cadastro para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-leblon-posto-11",
+      "name": "Praia do Leblon Leblon P11",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/leblon-posto-11/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:26:03.811Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nSE   3.11 kts\n Multispot\nPraia do Leblon\nLeblon P11\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Posto 11 do Leblon é um beach break que funciona com praticamente todas as ondulações que passam pelo Rio, como Leste, Sudeste, Sul e Sudoeste. Além do surf, é outro ponto importante para o Kite quando o vento é o sudoeste. \n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: L, S, SE e E | Vento favorável: N, NE | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/leblon-posto-11/",
+        "http://v1.surfconnect.com.br/spot/camera/id/15/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-leblon-posto-11",
+        "checkedAt": "2026-09-26T13:26:57.674Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/15/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:26:03.811Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-leme",
+      "name": "Praia do Leme Leme",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/leme/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:23:39.641Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2 m\nNE   1.3 kts\n Multispot\nPraia do Leme\nLeme\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Leme é uma praia localizada no canto esquerdo da praia de Copacabana. É um excelente pico para os bodyborders e surfista de peito por conta de suas ondas tubulares, rápidas e que quebram na rasa bancada de areia próximo a praia. Nos dias em que as condições se alinham a galera do surf também aproveita pra botar pra baixo nos tubos ocos carinhosamente conhecido como \"Pipeleme\"\n\nO pico também funciona bem nos dias de marolas por conta da preservação do fundo devido a pedra do Leme.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE, E | Vento favorável: S, SSW, SW, W | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/leme/",
+        "https://dvr-br1.hostlink.com/vsaas/embed/cam-ee5a8ad7d4",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "before": [
+        {
+          "frame": "http://v1.surfconnect.com.br/leme/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2 m\nNE   1.3 kts\n Multispot\nPraia do Leme\nLeme\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Leme é uma praia localizada no canto esquerdo da praia de Copacabana. É um excelente pico para os bodyborders e surfista de peito por conta de suas ondas tubulares, rápidas e que quebram na rasa bancada de areia próximo a praia. Nos dias em que as condições se alinham a galera do surf também aproveita pra botar pra b",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-ee5a8ad7d4",
+          "text": "09:23:56\nLIVE\nkeyboard\n09:20\n09:21\n09:22\n09:23\n09:24\n09:25\nview_comfy",
+          "videos": [
+            {
+              "time": 8.655573,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 207,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://v1.surfconnect.com.br/leme/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2 m\nNE   1.3 kts\n Multispot\nPraia do Leme\nLeme\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Leme é uma praia localizada no canto esquerdo da praia de Copacabana. É um excelente pico para os bodyborders e surfista de peito por conta de suas ondas tubulares, rápidas e que quebram na rasa bancada de areia próximo a praia. Nos dias em que as condições se alinham a galera do surf também aproveita pra botar pra b",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-ee5a8ad7d4",
+          "text": "09:24:00\nLIVE\nkeyboard\n09:20\n09:21\n09:22\n09:23\n09:24\n09:25\nview_comfy",
+          "videos": [
+            {
+              "time": 12.662651,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 328,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-surfconnect-leme.png",
+      "visualReview": "Praia visível, sem tela preta; carimbo da câmera indica2000.",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:23:39.641Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento na fonte, mas o relógio da câmera exibe o ano2000; atualidade não confirmada.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-leme-fixa",
+      "name": "Leme Fixa",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/leme-fixa/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:26:10.502Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  21 Cº\nS   2 m\nNE   1.3 kts\n Multispot\nPraia do Leme\nLeme Fixa\n FAVORITO  COMPARTILHAR  TWEETAR\n\n \n\nO Leme é uma praia localizada no canto esquerdo da praia de Copacabana. É um excelente pico para os bodyborders e surfista de peito por conta de suas ondas tubulares, rápidas e que quebram na rasa bancada de areia próximo a praia. Nos dias em que as condições se alinham a galera do surf também aproveita pra botar pra baixo nos tubos ocos carinhosamente conhecido como \"Pipeleme\"\n\nO pico também funciona bem nos dias de marolas por conta da preservação do fundo devido a pedra do Leme.\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/leme-fixa/",
+        "https://dvr-br1.hostlink.com/vsaas/embed/haight.dias.entrada-906e990f55",
+        "https://www.google.com/maps/embed",
+        "about:blank",
+        "about:blank",
+        "about:blank"
+      ],
+      "before": [
+        {
+          "frame": "http://v1.surfconnect.com.br/leme-fixa/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  21 Cº\nS   2 m\nNE   1.3 kts\n Multispot\nPraia do Leme\nLeme Fixa\n FAVORITO  COMPARTILHAR  TWEETAR\n\n \n\nO Leme é uma praia localizada no canto esquerdo da praia de Copacabana. É um excelente pico para os bodyborders e surfista de peito por conta de suas ondas tubulares, rápidas e que quebram na rasa bancada de areia próximo a praia. Nos dias em que as condições se alinham a galera do surf também aproveita pra bot",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/haight.dias.entrada-906e990f55",
+          "text": "09:26:24\nLIVE\nkeyboard\n09:22\n09:23\n09:24\n09:25\n09:26\n09:27\nview_comfy",
+          "videos": [
+            {
+              "time": 10.194424,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 214,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "Keyboard shortcuts\nMap data ©2026 Google\nTerms\nReport a map error",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://v1.surfconnect.com.br/leme-fixa/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  21 Cº\nS   2 m\nNE   1.3 kts\n Multispot\nPraia do Leme\nLeme Fixa\n FAVORITO  COMPARTILHAR  TWEETAR\n\n \n\nO Leme é uma praia localizada no canto esquerdo da praia de Copacabana. É um excelente pico para os bodyborders e surfista de peito por conta de suas ondas tubulares, rápidas e que quebram na rasa bancada de areia próximo a praia. Nos dias em que as condições se alinham a galera do surf também aproveita pra bot",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/haight.dias.entrada-906e990f55",
+          "text": "09:26:28\nLIVE\nkeyboard\n09:22\n09:23\n09:24\n09:25\n09:26\n09:27\nview_comfy",
+          "videos": [
+            {
+              "time": 14.202966,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 314,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "Keyboard shortcuts\nMap data ©2026 Google\nTerms\nReport a map error",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-surfconnect-leme-fixa.png",
+      "visualReview": "Praia visível; carimbo26/09/2026, horário difere do relógio do player.",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:26:10.502Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento confirmado na fonte; os relógios da câmera e do player diferem.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-macumba",
+      "name": "Praia da Macumba - 5W Macumba - 5W",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/macumba/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:27:04.462Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.14 m\nS   1.2 kts\n Multispot\nPraia da Macumba - 5W\nMacumba - 5W\n FAVORITO  COMPARTILHAR  TWEETAR\n\nEm frente a rua 5W na Praia da Macumba rolam ótimas ondas principalmente para a galera do stand up paddle e long board. O outside é bem longe e proporciona uma boa remada. As ondas são longas e cheias proporcionando várias manobras. No dia a dia é provável que você divida as ondas com algumas das lendas vivas do surf que frequentam o pico.\nMelhor ondulação de Sul / Sudeste e vento Norte.\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/macumba/",
+        "https://dvr-br1.hostlink.com/vsaas/embed/cam-8e2b0bb753",
+        "https://www.google.com/maps/embed",
+        "about:blank",
+        "about:blank",
+        "about:blank"
+      ],
+      "before": [
+        {
+          "frame": "http://v1.surfconnect.com.br/macumba/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.14 m\nS   1.2 kts\n Multispot\nPraia da Macumba - 5W\nMacumba - 5W\n FAVORITO  COMPARTILHAR  TWEETAR\n\nEm frente a rua 5W na Praia da Macumba rolam ótimas ondas principalmente para a galera do stand up paddle e long board. O outside é bem longe e proporciona uma boa remada. As ondas são longas e cheias proporcionando várias manobras. No dia a dia é provável que você divida as ondas com algumas das lend",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-8e2b0bb753",
+          "text": "09:27:38\nLIVE\nkeyboard\n09:24\n09:25\n09:26\n09:27\n09:28\n09:29\nview_comfy\nClick to unmute",
+          "videos": [
+            {
+              "time": 15.439859,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 2688,
+              "height": 1520,
+              "frames": 395,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "Keyboard shortcuts\nMap data ©2026 Google\nTerms\nReport a map error",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://v1.surfconnect.com.br/macumba/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.14 m\nS   1.2 kts\n Multispot\nPraia da Macumba - 5W\nMacumba - 5W\n FAVORITO  COMPARTILHAR  TWEETAR\n\nEm frente a rua 5W na Praia da Macumba rolam ótimas ondas principalmente para a galera do stand up paddle e long board. O outside é bem longe e proporciona uma boa remada. As ondas são longas e cheias proporcionando várias manobras. No dia a dia é provável que você divida as ondas com algumas das lend",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-8e2b0bb753",
+          "text": "09:27:42\nLIVE\nkeyboard\n09:24\n09:25\n09:26\n09:27\n09:28\n09:29\nview_comfy\nClick to unmute",
+          "videos": [
+            {
+              "time": 19.452652,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 2688,
+              "height": 1520,
+              "frames": 515,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "Keyboard shortcuts\nMap data ©2026 Google\nTerms\nReport a map error",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-surfconnect-macumba.png",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:27:04.462Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento confirmado no teste.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-macumba-curvao",
+      "name": "Curvão Macumba - Curvão",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/macumba-curvao/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:26:35.848Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  23 Cº\nS   2.14 m\nL   6.1 kts\n Multispot\nCurvão\nMacumba - Curvão\n FAVORITO  COMPARTILHAR  TWEETAR\n\nEm frente ao Curvão na Praia da Macumba um pouco antes do Camping rolam ótimas ondas. O fundo e a curva que a praia fazem deixam as ondas um pouco diferentes do inicio da praia, As ondas são um pouco menos longas, mas possuem uma parede mais em pé e proporcionam melhores condições para a galera de pranchinha, apesar de também ser bom pra tribo do longboard.\n\nMelhor ondulação de Sul / Sudeste e vento Norte.\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/macumba-curvao/",
+        "http://v1.surfconnect.com.br/spot/camera/id/16/",
+        "https://www.google.com/maps/embed",
+        "about:blank",
+        "about:blank",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-macumba-curvao",
+        "checkedAt": "2026-09-26T13:27:03.522Z",
+        "error": "Navigation timeout of 20000 ms exceeded"
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:26:35.848Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-meio-da-barra",
+      "name": "Barra da Tijuca Meio da Barra",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/meio-da-barra/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:24:17.293Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nL   12.42 kts\n Multispot\nBarra da Tijuca\nMeio da Barra\n FAVORITO  COMPARTILHAR  TWEETAR\n\nNa altura do Posto 4 na Barra da Tijuca, (em frente ao condomínio Barramares) existem duas valas que proporcionam esquerdas e direitas manobráveis, em algumas ocasiões até com canal para entrar. Na maré cheia, é uma onda manobrável e longa, e na maré seca pode rolar tubos na bancada e uma onda mais rápida.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE, E  | Vento favorável: NE, E (fraco)  | Melhor maré: Ambas\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\n \n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/meio-da-barra/",
+        "https://dvr-br1.hostlink.com/vsaas/embed/cam-af1decf92c",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "before": [
+        {
+          "frame": "http://v1.surfconnect.com.br/meio-da-barra/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nL   12.42 kts\n Multispot\nBarra da Tijuca\nMeio da Barra\n FAVORITO  COMPARTILHAR  TWEETAR\n\nNa altura do Posto 4 na Barra da Tijuca, (em frente ao condomínio Barramares) existem duas valas que proporcionam esquerdas e direitas manobráveis, em algumas ocasiões até com canal para entrar. Na maré cheia, é uma onda manobrável e longa, e na maré seca pode rolar tubos na bancada e uma onda mais rápida",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-af1decf92c",
+          "text": "09:24:31\nLIVE\nkeyboard\n09:21\n09:22\n09:23\n09:24\n09:25\n09:26\nview_comfy",
+          "videos": [
+            {
+              "time": 9.444566,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 229,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://v1.surfconnect.com.br/meio-da-barra/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nL   12.42 kts\n Multispot\nBarra da Tijuca\nMeio da Barra\n FAVORITO  COMPARTILHAR  TWEETAR\n\nNa altura do Posto 4 na Barra da Tijuca, (em frente ao condomínio Barramares) existem duas valas que proporcionam esquerdas e direitas manobráveis, em algumas ocasiões até com canal para entrar. Na maré cheia, é uma onda manobrável e longa, e na maré seca pode rolar tubos na bancada e uma onda mais rápida",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-af1decf92c",
+          "text": "09:24:35\nLIVE\nkeyboard\n09:21\n09:22\n09:23\n09:24\n09:25\n09:26\nview_comfy",
+          "videos": [
+            {
+              "time": 13.462443,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 349,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-surfconnect-meio-da-barra.png",
+      "visualReview": "Praia visível, sem tela preta; carimbo da câmera indica2000.",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:24:17.293Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento na fonte, mas o relógio da câmera exibe o ano2000; atualidade não confirmada.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-pepino",
+      "name": "Pepino",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/pepino/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:28:07.522Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  22 Cº\nS   2.3 m\nS   1.2 kts\n Multispot\nSão Conrado\nPepino\n FAVORITO  COMPARTILHAR  TWEETAR\n\nA onda do Pepino em São Conrado é conhecida por sua força e formação tubular, atraindo surfistas experientes por ser uma onda rápida. Localizada aos pés da Pedra da Gávea, oferece condições favoráveis na ondulação de sul e sudoeste e também é mais protegida do vento sudoeste. \n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE  | Vento favorável: SE  | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\n \n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/pepino/",
+        "https://dvr-br1.hostlink.com/vsaas/embed/pepino-a9f752c6e2",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "before": [
+        {
+          "frame": "http://v1.surfconnect.com.br/pepino/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  22 Cº\nS   2.3 m\nS   1.2 kts\n Multispot\nSão Conrado\nPepino\n FAVORITO  COMPARTILHAR  TWEETAR\n\nA onda do Pepino em São Conrado é conhecida por sua força e formação tubular, atraindo surfistas experientes por ser uma onda rápida. Localizada aos pés da Pedra da Gávea, oferece condições favoráveis na ondulação de sul e sudoeste e também é mais protegida do vento sudoeste. \n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondu",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/pepino-a9f752c6e2",
+          "text": "09:28:21\nLIVE\nkeyboard\n09:24\n09:25\n09:26\n09:27\n09:28\n09:29\nview_comfy\nClick to unmute",
+          "videos": [
+            {
+              "time": 9.599248,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 150,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://v1.surfconnect.com.br/pepino/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  22 Cº\nS   2.3 m\nS   1.2 kts\n Multispot\nSão Conrado\nPepino\n FAVORITO  COMPARTILHAR  TWEETAR\n\nA onda do Pepino em São Conrado é conhecida por sua força e formação tubular, atraindo surfistas experientes por ser uma onda rápida. Localizada aos pés da Pedra da Gávea, oferece condições favoráveis na ondulação de sul e sudoeste e também é mais protegida do vento sudoeste. \n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondu",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/pepino-a9f752c6e2",
+          "text": "09:28:25\nLIVE\nkeyboard\n09:24\n09:25\n09:26\n09:27\n09:28\n09:29\nview_comfy\nClick to unmute",
+          "videos": [
+            {
+              "time": 13.612045,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 230,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-surfconnect-pepino.png",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:28:07.522Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento confirmado no teste.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-postinho",
+      "name": "Barra da Tijuca Postinho",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/postinho/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:24:35.527Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  0 Cº\nS   2.3 m\nL   12.42 kts\n Multispot\nBarra da Tijuca\nPostinho\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Postinho é conhecido por suas ondas rápidas e tubulares. É um trecho de 150 metros na altura do posto 2 na praia da Barra da Tijuca. Possui um Shorebrake que só quebra nas maiores ondulações (Laje do Gardenal).\n\nÉ também o principal point para a prática de Kitesurf e Windsurf no Rio com área legalizada pela prefeitura para pousos e decolagens de kites. Pela sua posição geográfica, recebe os ventos mais constantes. Melhores condições de vento para o kite: Leste / Sudeste\n\n  \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE  | Vento favorável: NE, E  | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\n \n\n\t\nK7 - Kite Point Rio\nEscola e Clube de Kitesurf, SUP, Surf, Tow-in, atividades aquáticas, atividades funcionais, lutas..\nAcesse: http://www.kitepointrio.com.br/\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/postinho/",
+        "http://v1.surfconnect.com.br/spot/camera/id/2/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-postinho",
+        "checkedAt": "2026-09-26T13:26:27.293Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/2/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:24:35.527Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-posto6",
+      "name": "Barra da Tijuca Posto 6",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/posto6/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:24:42.346Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.24 m\nN   6.7 kts\n Multispot\nBarra da Tijuca\nPosto 6\n FAVORITO  COMPARTILHAR  TWEETAR\n\nA onda no Posto 6 pode variar e ter semelhanças com a onda do Postinho e a do Meio da Barra podendo proporcionar tanto ondas cheias e manobráveis como ondas tubulares e rápidas. Geralmente as ondas são um pouco maiores que esses dois picos.\n\nAlém do Surf, é outro ponto importante do kite em função da aceleração do vento na área. Também rolam boas ondas para Kitewave.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE | Vento favorável: NE, E  | Melhor maré: Ambas\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/posto6/",
+        "http://v1.surfconnect.com.br/spot/camera/id/4/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-posto6",
+        "checkedAt": "2026-09-26T13:26:31.192Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/4/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:24:42.346Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+      "name": "Praia de Copacabana - Posto 5 Copa P5",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-5-e-6/",
+      "access": "registration",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:22.389Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nPraia de Copacabana - Posto 5\nCopa P5\n FAVORITO  COMPARTILHAR  TWEETAR\n\nA onda do Posto 5 atrai praticantes do bodyboard e do bodysurf por conta de sua onda rápida, potente e muito próxima da areia. Há dias em que as condições se acertam gerando belíssimos e poderosos tubos para direita, desafiando os surfistas de pranchinha. É um pico famoso por funcionar bem nos dias de sudoeste e grandes ondulações, que entram storm em todos os picos menos no Posto 5, funcionando como alternativa. Alguns nomes como Kelly Slater e John John Florence já surfaram essa onda em seus dias épicos.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE, E | Vento favorável: S, SSW, SW,W | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/praia-de-copacabana-posto-5-e-6/",
+        "http://v1.surfconnect.com.br/spot/camera/id/13/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires registration; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+        "checkedAt": "2026-09-26T13:26:40.311Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/13/",
+            "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:22.389Z",
+        "outcome": "restricted",
+        "reason": "O operador exige cadastro para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-6",
+      "name": "Copa P6",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-6/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:24:55.906Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nPraia de Copacabana - Posto 6\nCopa P6\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO Posto 6 devido a proteção do Forte de Copacabana, conta com o mar flat durante a maior parte dos dias e atrai praticantes de stand up paddle e outros esportes aquáticos como natação no mar, caiaque e triathlon, que contam com diversas assesorias esportivas no local.\n\nAlém do visual privilegiado do nascer do sol, a barreira do forte serva para proteger o pico do vento sudoeste e amenizar grandes ondulações, que em dias raros geram direitas divertidas tanto para pranchinha, bodyboard e stand up. Lá se encontra também a \"Laje do Shore\" para os mais aventureiros.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE, E | Vento favorável: S, SW, SSW, W | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android \n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/praia-de-copacabana-posto-6/",
+        "http://v1.surfconnect.com.br/spot/camera/id/35/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-praia-de-copacabana-posto-6",
+        "checkedAt": "2026-09-26T13:26:37.432Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/35/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:24:55.906Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-praia-do-diabo",
+      "name": "Praia do Diabo Diabo",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/praia-do-diabo/",
+      "access": "registration",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:25:49.843Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nPraia do Diabo\nDiabo\n FAVORITO  COMPARTILHAR  TWEETAR\n\nÉ uma pequena praia que fica entre a praia do Arpoador e Copacabana. Grande parte da sua faixa de areia é restrita a acesso militar, mas a área permitida ao público é muito agradavél e famosa por seus diversos esportes como futevolêi, beachtennis e diversão com cães. Em relação ao surf, é um beachbreak com ondas rápidas e tubulares mas muito divertidas, e o pico funciona como opção nos dias de vento sudoeste por conta da proteção da pedra.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE, E | Vento favorável: S, SSW, SW | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/praia-do-diabo/",
+        "http://v1.surfconnect.com.br/spot/camera/id/12/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires registration; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-praia-do-diabo",
+        "checkedAt": "2026-09-26T13:26:51.996Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/12/",
+            "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:25:49.843Z",
+        "outcome": "restricted",
+        "reason": "O operador exige cadastro para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo",
+      "name": "Canto Esquerdo Sanca Esquerdo Lateral",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+      "access": "public",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:27:49.444Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nCanto Esquerdo\nSanca Esquerdo Lateral\n FAVORITO  COMPARTILHAR  TWEETAR\n\nOndas fortes e tubulares que formam um triângulo da junção da ondulação que bate no costão e vem de encontro a onda muitas vezes dobrando seu tamanho. Exige muito condicionamento físico na remada e bom posicionamento. Apesar de tubular, pra tirar tubo tem que ter muito controle no drop e na velocidade da prancha pra não passar direto. Como a onda oferece muita velocidade, na junção há a possibilidade de manobras aéreas. É um pico muito frequentado pela galera do bodyboard e bodysurf. As melhores condições são de swell de leste e sudeste e vento leste que é bem constante e o pico fica bem protegido.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia | Ondulação ideal: S, SE e E | Vento favorável: N, NE | Melhor maré: Seca\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\n \n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+        "https://dvr-br1.hostlink.com/vsaas/embed/cam-bde211ea8d",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "before": [
+        {
+          "frame": "http://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nCanto Esquerdo\nSanca Esquerdo Lateral\n FAVORITO  COMPARTILHAR  TWEETAR\n\nOndas fortes e tubulares que formam um triângulo da junção da ondulação que bate no costão e vem de encontro a onda muitas vezes dobrando seu tamanho. Exige muito condicionamento físico na remada e bom posicionamento. Apesar de tubular, pra tirar tubo tem que ter muito controle no drop e na velocid",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-bde211ea8d",
+          "text": "09:28:03\nLIVE\nkeyboard\n09:24\n09:25\n09:26\n09:27\n09:28\n09:29\nview_comfy",
+          "videos": [
+            {
+              "time": 9.542566,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 117,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "after": [
+        {
+          "frame": "http://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+          "text": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nCanto Esquerdo\nSanca Esquerdo Lateral\n FAVORITO  COMPARTILHAR  TWEETAR\n\nOndas fortes e tubulares que formam um triângulo da junção da ondulação que bate no costão e vem de encontro a onda muitas vezes dobrando seu tamanho. Exige muito condicionamento físico na remada e bom posicionamento. Apesar de tubular, pra tirar tubo tem que ter muito controle no drop e na velocid",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://dvr-br1.hostlink.com/vsaas/embed/cam-bde211ea8d",
+          "text": "09:28:07\nLIVE\nkeyboard\n09:24\n09:25\n09:26\n09:27\n09:28\n09:29\nview_comfy",
+          "videos": [
+            {
+              "time": 13.56956,
+              "duration": null,
+              "ready": 4,
+              "paused": false,
+              "width": 1920,
+              "height": 1080,
+              "frames": 177,
+              "source": "blob:media",
+              "error": null
+            }
+          ],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/maps/embed",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "nullblank",
+          "text": "",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        },
+        {
+          "frame": "https://www.google.com/recaptcha/api2/aframe",
+          "text": "/** Anti-fraud and anti-abuse applications only. See google.com/recaptcha */ try{var clients={'sodar':'https://pagead2.googlesyndication.com/pagead/sodar?'};window.addEventListener(\"message\",function(a){try{if(a.source===window.parent){var b=JSON.parse(a.data);var c=clients[b['id']];if(c){var d=document.createElement('img');d.src=c+b['params']+'&rc='+(localStorage.getItem(\"rc::a\")?sessionStorage.getItem(\"rc::b\"):\"\");window.document.body.appendChild(d);sessionStorage.setItem(\"rc::e\",parseInt(sessionStorage.getItem(\"rc::e\")||0)+1);localStorage.setItem(\"rc::h\",'1790429022798');}}}catch(b){}});window.parent.postMessage(\"_grecaptcha_ready\", \"*\");}catch(b){}",
+          "videos": [],
+          "live": null,
+          "playerVideo": null
+        }
+      ],
+      "observedStreamUrls": [],
+      "mediaFailures": [],
+      "result": "video_frames_advanced",
+      "reason": "Video time and decoded frames advanced over4seconds; visual scene and live/replay status still require review.",
+      "screenshot": ".perf-tools/audit-other-surfconnect-praia-sao-conrado-canto-esquerdo.png",
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:27:49.444Z",
+        "outcome": "playing",
+        "reason": "Vídeo em movimento na fonte; imagem com baixa visibilidade e relógio divergente.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      },
+      "visualReview": "Vídeo em movimento, mas imagem esbranquiçada e horário da câmera difere do relógio do player."
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+      "name": "Sanca Esquerdo Frontal",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo-frontal/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:28:25.396Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.3 m\nNE   1.3 kts\n Multispot\nCanto Esquerdo\nSanca Esquerdo Frontal\n FAVORITO  COMPARTILHAR  TWEETAR\n\nOndas fortes e tubulares que formam um triângulo da junção da ondulação que bate no costão e vem de encontro a onda muitas vezes dobrando seu tamanho. Exige muito condicionamento físico na remada e bom posicionamento. Apesar de tubular, pra tirar tubo tem que ter muito controle no drop e na velocidade da prancha pra não passar direto. Como a onda oferece muita velocidade, na junção há a possibilidade de manobras aéreas. É um pico muito frequentado pela galera do bodyboard e bodysurf. As melhores condições são de swell de leste e sudeste e vento leste que é bem constante e o pico fica bem protegido.\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo-frontal/",
+        "http://v1.surfconnect.com.br/spot/camera/id/39/",
+        "https://www.google.com/maps/embed",
+        "about:blank",
+        "about:blank",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+        "checkedAt": "2026-09-26T13:27:26.644Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/39/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:28:25.396Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-prainha",
+      "name": "Prainha",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/prainha/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:27:42.697Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  0 Cº\nS   2.14 m\nS   1.2 kts\n Multispot\nPrainha\nPrainha\n FAVORITO  COMPARTILHAR  TWEETAR\n\nPraia com fundo muito bom e que segura divesos swells\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/prainha/",
+        "http://v1.surfconnect.com.br/spot/camera/id/36/",
+        "https://www.google.com/maps/embed",
+        "about:blank",
+        "about:blank",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-prainha",
+        "checkedAt": "2026-09-26T13:27:23.598Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/36/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:27:42.697Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-recreio",
+      "name": "Canto do Recreio Recreio",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/recreio/",
+      "access": "registration",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:26:28.813Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.14 m\nS   1.2 kts\n Multispot\nCanto do Recreio\nRecreio\n FAVORITO  COMPARTILHAR  TWEETAR\n\nO canto direito do Recreio é perfeito para iniciantes nos dias de ondulações pequenas e médias. Nos dias grandes, é uma das boas opções de surf  pois fica protegido do vento Sudoeste e das maiores ondulações, proporcionando direitas muito boas bem perto da pedra. \nMelhor ondulação de Leste / Sudeste e vento Sudoeste - Oeste/ Sudoeste.\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/recreio/",
+        "http://v1.surfconnect.com.br/spot/camera/id/6/",
+        "https://www.google.com/maps/embed",
+        "about:blank",
+        "about:blank",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires registration; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-recreio",
+        "checkedAt": "2026-09-26T13:27:00.685Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/6/",
+            "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:26:28.813Z",
+        "outcome": "restricted",
+        "reason": "O operador exige cadastro para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    },
+    {
+      "id": "surfconnect-reserva",
+      "name": "Praia da Reserva Reserva",
+      "publisher": "SurfConnect",
+      "source": "https://v1.surfconnect.com.br/reserva/",
+      "access": "subscription",
+      "youtubeId": null,
+      "checkedAt": "2026-09-26T13:24:49.030Z",
+      "httpStatus": 200,
+      "sourcePageText": "SOBRE\nPICOS\nMULTISPOT\nNOVO\nPLANOS\nNOTÍCIAS\nCONTATO\n ASSINE JÁ\n ENTRAR\nGERIBÁ\n \nITAÚNA\n \nLEME\n \nLEME FIXA\n \nCOPA P5\n \nCOPA P6\n \nDIABO\n \nARPEX\n \nARPEX LATERAL\n \nIPANEMA\n \nIPANEMA P10\n \nLEBLON P11\n \nLEBLON P12\n \nSANCA ESQUERDO FRONTAL\n \nSANCA ESQUERDO LATERAL\n \nPEPINO\n \nPOSTINHO\n \nMEIO DA BARRA\n \nPOSTO 6\n \nRESERVA\n \nRECREIO\n \nMACUMBA - 5W\n \nMACUMBA - CURVÃO\n \nPRAINHA\n \nMARESIAS\n \nPRAIA DO PERNAMBUCO\n \nPRAIA DA ENSEADA\n \nMALUF\n \nPITANGUEIRAS\n \nPRAIA DO TOMBO\n \nSANTOS\n \nPRAIA GRANDE\nÁGUA  17 Cº\nS   2.24 m\nL   12.42 kts\n Multispot\nPraia da Reserva\nReserva\n FAVORITO  COMPARTILHAR  TWEETAR\n\nLocalizado na área de reserva ecológica que fica entre a Barra da Tijuca e o Recreio dos Bandeirantes, o pico é bem conhecido pelas bancadas de pedras espalhadas na praia. São várias lajes que dependem muito da maré, vento e ondulação certa para quebrar com qualidade.\n\nAs ondas são mais cavadas e rápidas na maioria das vezes, mas em seus dias especiais proporcionam um surf memorável. Por ser uma praia muito aberta, qualquer vento acima de 7 knots interfere bem nas condições das ondas.\n\n\nPs: Para os Kitesurfistas vale um downwind com vento leste forte saindo do Posto 6 na Barra da Tijuca e indo até a Praia do Recreio. É possível encontrar boas onda nesse trajeto.\n\n \n\nGuia SURFCONNECT\n\nFundo: Areia e Pedra | Ondulação ideal: S, SE | Vento favorável: N, NE  | Melhor maré: Ambas\n\n \n\n→ Baixe o app surfconnect e confira a previsão detalhada e em tempo real em seu celular! IOS | Android\n\nWINDGURU\n\nVeja as\n\nÚLTIMAS NOTÍCIAS\nAlerta Swell\n\n  Tem swell se aproximando ao longo da semana. A previsão indica que o mar deve ganhar força com pico na quarta-feira, com ondas em torno de 2 metros ou...\n\nLEIA MAIS \nPrevisão BIG SWELL por Marcelo Andrade\n\nO maior swell do ano está chegando e a surfconnect não vai te deixar na mão! Por isso, preparamos uma análise exclusiva das condições desse BIG SWELL que...\n\nLEIA MAIS \nO tão esperado fim do verão chegou!\n\n  Surfista que é surfista sabe que o verão é sempre uma época bem complicada.. Além das condições quase sempre não favoravéis para o surf, as praias...\n\nLEIA MAIS \nAcabou a secura! Tem swell na área!\n\nAcabou a secura! Tem swell novo chegando na costa e quem vai analisar e comentar vai ser Marcelo Andrade do @surf100comentarios. Confira...\n\nLEIA MAIS \nSOBRE\nPICOS\nPLANOS\nNOTÍCIAS\nCONTATO\nTERMOS\nNossas Redes\n   \nBaixe agora o app do SurfConnect\n \n© SURFCONNECT - Todos os direitos reservados. Fale conosco: atendimento@surfconnect.com.br\nSurf Connect Eireli – ME – CNPJ: 22471414/0001-31\nRua Guilhermina Guinle, 272, 5º Andar – Botafogo – Rio de Janeiro – CEP: 22270-060",
+      "frameUrls": [
+        "http://v1.surfconnect.com.br/reserva/",
+        "http://v1.surfconnect.com.br/spot/camera/id/5/",
+        "https://www.google.com/maps/embed",
+        "about:blank"
+      ],
+      "result": "access_restricted",
+      "reason": "Catalog requires subscription; public source visited, no sign-in, purchase, or restricted media access attempted.",
+      "observedStreamUrls": [],
+      "restrictionEvidence": {
+        "id": "surfconnect-reserva",
+        "checkedAt": "2026-09-26T13:26:34.580Z",
+        "frames": [
+          {
+            "url": "http://v1.surfconnect.com.br/spot/camera/id/5/",
+            "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+          }
+        ]
+      },
+      "reviewedOutcome": {
+        "checkedAt": "2026-09-26T13:24:49.030Z",
+        "outcome": "restricted",
+        "reason": "O operador exige assinatura para exibir esta câmera.",
+        "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+      }
+    }
+  ],
+  "sourceEquivalenceGroups": [],
+  "duplicateReview": "No equivalent source proven among these27entries. Coincident coordinates are not evidence of duplicate cameras. Comparison with CamerasRJ cannot establish shared physical installation without equal public stream identifiers.",
+  "summary": {
+    "playing": 11,
+    "failed": 1,
+    "inconclusive": 0,
+    "restricted": 15,
+    "external": 0
+  },
+  "reviewedAt": "2026-09-26T13:30:20.025Z"
+}

@@ -1614,7 +1614,7 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                       <Camera className="inline size-3 text-teal-700" /> Imagem
                       conferida ·{' '}
                       <Camera className="inline size-3 text-blue-600" /> Não
-                      testada
+                      confirmada
                     </p>
                     <p>
                       <Camera className="inline size-3 text-amber-700" /> Falhou

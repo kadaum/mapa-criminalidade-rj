@@ -1,0 +1,382 @@
+{
+  "youtubeMetadata": [
+    {
+      "id": "homes-posto-3",
+      "checkedAt": "2026-09-26T13:21:52.406Z",
+      "videoId": "k2QzfrPLQSg",
+      "playability": {
+        "status": "OK",
+        "playableInEmbed": true,
+        "liveStreamability": {
+          "liveStreamabilityRenderer": {
+            "videoId": "k2QzfrPLQSg",
+            "broadcastId": "11",
+            "pollDelayMs": "15000"
+          }
+        },
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "live": {
+        "isLiveNow": true,
+        "startTimestamp": "2026-09-17T02:11:43+00:00"
+      },
+      "details": {
+        "title": "Rio de Janeiro Cam - Copacabana Posto 3",
+        "isLive": true,
+        "lengthSeconds": "0"
+      }
+    },
+    {
+      "id": "homes-posto-6",
+      "checkedAt": "2026-09-26T13:21:53.080Z",
+      "videoId": "Hr7c0XuEgm0",
+      "playability": {
+        "status": "OK",
+        "playableInEmbed": true,
+        "liveStreamability": {
+          "liveStreamabilityRenderer": {
+            "videoId": "Hr7c0XuEgm0",
+            "broadcastId": "13",
+            "pollDelayMs": "15000"
+          }
+        },
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "live": {
+        "isLiveNow": true,
+        "startTimestamp": "2026-09-17T02:04:22+00:00"
+      },
+      "details": {
+        "title": "Webcam Rio de Janeiro Copacabana Posto 6",
+        "isLive": true,
+        "lengthSeconds": "0"
+      }
+    },
+    {
+      "id": "paineiras-corcovado",
+      "checkedAt": "2026-09-26T13:21:53.787Z",
+      "videoId": "aRDuS1iqioU",
+      "playability": {
+        "status": "OK",
+        "playableInEmbed": true,
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "live": {
+        "isLiveNow": false,
+        "startTimestamp": "2026-09-08T09:53:23+00:00",
+        "endTimestamp": "2026-09-08T22:38:04+00:00"
+      },
+      "details": {
+        "title": "Paineiras Corcovado AO VIVO / Cristo Redentor",
+        "lengthSeconds": "42899"
+      }
+    },
+    {
+      "id": "aviation-tv-santos-dumont",
+      "checkedAt": "2026-09-26T13:21:54.590Z",
+      "videoId": "oWUc9q-w7j4",
+      "playability": {
+        "status": "OK",
+        "playableInEmbed": true,
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "live": {
+        "isLiveNow": false,
+        "startTimestamp": "2026-09-25T20:50:49+00:00",
+        "endTimestamp": "2026-09-26T08:51:13+00:00"
+      },
+      "details": {
+        "title": "25-09-2026 (NOITE) - AEROPORTO SANTOS DUMONT / RIO DE JANEIRO - BRASIL SDU SBRJ",
+        "lengthSeconds": "42899"
+      }
+    },
+    {
+      "id": "aviation-tv-galeao",
+      "checkedAt": "2026-09-26T13:21:55.337Z",
+      "videoId": "Ovs0e52kN28",
+      "playability": {
+        "status": "OK",
+        "playableInEmbed": true,
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "live": {
+        "isLiveNow": false,
+        "startTimestamp": "2026-09-25T14:50:59+00:00",
+        "endTimestamp": "2026-09-26T02:51:11+00:00"
+      },
+      "details": {
+        "title": "25-09-2026 (TARDE E NOITE) - AEROPORTO INTERNACIONAL DO GALEÃO / RIO DE JANEIRO - BRASIL GIG SBGL",
+        "lengthSeconds": "42899"
+      }
+    }
+  ],
+  "restricted": [
+    {
+      "id": "surfconnect-postinho",
+      "checkedAt": "2026-09-26T13:26:27.293Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/2/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-posto6",
+      "checkedAt": "2026-09-26T13:26:31.192Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/4/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-reserva",
+      "checkedAt": "2026-09-26T13:26:34.580Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/5/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-6",
+      "checkedAt": "2026-09-26T13:26:37.432Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/35/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+      "checkedAt": "2026-09-26T13:26:40.311Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/13/",
+          "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-ipanema-posto-10",
+      "checkedAt": "2026-09-26T13:26:43.407Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/34/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-ipanema-posto-8",
+      "checkedAt": "2026-09-26T13:26:46.248Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/10/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-arpoador",
+      "checkedAt": "2026-09-26T13:26:49.122Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/1/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-praia-do-diabo",
+      "checkedAt": "2026-09-26T13:26:51.996Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/12/",
+          "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-leblon",
+      "checkedAt": "2026-09-26T13:26:54.843Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/9/",
+          "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-leblon-posto-11",
+      "checkedAt": "2026-09-26T13:26:57.674Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/15/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-recreio",
+      "checkedAt": "2026-09-26T13:27:00.685Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/6/",
+          "text": "Câmera exclusiva para cadastrados!\n\nCadastre-se agora e tenha acesso a câmeras\ne conteúdos exclusivos.\n\n CADASTRE-SE"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-macumba-curvao",
+      "checkedAt": "2026-09-26T13:27:03.522Z",
+      "error": "Navigation timeout of 20000 ms exceeded"
+    },
+    {
+      "id": "surfconnect-prainha",
+      "checkedAt": "2026-09-26T13:27:23.598Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/36/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+      "checkedAt": "2026-09-26T13:27:26.644Z",
+      "frames": [
+        {
+          "url": "http://v1.surfconnect.com.br/spot/camera/id/39/",
+          "text": "Câmera exclusiva para assinantes!\n\nAssine agora e tenha acesso a câmeras exclusivas,\nconteúdos e nosso alerta de swell.\n\n ASSINE JÁ"
+        }
+      ]
+    }
+  ],
+  "replacements": [
+    {
+      "youtubeId": "0khziup_vfw",
+      "checkedAt": "2026-09-26T13:24:23.901Z",
+      "before": [
+        {
+          "time": 13397.910666,
+          "frames": 57,
+          "width": 426,
+          "height": 240,
+          "paused": false,
+          "ready": 2
+        }
+      ],
+      "after": [
+        {
+          "time": 13397.910666,
+          "frames": 57,
+          "width": 426,
+          "height": 240,
+          "paused": false,
+          "ready": 2
+        }
+      ],
+      "live": {
+        "isLiveNow": true,
+        "startTimestamp": "2026-09-26T08:50:51+00:00"
+      },
+      "playability": {
+        "status": "OK",
+        "reason": "We're experiencing technical difficulties.",
+        "playableInEmbed": true,
+        "liveStreamability": {
+          "liveStreamabilityRenderer": {
+            "videoId": "0khziup_vfw",
+            "broadcastId": "1",
+            "pollDelayMs": "15000"
+          }
+        },
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "title": "LIVE - AEROPORTO SANTOS DUMONT / RIO DE JANEIRO - BRASIL SDU SBRJ",
+      "screenshot": ".perf-tools/audit-replacement-0khziup_vfw.png"
+    },
+    {
+      "youtubeId": "CmUjaXaHqUU",
+      "checkedAt": "2026-09-26T13:24:41.282Z",
+      "before": [
+        {
+          "time": 38011.574698,
+          "frames": 349,
+          "width": 1280,
+          "height": 720,
+          "paused": false,
+          "ready": 4
+        }
+      ],
+      "after": [
+        {
+          "time": 38015.594325,
+          "frames": 469,
+          "width": 1280,
+          "height": 720,
+          "paused": false,
+          "ready": 4
+        }
+      ],
+      "live": {
+        "isLiveNow": true,
+        "startTimestamp": "2026-09-26T02:50:54+00:00"
+      },
+      "playability": {
+        "status": "OK",
+        "playableInEmbed": true,
+        "liveStreamability": {
+          "liveStreamabilityRenderer": {
+            "videoId": "CmUjaXaHqUU",
+            "broadcastId": "1",
+            "pollDelayMs": "15000"
+          }
+        },
+        "miniplayer": {
+          "miniplayerRenderer": {
+            "playbackMode": "PLAYBACK_MODE_ALLOW"
+          }
+        },
+        "contextParams": "Q0FFU0FnZ0M="
+      },
+      "title": "AO VIVO - AEROPORTO INTERNACIONAL DO GALEÃO / RIO DE JANEIRO - BRASIL GIG SBGL",
+      "screenshot": ".perf-tools/audit-replacement-CmUjaXaHqUU.png"
+    }
+  ]
+}

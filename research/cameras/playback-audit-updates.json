@@ -1,0 +1,538 @@
+[
+  {
+    "id": "homes-posto-3",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:21:22.354Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    },
+    "note": "Vídeo reproduziu no levantamento. Localização aproximada do diretório; posição da instalação não confirmada.",
+    "youtubeId": "k2QzfrPLQSg"
+  },
+  {
+    "id": "homes-posto-6",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:21:38.807Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    },
+    "note": "A câmera muda de direção. O endereço é publicado pelo operador; o marcador vem de um diretório.",
+    "youtubeId": "Hr7c0XuEgm0"
+  },
+  {
+    "id": "surfconnect-leme",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:23:39.641Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento na fonte, mas o relógio da câmera exibe o ano2000; atualidade não confirmada.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "Vídeo reproduziu no levantamento, mas o carimbo da câmera exibia 14/01/2000. Horário inconsistente; não certifica atualidade."
+  },
+  {
+    "id": "paineiras-corcovado",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:23:58.781Z",
+      "outcome": "playing",
+      "reason": "O vídeo reproduz uma gravação; esta transmissão já foi encerrada.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    },
+    "note": "A referência é uma gravação de 08/09/2026, conferida em 25/09/2026. O vídeo reproduz, mas não é transmissão ao vivo. A posição da câmera continua não confirmada.",
+    "recording": true,
+    "youtubeId": "aRDuS1iqioU"
+  },
+  {
+    "id": "surfconnect-meio-da-barra",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:17.293Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento na fonte, mas o relógio da câmera exibe o ano2000; atualidade não confirmada.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-postinho",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:35.527Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-posto6",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:42.346Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-reserva",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:49.030Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-praia-de-copacabana-posto-6",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:55.906Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "mar-urbano-posto-6",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:02.824Z",
+      "outcome": "failed",
+      "reason": "Nenhuma imagem em movimento foi recebida durante o teste na fonte.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "Localização aproximada publicada por diretório. Instalação não confirmada."
+  },
+  {
+    "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:22.389Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-ipanema-posto-10",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:29.104Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-ipanema-posto-8",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:36.002Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-arpoador",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:42.935Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-praia-do-diabo",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:49.843Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-leblon",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:56.757Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-leblon-posto-11",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:03.811Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-leme-fixa",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:10.502Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado na fonte; os relógios da câmera e do player diferem.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-recreio",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:28.813Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-macumba-curvao",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:35.848Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-macumba",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:04.462Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-prainha",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:42.697Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "A página reutiliza a coordenada de outro pico. Marcador rejeitado até confirmação da localização."
+  },
+  {
+    "id": "surfconnect-praia-sao-conrado-canto-esquerdo",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:49.444Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento na fonte; imagem com baixa visibilidade e relógio divergente.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-pepino",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:07.522Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:25.396Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    },
+    "note": "O operador indica o pico da praia, não a posição medida da câmera. Acesso e reprodução podem mudar."
+  },
+  {
+    "id": "camerasrj-373",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:53.603Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-6933",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:53.683Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-6934",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:05.995Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-3766",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:08.437Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-4245",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:11.538Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-3673",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:23.568Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-3684",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:25.960Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-3685",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:35.234Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-3692",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:52.627Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-1732",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:04.764Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-1751",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:07.207Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-874",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:11.802Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-7278",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:52.731Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-7279",
+    "status": "failed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:53.323Z",
+      "outcome": "failed",
+      "reason": "A fonte retornou falha de transmissão no teste. Isso não confirma que a câmera esteja desligada.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Referência do catálogo CamerasRJ."
+  },
+  {
+    "id": "camerasrj-7237",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:11.638Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Vídeo com avanço de quadros confirmado no site em 25/09/2026. Disponibilidade depende da fonte e do navegador. A coordenada continua uma referência aproximada; não confirma instalação ou campo de visão."
+  },
+  {
+    "id": "camerasrj-49",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:11.683Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "O player falhou no teste. Isso pode ser incompatibilidade de navegador/codec; não confirma câmera desligada."
+  },
+  {
+    "id": "camerasrj-1967",
+    "status": "unverified",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:11.639Z",
+      "outcome": "inconclusive",
+      "reason": "O teste não confirmou quadros de vídeo dentro do tempo de observação. A disponibilidade continua incerta.",
+      "method": "Chrome em processo isolado: dimensões, tempo, quadros decodificados, track de vídeo e falhas reportadas pela fonte."
+    },
+    "note": "Vídeo com avanço de quadros confirmado no site em 25/09/2026. Disponibilidade depende da fonte e do navegador. A coordenada continua uma referência aproximada; não confirma instalação ou campo de visão."
+  },
+  {
+    "id": "aviation-tv-santos-dumont",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:32.291Z",
+      "outcome": "playing",
+      "reason": "O vídeo reproduz uma gravação; esta transmissão já foi encerrada.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    },
+    "note": "Vídeo em movimento e transmissão ao vivo confirmados em 25/09/2026 no player oficial Aviation TV. O canal troca os links periodicamente; este vídeo pode terminar ou virar gravação. Consulte o canal do operador para a transmissão atual. A posição do equipamento não foi publicada, portanto não há marcador no mapa.",
+    "recording": true,
+    "youtubeId": "oWUc9q-w7j4"
+  },
+  {
+    "id": "aviation-tv-galeao",
+    "status": "observed",
+    "checkedAt": "26/09/2026",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:41.282Z",
+      "outcome": "playing",
+      "reason": "Transmissão atual em movimento confirmada; o link anterior virou gravação.",
+      "method": "Chrome: novo player YouTube incorporado,1280×720,120quadros adicionais em4segundos; liveNowtrue."
+    },
+    "note": "Vídeo em movimento e transmissão ao vivo confirmados em 25/09/2026 no player oficial Aviation TV. O canal troca os links periodicamente; este vídeo pode terminar ou virar gravação. Consulte o canal do operador para a transmissão atual. A posição do equipamento não foi publicada, portanto não há marcador no mapa.",
+    "recording": false,
+    "youtubeId": "CmUjaXaHqUU"
+  }
+]

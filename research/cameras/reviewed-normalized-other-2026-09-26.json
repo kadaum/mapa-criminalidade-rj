@@ -1,0 +1,249 @@
+[
+  {
+    "id": "aviation-tv-galeao",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:41.282Z",
+      "outcome": "playing",
+      "reason": "Transmissão atual em movimento confirmada; o link anterior virou gravação.",
+      "method": "Chrome: novo player YouTube incorporado,1280×720,120quadros adicionais em4segundos; liveNowtrue."
+    },
+    "recording": false,
+    "youtubeId": "CmUjaXaHqUU"
+  },
+  {
+    "id": "aviation-tv-santos-dumont",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:32.291Z",
+      "outcome": "playing",
+      "reason": "O vídeo reproduz uma gravação; esta transmissão já foi encerrada.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    },
+    "recording": true
+  },
+  {
+    "id": "homes-posto-3",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:21:22.354Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    }
+  },
+  {
+    "id": "homes-posto-6",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:21:38.807Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    }
+  },
+  {
+    "id": "mar-urbano-posto-6",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:02.824Z",
+      "outcome": "failed",
+      "reason": "Nenhuma imagem em movimento foi recebida durante o teste na fonte.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "paineiras-corcovado",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:23:58.781Z",
+      "outcome": "playing",
+      "reason": "O vídeo reproduz uma gravação; esta transmissão já foi encerrada.",
+      "method": "Chrome: player YouTube incorporado, comparação de tempo e quadros decodificados em4segundos."
+    },
+    "recording": true
+  },
+  {
+    "id": "surfconnect-arpoador",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:42.935Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-ipanema-posto-10",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:29.104Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-ipanema-posto-8",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:36.002Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-leblon",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:56.757Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-leblon-posto-11",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:03.811Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-leme",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:23:39.641Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento na fonte, mas o relógio da câmera exibe o ano2000; atualidade não confirmada.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-leme-fixa",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:10.502Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado na fonte; os relógios da câmera e do player diferem.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-macumba",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:04.462Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-macumba-curvao",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:35.848Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-meio-da-barra",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:17.293Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento na fonte, mas o relógio da câmera exibe o ano2000; atualidade não confirmada.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-pepino",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:07.522Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento confirmado no teste.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-postinho",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:35.527Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-posto6",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:42.346Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:22.389Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-praia-de-copacabana-posto-6",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:55.906Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-praia-do-diabo",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:25:49.843Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-praia-sao-conrado-canto-esquerdo",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:49.444Z",
+      "outcome": "playing",
+      "reason": "Vídeo em movimento na fonte; imagem com baixa visibilidade e relógio divergente.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:28:25.396Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-prainha",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:27:42.697Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-recreio",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:26:28.813Z",
+      "outcome": "restricted",
+      "reason": "O operador exige cadastro para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  },
+  {
+    "id": "surfconnect-reserva",
+    "playbackCheck": {
+      "checkedAt": "2026-09-26T13:24:49.030Z",
+      "outcome": "restricted",
+      "reason": "O operador exige assinatura para exibir esta câmera.",
+      "method": "Chrome: página pública do operador, comparação de tempo e quadros; sem autenticação."
+    }
+  }
+]

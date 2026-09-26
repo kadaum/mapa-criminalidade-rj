@@ -75,3 +75,15 @@ A fonte CADLOG é [IPP/Prefeitura do Rio, CC BY 4.0](https://www.arcgis.com/home
 ### Câmeras sobrepostas
 
 Tocar num cone isolado abre o vídeo correspondente. Cones sobrepostos abrem um seletor ancorado no toque. Marcadores e números têm prioridade sobre os cones abaixo deles. Grupos de até 12 referências abrem a escolha diretamente, sem exigir chegar ao zoom máximo; grupos maiores continuam aproximando até a escala de rua. Referências com coordenadas coincidentes também exibem seus cones na escala de rua, preservando o número para selecionar as alternativas. Direções distintas só vêm de ajustes salvos, sem inventar orientações para separar os desenhos.
+
+## Auditoria integral de reprodução — 26/09/2026
+
+A rodada anterior cobria amostras, não todas as referências. O produto agora distingue resultados de reprodução e disponibilidade, mostra data e motivo, e preserva a diferença entre referência cadastrada e vídeo funcionando. A fila integral inclui 6.658 IDs CamerasRJ e 27 referências de outros operadores. Fontes restritas são identificadas sem contornar acesso; isso não confirma sua reprodução.
+
+O auditor CamerasRJ (`scripts/cameras/audit-camerasrj.mjs`) usa quatro processos Chrome independentes e até 40 segundos por ID. Exige track de vídeo, dimensões mínimas, avanço de tempo e de quadros; o MP4 placeholder 16×16 do fornecedor não conta. Falha explícita da fonte, quadros pretos, bloqueio de incorporação, timeout inconclusivo e erro do próprio teste são separados. HTTP 429 impõe espera e recoloca o ID na fila. Arquivo JSONL e resumo são checkpoints locais mutáveis; publique somente snapshots revisados. As referências com coordenadas têm prioridade na fila completa.
+
+`normalize-playback-audit.mjs` converte o checkpoint em resultados revisáveis; `apply-playback-audit.mjs ARRAY_JSON` aplica resultados com timestamp e conserva os mais recentes. `playback-audit-updates.json` preserva as verificações ao regenerar o catálogo. O total exibido no site é o snapshot publicado, não um contador em tempo real do processo local.
+
+Os IDs874,7278 e7279 do cruzamento Lúcio Costa/Érico Veríssimo foram testados no produto e diretamente na fonte. Todos retornaram falha de transmissão/timeout na origem. São referências da mesma fonte CamerasRJ; o endereço compartilhado não comprova equipamentos ou transmissões idênticos. Evidências sanitizadas: `example-three-2026-09-26.json`.
+
+O seletor ordena fontes com reprodução confirmada primeiro. Substituição automática só usa identidade de sinal exata (mesmo vídeo YouTube ou mesma URL de reprodução); mesma coordenada ou nome não autoriza trocar imagens. Testes cobrem preferência pela fonte confirmada, preservação de sinal diferente no mesmo endereço e exclusão de acesso restrito.

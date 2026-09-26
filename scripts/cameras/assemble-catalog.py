@@ -38,9 +38,21 @@ if updates_path.exists():
     updates={c['id']:c for c in json.loads(updates_path.read_text(encoding='utf-8'))}
     for camera in cameras:
         camera.update(updates.get(camera['id'],{}))
+# Persist the latest playback audit when rebuilding from historical inventories.
+audit_path=pathlib.Path('research/cameras/playback-audit-updates.json')
+if audit_path.exists():
+    audited={c['id']:c for c in json.loads(audit_path.read_text(encoding='utf-8-sig'))}
+    for camera in cameras:
+        camera.update(audited.get(camera['id'],{}))
 cameras.sort(key=lambda c:(c['status']!='observed',c['publisher']=='CamerasRJ',c['neighborhood'].casefold(),c['name'].casefold(),c['id']))
 base=pathlib.Path('public/data');base.mkdir(exist_ok=True)
 result={'reviewedAt':'08/09/2026','scope':'Município do Rio de Janeiro; referências encontradas nas fontes consultadas, não cobertura integral de câmeras ou de transmissões funcionando.','attribution':[{'name':'CamerasRJ','url':geo['catalogUrl'],'note':'Nomes, IDs e locais de referências públicas. Não atribuir licença MIT ou PDDL ao catálogo original.'},{'name':'CADLOG / Instituto Pereira Passos / Prefeitura do Rio','url':'https://www.arcgis.com/home/item.html?id=899168c8feab4230a9f795ed07cdde7b','license':'CC BY 4.0','transformation':'Cruzamentos derivados por nomes e vértices; endereços interpolados nas faixas oficiais de numeração, com paridade. Posição exata do equipamento desconhecida.'}], 'cameras':cameras}
+checked=[c for c in cameras if c.get('playbackCheck')]
+if checked:
+    counts={}
+    for c in checked:
+        outcome=c['playbackCheck']['outcome']; counts[outcome]=counts.get(outcome,0)+1
+    result['playbackAudit']={'total':len(cameras),'checked':len(checked),'complete':len(checked)==len(cameras),'updatedAt':max(c['playbackCheck']['checkedAt'] for c in checked),'counts':counts}
 (base/'public-cameras.json').write_text(json.dumps(result,ensure_ascii=False,separators=(',',':')))
 (base/'camera-location-evidence.json').write_text(json.dumps(evidence,ensure_ascii=False,separators=(',',':')))
 print({'total':len(cameras),'mapped':sum(bool(c['coordinates']) for c in cameras),'publicMapped':sum(bool(c['coordinates']) and c['access']=='public' for c in cameras),'pending':sum(c['coordinates'] is None for c in cameras)})

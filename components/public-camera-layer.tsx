@@ -18,6 +18,8 @@ import { CameraCoverage } from '@/components/camera-coverage';
 import { cameraCoverageFeatureCollection, normalizeCoverageParameters } from '@/lib/camera-coverage';
 import {
   cameraReference,
+  compareCameraPlayback,
+  preferredCameraSource,
   publicCameras,
   precisionLabels,
   statusLabels,
@@ -216,7 +218,7 @@ export function useCameraWorkspace(
   filteredRef.current = filtered;
 
   function showCamera(camera: PublicCamera) {
-    setSelected(camera);
+    setSelected(preferredCameraSource(camera, catalog.cameras));
   }
   const revealRef = useRef(revealPanel);
   revealRef.current = revealPanel;
@@ -279,14 +281,14 @@ export function useCameraWorkspace(
       content.appendChild(note);
       const list = document.createElement('div');
       list.className = 'camera-map-preview-list';
-      cameras.forEach((camera) => {
+      [...cameras].sort(compareCameraPlayback).forEach((camera) => {
         const button = document.createElement('button');
         button.type = 'button';
         const name = document.createElement('strong');
         name.textContent = cameras.length === 1 ? 'Abrir vídeo' : camera.name;
         const detail = document.createElement('span');
         detail.textContent =
-          'ID ' + catalogId(camera) + ' · ' + camera.neighborhood;
+          'ID ' + catalogId(camera) + ' · ' + camera.publisher + ' · ' + statusLabels[camera.status] + (camera.checkedAt ? ' em ' + camera.checkedAt : '');
         button.appendChild(name);
         button.appendChild(detail);
         button.addEventListener('click', () => {
@@ -705,6 +707,13 @@ export function useCameraWorkspace(
             Escolha um ponto ou procure abaixo. Os marcadores indicam locais de
             referência, não a área filmada.
           </p>
+          {catalog.playbackAudit && (
+            <p className="mt-2 rounded-lg bg-slate-50 p-2 text-xs leading-5 text-slate-600">
+              Verificação de disponibilidade: {catalog.playbackAudit.checked.toLocaleString('pt-BR')} de {catalog.playbackAudit.total.toLocaleString('pt-BR')} fontes analisadas nesta rodada.
+              {' '}Atualizado em {new Date(catalog.playbackAudit.updatedAt).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}.
+              {' '}O resultado de cada fonte aparece abaixo; acesso restrito e teste inconclusivo não contam como vídeo funcionando.
+            </p>
+          )}
           {loadState === 'ready' && (
             <details
               className="mt-3 rounded-xl border border-teal-200 bg-teal-50 p-3"
@@ -852,7 +861,7 @@ export function useCameraWorkspace(
                 setClusterSelection(null);
               }}
             />{' '}
-            Apenas imagens conferidas no levantamento
+            Apenas reprodução confirmada no teste
           </label>
           {clusterSelection && (
             <div className="mt-3 rounded-lg bg-teal-50 p-3 text-sm">
@@ -892,6 +901,9 @@ export function useCameraWorkspace(
                   (camera.youtubeId || camera.publisher === 'CamerasRJ')
                     ? 'Abrir vídeo aqui'
                     : 'Ver acesso na fonte'}
+                </span>
+                <span className="mt-1 block text-[11px] text-slate-600">
+                  {statusLabels[camera.status]}{camera.checkedAt ? ' · ' + camera.checkedAt : ''}
                 </span>
                 {camera.access !== 'public' && (
                   <span className="ml-1 text-xs">
@@ -1062,13 +1074,20 @@ function CameraDetail({
           </span>
         )}
         <span className="rounded bg-slate-100 px-2 py-1">
-          Levantamento: {statusLabels[camera.status]}
+          {statusLabels[camera.status]}
           {camera.checkedAt ? ` em ${camera.checkedAt}` : ''}
         </span>
         <span className="rounded bg-slate-100 px-2 py-1">
           {accessLabels[camera.access]}
         </span>
       </div>
+      <p className="text-xs leading-5 text-slate-600">
+        {camera.playbackCheck
+          ? camera.playbackCheck.reason
+          : camera.status === 'unverified'
+            ? 'Ainda não verificamos a reprodução desta fonte. A referência no mapa não confirma que o vídeo esteja disponível.'
+            : 'O resultado corresponde à data do teste. A disponibilidade pode mudar.'}
+      </p>
       {camera.coordinates && (
         <Button
           variant="outline"
