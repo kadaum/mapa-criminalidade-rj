@@ -1,0 +1,708 @@
+{
+  "reviewedAt": "2026-09-26T13:43:09.9591946Z",
+  "scope": "All 23 non-CamerasRJ catalog entries with coordinates: Homes in Rio (2), SurfConnect (20 mapped), Instituto Mar Urbano (1).",
+  "method": "Inspected every available local audit screenshot and public source metadata. No restricted/userdata access or video download. Bearings are coarse estimates only where frame and coastal context support a seaward direction; no FOV/range values are inferred.",
+  "total": 23,
+  "summary": {
+    "locationCorrected": 1,
+    "insufficient": 8,
+    "image_unavailable": 15,
+    "actualCoverageCalibrated": 0,
+    "rejectedGenericBearings": 7
+  },
+  "cameras": [
+    {
+      "id": "homes-posto-3",
+      "name": "Copacabana · Posto 3",
+      "status": "location_corrected_orientation_unresolved",
+      "access": "public",
+      "evidenceUrls": [
+        "https://www.youtube.com/watch?v=k2QzfrPLQSg",
+        "https://worldcam.eu/webcams/south-america/brazil/40612-rio-de-janeiro-copacabana-posto-3",
+        "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+        "https://homesinrio.com/wp-content/uploads/2021/09/map2.png",
+        "https://www.google.com/maps/search/?api=1&query=Edificio+Chopin+Copacabana+1782"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-homes-posto-3.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.1795625,
+          -22.9676875
+        ],
+        "precision": "building_reference",
+        "source": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+        "interpretation": "Operator identifies Edifício Chopin; operator map pin at Av. Atlântica1782; Google Maps displayed short Plus Code2RJC+W5, recovered as589R2RJC+W5 using Rio reference; decoded cell center, not exact lens."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Directional sector only; actual HFOV, range and visibility not calibrated.",
+      "assessment": "Posição do prédio corrigida por fonte do operador e referência cartográfica. Rejeitado setor nominal45° porque atravessa edifícios no mapa e não corresponde bem ao quadro. Sem azimute óptico, abertura ou alcance calibrados.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 150,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      },
+      "reportedDirection": "Nordeste, descrição ampla do operador"
+    },
+    {
+      "id": "homes-posto-6",
+      "name": "Copacabana · Posto 6",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam",
+        "https://worldcam.eu/webcams/south-america/brazil/40611-rio-de-janeiro-copacabana-posto-6"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-homes-posto-6.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.19027778,
+          -22.98305556
+        ],
+        "precision": "directory",
+        "source": "https://worldcam.eu/webcams/south-america/brazil/40611-rio-de-janeiro-copacabana-posto-6",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Estimativa visual ampla: câmera olha da orla para praia e mar; coordenada de diretório e instalação não confirmada impedem eixo preciso.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 155,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      }
+    },
+    {
+      "id": "surfconnect-leme",
+      "name": "Praia do Leme Leme",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/leme/"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-surfconnect-leme.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.17071385816649,
+          -22.96408552084031
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/leme/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Estimativa de observação para o mar a partir da praia do Leme; pin é do pico, não da instalação; página mostra imagem ampla sem referência de norte.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 160,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      }
+    },
+    {
+      "id": "surfconnect-meio-da-barra",
+      "name": "Barra da Tijuca Meio da Barra",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/meio-da-barra/"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-surfconnect-meio-da-barra.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.33077078161472,
+          -23.011217712290918
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/meio-da-barra/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Estimativa de observação para o mar a partir da orla; pin identifica o pico, não a instalação; imagem não prova orientação cardinal exata.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 180,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      }
+    },
+    {
+      "id": "surfconnect-postinho",
+      "name": "Barra da Tijuca Postinho",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/postinho/",
+        "http://v1.surfconnect.com.br/spot/camera/id/2/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.30665464075321,
+          -23.01532848375222
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/postinho/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-posto6",
+      "name": "Barra da Tijuca Posto 6",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/posto6/",
+        "http://v1.surfconnect.com.br/spot/camera/id/4/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.34212189016574,
+          -23.010580765242675
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/posto6/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-reserva",
+      "name": "Praia da Reserva Reserva",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/reserva/",
+        "http://v1.surfconnect.com.br/spot/camera/id/5/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.378128,
+          -23.011714
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/reserva/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-6",
+      "name": "Copa P6",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/praia-de-copacabana-posto-6/",
+        "http://v1.surfconnect.com.br/spot/camera/id/35/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.18856341838534,
+          -22.97841016639113
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-6/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "mar-urbano-posto-6",
+      "name": "Copacabana · Posto 6 (Mar Urbano)",
+      "status": "image_unavailable",
+      "access": "public",
+      "evidenceUrls": [
+        "https://institutomarurbano.com.br/live-cam/",
+        "https://worldcam.eu/webcams/south-america/brazil/36669-rio-de-janeiro-copacabana-posto-6"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-mar-urbano-posto-6.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.1889177,
+          -22.985619
+        ],
+        "precision": "directory",
+        "source": "https://worldcam.eu/webcams/south-america/brazil/36669-rio-de-janeiro-copacabana-posto-6",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Nenhuma imagem em movimento foi recebida durante o teste na fonte. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-praia-de-copacabana-posto-5-e-6",
+      "name": "Praia de Copacabana - Posto 5 Copa P5",
+      "status": "image_unavailable",
+      "access": "registration",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/praia-de-copacabana-posto-5-e-6/",
+        "http://v1.surfconnect.com.br/spot/camera/id/13/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.18856341838534,
+          -22.97841016639113
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/praia-de-copacabana-posto-5-e-6/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige cadastro para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-ipanema-posto-10",
+      "name": "Praia de Ipanema - Posto 10 Ipanema P10",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/ipanema-posto-10/",
+        "http://v1.surfconnect.com.br/spot/camera/id/34/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.209605,
+          -22.986261
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/ipanema-posto-10/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-ipanema-posto-8",
+      "name": "Praia de Ipanema - Posto 8 Ipanema",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/ipanema-posto-8/",
+        "http://v1.surfconnect.com.br/spot/camera/id/10/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.19689134901279,
+          -22.987466228263322
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/ipanema-posto-8/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-arpoador",
+      "name": "Praia do Arpoador Arpex",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/arpoador/",
+        "http://v1.surfconnect.com.br/spot/camera/id/1/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.191367737156725,
+          -22.989746448005217
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/arpoador/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-praia-do-diabo",
+      "name": "Praia do Diabo Diabo",
+      "status": "image_unavailable",
+      "access": "registration",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/praia-do-diabo/",
+        "http://v1.surfconnect.com.br/spot/camera/id/12/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.190587893254076,
+          -22.98919991165634
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/praia-do-diabo/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige cadastro para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-leblon",
+      "name": "Canto do Leblon Leblon P12",
+      "status": "image_unavailable",
+      "access": "registration",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/leblon/",
+        "http://v1.surfconnect.com.br/spot/camera/id/9/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.22666145822757,
+          -22.98826832512302
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/leblon/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige cadastro para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-leblon-posto-11",
+      "name": "Praia do Leblon Leblon P11",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/leblon-posto-11/",
+        "http://v1.surfconnect.com.br/spot/camera/id/15/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.21939267179721,
+          -22.986885565510555
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/leblon-posto-11/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-leme-fixa",
+      "name": "Leme Fixa",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/leme-fixa/"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-surfconnect-leme-fixa.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.17071385816649,
+          -22.96408552084031
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/leme-fixa/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Estimativa de observação para o mar a partir da praia do Leme; pin é do pico, não da instalação; imagem não prova posição da câmera.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 160,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      }
+    },
+    {
+      "id": "surfconnect-recreio",
+      "name": "Canto do Recreio Recreio",
+      "status": "image_unavailable",
+      "access": "registration",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/recreio/",
+        "http://v1.surfconnect.com.br/spot/camera/id/6/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.47021768706361,
+          -23.032283033941873
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/recreio/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige cadastro para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-macumba-curvao",
+      "name": "Curvão Macumba - Curvão",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/macumba-curvao/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.48650319575961,
+          -23.03400917927991
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/macumba-curvao/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-macumba",
+      "name": "Praia da Macumba - 5W Macumba - 5W",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/macumba/"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-surfconnect-macumba.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.4781399057739,
+          -23.031502838815346
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/macumba/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Estimativa ampla de direção para o mar; relevo costeiro visível confirma cenário, mas não fixa norte ou coordenada de instalação.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 160,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      }
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo",
+      "name": "Canto Esquerdo Sanca Esquerdo Lateral",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-surfconnect-praia-sao-conrado-canto-esquerdo.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.25576702053223,
+          -22.998546163471357
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Imagem disponível, porém névoa/sombra e baixa visibilidade não permitem confirmar o eixo; página indica pico, sem posição da câmera.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    },
+    {
+      "id": "surfconnect-pepino",
+      "name": "Pepino",
+      "status": "insufficient",
+      "access": "public",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/pepino/"
+      ],
+      "framePath": "C:\\Users\\cadau\\Documents\\Codex\\2026-09-24\\organic-criminalidade-rj\\work\\.perf-tools\\audit-other-surfconnect-pepino.png",
+      "cameraPosition": {
+        "coordinates": [
+          -43.27263,
+          -23.00106
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/pepino/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": 45,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "Estimativa ampla de direção para o mar na praia; ponto cadastrado identifica o pico e não a instalação, sem orientação cardinal no vídeo.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed.",
+      "rejectedModelProposal": {
+        "bearingDeg": 135,
+        "reason": "Root review rejected a generic seaward guess without georeferenced landmarks or operator direction."
+      }
+    },
+    {
+      "id": "surfconnect-praia-sao-conrado-canto-esquerdo-frontal",
+      "name": "Sanca Esquerdo Frontal",
+      "status": "image_unavailable",
+      "access": "subscription",
+      "evidenceUrls": [
+        "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo-frontal/",
+        "http://v1.surfconnect.com.br/spot/camera/id/39/"
+      ],
+      "framePath": null,
+      "cameraPosition": {
+        "coordinates": [
+          -43.25576,
+          -22.9985
+        ],
+        "precision": "spot",
+        "source": "https://v1.surfconnect.com.br/praia-sao-conrado-canto-esquerdo-frontal/",
+        "interpretation": "Coordenada do catálogo/pico ou diretório; não comprovada como posição de instalação."
+      },
+      "bearingDeg": null,
+      "bearingType": "unknown",
+      "bearingUncertaintyDeg": null,
+      "rangeMeters": null,
+      "horizontalFovDeg": null,
+      "coneGeometry": "Uncalculable: o material público não informa campo de visão, alcance nem posição precisa da câmera.",
+      "assessment": "O operador exige assinatura para exibir esta câmera. Fonte consultada sem autenticação; posição de instalação e direção não demonstradas.",
+      "ptz": "not_determined",
+      "ptzEvidence": "Nenhuma evidência pública consultada demonstra pan/tilt/zoom dinâmico para este feed."
+    }
+  ],
+  "rootReviewedAt": "2026-09-26T13:49:06.648Z"
+}

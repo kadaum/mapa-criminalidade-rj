@@ -392,8 +392,6 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
       mapRef.current?.flyTo({ center: coordinates, zoom: 18, duration: 0 });
     },
     revealCameraPanel,
-    () => setMapExpanded(true),
-    mapExpanded,
   );
   function revealCameraPanel() {
     setMapExpanded(false);
@@ -1604,13 +1602,12 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                   </div>
                 )}
                 {cameras.active ? (
-                  cameras.coverageActive ? null : (
                   <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
                     <p className="font-semibold">
                       Toque na câmera, no cone ou no número
                     </p>
                     <p>
-                      <span className="block font-medium text-amber-800">Cones ilustrativos · direção não calibrada</span>
+                      <span className="block font-medium text-amber-800">Cone somente com orientação estimada</span>
                       <Camera className="inline size-3 text-teal-700" /> Imagem
                       conferida ·{' '}
                       <Camera className="inline size-3 text-blue-600" /> Não
@@ -1623,7 +1620,6 @@ export function CrimeAtlas({ showHeader = true }: { showHeader?: boolean }) {
                       indica offline
                     </p>
                   </div>
-                  )
                 ) : (
                   <>
                     <Popover>

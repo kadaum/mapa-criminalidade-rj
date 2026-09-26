@@ -11,7 +11,16 @@
     "youtubeId": "k2QzfrPLQSg",
     "source": "https://www.youtube.com/watch?v=k2QzfrPLQSg",
     "status": "observed",
-    "checkedAt": "25/09/2026"
+    "checkedAt": "25/09/2026",
+    "name": "Copacabana Palace · Homes in Rio",
+    "address": "Edifício Chopin, Avenida Atlântica, 1782 — Copacabana",
+    "coordinates": [
+      -43.1795625,
+      -22.9676875
+    ],
+    "precision": "spot",
+    "locationSource": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+    "note": "Edifício identificado pelo operador; marcador aproxima o prédio, não a posição exata da lente. Direção nordeste informada pelo operador e compatível com a presença de Leme no quadro."
   },
   {
     "id": "paineiras-corcovado",

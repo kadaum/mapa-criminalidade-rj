@@ -14,7 +14,6 @@ import type { FeatureCollection, Point } from 'geojson';
 import { Camera, Copy, MapPin, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CameraPlayer } from '@/components/camera-player';
-import { CameraCoverage } from '@/components/camera-coverage';
 import { cameraCoverageFeatureCollection, normalizeCoverageParameters } from '@/lib/camera-coverage';
 import {
   cameraReference,
@@ -93,8 +92,6 @@ export function useCameraWorkspace(
   visible: boolean,
   focus: (coordinates: [number, number]) => void,
   revealPanel: () => void,
-  expandMap: () => void,
-  mapExpanded: boolean,
 ) {
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [enabled, setEnabled] = useState(false);
@@ -106,11 +103,6 @@ export function useCameraWorkspace(
     'idle' | 'loading' | 'ready' | 'error'
   >('idle');
   const [selected, setSelected] = useState<PublicCamera | null>(null);
-  const [coverageCamera, setCoverageCamera] = useState<PublicCamera | null>(
-    null,
-  );
-  const coverageRef = useRef<PublicCamera | null>(null);
-  coverageRef.current = coverageCamera;
   const [query, setQuery] = useState('');
   const [publisher, setPublisher] = useState('all');
   const [onlyObserved, setOnlyObserved] = useState(false);
@@ -136,7 +128,6 @@ export function useCameraWorkspace(
     const next = !enabled;
     setEnabled(next);
     setSelected(null);
-    setCoverageCamera(null);
     const url = new URL(window.location.href);
     if (next) url.searchParams.set('cameras', '1');
     else url.searchParams.delete('cameras');
@@ -193,7 +184,7 @@ export function useCameraWorkspace(
     }),
     [mapped],
   );
-  const highlightedCamera = selected || coverageCamera;
+  const highlightedCamera = selected;
   const selectedGeojson = useMemo(
     (): FeatureCollection<Point> => ({
       type: 'FeatureCollection',
@@ -222,19 +213,6 @@ export function useCameraWorkspace(
   }
   const revealRef = useRef(revealPanel);
   revealRef.current = revealPanel;
-  function simulateCoverage(camera: PublicCamera) {
-    if (!camera.coordinates) return;
-    setSelected(null);
-    popupRef.current?.remove();
-    setCoverageCamera(camera);
-    requestAnimationFrame(() =>
-      map
-        ?.getContainer()
-        .scrollIntoView({ behavior: 'smooth', block: 'center' }),
-    );
-  }
-  const simulateRef = useRef(simulateCoverage);
-  simulateRef.current = simulateCoverage;
   const showRef = useRef(showCamera);
   showRef.current = showCamera;
 
@@ -297,17 +275,6 @@ export function useCameraWorkspace(
         list.appendChild(button);
       });
       content.appendChild(list);
-      if (cameras.length === 1) {
-        const simulate = document.createElement('button');
-        simulate.type = 'button';
-        simulate.className =
-          'mt-2 min-h-11 w-full rounded-lg border border-amber-300 bg-amber-50 p-2 text-xs font-semibold';
-        simulate.textContent = 'Ajustar cone';
-        simulate.addEventListener('click', () =>
-          simulateRef.current(cameras[0]),
-        );
-        content.appendChild(simulate);
-      }
       popup = new Popup({
         className: 'camera-map-popup',
         closeButton: true,
@@ -326,13 +293,11 @@ export function useCameraWorkspace(
         ?.setAttribute('aria-label', 'Fechar câmeras deste ponto');
     };
     const selectPoint = (event: MapLayerMouseEvent) => {
-      if (coverageRef.current) return;
       const ids = new Set(event.features?.map(f => String(f.properties.id)));
       const cameras = filteredRef.current.filter(c => ids.has(c.id) && c.coordinates);
       if (cameras.length) showOnMap(cameras[0].coordinates!, cameras);
     };
     const selectCone = (event: MapLayerMouseEvent) => {
-      if (coverageRef.current) return;
       // Markers and numbered groups have priority over the sectors beneath them.
       if (map.queryRenderedFeatures(event.point, { layers: ['camera-points', 'camera-clusters'] }).length) return;
       const ids = new Set(event.features?.map(f => String(f.properties.cameraId)));
@@ -341,7 +306,6 @@ export function useCameraWorkspace(
       else if (cameras.length) showOnMap([event.lngLat.lng, event.lngLat.lat], cameras);
     };
     const expandCluster = async (event: MapLayerMouseEvent) => {
-      if (coverageRef.current) return;
       const feature = event.features?.[0];
       const source = map.getSource(sourceId) as GeoJSONSource | undefined;
       if (!feature || !source || feature.geometry.type !== 'Point') return;
@@ -408,15 +372,11 @@ export function useCameraWorkspace(
           for (const member of members.flat()) ids.add(String(member.properties?.id));
         } catch { return; /* Filters may replace a cluster while it resolves. */ }
       }
-      const cameras = catalogSnapshot.filter(c => c.coordinates && c.id !== coverageRef.current?.id && ids.has(c.id));
-      const entries = cameras.map(camera => {
-        let parameters = { bearingDeg: 0, fovDeg: 60, rangeMeters: 250 };
-        try {
-          const saved = JSON.parse(localStorage.getItem('mapa-rj:coverage:v1:' + camera.id) || 'null');
-          if (saved?.kind === 'manual-simulation') parameters = normalizeCoverageParameters(saved.parameters || parameters);
-        } catch { /* Optional local settings. */ }
-        return { camera, parameters };
-      });
+      const cameras = catalogSnapshot.filter(c => c.coordinates && c.coverage && ids.has(c.id));
+      const entries = cameras.map(camera => ({
+        camera,
+        parameters: normalizeCoverageParameters(camera.coverage!),
+      }));
       const signature = JSON.stringify(entries.map(({ camera, parameters }) => [camera.id, camera.coordinates, parameters]));
       if (signature === coverageSignature) return;
       coverageSignature = signature;
@@ -625,21 +585,9 @@ export function useCameraWorkspace(
 
   return {
     active,
-    coverageActive: active && !!coverageCamera,
     toggle,
     controls: visible && (
       <>
-        {active && coverageCamera?.coordinates && map && (
-          <CameraCoverage
-            key={coverageCamera.id}
-            map={map}
-            camera={coverageCamera}
-            onClose={() => setCoverageCamera(null)}
-              onOpenVideo={() => setSelected(coverageCamera)}
-              onExpandMap={expandMap}
-              mapExpanded={mapExpanded}
-          />
-        )}
         <div className="absolute left-3 top-17 z-20 flex overflow-hidden rounded-lg border border-[#dce2ed] bg-white shadow-lg md:left-4 md:top-18">
           <button
             type="button"
@@ -679,7 +627,6 @@ export function useCameraWorkspace(
             camera={selected}
             sharedReferenceCount={sharedReferenceCount}
             onClose={() => setSelected(null)}
-            onSimulate={() => simulateCoverage(selected)}
             onLocate={() => {
               if (selected.coordinates) {
                 focus(selected.coordinates);
@@ -978,13 +925,11 @@ function CameraViewer({
   sharedReferenceCount,
   onClose,
   onLocate,
-  onSimulate,
 }: {
   camera: PublicCamera;
   sharedReferenceCount: number;
   onClose: () => void;
   onLocate: () => void;
-  onSimulate: () => void;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -1017,7 +962,6 @@ function CameraViewer({
             camera={camera}
             sharedReferenceCount={sharedReferenceCount}
             onLocate={onLocate}
-            onSimulate={onSimulate}
           />
         </div>
       </div>
@@ -1029,12 +973,10 @@ function CameraDetail({
   camera,
   sharedReferenceCount,
   onLocate,
-  onSimulate,
 }: {
   camera: PublicCamera;
   sharedReferenceCount: number;
   onLocate: () => void;
-  onSimulate: () => void;
 }) {
   const [referenceOpen, setReferenceOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
@@ -1088,15 +1030,11 @@ function CameraDetail({
             ? 'Ainda não verificamos a reprodução desta fonte. A referência no mapa não confirma que o vídeo esteja disponível.'
             : 'O resultado corresponde à data do teste. A disponibilidade pode mudar.'}
       </p>
-      {camera.coordinates && (
-        <Button
-          variant="outline"
-          className="min-h-11 w-full border-amber-300 text-amber-950"
-          onClick={onSimulate}
-        >
-          Ajustar cone no mapa
-        </Button>
-      )}
+      <p className="text-xs leading-5 text-slate-600">
+        {camera.coverage
+          ? camera.coverage.note
+          : 'Campo de visão ainda não calibrado. O marcador indica apenas o local de referência.'}
+      </p>
       <CameraPlayer camera={camera} />
       <div className="space-y-2 text-xs leading-5 text-muted-foreground">
         <p>

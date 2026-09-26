@@ -10,33 +10,11 @@ Outras fontes continuam externas, com essa limitação indicada antes do clique.
 
 ## Cobertura e precisão
 
-### Simulação manual de campo de visão
+### Cones automáticos
 
-Os cones aparecem automaticamente nos pontos individuais visíveis ao aproximar o mapa, sem clicar. Agrupamentos permanecem compactos até se separarem. A legenda informa que os cones são ilustrativos e a direção não está calibrada. **Ajustar cone no mapa** abre os parâmetros pelo detalhe do vídeo ou pelo ponto. O setor tem direção, abertura horizontal e raio editáveis; a direção também pode ser apontada no mapa. É sempre rotulado como simulação manual não calibrada. Os parâmetros iniciais são exemplos, não dados da instalação, e não há análise de obstáculos ou altura. Salvar grava apenas os parâmetros locais no navegador. Câmeras sem coordenadas não oferecem esse comando. Fechar o editor restaura o cone automático e os cliques normais nos agrupamentos. Os cones seguem os filtros e são removidos ao sair das câmeras.
+Os cones aparecem automaticamente nas câmeras visíveis e nos grupos pequenos ao aproximar. O visitante apenas navega e seleciona vídeo pelo cone, marcador ou número. Não há editor, sliders ou botão de ajuste na interface pública; valores antigos de localStorage não influenciam o desenho.
 
-No modo câmeras, **Ruas/Satélite** e **2D/Perspectiva** ficam na barra acima do mapa. O satélite é opcional e não é imagem ao vivo. A perspectiva inclina a base, sem criar prédios3D. A vista geral e a saída do modo câmeras retornam à vista superior. O cone fica abaixo dos marcadores, com contorno tracejado; seu painel substitui a legenda para evitar sobreposição.
-
-Os números no mapa aproximam os agrupamentos até separar as referências. Quando a expansão ultrapassaria o zoom permitido (incluindo coordenadas compartilhadas), um seletor ancorado ao ponto mostra nomes e IDs. Não deslocamos marcadores para simular locais distintos. Câmeras individuais mostram nome e ação de vídeo no próprio mapa. O fluxo não exige abrir a lista lateral. Verificado por cliques no canvas em desktop e celular emulado, incluindo expansão além do zoom 14, grupo de três referências no mesmo ponto e abertura/fechamento do vídeo.
-
-O catálogo em `public/data/public-cameras.json` contém as referências encontradas nas fontes consultadas. Não representa todas as câmeras instaladas na cidade nem todas as transmissões funcionando. A contagem é por ID de catálogo, não por suporte físico. As coordenadas não representam campo de visão.
-
-- **CamerasRJ:** catálogo público com 6.658 IDs e 146 grupos de bairros, incluindo um grupo indefinido. Não se atribui ao agregador a operação dos equipamentos. As referências podem falhar por origem, rede ou compatibilidade de codec.
-- **CADLOG:** nomes de ruas e bairros oficiais permitem derivar cruzamentos conservadoramente. A evidência de cada referência fica em `public/data/camera-location-evidence.json`. Interseção é referência do cruzamento; endereço interpolado é estimativa na via, nunca posição medida do equipamento.
-- **SurfConnect:** 21 páginas, com acesso livre, cadastro ou assinatura explícitos. A posição publicada é do pico de praia. Uma coordenada de Prainha foi rejeitada por reutilizar Macumba. As duas vistas do Leme e outras câmeras no mesmo pico permanecem IDs distintos, sem deduplicação arbitrária por coordenada.
-- **Homes in Rio:** Postos 3 e 6 são transmissões distintas, com localização aproximada de diretório. Instituto Mar Urbano é outro operador no Posto 6.
-- **Paineiras Corcovado:** a transmissão encontrada permanece sem marcador até localizar a instalação. Não se usou a coordenada do Cristo como substituta.
-
-### Resultado da auditoria de instalação
-
-Na revisão atual, nenhuma referência tem confirmação física do ponto de montagem. As 962 referências de cruzamento e 473 de endereço em `public/data/camera-location-evidence.json` são pontos derivados do CADLOG: o cruzamento identifica a referência da esquina e o endereço é interpolado na via. As coordenadas não devem ser lidas como posição do poste, prédio ou suporte da câmera.
-
-IDs que compartilham a mesma coordenada, inclusive grupos de três ou mais, podem ser transmissões ou variações do catálogo que receberam a mesma referência derivada. Isso não comprova três equipamentos no mesmo ponto. O Posto 6 da Homes in Rio publica um endereço, mas o marcador continua vindo de diretório e não confirma o local de montagem.
-
-Para classificar uma posição como precisa, será necessária uma confirmação do operador que vincule o ID a um registro de instalação com coordenada levantada, ou uma evidência datada, identificável e georreferenciada que mostre o equipamento. Até lá, a interface e as referências copiáveis devem manter a ressalva de que a posição exata do equipamento não foi confirmada.
-
-Como próxima etapa, pode ser feita uma amostra de 10 a 20 referências, distribuída entre cruzamentos CADLOG, endereços interpolados e endereços publicados por operadores, para tentar obter esse tipo de confirmação diretamente com as fontes. Essa amostra serve para medir a verificabilidade e ajustar os rótulos; não promete cobertura exata do catálogo inteiro.
-
-Diretórios que repetem as mesmas transmissões não entram como novas câmeras. Links removidos, transmissões encerradas, passeios móveis, mapas genéricos e páginas que só prometem câmera futura ficam no inventário de pesquisa. Nenhum endpoint interno ou autenticado compõe a base.
+Direção, abertura e alcance são responsabilidade editorial do catálogo. Quando falta direção fundamentada, o marcador permanece sem cone direcional; não há fallback para norte. O campo opcional coverage permite incorporar parâmetros pesquisados pela equipe, sem controles para o visitante.
 
 ## Disponibilidade
 
@@ -74,7 +52,7 @@ A fonte CADLOG é [IPP/Prefeitura do Rio, CC BY 4.0](https://www.arcgis.com/home
 
 ### Câmeras sobrepostas
 
-Tocar num cone isolado abre o vídeo correspondente. Cones sobrepostos abrem um seletor ancorado no toque. Marcadores e números têm prioridade sobre os cones abaixo deles. Grupos de até 12 referências abrem a escolha diretamente, sem exigir chegar ao zoom máximo; grupos maiores continuam aproximando até a escala de rua. Referências com coordenadas coincidentes também exibem seus cones na escala de rua, preservando o número para selecionar as alternativas. Direções distintas só vêm de ajustes salvos, sem inventar orientações para separar os desenhos.
+Tocar num cone isolado abre o vídeo correspondente. Cones sobrepostos abrem um seletor ancorado no toque. Marcadores e números têm prioridade sobre os cones abaixo deles. Grupos de até 12 referências abrem a escolha diretamente, sem exigir chegar ao zoom máximo; grupos maiores continuam aproximando até a escala de rua. Referências com coordenadas coincidentes também exibem seus cones na escala de rua, preservando o número para selecionar as alternativas. Não inventamos direções para separar os desenhos.
 
 ## Auditoria integral de reprodução — 26/09/2026
 
@@ -87,3 +65,7 @@ O auditor CamerasRJ (`scripts/cameras/audit-camerasrj.mjs`) usa quatro processos
 Os IDs874,7278 e7279 do cruzamento Lúcio Costa/Érico Veríssimo foram testados no produto e diretamente na fonte. Todos retornaram falha de transmissão/timeout na origem. São referências da mesma fonte CamerasRJ; o endereço compartilhado não comprova equipamentos ou transmissões idênticos. Evidências sanitizadas: `example-three-2026-09-26.json`.
 
 O seletor ordena fontes com reprodução confirmada primeiro. Substituição automática só usa identidade de sinal exata (mesmo vídeo YouTube ou mesma URL de reprodução); mesma coordenada ou nome não autoriza trocar imagens. Testes cobrem preferência pela fonte confirmada, preservação de sinal diferente no mesmo endereço e exclusão de acesso restrito.
+
+### Revisão editorial dos cones — 26/09/2026
+
+Inventário integral: 1.435 CamerasRJ mapeadas, sincronizadas pelo script inventory-calibration.mjs com a auditoria de vídeo, mais 23 de outros operadores inspecionadas em calibration-public-2026-09-26.json. A revisão principal rejeitou sete eixos genéricos sugeridos pelo modelo menor. Só Homes/Copacabana Palace recebeu orientação fundamentada nesta rodada: o operador identifica Edifício Chopin, endereço1782 em seu mapa e direção nordeste. A referência do prédio foi reconciliada com o Plus Code público2RJC+W5 (contexto Rio, código completo589R2RJC+W5), cujo centro foi decodificado em[-43.1795625,-22.9676875]. Isso não confirma a posição da lente. A revisão visual rejeitou converter nordeste em setor nominal45°: o desenho atravessava edifícios e não correspondia bem ao quadro. Nenhum cone foi promovido a calibrado nesta rodada; a posição do prédio foi corrigida. A geometria da lente, obstáculos e altura continuam desconhecidos. Fontes: https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam e mapa do próprio operador https://homesinrio.com/wp-content/uploads/2021/09/map2.png.

@@ -6,6 +6,15 @@ export type PublicCamera = {
   publisher: string;
   address: string;
   coordinates: [number, number] | null;
+  /** Editorial parameters from verified research; never visitor preferences. */
+  coverage?: {
+    bearingDeg: number;
+    fovDeg: number;
+    rangeMeters: number;
+    source: string;
+    assessedAt: string;
+    note: string;
+  };
   precision: 'directory' | 'intersection' | 'address' | 'spot' | 'unresolved';
   locationSource: string;
   source: string;
