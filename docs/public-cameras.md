@@ -71,3 +71,7 @@ A fonte CADLOG é [IPP/Prefeitura do Rio, CC BY 4.0](https://www.arcgis.com/home
 ## Verificação
 
 `node scripts/validate-cameras.mjs` verifica unicidade, links sem autenticação, estrutura, IDs de vídeo distintos, precisão declarada, paridade e faixa dos endereços e pertencimento dos pontos derivados ao município. TypeScript, lint e build verificam a implementação. QA no navegador cobre desktop e celular, reprodução, cópia idêntica ao texto visível, referência sem coordenada, retorno às estatísticas e remoção do player. O levantamento não faz varredura de reprodução dos milhares de sinais.
+
+### Câmeras sobrepostas
+
+Tocar num cone isolado abre o vídeo correspondente. Cones sobrepostos abrem um seletor ancorado no toque. Marcadores e números têm prioridade sobre os cones abaixo deles. Grupos de até 12 referências abrem a escolha diretamente, sem exigir chegar ao zoom máximo; grupos maiores continuam aproximando até a escala de rua. Referências com coordenadas coincidentes também exibem seus cones na escala de rua, preservando o número para selecionar as alternativas. Direções distintas só vêm de ajustes salvos, sem inventar orientações para separar os desenhos.

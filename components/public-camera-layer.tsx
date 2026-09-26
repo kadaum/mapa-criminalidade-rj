@@ -325,9 +325,18 @@ export function useCameraWorkspace(
     };
     const selectPoint = (event: MapLayerMouseEvent) => {
       if (coverageRef.current) return;
-      const id = event.features?.[0]?.properties?.id;
-      const camera = filteredRef.current.find((c) => c.id === id);
-      if (camera?.coordinates) showOnMap(camera.coordinates, [camera]);
+      const ids = new Set(event.features?.map(f => String(f.properties.id)));
+      const cameras = filteredRef.current.filter(c => ids.has(c.id) && c.coordinates);
+      if (cameras.length) showOnMap(cameras[0].coordinates!, cameras);
+    };
+    const selectCone = (event: MapLayerMouseEvent) => {
+      if (coverageRef.current) return;
+      // Markers and numbered groups have priority over the sectors beneath them.
+      if (map.queryRenderedFeatures(event.point, { layers: ['camera-points', 'camera-clusters'] }).length) return;
+      const ids = new Set(event.features?.map(f => String(f.properties.cameraId)));
+      const cameras = filteredRef.current.filter(c => ids.has(c.id) && c.coordinates);
+      if (cameras.length === 1) showRef.current(cameras[0]);
+      else if (cameras.length) showOnMap([event.lngLat.lng, event.lngLat.lat], cameras);
     };
     const expandCluster = async (event: MapLayerMouseEvent) => {
       if (coverageRef.current) return;
@@ -339,9 +348,9 @@ export function useCameraWorkspace(
         const id = Number(feature.properties.cluster_id);
         const zoom = await source.getClusterExpansionZoom(id);
         if (disposed) return;
-        // Never divert to the sidebar at street zoom. Continue until points
-        // separate; references sharing coordinates need a chooser on the map.
-        if (zoom <= map.getMaxZoom() && map.getZoom() < map.getMaxZoom()) {
+        // Small groups and street-level clusters open an anchored chooser.
+        // Large regional groups zoom in to keep the list useful.
+        if (Number(feature.properties.point_count) > 12 && map.getZoom() < 17 && zoom <= map.getMaxZoom() && map.getZoom() < map.getMaxZoom()) {
           closePopup();
           map.easeTo({
             center: coords,
@@ -364,12 +373,6 @@ export function useCameraWorkspace(
           ids.has(camera.id),
         );
         if (cameras.length) {
-          if (map.getZoom() < 17)
-            map.easeTo({
-              center: coords,
-              zoom: Math.min(17, map.getMaxZoom()),
-              duration: 0,
-            });
           showOnMap(coords, cameras);
         }
       } catch {
@@ -383,12 +386,27 @@ export function useCameraWorkspace(
       map.getCanvas().style.cursor = '';
     };
     let coverageSignature = '';
-    const updateAutomaticCoverage = () => {
+    let coverageUpdate = 0;
+    const updateAutomaticCoverage = async () => {
+      const update = ++coverageUpdate;
+      const catalogSnapshot = filteredRef.current;
       if (disposed || !map.getLayer('camera-points')) return;
       const source = map.getSource(automaticCoverageSource) as GeoJSONSource | undefined;
       if (!source) return;
       const ids = new Set(map.queryRenderedFeatures({ layers: ['camera-points'] }).map(f => String(f.properties.id)));
-      const cameras = filteredRef.current.filter(c => ids.has(c.id) && c.coordinates && c.id !== coverageRef.current?.id);
+      // Cluster geometry is quantized: use membership IDs, never coordinate equality.
+      const groups = map.getZoom() >= 15
+        ? map.queryRenderedFeatures({ layers: ['camera-clusters'] }).filter(f => Number(f.properties.point_count) <= 12)
+        : [];
+      const pointSource = map.getSource(sourceId) as GeoJSONSource | undefined;
+      if (pointSource && groups.length) {
+        try {
+          const members = await Promise.all(groups.map(g => pointSource.getClusterLeaves(Number(g.properties.cluster_id), Number(g.properties.point_count), 0)));
+          if (disposed || update !== coverageUpdate || catalogSnapshot !== filteredRef.current) return;
+          for (const member of members.flat()) ids.add(String(member.properties?.id));
+        } catch { return; /* Filters may replace a cluster while it resolves. */ }
+      }
+      const cameras = catalogSnapshot.filter(c => c.coordinates && c.id !== coverageRef.current?.id && ids.has(c.id));
       const entries = cameras.map(camera => {
         let parameters = { bearingDeg: 0, fovDeg: 60, rangeMeters: 250 };
         try {
@@ -518,6 +536,9 @@ export function useCameraWorkspace(
           'icon-ignore-placement': true,
         },
       });
+      map.on('click', 'camera-automatic-coverage-fill', selectCone);
+      map.on('mouseenter', 'camera-automatic-coverage-fill', pointer);
+      map.on('mouseleave', 'camera-automatic-coverage-fill', resetPointer);
       map.on('click', 'camera-points', selectPoint);
       map.on('click', 'camera-clusters', expandCluster);
       map.on('mouseenter', 'camera-points', pointer);
@@ -539,6 +560,9 @@ export function useCameraWorkspace(
       map.off('load', setup);
       map.off('moveend', updateBounds);
       map.off('idle', updateAutomaticCoverage);
+      map.off('click', 'camera-automatic-coverage-fill', selectCone);
+      map.off('mouseenter', 'camera-automatic-coverage-fill', pointer);
+      map.off('mouseleave', 'camera-automatic-coverage-fill', resetPointer);
       map.off('click', 'camera-points', selectPoint);
       map.off('click', 'camera-clusters', expandCluster);
       map.off('mouseenter', 'camera-points', pointer);
