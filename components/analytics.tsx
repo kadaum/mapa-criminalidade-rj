@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 const MEASUREMENT_IDS = ['G-0PDCFQQGBC', 'G-GN79TEBSWQ'] as const;
 
 type AnalyticsWindow = Window & {
-  dataLayer?: unknown[][];
+  dataLayer?: unknown[];
   gtag?: (...args: unknown[]) => void;
 };
 
@@ -14,8 +14,8 @@ function initializeAnalytics() {
   const analyticsWindow = window as AnalyticsWindow;
 
   analyticsWindow.dataLayer ||= [];
-  analyticsWindow.gtag ||= (...args: unknown[]) => {
-    analyticsWindow.dataLayer?.push(args);
+  analyticsWindow.gtag ||= function gtag(..._args: unknown[]) {
+    analyticsWindow.dataLayer?.push(arguments);
   };
 
   if (!document.querySelector(`script[data-google-analytics="${MEASUREMENT_IDS[0]}"]`)) {
