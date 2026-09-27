@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-const MEASUREMENT_ID = 'G-0PDCFQQGBC';
+const MEASUREMENT_IDS = ['G-0PDCFQQGBC', 'G-GN79TEBSWQ'] as const;
 
 type AnalyticsWindow = Window & {
   dataLayer?: unknown[][];
@@ -18,19 +18,21 @@ function initializeAnalytics() {
     analyticsWindow.dataLayer?.push(args);
   };
 
-  if (!document.querySelector(`script[data-google-analytics="${MEASUREMENT_ID}"]`)) {
+  if (!document.querySelector(`script[data-google-analytics="${MEASUREMENT_IDS[0]}"]`)) {
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
-    script.dataset.googleAnalytics = MEASUREMENT_ID;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_IDS[0]}`;
+    script.dataset.googleAnalytics = MEASUREMENT_IDS[0];
     document.head.appendChild(script);
 
     analyticsWindow.gtag('js', new Date());
-    analyticsWindow.gtag('config', MEASUREMENT_ID, {
-      send_page_view: false,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-    });
+    for (const measurementId of MEASUREMENT_IDS) {
+      analyticsWindow.gtag('config', measurementId, {
+        send_page_view: false,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+    }
   }
 
   return analyticsWindow.gtag;
@@ -49,14 +51,16 @@ export function Analytics() {
       const host = new URL(referrer).hostname;
       referralGroup = /(^|\.)(chatgpt\.com|openai\.com|perplexity\.ai|claude\.ai|gemini\.google\.com)$/.test(host) ? 'ai_referral' : /(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com)$/.test(host) ? 'search_referral' : 'other_referral';
     } catch { /* Direct visits have no referrer URL. */ }
-    gtag?.('event', 'page_view', {
-      send_to: MEASUREMENT_ID,
-      page_location: `${window.location.origin}${path}`,
-      page_path: path,
-      page_title: document.title,
-      page_family: family,
-      referral_group: referralGroup,
-    });
+    for (const measurementId of MEASUREMENT_IDS) {
+      gtag?.('event', 'page_view', {
+        send_to: measurementId,
+        page_location: `${window.location.origin}${path}`,
+        page_path: path,
+        page_title: document.title,
+        page_family: family,
+        referral_group: referralGroup,
+      });
+    }
     const onClick = (event: MouseEvent) => {
       const anchor = (event.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
       if (!anchor) return;
@@ -68,7 +72,11 @@ export function Analytics() {
         : destination.endsWith('.csv') || destination.endsWith('.json') ? 'export_data'
         : url.hostname.endsWith('ispdados.rj.gov.br') || url.hostname.endsWith('ibge.gov.br') ? 'open_source'
         : null;
-      if (action) gtag?.('event', action, { page_family: family, target_path: destination });
+      if (action) {
+        for (const measurementId of MEASUREMENT_IDS) {
+          gtag?.('event', action, { send_to: measurementId, page_family: family, target_path: destination });
+        }
+      }
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
