@@ -50,6 +50,7 @@ next-env.d.ts
 /public/data/cisp-population.json
 /public/data/cisp-rio.geojson
 /public/data/neighborhoods-rio.geojson
+/public/data/neighborhood-labels.json
 /public/data/public-cameras.json
 
 # Generated IBGE context and neighborhood share cards; build locally from official compact sources.

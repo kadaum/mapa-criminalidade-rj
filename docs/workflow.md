@@ -7,6 +7,7 @@
 3. Preservar hash SHA-256 e metadados da coleta.
 4. Decodificar Windows-1252 e filtrar o município do Rio.
 5. Manter 36 meses no payload web: 12 atuais, 12 de comparação e 12 de contexto.
+6. Gerar `public/data/neighborhood-labels.json` no build a partir do GeoJSON existente. O mapa carrega esse payload leve para rótulos; a geometria completa dos bairros só é solicitada quando a pessoa ativa “Limites dos bairros”.
 
 Responsável lógico: **coletor**.
 

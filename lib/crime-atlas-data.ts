@@ -1,5 +1,7 @@
-async function fetchJson(fetcher: typeof fetch, url: string) {
-  const response = await fetcher(url);
+import { parseNeighborhoodLabels } from './neighborhood-labels.ts';
+
+async function fetchJson(fetcher: typeof fetch, url: string, signal?: AbortSignal) {
+  const response = await fetcher(url, signal ? { signal } : undefined);
   if (!response.ok) throw new Error(`${url} unavailable`);
   return response.json() as Promise<unknown>;
 }
@@ -18,6 +20,14 @@ export function loadCrimeAtlasCore(fetcher: typeof fetch = fetch) {
   }));
 }
 
-export function loadCrimeAtlasNeighborhoods(fetcher: typeof fetch = fetch) {
-  return fetchJson(fetcher, '/data/neighborhoods-rio.geojson');
+export function loadCrimeAtlasNeighborhoodLabels(fetcher: typeof fetch = fetch, signal?: AbortSignal) {
+  return fetchJson(fetcher, '/data/neighborhood-labels.json', signal).then(parseNeighborhoodLabels);
+}
+
+export function loadCrimeAtlasNeighborhoods(fetcher: typeof fetch = fetch, signal?: AbortSignal) {
+  return fetchJson(fetcher, '/data/neighborhoods-rio.geojson', signal);
+}
+
+export function needsNeighborhoodGeometry(showNeighborhoods: boolean, neighborhoods: unknown) {
+  return showNeighborhoods && neighborhoods == null;
 }
