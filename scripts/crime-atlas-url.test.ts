@@ -2,6 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   crimeAtlasQuery,
+  cameraDestinationPath,
+  publicCameraNavigationQuery,
+  publishedCispIds,
   publicNavigationQuery,
   readCrimeAtlasUrl,
 } from '../components/crime-atlas-url.ts';
@@ -49,4 +52,39 @@ void test('CISP e janela inválidas não criam seleção fantasma', () => {
   const state = readCrimeAtlasUrl(new URLSearchParams('cisp=-1&meses=99'));
   assert.equal(state.cisp, 0);
   assert.equal(state.months, 12);
+});
+
+void test('câmera preserva somente contexto público e canonicaliza bairro permitido', () => {
+  const query = publicCameraNavigationQuery(
+    '?bairro=barra%20da%20tij%C3%BAca&cisp=19&fim=2026-07&token=secret&protocolo=abc',
+  );
+  assert.equal(query.toString(), 'bairro=Barra+da+Tijuca&cisp=19&fim=2026-07');
+});
+
+void test('câmera descarta bairro desconhecido sem propagar credenciais', () => {
+  const query = publicCameraNavigationQuery(
+    '?bairro=Lapa&token=secret&cameraID=private-id',
+  );
+  assert.equal(query.toString(), '');
+});
+
+void test('câmera rejeita contexto fora dos domínios públicos', () => {
+  const query = publicCameraNavigationQuery(
+    '?cisp=2&outra=99&indicador=private&meses=37&fim=2026-13&comparacao=bad&visualizacao=html',
+  );
+  assert.equal(query.toString(), '');
+});
+
+void test('câmera usa exatamente os IDs publicados no snapshot', () => {
+  for (const cisp of [42, 43, 44])
+    assert.equal(publicCameraNavigationQuery(`?cisp=${cisp}`).get('cisp'), String(cisp));
+  for (const cisp of [2, 3, 8])
+    assert.equal(publicCameraNavigationQuery(`?cisp=${cisp}`).has('cisp'), false);
+  assert.equal(publishedCispIds.size, 41);
+});
+
+void test('destino de câmera preserva contexto ao abrir e fechar', () => {
+  const context = '?bairro=Centro&cisp=1&fim=2026-07&protocolo=secret';
+  assert.equal(cameraDestinationPath('cam/1', context), '/cameras/cam%2F1?bairro=Centro&cisp=1&fim=2026-07');
+  assert.equal(cameraDestinationPath(null, context), '/cameras?bairro=Centro&cisp=1&fim=2026-07');
 });

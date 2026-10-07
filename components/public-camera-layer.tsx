@@ -30,6 +30,7 @@ import {
   type PublicCamera,
   type CameraCatalog,
 } from '@/lib/public-cameras';
+import { cameraNeighborhoodFromUrl } from '@/lib/neighborhood-query';
 
 const sourceId = 'public-camera-points';
 const selectedSourceId = 'selected-camera-point';
@@ -132,9 +133,12 @@ export function useCameraWorkspace(
   const loaded = useRef(false);
 
   useEffect(() => {
+    if (initialEnabled) {
+      setQuery(cameraNeighborhoodFromUrl(new URL(window.location.href).searchParams.get('bairro')));
+    }
     if (new URLSearchParams(window.location.search).get('cameras') === '1')
       setEnabled(true);
-  }, []);
+  }, [initialEnabled]);
   useEffect(() => {
     onCameraChange?.(selected?.id ?? null);
   }, [selected?.id, onCameraChange]);

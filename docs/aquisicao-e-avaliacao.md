@@ -4,7 +4,9 @@ Plano preparado em 6 de outubro de 2026. Nenhuma mensagem, newsletter, proprieda
 
 ## Baseline verificável
 
-Uma consulta HTTP ao site publicado em 6 de outubro retornou `200` para `/`, `/robots.txt` e `/sitemap.xml`. O `robots.txt` permite `/`, bloqueia `/api/` e referencia o sitemap. O HTML inicial da entrada contém título e canonical absoluto autorreferente. O sitemap publicado lista as páginas existentes, mas ainda não contém as novas rotas de bairros e o hub cronológico; elas entram após publicação desta versão.
+Uma consulta HTTP ao site publicado em 6 de outubro retornou `200` para `/`, `/robots.txt` e `/sitemap.xml`. O `robots.txt` permite `/`, bloqueia `/api/` e referencia o sitemap. O HTML inicial da entrada contém título e canonical absoluto autorreferente. O sitemap publicado lista as páginas existentes, mas ainda não contém as novas rotas de bairros e o hub cronológico; elas entram após publicação desta versão. Esse registro é histórico e permanece inalterado.
+
+Em 7 de outubro de 2026, a verificação HTTP da produção v56 mostrou as rotas de bairros e o hub cronológico incluídos no sitemap público. Essa observação atualiza o estado operacional sem reescrever a evidência do baseline de 6 de outubro.
 
 Isso comprova acessibilidade técnica no momento da consulta, não indexação. O Google explica que sitemap ajuda descoberta, mas não garante rastreamento ou indexação. A documentação também trata `rel="canonical"` como sinal forte, sitemap como sinal mais fraco e recomenda canonical autorreferente no HTML. Fontes primárias: [visão geral de sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview), [canonicalização](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) e [uso do Search Console](https://developers.google.com/search/docs/monitor-debug/search-console-start).
 

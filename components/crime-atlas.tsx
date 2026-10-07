@@ -9,7 +9,7 @@ import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
-import { crimeAtlasQuery, readCrimeAtlasUrl } from '@/components/crime-atlas-url';
+import { cameraDestinationPath, crimeAtlasQuery, readCrimeAtlasUrl } from '@/components/crime-atlas-url';
 import { PeriodPicker } from '@/components/period-picker';
 import { useCameraWorkspace } from '@/components/public-camera-layer';
 import {
@@ -24,6 +24,7 @@ import {
   Bookmark,
   CalendarRange,
   Camera,
+  ChevronDown,
   Database,
   FileText,
   Info,
@@ -372,6 +373,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   const [endPeriod, setEndPeriod] = useState('');
   const [comparisonMode, setComparisonMode] = useState<Comparison>('previous');
   const [selectedCisp, setSelectedCisp] = useState(0);
+  const [mobileRegionExpanded, setMobileRegionExpanded] = useState(false);
   const [hoveredCisp, setHoveredCisp] = useState<number | null>(null);
   const [search, setSearch] = useState('');
   const [display, setDisplay] = useState<'map' | 'list'>('map');
@@ -414,12 +416,9 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
       initialEnabled: cameraDestination,
       initialCameraId,
       onCameraChange: cameraDestination
-        ? (cameraId) =>
-            window.history.replaceState(
-              null,
-              '',
-              cameraId ? `/cameras/${encodeURIComponent(cameraId)}` : '/cameras',
-            )
+        ? (cameraId) => {
+            window.history.replaceState(null, '', cameraDestinationPath(cameraId, window.location.search));
+          }
         : undefined,
     },
   );
@@ -441,6 +440,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   useEffect(() => {
     function applyUrl() {
       const state = readCrimeAtlasUrl(new URLSearchParams(window.location.search));
+      setMobileRegionExpanded(false);
       setSelectedCisp(state.cisp);
       setIndicator(state.indicator);
       setWindowMonths(state.months);
@@ -1067,6 +1067,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
     if (!territory || !stats.some((item) => item.cisp === cisp)) return;
     cityViewRef.current = false;
     shouldMoveRef.current = true;
+    setMobileRegionExpanded(false);
     setSelectedCisp(cisp);
     emitRegionSelect(cisp);
     setSearch('');
@@ -1815,11 +1816,9 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
             <>
               {selected && <motion.button
                 type="button"
-                onClick={() =>
-                  document.getElementById('region-panel')?.scrollIntoView({
-                    behavior: reducedMotion ? 'auto' : 'smooth',
-                  })
-                }
+                onClick={() => setMobileRegionExpanded((expanded) => !expanded)}
+                aria-expanded={mobileRegionExpanded}
+                aria-controls="region-panel"
                 key={`${selectedCisp}-${indicator}-${viewMode}`}
                 initial={reducedMotion ? false : { y: 12, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -1833,7 +1832,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                     </span>
                     <span className="mt-1 block text-xs text-[#59667b]">
                       {selected?.current.toLocaleString('pt-BR') ?? '—'}{' '}
-                      {displayUnit} · CISP {selectedCisp}
+                      {displayUnit} · CISP {selectedCisp} · {periodRange}
                     </span>
                   </span>
                   <strong className="shrink-0 text-xl tabular-nums text-[#2455dc]">
@@ -1853,10 +1852,17 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                     </small>
                   </strong>
                 </div>
+                <div className="mt-2 flex items-center justify-between gap-3 border-t border-[#e6eaf0] pt-2 text-xs font-semibold text-[#2455dc]">
+                  <span>{mobileRegionExpanded ? 'Recolher detalhes' : 'Ver detalhes'}</span>
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={`size-4 transition-transform ${mobileRegionExpanded ? 'rotate-180' : ''}`}
+                  />
+                </div>
               </motion.button>}
               <aside
                 id="region-panel"
-                className="atlas-panel border-t border-[#dce2ed] p-5 lg:border-l lg:border-t-0"
+                className={`atlas-panel border-t border-[#dce2ed] p-5 lg:border-l lg:border-t-0 ${selected && !mobileRegionExpanded ? 'hidden lg:block' : ''}`}
                 aria-live="polite"
               >
                 {!selected && (
