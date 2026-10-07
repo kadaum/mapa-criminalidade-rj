@@ -395,15 +395,16 @@ function EmbeddedPlayer({
 
   useEffect(() => {
     const slow = window.setTimeout(() => {
+      if (firstFrame.current || failedAttempt.current) return;
       setSlowConnection(true);
-      if (!firstFrame.current && !timeoutEmitted.current) {
+      if (!timeoutEmitted.current) {
         timeoutEmitted.current = true;
         emitProductEvent({ name: 'camera_timeout', provider: analyticsProvider(source.kind), camera_id: camera.id, threshold_seconds: 10 });
       }
     }, 10_000);
     const timeout = window.setTimeout(
       () => {
-        if (firstFrame.current) return;
+        if (firstFrame.current || failedAttempt.current) return;
         failedAttempt.current = true;
         setState('error');
         setMessage(

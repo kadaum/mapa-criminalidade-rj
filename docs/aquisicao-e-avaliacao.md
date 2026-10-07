@@ -4,9 +4,7 @@ Plano preparado em 6 de outubro de 2026. Nenhuma mensagem, newsletter, proprieda
 
 ## Baseline verificável
 
-Uma consulta HTTP ao site publicado em 6 de outubro retornou `200` para `/`, `/robots.txt` e `/sitemap.xml`. O `robots.txt` permite `/`, bloqueia `/api/` e referencia o sitemap. O HTML inicial da entrada contém título e canonical absoluto autorreferente. O sitemap publicado lista as páginas existentes, mas ainda não contém as novas rotas de bairros e o hub cronológico; elas entram após publicação desta versão. Esse registro é histórico e permanece inalterado.
-
-Em 7 de outubro de 2026, a verificação HTTP da produção v56 mostrou as rotas de bairros e o hub cronológico incluídos no sitemap público. Essa observação atualiza o estado operacional sem reescrever a evidência do baseline de 6 de outubro.
+Uma consulta HTTP ao site publicado em 6 de outubro retornou `200` para `/`, `/robots.txt` e `/sitemap.xml`. O `robots.txt` permite `/`, bloqueia `/api/` e referencia o sitemap. O HTML inicial da entrada contém título e canonical absoluto autorreferente. O sitemap publicado lista as páginas existentes, mas ainda não contém as novas rotas de bairros e o hub cronológico; elas entram após publicação desta versão.
 
 Isso comprova acessibilidade técnica no momento da consulta, não indexação. O Google explica que sitemap ajuda descoberta, mas não garante rastreamento ou indexação. A documentação também trata `rel="canonical"` como sinal forte, sitemap como sinal mais fraco e recomenda canonical autorreferente no HTML. Fontes primárias: [visão geral de sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview), [canonicalização](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) e [uso do Search Console](https://developers.google.com/search/docs/monitor-debug/search-console-start).
 
@@ -17,6 +15,8 @@ Não há acesso confirmado ao Search Console neste trabalho. Impressões, consul
 A ação útil principal é a proporção de sessões consentidas que concluem ao menos uma destas ações: selecionar bairro/CISP, abrir e obter primeiro quadro/progresso de câmera, comparar, compartilhar uma URL estável ou concluir uma contribuição. A base de cálculo precisa declarar que cobre somente pessoas que aceitaram analytics.
 
 Os eventos são allowlisted em `lib/product-analytics.ts`. Não aceitam texto livre, endereço, parâmetros de busca, URL completa, protocolo de contribuição ou identificador pessoal. Câmeras usam apenas provedor enumerado e ID público permanente com caracteres limitados. Tentativa, resolução, primeiro quadro, progresso, erro e timeout são eventos distintos; timeout indica que o limite de dez segundos foi atingido e não prova que a fonte está offline.
+
+A cobertura de observação varia por provedor. O CamerasRJ permite confirmar o primeiro quadro decodificado sob o contrato do player; seu progresso contínuo só pode ser contado quando o próprio provedor o reporta ao bridge, e não deve ser inferido pelo timer ou pela abertura do player. No YouTube, o avanço pode ser observado pelos eventos `infoDelivery` de tempo crescente. A ausência de um evento de progresso do CamerasRJ permanece “não observado”, não uma falha nem uma prova de disponibilidade contínua.
 
 Funil recomendado:
 
