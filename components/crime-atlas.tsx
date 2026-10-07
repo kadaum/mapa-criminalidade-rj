@@ -9,7 +9,7 @@ import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
-import { cameraDestinationPath, crimeAtlasQuery, readCrimeAtlasUrl } from '@/components/crime-atlas-url';
+import { cameraDestinationPath, crimeAtlasQuery, publicCameraNavigationQuery, readCrimeAtlasUrl } from '@/components/crime-atlas-url';
 import { PeriodPicker } from '@/components/period-picker';
 import { useCameraWorkspace } from '@/components/public-camera-layer';
 import {
@@ -638,7 +638,15 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
     selectedRef.current = selectedCisp;
     if (!urlReady || !effectiveEnd) return;
     const url = new URL(window.location.href);
-    url.search = crimeAtlasQuery({ cisp: selectedCisp, indicator, months: windowMonths, end: endPeriod, comparison: comparisonMode, view: viewMode }).toString();
+    const next = crimeAtlasQuery({ cisp: selectedCisp, indicator, months: windowMonths, end: endPeriod, comparison: comparisonMode, view: viewMode });
+    if (cameraDestination) {
+      const context = publicCameraNavigationQuery(url.search);
+      for (const key of ['bairro', 'outra']) {
+        const value = context.get(key);
+        if (value) next.set(key, value);
+      }
+    }
+    url.search = next.toString();
     window.history.replaceState(null, '', url);
   }, [
     selectedCisp,
@@ -648,6 +656,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
     effectiveEnd,
     endPeriod,
     comparisonMode,
+    cameraDestination,
     urlReady,
   ]);
 
