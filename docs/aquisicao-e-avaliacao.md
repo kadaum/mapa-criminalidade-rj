@@ -8,6 +8,8 @@ Uma consulta HTTP ao site publicado em 6 de outubro retornou `200` para `/`, `/r
 
 Isso comprova acessibilidade técnica no momento da consulta, não indexação. O Google explica que sitemap ajuda descoberta, mas não garante rastreamento ou indexação. A documentação também trata `rel="canonical"` como sinal forte, sitemap como sinal mais fraco e recomenda canonical autorreferente no HTML. Fontes primárias: [visão geral de sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview), [canonicalização](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) e [uso do Search Console](https://developers.google.com/search/docs/monitor-debug/search-console-start).
 
+Os campos de data têm papéis distintos: `schema.org/dateModified` descreve a revisão do documento e só deve ser emitido quando essa revisão for verificável; o cabeçalho `Last-Modified` é a data observada da fonte upstream; `generatedAt` é o timestamp de coleta do snapshot derivado. O sitemap mantém apenas URLs canônicas quando não há revisão por documento verificável. Referências: [schema.org/dateModified](https://schema.org/dateModified) e [como criar sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
+
 Não há acesso confirmado ao Search Console neste trabalho. Impressões, consultas, posição, cobertura e cliques começam como “não medido”; não devem receber estimativas. Quando houver acesso autorizado, registrar exportação datada antes do piloto e comparar páginas equivalentes, sem atribuir causalidade a uma única ação.
 
 ## Contrato de medição

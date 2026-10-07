@@ -345,7 +345,7 @@ export function RegionExplorer({
         <SiteHeader date={data ? dateLabel(data.latestPeriod) : undefined} />
       )}
       <ExploreNavigation active={`/${mode}`} query={queryString} />
-      <div className="mx-auto max-w-[1320px] px-5 py-7 md:px-8 md:py-10">
+      <div id="conteudo-principal" tabIndex={-1} className="mx-auto max-w-[1320px] px-5 py-7 outline-none md:px-8 md:py-10">
         <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">

@@ -15,7 +15,7 @@ export function PageShell({ children, crumbs }: { children: ReactNode; crumbs: {
         <a className="underline underline-offset-4" href="/">Mapa</a>
         {crumbs.map((item) => <span key={item.label} className="flex gap-2"><span aria-hidden="true">/</span>{item.path ? <a className="underline underline-offset-4" href={item.path}>{item.label}</a> : <span aria-current="page">{item.label}</span>}</span>)}
       </nav>
-      {children}
+      <div id="conteudo-principal" tabIndex={-1} className="outline-none">{children}</div>
       <footer className="mt-12 border-t border-[#dce2ed] pt-6 text-sm text-[#526078]">
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           <a href="/regioes" className="underline">Regiões</a><a href="/indicadores" className="underline">Indicadores</a>

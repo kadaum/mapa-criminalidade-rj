@@ -214,7 +214,7 @@ export function CrimeHistory() {
         active="/historico"
         query={`?${new URLSearchParams({ indicador: indicator, ...(cisp ? { cisp: String(cisp) } : {}) })}`}
       />
-      <main className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-8">
+      <main id="conteudo-principal" tabIndex={-1} className="mx-auto max-w-6xl space-y-6 px-4 py-8 outline-none md:px-8">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-[#526b99]">
             {cisp

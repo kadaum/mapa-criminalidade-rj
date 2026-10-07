@@ -52,6 +52,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a className="skip-content-link" href="#conteudo-principal">
+          Pular para o conteúdo principal
+        </a>
         <Analytics />
         {children}
         <footer className="mx-auto flex max-w-6xl flex-wrap gap-5 px-4 py-6 text-sm text-[#526078]"><Link className="underline" href="/privacidade">Privacidade (LGPD)</Link><Link className="underline" href="/termos">Termos de uso</Link><Link className="underline" href="/contribuir">Contribuir</Link><Link className="underline" href="/bairros">Bairros</Link><PrivacyPreferencesButton /></footer>

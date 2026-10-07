@@ -44,7 +44,7 @@ export function CameraDetailClient({
     setSaved(next.includes(cameraId));
   }
   return (
-    <main className="mx-auto max-w-4xl p-4 pb-12 sm:p-6">
+    <main id="conteudo-principal" tabIndex={-1} className="mx-auto max-w-4xl p-4 pb-12 outline-none sm:p-6">
       <a
         className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700 underline"
         href="/cameras"

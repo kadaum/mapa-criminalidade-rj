@@ -5,10 +5,18 @@ Dados policiais oficiais por CISP no município do Rio de Janeiro. Conteúdo pú
 - Mapa interativo: https://mapa-criminalidade-rj.ricardoguia.com/
 - Diretório das 41 CISPs: https://mapa-criminalidade-rj.ricardoguia.com/regioes
 - Páginas-piloto de bairros: https://mapa-criminalidade-rj.ricardoguia.com/bairros
+- Bairro Centro: https://mapa-criminalidade-rj.ricardoguia.com/bairros/centro
+- Bairro Copacabana: https://mapa-criminalidade-rj.ricardoguia.com/bairros/copacabana
+- Bairro Tijuca: https://mapa-criminalidade-rj.ricardoguia.com/bairros/tijuca
+- Bairro Barra da Tijuca: https://mapa-criminalidade-rj.ricardoguia.com/bairros/barra-da-tijuca
+- Bairro Campo Grande: https://mapa-criminalidade-rj.ricardoguia.com/bairros/campo-grande
+- CISP 19: https://mapa-criminalidade-rj.ricardoguia.com/regioes/cisp-19
+- Boletim de agosto de 2026: https://mapa-criminalidade-rj.ricardoguia.com/boletins/2026-08
 - Definições e séries dos indicadores: https://mapa-criminalidade-rj.ricardoguia.com/indicadores
 - Dados, dicionário, JSON e CSV: https://mapa-criminalidade-rj.ricardoguia.com/dados
 - Método e limites: https://mapa-criminalidade-rj.ricardoguia.com/metodologia
 - Arquivo cronológico de boletins: https://mapa-criminalidade-rj.ricardoguia.com/boletins
+- Câmeras públicas: https://mapa-criminalidade-rj.ricardoguia.com/cameras — diretório e filtros; a página não garante transmissão ao vivo.
 
 Uma CISP pode cobrir bairros inteiros ou partes de bairros. Registros comunicados à polícia não abrangem fatos subnotificados. Casos, vítimas e agregados sobrepostos não devem ser somados. Taxas por residentes não representam risco individual.
 

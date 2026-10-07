@@ -1363,7 +1363,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
 
   if (loadError)
     return (
-      <main className="grid min-h-screen place-items-center bg-[#f3f5fa] p-6">
+      <main id="conteudo-principal" tabIndex={-1} className="grid min-h-screen place-items-center bg-[#f3f5fa] p-6 outline-none">
         <div className="max-w-md rounded-2xl bg-white p-7 shadow-sm">
           <h1 className="text-xl font-semibold">Os dados não carregaram.</h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -1375,7 +1375,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
     );
 
   if (!snapshot || !territories || !population)
-    return <main className="min-h-[2500px] bg-[#f3f5fa] px-4 py-10 text-[#172235] min-[400px]:min-h-[2400px] sm:min-h-[2250px] md:min-h-[2150px] lg:min-h-[1100px]"><output className="mx-auto block max-w-4xl rounded-2xl bg-white p-6 text-base">Carregando o mapa interativo e os dados oficiais.</output></main>;
+    return <main id="conteudo-principal" tabIndex={-1} className="min-h-[2500px] bg-[#f3f5fa] px-4 py-10 text-[#172235] outline-none min-[400px]:min-h-[2400px] sm:min-h-[2250px] md:min-h-[2150px] lg:min-h-[1100px]"><output className="mx-auto block max-w-4xl rounded-2xl bg-white p-6 text-base">Carregando o mapa interativo e os dados oficiais.</output></main>;
 
   return (
     <main className="atlas-page min-h-screen bg-[#f3f5fa] text-[#172235]">
@@ -1387,7 +1387,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
         query={`?${new URLSearchParams({ ...(selectedCisp ? { cisp: String(selectedCisp) } : {}), indicador: indicator, meses: String(windowMonths), fim: endPeriod || 'latest', comparacao: comparisonMode, visualizacao: viewMode === 'quantity' ? 'quantidade' : viewMode === 'variation' ? 'variacao' : 'taxa' })}`}
       />
 
-      <div className="mx-auto max-w-[1800px] px-3 pb-8 pt-3 md:px-5">
+      <div id="conteudo-principal" tabIndex={-1} className="mx-auto max-w-[1800px] px-3 pb-8 pt-3 outline-none md:px-5">
         <section className="mb-3 flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
           <div>
             <h2 className="text-xl font-semibold tracking-tight">

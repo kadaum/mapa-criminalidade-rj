@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BreadcrumbLd, JsonLd, PageShell, SeriesTable, SourceNote } from '@/components/organic-ui';
-import { ORIGIN, areas, canonical, city, fmt, indicatorById, indicatorList, metrics, monthLabel, monthlySeries, period, sourceUpdated, windowLabel } from '@/lib/organic-data';
+import { ORIGIN, areas, canonical, city, fmt, indicatorById, indicatorList, metrics, monthLabel, monthlySeries, period, windowLabel } from '@/lib/organic-data';
 
 type Params = { params: Promise<{ slug: string }> };
 export function generateStaticParams() { return indicatorList.map((item) => ({ slug: item.id })); }
@@ -18,7 +18,7 @@ export default async function Indicator({ params }: Params) {
   const current = city(item.id), rows = metrics(item.id);
   return <PageShell crumbs={[{ label: 'Indicadores', path: '/indicadores' }, { label: item.label }]}>
     <BreadcrumbLd items={[{ name: 'Indicadores', path: '/indicadores' }, { name: item.label, path }]} />
-    <JsonLd value={{ '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${ORIGIN}${path}#webpage`, url: `${ORIGIN}${path}`, name: `${item.label} no Rio de Janeiro`, description: item.definition, dateModified: sourceUpdated, isPartOf: { '@id': `${ORIGIN}/#website` } }} />
+    <JsonLd value={{ '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${ORIGIN}${path}#webpage`, url: `${ORIGIN}${path}`, name: `${item.label} no Rio de Janeiro`, description: item.definition, isPartOf: { '@id': `${ORIGIN}/#website` } }} />
     <p className="text-sm font-semibold uppercase tracking-wide text-[#2455dc]">Indicador do ISP-RJ</p><h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{item.label} no Rio de Janeiro</h1><p className="mt-3 max-w-3xl text-base leading-7 text-[#526078]">{item.definition}</p>{'note' in item && item.note && <p className="mt-3 max-w-3xl text-sm leading-6 text-[#526078]">{item.note}</p>}
     <div className="mt-7 grid gap-4 sm:grid-cols-3"><div className="rounded-2xl bg-[#172235] p-5 text-white"><h2 className="font-semibold">Cidade · quantidade</h2><strong className="mt-3 block text-4xl tabular-nums">{fmt(current.count)}</strong><p className="mt-2 text-sm text-white/80">{item.unit} · {windowLabel(period, 12)}</p></div><div className="rounded-2xl border border-[#dce2ed] bg-white p-5"><h2 className="font-semibold">Taxa municipal</h2><strong className="mt-3 block text-4xl tabular-nums">{fmt(current.rate, 1)}</strong><p className="mt-2 text-sm text-[#526078]">{item.unit} por 100 mil residentes</p></div><div className="rounded-2xl border border-[#dce2ed] bg-white p-5"><h2 className="font-semibold">População no denominador</h2><strong className="mt-3 block text-4xl tabular-nums">{fmt(current.population)}</strong><p className="mt-2 text-sm text-[#526078]">Censo 2022 · 41 CISPs</p></div></div>
     <section className="mt-6 rounded-2xl border border-[#dce2ed] bg-white p-5"><h2 className="text-lg font-semibold">Comparação de 12 meses</h2><p className="mt-2 leading-7">Janela anterior: {fmt(current.previous)} {item.unit}; janela atual: {fmt(current.count)} {item.unit}. {current.change == null ? 'Variação percentual indisponível quando o volume anterior é inferior a 20 ou zero.' : `Variação de ${fmt(current.change, 1)}%.`}</p><p className="mt-2 text-sm text-[#526078]">As janelas são equivalentes; a taxa usa residentes e não representa risco individual.</p></section>

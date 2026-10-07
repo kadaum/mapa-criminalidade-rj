@@ -34,7 +34,7 @@ export default function Methodology() {
           </Badge>
         </div>
       </header>
-      <article className="mx-auto max-w-5xl px-4 py-10 md:px-7 md:py-16">
+      <article id="conteudo-principal" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-10 outline-none md:px-7 md:py-16">
         <Badge className="bg-primary/10 text-primary">
           Série validada · {monthLabel(period)}
         </Badge>
