@@ -1750,7 +1750,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                   </div>
                 )}
                 {cameras.active ? (
-                  <div className="absolute bottom-3 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
+                  <div className="absolute bottom-11 left-3 z-20 max-w-[calc(100%-76px)] rounded-xl border bg-white/95 p-3 text-[11px] leading-5 shadow-lg">
                     <p className="font-semibold">
                       Toque na câmera ou no número
                     </p>
@@ -1770,7 +1770,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                 ) : (
                   <>
                     <Popover>
-                      <div className="absolute bottom-3 left-3 z-20 md:bottom-4 md:left-4">
+                      <div className="absolute bottom-11 left-3 z-20 md:bottom-12 md:left-4">
                         <PopoverTrigger
                           className="flex h-9 items-center gap-2 rounded-xl border border-[#dce2ed] bg-white/94 px-2.5 text-[10px] font-medium tabular-nums text-[#526078] shadow-lg backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2455dc] md:h-10 md:text-[11px]"
                         >
