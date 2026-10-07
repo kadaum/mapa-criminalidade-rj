@@ -16,8 +16,10 @@ function initializeAnalytics() {
   const analyticsWindow = window as AnalyticsWindow;
 
   analyticsWindow.dataLayer ||= [];
-  analyticsWindow.gtag ||= function gtag(...args: unknown[]) {
-    analyticsWindow.dataLayer?.push(args);
+  analyticsWindow.gtag ||= function gtag() {
+    // Google’s loader consumes the native Arguments object from each dataLayer command.
+    // oxlint-disable-next-line prefer-rest-params -- Google gtag.js requires native Arguments.
+    analyticsWindow.dataLayer?.push(arguments);
   };
 
   if (!document.querySelector(`script[data-google-analytics="${MEASUREMENT_IDS[0]}"]`)) {
