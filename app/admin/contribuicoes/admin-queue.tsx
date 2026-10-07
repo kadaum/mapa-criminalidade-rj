@@ -94,7 +94,7 @@ export function AdminQueue() {
         value={queueStatus}
         disabled={busyId !== null}
         onChange={(event) => setQueueStatus(event.target.value as QueueStatus)}
-        className="rounded-lg border border-[#aeb9c8] bg-white px-3 py-2"
+        className="rounded-lg border border-[#718096] bg-white px-3 py-2"
       >
         {Object.entries(queueStatusLabels).map(([value, label]) => (
           <option key={value} value={value}>
@@ -142,7 +142,7 @@ export function AdminQueue() {
             }
             maxLength={500}
             rows={3}
-            className="mt-2 block w-full rounded-lg border border-[#aeb9c8] p-3"
+            className="mt-2 block w-full rounded-lg border border-[#718096] p-3"
           />
           <div className="mt-4 flex flex-wrap gap-2">
             <button

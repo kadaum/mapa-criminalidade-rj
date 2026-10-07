@@ -22,7 +22,7 @@ export default async function ContributionsAdminPage() {
     <PageShell
       crumbs={[{ label: 'Administração' }, { label: 'Contribuições' }]}
     >
-      <main className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-4xl">
         <h1 className="text-3xl font-semibold">Fila de contribuições</h1>
         {!userId && (
           <div className="mt-6 rounded-2xl bg-white p-6">
@@ -61,7 +61,7 @@ export default async function ContributionsAdminPage() {
             <AdminQueue />
           </>
         )}
-      </main>
+      </div>
     </PageShell>
   );
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ContributePage() {
   return (
     <PageShell crumbs={[{ label: 'Contribuir' }]}>
-      <main className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-semibold">
           Ajude a corrigir as referências públicas
         </h1>
@@ -25,7 +25,7 @@ export default function ContributePage() {
           sugestão para análise, mas isso não altera nem publica o catálogo
           automaticamente.
         </p>
-      </main>
+      </div>
     </PageShell>
   );
 }

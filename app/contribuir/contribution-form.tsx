@@ -63,7 +63,7 @@ export function ContributionForm() {
           id="kind"
           name="kind"
           required
-          className="mt-2 w-full rounded-lg border border-[#aeb9c8] bg-white p-3"
+          className="mt-2 w-full rounded-lg border border-[#718096] bg-white p-3"
         >
           <option value="camera_broken">Câmera não está funcionando</option>
           <option value="correct_location">Corrigir localização</option>
@@ -80,7 +80,7 @@ export function ContributionForm() {
           type="url"
           maxLength={2048}
           placeholder="https://…"
-          className="mt-2 w-full rounded-lg border border-[#aeb9c8] p-3"
+          className="mt-2 w-full rounded-lg border border-[#718096] p-3"
         />
         <p className="mt-1 text-sm text-[#526078]">
           Obrigatório ao sugerir uma fonte. O site não abre o link
@@ -97,7 +97,7 @@ export function ContributionForm() {
           required
           maxLength={1000}
           rows={6}
-          className="mt-2 w-full rounded-lg border border-[#aeb9c8] p-3"
+          className="mt-2 w-full rounded-lg border border-[#718096] p-3"
         />
         <p className="mt-1 text-sm text-[#526078]">
           Até 1.000 caracteres. Não inclua nome, email, telefone ou outros dados

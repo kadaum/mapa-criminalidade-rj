@@ -8,23 +8,23 @@ export function JsonLd({ value }: { value: object }) {
 }
 
 export function PageShell({ children, crumbs }: { children: ReactNode; crumbs: { label: string; path?: string }[] }) {
-  return <main className="organic-page min-h-screen bg-[#f3f5fa] text-[#172235]">
+  return <div className="organic-page min-h-screen bg-[#f3f5fa] text-[#172235]">
     <SiteHeader />
     <div className="mx-auto max-w-6xl px-4 pb-16 pt-5 sm:px-6">
       <nav aria-label="Caminho" className="mb-6 flex flex-wrap gap-2 text-sm text-[#526078]">
         <a className="underline underline-offset-4" href="/">Mapa</a>
         {crumbs.map((item) => <span key={item.label} className="flex gap-2"><span aria-hidden="true">/</span>{item.path ? <a className="underline underline-offset-4" href={item.path}>{item.label}</a> : <span aria-current="page">{item.label}</span>}</span>)}
       </nav>
-      <div id="conteudo-principal" tabIndex={-1} className="outline-none">{children}</div>
-      <footer className="mt-12 border-t border-[#dce2ed] pt-6 text-sm text-[#526078]">
+      <main id="conteudo-principal" tabIndex={-1} className="outline-none">{children}</main>
+      <nav aria-label="Mais informações" className="mt-12 border-t border-[#dce2ed] pt-6 text-sm text-[#526078]">
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           <a href="/regioes" className="underline">Regiões</a><a href="/indicadores" className="underline">Indicadores</a>
           <a href="/dados" className="underline">Dados e downloads</a><a href="/metodologia" className="underline">Metodologia</a>
           <a href="/boletins/2026-08" className="underline">Boletim de agosto de 2026</a>
         </div>
-      </footer>
+      </nav>
     </div>
-  </main>;
+  </div>;
 }
 
 export function BreadcrumbLd({ items }: { items: { name: string; path: string }[] }) {

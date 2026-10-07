@@ -37,7 +37,7 @@ export function StatusLookup({ initial = '' }: { initial?: string }) {
         name="protocolo"
         defaultValue={initial}
         required
-        className="mt-2 block w-full rounded-lg border border-[#aeb9c8] p-3 font-mono"
+        className="mt-2 block w-full rounded-lg border border-[#718096] p-3 font-mono"
       />
       <button className="mt-4 rounded-full bg-[#163b65] px-5 py-3 font-semibold text-white">
         Consultar
