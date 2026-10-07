@@ -153,7 +153,7 @@ export function CameraDetailClient({
           depende da fonte e do player.
         </p>
       </details>
-      <p className="mt-6 flex items-center gap-2 text-xs text-slate-500">
+      <p className="mt-6 flex items-center gap-2 text-xs text-slate-600">
         <RotateCcw className="size-3.5" /> Link permanente:{' '}
         <a className="underline" href={canonicalUrl}>
           {camera.id}
