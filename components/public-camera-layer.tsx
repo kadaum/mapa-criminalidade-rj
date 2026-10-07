@@ -129,6 +129,7 @@ export function useCameraWorkspace(
   const [limit, setLimit] = useState(12);
   const [showDirections, setShowDirections] = useState(false);
   const popupRef = useRef<Popup | null>(null);
+  const initialFocusRef = useRef<string | null>(null);
   const active = enabled && visible;
   const loaded = useRef(false);
 
@@ -169,8 +170,7 @@ export function useCameraWorkspace(
           const initial = data.cameras.find(
             (camera) => camera.id === initialCameraId,
           );
-          if (initial)
-            setSelected(preferredCameraSource(initial, data.cameras));
+          if (initial) setSelected(initial);
         }
         loaded.current = true;
         setLoadState('ready');
@@ -180,6 +180,19 @@ export function useCameraWorkspace(
       });
     return () => controller.abort();
   }, [enabled, loadAttempt, initialCameraId]);
+
+  useEffect(() => {
+    if (
+      !map ||
+      !initialCameraId ||
+      selected?.id !== initialCameraId ||
+      !selected.coordinates ||
+      initialFocusRef.current === initialCameraId
+    )
+      return;
+    initialFocusRef.current = initialCameraId;
+    focus(selected.coordinates);
+  }, [map, initialCameraId, selected, focus]);
 
   const filtered = useMemo(() => {
     const needle = normalize(query.trim());
@@ -1067,10 +1080,15 @@ function CameraViewer({
   useEffect(() => {
     const dialog = dialogRef.current;
     const previousFocus = document.activeElement as HTMLElement | null;
+    const restoreFocus =
+      previousFocus && previousFocus !== document.body
+        ? previousFocus
+        : document.getElementById('camera-panel');
     dialog?.showModal();
     return () => {
       dialog?.close();
-      previousFocus?.focus({ preventScroll: true });
+      if (restoreFocus?.isConnected)
+        restoreFocus.focus({ preventScroll: true });
     };
   }, []);
   return (

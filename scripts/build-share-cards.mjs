@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import { availableBulletinPeriods, bulletinMetricFrom } from '../lib/bulletin-core.ts';
+import { CAMERA_SHARE_CARDS } from '../lib/camera-share-cards.ts';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
 const OUT = path.join(ROOT, 'public', 'share');
@@ -12,6 +13,7 @@ const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'public/data/crime
 const population = JSON.parse(await fs.readFile(path.join(ROOT, 'public/data/cisp-population.json'), 'utf8'));
 const context = JSON.parse(await fs.readFile(path.join(ROOT, 'public/data/neighborhood-context.json'), 'utf8'));
 const territories = JSON.parse(await fs.readFile(path.join(ROOT, 'public/data/cisp-neighborhoods.json'), 'utf8'));
+const cameras = JSON.parse(await fs.readFile(path.join(ROOT, 'public/data/public-cameras.json'), 'utf8'));
 
 const neighborhoods = [
   ['centro', 'Centro'],
@@ -88,10 +90,33 @@ function bulletinSvg(end) {
   return shell(body);
 }
 
+function cameraSvg(camera) {
+  const nameLines = wrap(camera.name, 29);
+  const title = nameLines.map((line, index) => `<text x="74" y="${145 + index * 62}" font-family="Arial, Helvetica, sans-serif" font-size="48px" font-weight="700" fill="#10213f">${escapeXml(line)}</text>`).join('');
+  const detailY = 168 + nameLines.length * 62;
+  const body = [
+    `<text x="74" y="78" font-family="Arial, Helvetica, sans-serif" font-size="21px" font-weight="700" fill="#2455dc">CÂMERA PÚBLICA · ${escapeXml(camera.publisher.toLocaleUpperCase('pt-BR'))}</text>`,
+    title,
+    `<text x="74" y="${detailY}" font-family="Arial, Helvetica, sans-serif" font-size="27px" fill="#526078">${escapeXml(camera.neighborhood)} · Rio de Janeiro</text>`,
+    `<rect x="74" y="${detailY + 38}" width="1050" height="122" rx="18" fill="#eef3ff"/>`,
+    `<text x="104" y="${detailY + 86}" font-family="Arial, Helvetica, sans-serif" font-size="23px" font-weight="700" fill="#10213f">Consulte a disponibilidade na fonte</text>`,
+    `<text x="104" y="${detailY + 121}" font-family="Arial, Helvetica, sans-serif" font-size="19px" fill="#526078">A página apresenta o cadastro e o acesso à origem pública.</text>`,
+  ].join('');
+  return shell(body);
+}
+
 await fs.mkdir(OUT, { recursive: true });
 const expected = [];
-for (const [slug, name] of neighborhoods) expected.push([`bairro-${slug}.png`, neighborhoodSvg(slug, name)]);
-for (const end of availableBulletinPeriods(snapshot.rows, population.records, ['total_roubos', 'total_furtos', 'letalidade_violenta', 'estelionato'])) expected.push([`boletim-${end}.png`, bulletinSvg(end)]);
+const cameraOnly = process.argv.includes('--cameras-only');
+if (!cameraOnly) {
+  for (const [slug, name] of neighborhoods) expected.push([`bairro-${slug}.png`, neighborhoodSvg(slug, name)]);
+  for (const end of availableBulletinPeriods(snapshot.rows, population.records, ['total_roubos', 'total_furtos', 'letalidade_violenta', 'estelionato'])) expected.push([`boletim-${end}.png`, bulletinSvg(end)]);
+}
+for (const [id, card] of Object.entries(CAMERA_SHARE_CARDS)) {
+  const camera = cameras.cameras.find((item) => item.id === id);
+  if (!camera) throw new Error(`Câmera do piloto ausente do catálogo: ${id}`);
+  expected.push([path.basename(card.image), cameraSvg(camera)]);
+}
 for (const [filename, svg] of expected) {
   const output = path.join(OUT, filename);
   await sharp(Buffer.from(svg)).png({ compressionLevel: 9, palette: true, quality: 90 }).toFile(output);

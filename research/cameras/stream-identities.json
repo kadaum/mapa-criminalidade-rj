@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "cameras": [
+    {
+      "id": "homes-posto-3",
+      "source": "https://homesinrio.com/rio-de-janeiro-luxury-apartment-webcam",
+      "streamResolver": "homes-posto-3",
+      "historicalStreams": [
+        {
+          "provider": "youtube",
+          "streamId": "k2QzfrPLQSg",
+          "lastObservedAt": "2026-10-06",
+          "outcome": "ended"
+        }
+      ]
+    },
+    {
+      "id": "homes-posto-6",
+      "source": "https://homesinrio.com/apartment-rio-de-janeiro-copacabana-beach-webcam",
+      "streamResolver": "homes-posto-6",
+      "historicalStreams": [
+        {
+          "provider": "youtube",
+          "streamId": "Hr7c0XuEgm0",
+          "lastObservedAt": "2026-10-06",
+          "outcome": "unavailable"
+        }
+      ]
+    }
+  ]
+}

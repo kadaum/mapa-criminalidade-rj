@@ -2,7 +2,7 @@
 
 Este documento descreve a preparação de um candidato para o repositório público [kadaum/mapa-criminalidade-rj](https://github.com/kadaum/mapa-criminalidade-rj). O candidato está associado ao rascunho [PR #9](https://github.com/kadaum/mapa-criminalidade-rj/pull/9); não houve merge.
 
-## Verificações locais
+## Verificações históricas da base pública
 
 Use Node.js `>=22.13.0` e uma instalação limpa. A sequência de inicialização é:
 
@@ -13,7 +13,7 @@ npm run validate:data
 npm run dev
 ```
 
-O release deve registrar o SHA revisado, o período do snapshot e as validações realmente executadas. A rodada registrada para este candidato foi:
+O release deve registrar o SHA revisado, o período do snapshot e as validações realmente executadas. A rodada abaixo pertence à preparação histórica da base v58 do PR #9, anterior à reconciliação local com a versão 66:
 
 - `npm ci` limpo;
 - `npm run prepare:public-data`, com seis artefatos de runtime e 18 cartões derivados do IBGE;
@@ -23,7 +23,7 @@ O release deve registrar o SHA revisado, o período do snapshot e as validaçõe
 - typecheck, lint restrito ao escopo e build aprovados;
 - a auditoria de dependências retornou 0 críticas, 0 moderadas e 9 altas (um advisory de `braces` e oito ocorrências propagadas);
 
-A rodada final de runtime confirmou persistência do bairro em troca assíncrona, recarga e abertura/fechamento permanente, além da remoção de consultas inválidas ou privadas, CISP 44 válida e ausência de erros. A correção foi publicada no commit [`0c5994c`](https://github.com/kadaum/mapa-criminalidade-rj/commit/0c5994cc4943e24bcbcc0e35f58e4c7b7c1b4d38). O [CI do PR #9](https://github.com/kadaum/mapa-criminalidade-rj/actions/runs/37618602555) passou todas as etapas funcionais e falhou somente em `npm audit --audit-level=high`, com o gate inalterado.
+A rodada histórica de runtime confirmou persistência do bairro em troca assíncrona, recarga e abertura/fechamento permanente, além da remoção de consultas inválidas ou privadas, CISP 44 válida e ausência de erros. Essa correção histórica foi publicada no commit [`0c5994c`](https://github.com/kadaum/mapa-criminalidade-rj/commit/0c5994cc4943e24bcbcc0e35f58e4c7b7c1b4d38). O [CI daquela revisão do PR #9](https://github.com/kadaum/mapa-criminalidade-rj/actions/runs/37618602555) passou todas as etapas funcionais e falhou somente em `npm audit --audit-level=high`, com o gate inalterado.
 
 A auditoria permanece registrada e o gate de segurança não foi alterado. Portanto, este registro documenta as verificações executadas e não declara que todos os gates passaram. Para a camada de câmeras, consulte [`docs/camera-p0-evaluation.md`](camera-p0-evaluation.md), incluindo os testes controlados e `node scripts/validate-cameras.mjs`. Para a navegação, consulte [`docs/interface-navigation.md`](interface-navigation.md).
 
@@ -38,7 +38,7 @@ Revise o conteúdo do commit e remova artefatos que não pertencem ao release:
 - screenshots ou respostas de terceiros que contenham dados pessoais;
 - arquivos gerados que não estejam explicitamente documentados como artefato público.
 
-Não publique endereços exatos de pessoas, protocolos de contribuição, IDs de usuário ou identificadores efêmeros de transmissão. IDs públicos permanentes de câmera só devem aparecer quando já fazem parte do catálogo e da fonte pública correspondente.
+Não publique endereços exatos de pessoas, protocolos de contribuição, IDs de usuário ou identificadores efêmeros da resolução atual de uma transmissão. IDs públicos permanentes de câmera só devem aparecer quando já fazem parte do catálogo e da fonte pública correspondente. O manifesto revisado de identidade das duas câmeras Homes contém apenas páginas HTTPS estáveis do operador e dois IDs públicos imutáveis de vídeos anteriores, marcados como encerrado ou indisponível para preservar o histórico; ele não contém token, cookie, credencial nem o ID transitório resolvido em tempo de execução.
 
 ## Dados e fontes
 
@@ -58,12 +58,24 @@ O fluxo de `/contribuir` é moderado dentro do aplicativo. O código de contribu
 - [ ] O release aponta para o mesmo SHA que foi validado localmente.
 - [ ] O diff, as fontes e as licenças foram revisados antes da publicação.
 
-## Preparação atual do candidato
+## Histórico da preparação e estado local atual
 
-Em 2026-10-07, a comparação somente leitura foi feita contra `github/main` em `19d51b9886571ccd8e1983aec7e09b5463f894de`. O candidato revisável está na branch local `release/candidate-from-github-main-2026-10`, no diretório do candidato; ele não foi enviado ao GitHub. O histórico Git persistente usado pela worktree fica no diretório de apoio da release, e o índice parte desse SHA para preservar a comparação sem substituir os arquivos candidatos existentes.
+Na preparação histórica de 2026-10-07, a comparação somente leitura foi feita contra `github/main` em `19d51b9886571ccd8e1983aec7e09b5463f894de`. Na conferência inicial de 2026-10-07, o rascunho PR #9 apontava para `689fdf77ba0bf2dc38db2fa901474fdf832f81f6`. A conferência inicial registrou o candidato local antes do envio ao GitHub; os commits e o estado público posterior são acompanhados no PR #9.
 
 O inventário de mudanças deve ser obtido do diff atual; contagens anteriores de arquivos adicionados, modificados ou removidos foram descartadas por estarem desatualizadas. Também foram removidas deste registro referências a diretórios temporários e caminhos absolutos internos.
 
 Os três snapshots estatísticos do ISP-RJ são os únicos dados confirmados para o repositório público. Os seis artefatos de terceiros, o contexto IBGE e os cinco cartões de bairro podem continuar no diretório de trabalho para validação local, mas permanecem ignorados e fora do escopo publicável até que suas licenças sejam confirmadas. Nenhum ZIP, SHP, XLSX, dicionário ou outro arquivo bruto do IBGE faz parte do escopo público confirmado.
 
-O rascunho PR #9 acompanha esta preparação; não houve merge. A auditoria de dependências permanece pendente conforme o resultado registrado acima; o gate de segurança permanece inalterado. A evidência detalhada da rodada final está no relatório persistente da auditoria local.
+O rascunho PR #9 acompanha a preparação, sem merge. A auditoria de dependências permanece pendente conforme os resultados históricos e atuais registrados neste documento; o gate de segurança permanece inalterado. A evidência detalhada da rodada local v66 está no relatório persistente da auditoria local.
+
+## Paridade local com a versão 66
+
+Em 2026-10-07, o candidato local foi reconciliado com a aplicação nativa no commit `69aafa0a273677c010cda6fb6224490d20c223b4`, preservando as diferenças necessárias do espelho público. Foram incorporadas as correções de carregamento assíncrono do mapa, legenda de variação, navegação e retorno de câmeras, foco acessível, compartilhamento, metadados de páginas de bairro, cabeçalho móvel e identidade estável das duas câmeras Homes.
+
+O manifesto `research/cameras/stream-identities.json` é a única exceção ao bloqueio do diretório de pesquisa. O arquivo é validado com esquema fechado e contém somente as duas páginas públicas fixas do operador, seus resolvers allowlisted e os dois IDs públicos históricos descritos acima. Todos os demais arquivos de pesquisa continuam ignorados.
+
+Os dois cards sociais de câmera incluídos são arte original gerada pelo próprio projeto com formas e texto. Eles não incluem frame de transmissão, foto, logomarca, geometria, valor do IBGE ou outro conteúdo de terceiro; os nomes públicos de câmera, operador e bairro servem apenas como identificação e atribuição. A inclusão desses PNGs não altera nem amplia a licença do catálogo, das transmissões, das bases geográficas ou dos dados do IBGE.
+
+O candidato mantém `vinext` `1.0.0-beta.9` e o lockfile existente: a aplicação nativa não alterou dependências desde a base pública correspondente, e copiar o manifesto privado removeria comandos de bootstrap e exigiria o manifesto de hospedagem excluído. A validação foi feita em uma cópia temporária limpa, executando `npm ci`, bootstrap dos dados ignorados, validação de dados e câmeras, seis testes de reconstrução da identidade, 13 avaliações unitárias, 62 testes Node, 20 avaliações de integração, typecheck, lint e build. Todos esses passos passaram. `npm audit --audit-level=high` continua falhando com nove ocorrências do advisory de `braces`; a única correção automática oferecida exige `--force` e troca incompatível de `shadcn`, por isso o gate e as versões foram preservados sem downgrade forçado.
+
+O workflow público agora executa explicitamente a validação do catálogo de câmeras, os testes isolados de reconstrução da identidade e as avaliações de integração. As permissões mínimas, ações fixadas por SHA e o gate `npm audit --audit-level=high` permanecem inalterados.

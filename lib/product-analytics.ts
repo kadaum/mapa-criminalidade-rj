@@ -12,7 +12,7 @@ export const knownCampaigns = ['bairro-piloto', 'boletim-mensal', 'imprensa-loca
 export type ProductAnalyticsEvent =
   | { name: 'region_select'; cisp: typeof validCisps[number] }
   | { name: 'neighborhood_select'; neighborhood: typeof neighborhoods[number]; cisp: number }
-  | { name: 'share'; mode: 'fixed' | 'latest'; channel: 'link' | 'whatsapp'; content: 'neighborhood' | 'bulletin' | 'region' }
+  | { name: 'share'; mode: 'fixed' | 'latest'; channel: 'link' | 'whatsapp'; content: 'neighborhood' | 'bulletin' | 'region' | 'camera' }
   | { name: 'camera_open' | 'camera_resolve' | 'camera_first_frame' | 'camera_progress' | 'camera_open_source'; provider: typeof providers[number]; camera_id: string }
   | { name: 'camera_error'; provider: typeof providers[number]; camera_id: string; reason: typeof cameraFailures[number] }
   | { name: 'camera_timeout'; provider: typeof providers[number]; camera_id: string; threshold_seconds: 10 }
@@ -28,7 +28,7 @@ export function validateProductEvent(value: unknown): value is ProductAnalyticsE
   const event = value as Record<string, unknown>;
   if (event.name === 'region_select') return exactKeys(event, ['name', 'cisp']) && typeof event.cisp === 'number' && validCisps.includes(event.cisp as typeof validCisps[number]);
   if (event.name === 'neighborhood_select') return exactKeys(event, ['name', 'neighborhood', 'cisp']) && inList(neighborhoods, event.neighborhood) && Number.isInteger(event.cisp) && Number(event.cisp) >= 1 && Number(event.cisp) <= 99;
-  if (event.name === 'share') return exactKeys(event, ['name', 'mode', 'channel', 'content']) && inList(['fixed', 'latest'] as const, event.mode) && inList(['link', 'whatsapp'] as const, event.channel) && inList(['neighborhood', 'bulletin', 'region'] as const, event.content);
+  if (event.name === 'share') return exactKeys(event, ['name', 'mode', 'channel', 'content']) && inList(['fixed', 'latest'] as const, event.mode) && inList(['link', 'whatsapp'] as const, event.channel) && inList(['neighborhood', 'bulletin', 'region', 'camera'] as const, event.content);
   if (inList(['camera_open', 'camera_resolve', 'camera_first_frame', 'camera_progress', 'camera_open_source'] as const, event.name)) return exactKeys(event, ['name', 'provider', 'camera_id']) && inList(providers, event.provider) && benignId(event.camera_id);
   if (event.name === 'camera_error') return exactKeys(event, ['name', 'provider', 'camera_id', 'reason']) && inList(providers, event.provider) && benignId(event.camera_id) && inList(cameraFailures, event.reason);
   if (event.name === 'camera_timeout') return exactKeys(event, ['name', 'provider', 'camera_id', 'threshold_seconds']) && inList(providers, event.provider) && benignId(event.camera_id) && event.threshold_seconds === 10;

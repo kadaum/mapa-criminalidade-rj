@@ -2,6 +2,8 @@
 Usage: python3 scripts/cameras/assemble-catalog.py GEOCODED_JSON WEBCAMS_JSON SEED_JSON
 """
 import json,sys,pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from stream_identities import load_identities, apply_stream_identities
 geo,web,seed=[json.load(open(p)) for p in sys.argv[1:4]]
 cameras=seed.copy(); evidence={}
 for c in geo['cameras']:
@@ -44,6 +46,10 @@ if audit_path.exists():
     audited={c['id']:c for c in json.loads(audit_path.read_text(encoding='utf-8-sig'))}
     for camera in cameras:
         camera.update(audited.get(camera['id'],{}))
+# Historical catalog patches can carry retired video IDs. Reassert the current
+# curated operator-page identity after every legacy overlay, while preserving
+# each camera's reviewed playback and location fields.
+apply_stream_identities(cameras, load_identities())
 cameras.sort(key=lambda c:(c['status']!='observed',c['publisher']=='CamerasRJ',c['neighborhood'].casefold(),c['name'].casefold(),c['id']))
 base=pathlib.Path('public/data');base.mkdir(exist_ok=True)
 result={'reviewedAt':'08/09/2026','scope':'Município do Rio de Janeiro; referências encontradas nas fontes consultadas, não cobertura integral de câmeras ou de transmissões funcionando.','attribution':[{'name':'CamerasRJ','url':geo['catalogUrl'],'note':'Nomes, IDs e locais de referências públicas. Não atribuir licença MIT ou PDDL ao catálogo original.'},{'name':'CADLOG / Instituto Pereira Passos / Prefeitura do Rio','url':'https://www.arcgis.com/home/item.html?id=899168c8feab4230a9f795ed07cdde7b','license':'CC BY 4.0','transformation':'Cruzamentos derivados por nomes e vértices; endereços interpolados nas faixas oficiais de numeração, com paridade. Posição exata do equipamento desconhecida.'}], 'cameras':cameras}

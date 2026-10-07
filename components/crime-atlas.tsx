@@ -9,6 +9,7 @@ import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&ur
 import type { ExpressionSpecification, Map as MapLibreMap } from 'maplibre-gl';
 import type { FeatureCollection, Geometry, Position } from 'geojson';
 import { labelAnchor, visibleLabelIds } from '@/lib/map-labels';
+import { loadCrimeAtlasCore, loadCrimeAtlasNeighborhoods } from '@/lib/crime-atlas-data';
 import { cameraDestinationPath, crimeAtlasQuery, publicCameraNavigationQuery, readCrimeAtlasUrl } from '@/components/crime-atlas-url';
 import { PeriodPicker } from '@/components/period-picker';
 import { useCameraWorkspace } from '@/components/public-camera-layer';
@@ -130,6 +131,10 @@ type AreaStat = {
 type ViewMode = 'rate' | 'quantity' | 'variation';
 
 const palette = ['#f3e5b5', '#f7c964', '#ea9b42', '#d96930', '#a43d28'];
+const emptyNeighborhoods: FeatureCollection<Geometry, NeighborhoodProperties> = {
+  type: 'FeatureCollection',
+  features: [],
+};
 import { indicatorGroups as groups } from '@/lib/indicator-groups';
 import { emitProductEvent, emitRegionSelect } from '@/lib/product-analytics';
 
@@ -352,6 +357,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   const selectedRef = useRef(0);
   const hoveredRef = useRef<number | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const loadNeighborhoodLabelsRef = useRef<((data: FeatureCollection<Geometry, NeighborhoodProperties>) => void) | null>(null);
   const shouldMoveRef = useRef(false);
   const cityViewRef = useRef(true);
   const reducedMotion = useReducedMotion();
@@ -367,6 +373,9 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   const [territories, setTerritories] = useState<TerritoryData | null>(null);
   const [population, setPopulation] = useState<PopulationData | null>(null);
   const [loadError, setLoadError] = useState(false);
+  const [coreReady, setCoreReady] = useState(false);
+  const [neighborhoodLoadState, setNeighborhoodLoadState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [neighborhoodRetry, setNeighborhoodRetry] = useState(0);
   const [indicator, setIndicator] = useState('total_roubos');
   const [viewMode, setViewMode] = useState<ViewMode>('rate');
   const [windowMonths, setWindowMonths] = useState<number>(12);
@@ -458,32 +467,32 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   }, []);
 
   useEffect(() => {
-    async function currentData() {
-      const response = await fetch('/data/crime-rio-snapshot.json');
-      if (!response.ok) throw new Error('snapshot unavailable');
-      return response.json() as Promise<Snapshot>;
-    }
-    Promise.all([
-      currentData(),
-      fetch('/data/cisp-rio.geojson').then((r) => r.json()),
-      fetch('/data/neighborhoods-rio.geojson').then((r) => r.json()),
-      fetch('/data/cisp-neighborhoods.json').then((r) => r.json()),
-      fetch('/data/cisp-population.json').then((r) => r.json()),
-    ])
-      .then(([data, geo, neighborhoodGeo, territoryData, populationData]) => {
-        setSnapshot(data as Snapshot);
-        setBoundaries(geo as FeatureCollection<Geometry, CispProperties>);
-        setNeighborhoods(
-          neighborhoodGeo as FeatureCollection<
-            Geometry,
-            NeighborhoodProperties
-          >,
-        );
-        setTerritories(territoryData as TerritoryData);
-        setPopulation(populationData as PopulationData);
+    let active = true;
+    loadCrimeAtlasCore()
+      .then((data) => {
+        if (!active) return;
+        setSnapshot(data.snapshot as Snapshot);
+        setBoundaries(data.boundaries as FeatureCollection<Geometry, CispProperties>);
+        setTerritories(data.territories as TerritoryData);
+        setPopulation(data.population as PopulationData);
+        setCoreReady(true);
       })
-      .catch(() => setLoadError(true));
+      .catch(() => { if (active) setLoadError(true); });
+    return () => { active = false; };
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    setNeighborhoodLoadState('loading');
+    loadCrimeAtlasNeighborhoods()
+      .then((data) => {
+        if (!active) return;
+        setNeighborhoods(data as FeatureCollection<Geometry, NeighborhoodProperties>);
+        setNeighborhoodLoadState('ready');
+      })
+      .catch(() => { if (active) setNeighborhoodLoadState('error'); });
+    return () => { active = false; };
+  }, [neighborhoodRetry]);
 
   const periods = useMemo(
     () =>
@@ -688,7 +697,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
       !mapNode.current ||
       !geoRef.current ||
       !pointRef.current ||
-      !neighborhoods ||
+      !coreReady ||
       mapRef.current
     )
       return;
@@ -766,7 +775,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
         promoteId: 'cisp',
       });
       map.addSource('points', { type: 'geojson', data: pointRef.current! });
-      map.addSource('bairros', { type: 'geojson', data: neighborhoods });
+      map.addSource('bairros', { type: 'geojson', data: emptyNeighborhoods });
       map.addLayer({
         id: 'cisp-fill',
         type: 'fill',
@@ -896,27 +905,6 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
         { name: 'Baía de Guanabara', position: [-43.12, -22.82], water: true },
         { name: 'Oceano Atlântico', position: [-43.52, -23.09], water: true },
       ];
-      const neighborhoodLabels = neighborhoods.features
-        .map((feature) => ({
-          name: feature.properties.name,
-          position: labelAnchor(feature.geometry),
-          area: Number(feature.properties.areaM2 ?? 0),
-        }))
-        .filter((item) => item.position !== null)
-        .sort((a, b) => b.area - a.area || a.name.localeCompare(b.name));
-      for (const label of neighborhoodLabels) {
-        labels.push({
-          name: label.name,
-          position: label.position!,
-          detail: true,
-          minZoom:
-            label.area >= 10_000_000
-              ? 9.8
-              : label.area >= 2_000_000
-                ? 10.4
-                : 11,
-        });
-      }
       const markers = labels.map((label) => {
         const element = document.createElement('span');
         element.className = `atlas-place-label${label.water ? ' atlas-water-label' : ''}`;
@@ -973,11 +961,38 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
             updateLabels();
           });
       };
+      loadNeighborhoodLabelsRef.current = (data) => {
+        if (markers.some(({ label }) => label.detail)) return;
+        const neighborhoodLabels = data.features
+          .map((feature) => ({
+            name: feature.properties.name,
+            position: labelAnchor(feature.geometry),
+            area: Number(feature.properties.areaM2 ?? 0),
+          }))
+          .filter((item) => item.position !== null)
+          .sort((a, b) => b.area - a.area || a.name.localeCompare(b.name));
+        for (const label of neighborhoodLabels) {
+          const detail = {
+            name: label.name,
+            position: label.position!,
+            detail: true,
+            minZoom: label.area >= 10_000_000 ? 9.8 : label.area >= 2_000_000 ? 10.4 : 11,
+          };
+          const element = document.createElement('span');
+          element.className = 'atlas-place-label';
+          element.textContent = detail.name;
+          element.setAttribute('aria-hidden', 'true');
+          element.style.visibility = 'hidden';
+          markers.push({ label: detail, element, marker: new maplibregl.Marker({ element }).setLngLat(detail.position), added: false });
+        }
+        scheduleLabels();
+      };
       // Keep only nearby labels mounted; recalculate collisions after movement.
       map.on('moveend', scheduleLabels);
       map.on('resize', scheduleLabels);
       map.once('remove', () => {
         cancelAnimationFrame(labelFrame);
+        loadNeighborhoodLabelsRef.current = null;
         markers.forEach(({ marker }) => marker.remove());
       });
       map.resize();
@@ -1015,7 +1030,14 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
     };
   // Map listeners intentionally capture the stable map setup callback set.
   // oxlint-disable-next-line react-hooks/exhaustive-deps
-  }, [neighborhoods, reducedMotion]);
+  }, [coreReady, reducedMotion]);
+
+  useEffect(() => {
+    if (!neighborhoods) return;
+    const source = mapRef.current?.getSource('bairros') as maplibregl.GeoJSONSource | undefined;
+    if (source) void source.setData(neighborhoods);
+    loadNeighborhoodLabelsRef.current?.(neighborhoods);
+  }, [neighborhoods, cameraMap]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -1210,8 +1232,8 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map?.getLayer('bairro-line')) return;
-    map.setLayoutProperty(
+    if (!map?.getLayer('cisp-line')) return;
+    if (map.getLayer('bairro-line')) map.setLayoutProperty(
       'bairro-line',
       'visibility',
       showNeighborhoods ? 'visible' : 'none',
@@ -1526,7 +1548,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
             {viewMode === 'rate' && <p className="hidden text-xs leading-5 text-[#526078] sm:block">Taxa = {indicatorMeta?.unit ?? 'registros'} ÷ moradores (Censo 2022) × 100 mil. Veja também a quantidade.</p>}
             {layersOpen && <div id="atlas-layer-options" className="grid gap-2 border-t border-[#dce2ed] pt-3 sm:grid-cols-3">
               <label htmlFor="layer-cisp" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Limites das CISPs <Switch id="layer-cisp" checked={showBoundaries} onCheckedChange={setShowBoundaries} /></label>
-              <label htmlFor="layer-bairro" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Limites dos bairros <Switch id="layer-bairro" checked={showNeighborhoods} onCheckedChange={setShowNeighborhoods} /></label>
+              <div className="rounded-xl bg-[#f3f5fa] px-3 py-2"><label htmlFor="layer-bairro" className="flex min-h-7 items-center justify-between gap-3 text-sm">Limites dos bairros <Switch id="layer-bairro" checked={showNeighborhoods} disabled={neighborhoodLoadState !== 'ready'} onCheckedChange={setShowNeighborhoods} /></label>{neighborhoodLoadState === 'loading' && <p aria-live="polite" className="mt-1 text-xs text-[#526078]">Carregando limites dos bairros…</p>}{neighborhoodLoadState === 'error' && <output className="mt-1 block text-xs text-amber-800">Limites dos bairros indisponíveis. <button type="button" className="font-semibold underline underline-offset-2" onClick={() => setNeighborhoodRetry((value) => value + 1)}>Tentar novamente</button></output>}</div>
               <label htmlFor="layer-base" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Mapa de ruas e nomes <Switch id="layer-base" checked={showBase} onCheckedChange={setShowBase} /></label>
               <p className="text-xs leading-5 text-[#526078] sm:col-span-3">Bairros servem como referência; os dados continuam agrupados por CISP.</p>
             </div>}
@@ -1666,16 +1688,20 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                           <span className="sr-only">Abrir legenda do mapa: </span>
                           {viewMode === 'variation' ? (
                             <>
-                              <span>Caiu</span>
+                              <span>−50%</span>
                               <span
                                 className="flex h-2.5 w-16 overflow-hidden rounded-full"
                                 aria-hidden
+                                style={{
+                                  background:
+                                    'linear-gradient(90deg, #23647a 0%, #87b8c2 40%, #eef1ef 50%, #e6ad6d 60%, #bc6c3f 100%)',
+                                }}
                               >
-                                <i className="flex-1 bg-[#23647a]" />
-                                <i className="flex-1 bg-[#eef1ef]" />
-                                <i className="flex-1 bg-[#bc6c3f]" />
                               </span>
-                              <span>Subiu</span>
+                              <span>+50%</span>
+                              <span className="sr-only">
+                                Escala contínua; 0% significa sem mudança.
+                              </span>
                             </>
                           ) : (
                             <>
@@ -1710,36 +1736,46 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                         >
                           <PopoverTitle className="text-xs font-semibold text-[#172235]">
                             {viewMode === 'rate'
-                              ? 'Casos por 100 mil moradores'
+                              ? `Taxa de ${displayUnit ?? 'casos'} por 100 mil moradores`
                               : viewMode === 'quantity'
                                 ? `Quantidade de ${displayUnit ?? 'casos'}`
                                 : comparisonMode === 'year'
-                                  ? 'Variação no ano'
-                                  : 'Variação no período'}
+                                  ? 'Variação no ano (%)'
+                                  : 'Variação no período (%)'}
                           </PopoverTitle>
                           <PopoverDescription className="sr-only">
-                            Faixas de cores usadas no mapa.
+                            {viewMode === 'variation'
+                              ? 'Escala contínua percentual; valores intermediários são interpolados e os valores além dos extremos usam a cor do limite.'
+                              : 'Faixas de cores usadas no mapa.'}
                           </PopoverDescription>
                           {viewMode === 'variation' ? (
-                            <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs text-[#526078]">
-                              {[
-                                ['#23647a', 'Caiu'],
-                                ['#eef1ef', 'Estável'],
-                                ['#bc6c3f', 'Subiu'],
-                                ['#d7dfe1', 'Sem comparação'],
-                              ].map(([color, label]) => (
-                                <span
-                                  key={label}
-                                  className="flex items-center gap-2"
-                                >
-                                  <i
-                                    className="size-3 shrink-0 rounded-sm"
-                                    style={{ background: color }}
-                                  />
-                                  {label}
-                                </span>
-                              ))}
-                            </div>
+                            <>
+                              <div className="space-y-1.5 text-xs tabular-nums text-[#526078]">
+                                {[
+                                  ['#23647a', '−50% ou menos'],
+                                  ['#87b8c2', '−10%'],
+                                  ['#eef1ef', '0% · sem mudança'],
+                                  ['#e6ad6d', '+10%'],
+                                  ['#bc6c3f', '+50% ou mais'],
+                                  ['#d7dfe1', 'Sem comparação'],
+                                ].map(([color, label]) => (
+                                  <span
+                                    key={label}
+                                    className="flex items-center gap-2"
+                                  >
+                                    <i
+                                      className="size-3 shrink-0 rounded-sm"
+                                      style={{ background: color }}
+                                    />
+                                    {label}
+                                  </span>
+                                ))}
+                              </div>
+                              <p className="text-[10px] leading-4 text-[#59667b]">
+                                As cores variam continuamente entre os pontos;
+                                além dos extremos, usa-se a cor do limite.
+                              </p>
+                            </>
                           ) : (
                             <div className="space-y-1.5">
                               {palette
@@ -1765,7 +1801,9 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                             </div>
                           )}
                           <p className="border-t border-[#e6eaf0] pt-2 text-[10px] leading-4 text-[#59667b]">
-                            Faixas relativas às 41 áreas · {periodRange}
+                            {viewMode === 'variation'
+                              ? `Escala contínua e fixa · ${periodRange}`
+                              : `Faixas relativas às 41 áreas · ${periodRange}`}
                           </p>
                         </PopoverContent>
                       </div>

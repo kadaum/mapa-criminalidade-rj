@@ -38,13 +38,13 @@ export function SiteHeader({ date }: { date?: string }) {
         </a>
         <nav
           aria-label="Navegação principal"
-          className="order-3 flex w-full gap-1 overflow-x-auto [scrollbar-width:none] sm:order-none sm:w-auto"
+          className="order-3 grid w-full grid-cols-2 gap-1 sm:order-none sm:flex sm:w-auto sm:overflow-visible min-[360px]:flex min-[360px]:overflow-visible"
         >
           {primary.map(([href, label]) => (
             <a
               key={href}
               href={href}
-              className="inline-flex min-h-10 shrink-0 items-center rounded-lg px-3 text-sm font-semibold underline-offset-4 hover:bg-white/10 hover:underline"
+              className="inline-flex min-h-10 items-center justify-center rounded-lg px-1.5 text-sm font-semibold underline-offset-4 hover:bg-white/10 hover:underline sm:shrink-0 sm:px-3"
             >
               {label}
             </a>

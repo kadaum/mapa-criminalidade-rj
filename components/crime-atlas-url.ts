@@ -71,6 +71,23 @@ export function cameraDestinationPath(cameraId: string | null, input: string | U
   return `${cameraId ? `/cameras/${encodeURIComponent(cameraId)}` : '/cameras'}${suffix}`;
 }
 
+/** Build the camera hub URL with a catalog-validated initial selection. */
+export function cameraHubPath(cameraId: string, input: string | URLSearchParams) {
+  const query = publicCameraNavigationQuery(input);
+  query.set('camera', cameraId);
+  return `/cameras?${query.toString()}`;
+}
+
+/** Accept a hub selection only when it names a camera in the published catalog. */
+export function cameraSelectionFromQuery(
+  value: string | string[] | undefined,
+  publishedCameraIds: ReadonlySet<string>,
+) {
+  return typeof value === 'string' && publishedCameraIds.has(value)
+    ? value
+    : undefined;
+}
+
 export type CrimeAtlasUrlState = {
   cisp: number;
   indicator: string;

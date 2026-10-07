@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+__pycache__/
 /.pnp
 .pnp.*
 .yarn/*
@@ -71,5 +72,10 @@ next-env.d.ts
 /.perf-tools/mapped-scenes.err.log
 
 # Local research and logs are operational artifacts, never public release inputs.
-/research/
+# The single camera identity manifest below is a reviewed, schema-validated
+# build input containing only stable public operator pages and public stream IDs.
+/research/*
+!/research/cameras/
+/research/cameras/*
+!/research/cameras/stream-identities.json
 *.log

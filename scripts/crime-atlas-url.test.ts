@@ -3,6 +3,8 @@ import test from 'node:test';
 import {
   crimeAtlasQuery,
   cameraDestinationPath,
+  cameraHubPath,
+  cameraSelectionFromQuery,
   publicCameraNavigationQuery,
   publishedCispIds,
   publicNavigationQuery,
@@ -87,4 +89,18 @@ void test('destino de câmera preserva contexto ao abrir e fechar', () => {
   const context = '?bairro=Centro&cisp=1&fim=2026-07&protocolo=secret';
   assert.equal(cameraDestinationPath('cam/1', context), '/cameras/cam%2F1?bairro=Centro&cisp=1&fim=2026-07');
   assert.equal(cameraDestinationPath(null, context), '/cameras?bairro=Centro&cisp=1&fim=2026-07');
+});
+
+void test('retorno ao hub leva seleção e somente contexto público validado', () => {
+  assert.equal(
+    cameraHubPath('camerasrj-1725', '?bairro=barra%20da%20tij%C3%BAca&cisp=19&meses=6&fim=2026-07&token=secret'),
+    '/cameras?bairro=Barra+da+Tijuca&cisp=19&meses=6&fim=2026-07&camera=camerasrj-1725',
+  );
+});
+
+void test('seleção do hub aceita apenas ID publicado e valor escalar', () => {
+  const ids = new Set(['camerasrj-1725', 'camerasrj-1698']);
+  assert.equal(cameraSelectionFromQuery('camerasrj-1725', ids), 'camerasrj-1725');
+  assert.equal(cameraSelectionFromQuery('private-camera', ids), undefined);
+  assert.equal(cameraSelectionFromQuery(['camerasrj-1725'], ids), undefined);
 });

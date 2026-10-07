@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { boundedCampaign, cameraAnalyticsProvider, emitProductEvent, pinnedShareUrl, validateProductEvent } from '../lib/product-analytics.ts';
+import { CAMERA_SHARE_CARDS } from '../lib/camera-share-cards.ts';
 
 test('allowlist aceita somente payloads definidos e sem campos extras', () => {
   assert.equal(validateProductEvent({ name: 'neighborhood_select', neighborhood: 'tijuca', cisp: 18 }), true);
@@ -11,6 +12,9 @@ test('allowlist aceita somente payloads definidos e sem campos extras', () => {
     assert.equal(validateProductEvent({ name: 'region_select', cisp }), false);
   assert.equal(validateProductEvent({ name: 'region_select', cisp: 18, neighborhood: 'tijuca' }), false);
   assert.equal(validateProductEvent({ name: 'camera_timeout', provider: 'youtube', camera_id: 'posto-6', threshold_seconds: 10 }), true);
+  assert.equal(validateProductEvent({ name: 'share', mode: 'fixed', channel: 'link', content: 'camera' }), true);
+  assert.equal(validateProductEvent({ name: 'share', mode: 'fixed', channel: 'link', content: 'free-text' }), false);
+  assert.deepEqual(Object.keys(CAMERA_SHARE_CARDS).sort(), ['camerasrj-1698', 'camerasrj-1725']);
   assert.equal(validateProductEvent({ name: 'camera_timeout', provider: 'youtube', camera_id: 'posto-6', threshold_seconds: 10, address: 'Rua X' }), false);
   assert.equal(validateProductEvent({ name: 'camera_error', provider: 'youtube', camera_id: 'https://example.test/?token=x', reason: 'offline' }), false);
   assert.equal(validateProductEvent({ name: 'contribution_status', kind: 'camera_broken', status: 'accepted', protocol: '123' }), false);

@@ -34,6 +34,16 @@ export type NeighborhoodContext = {
   records: NeighborhoodContextRecord[];
 };
 
+export function neighborhoodDataset(context: NeighborhoodContext, neighborhoodName: string) {
+  return {
+    '@type': 'Dataset',
+    name: context.reference,
+    description: `${context.reference}: agregados do Censo Demográfico 2022 do IBGE sobre características observadas no entorno dos domicílios. Esta página apresenta o recorte de ${neighborhoodName}, com domicílios pesquisados e proporções com iluminação pública e calçada; “não declarado” permanece no denominador. Os dados descrevem observações de 2022, não funcionamento, conservação, acessibilidade ou segurança da infraestrutura.`,
+    creator: { '@type': 'Organization', name: context.source.publisher },
+    distribution: { '@type': 'DataDownload', contentUrl: context.source.dataUrl, encodingFormat: 'ZIP' },
+  };
+}
+
 export function contextForNeighborhood(
   context: NeighborhoodContext,
   name: string,
