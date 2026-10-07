@@ -334,6 +334,7 @@ function ViewToggle({
     <div
       className="grid grid-cols-3 rounded-xl bg-[#eaf0fc] p-1"
       aria-label="Forma de comparação"
+      role="group"
     >
       {items.map((item) => (
         <button
@@ -1477,7 +1478,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
               Toque nos números para aproximar. Selecione uma câmera no mapa para ver o local e abrir o vídeo.
             </span>
             <div className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex rounded-xl border border-[#dce2ed] p-1" aria-label="Estilo do mapa de câmeras">
+              <div className="inline-flex rounded-xl border border-[#dce2ed] p-1" aria-label="Estilo do mapa de câmeras" role="group">
                 {(['streets', 'satellite'] as const).map((style) => (
                   <button
                     key={style}
@@ -1493,7 +1494,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
                   </button>
                 ))}
               </div>
-              <div className="inline-flex rounded-xl border border-[#dce2ed] p-1" aria-label="Inclinação do mapa">
+              <div className="inline-flex rounded-xl border border-[#dce2ed] p-1" aria-label="Inclinação do mapa" role="group">
                 {([false, true] as const).map((tilted) => (
                   <button
                     key={String(tilted)}
