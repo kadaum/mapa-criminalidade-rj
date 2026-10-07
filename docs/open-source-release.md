@@ -23,6 +23,8 @@ O release deve registrar o SHA revisado, o período do snapshot e as validaçõe
 - typecheck, lint restrito ao escopo e build aprovados;
 - a auditoria de dependências retornou 0 críticas, 0 moderadas e 9 altas (um advisory de `braces` e oito ocorrências propagadas);
 
+A rodada final de runtime confirmou persistência do bairro em troca assíncrona, recarga e abertura/fechamento permanente, além da remoção de consultas inválidas ou privadas, CISP 44 válida e ausência de erros. A correção foi publicada no commit [`0c5994c`](https://github.com/kadaum/mapa-criminalidade-rj/commit/0c5994cc4943e24bcbcc0e35f58e4c7b7c1b4d38). O [CI do PR #9](https://github.com/kadaum/mapa-criminalidade-rj/actions/runs/37618602555) passou todas as etapas funcionais e falhou somente em `npm audit --audit-level=high`, com o gate inalterado.
+
 A auditoria permanece registrada e o gate de segurança não foi alterado. Portanto, este registro documenta as verificações executadas e não declara que todos os gates passaram. Para a camada de câmeras, consulte [`docs/camera-p0-evaluation.md`](camera-p0-evaluation.md), incluindo os testes controlados e `node scripts/validate-cameras.mjs`. Para a navegação, consulte [`docs/interface-navigation.md`](interface-navigation.md).
 
 ## Higienização antes de publicar
@@ -64,4 +66,4 @@ O inventário de mudanças deve ser obtido do diff atual; contagens anteriores d
 
 Os três snapshots estatísticos do ISP-RJ são os únicos dados confirmados para o repositório público. Os seis artefatos de terceiros, o contexto IBGE e os cinco cartões de bairro podem continuar no diretório de trabalho para validação local, mas permanecem ignorados e fora do escopo publicável até que suas licenças sejam confirmadas. Nenhum ZIP, SHP, XLSX, dicionário ou outro arquivo bruto do IBGE faz parte do escopo público confirmado.
 
-O rascunho PR #9 acompanha esta preparação; não houve merge. A auditoria de dependências permanece pendente conforme o resultado registrado acima; o gate de segurança permanece inalterado.
+O rascunho PR #9 acompanha esta preparação; não houve merge. A auditoria de dependências permanece pendente conforme o resultado registrado acima; o gate de segurança permanece inalterado. A evidência detalhada da rodada final está no relatório persistente da auditoria local.
