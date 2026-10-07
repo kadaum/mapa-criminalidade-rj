@@ -831,6 +831,26 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
         },
       });
       map.addLayer({
+        id: 'bairro-line-halo',
+        type: 'line',
+        source: 'bairros',
+        layout: { visibility: 'none' },
+        minzoom: 9.5,
+        paint: {
+          'line-color': '#0b2230',
+          'line-width': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            9.5,
+            3,
+            12,
+            3.5,
+          ],
+          'line-opacity': 1,
+        },
+      });
+      map.addLayer({
         id: 'bairro-line',
         type: 'line',
         source: 'bairros',
@@ -843,11 +863,21 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
             ['linear'],
             ['zoom'],
             9.5,
-            0.5,
+            1,
             12,
-            1.15,
+            1.5,
           ],
-          'line-opacity': 0.78,
+          'line-opacity': 1,
+        },
+      });
+      map.addLayer({
+        id: 'cisp-line-halo',
+        type: 'line',
+        source: 'cisp',
+        paint: {
+          'line-color': '#ffffff',
+          'line-width': 3.5,
+          'line-opacity': 1,
         },
       });
       map.addLayer({
@@ -857,7 +887,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
         paint: {
           'line-color': '#0b2230',
           'line-width': 1.2,
-          'line-opacity': 0.95,
+          'line-opacity': 1,
         },
       });
       map.addLayer({
@@ -1139,6 +1169,16 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   const indicatorMeta = snapshot?.indicators.find(
     (item) => item.id === indicator,
   );
+  const mapAccessibleName = cameras.active
+    ? 'Mapa de locais de referência de câmeras públicas no Rio de Janeiro'
+    : `Mapa de ${indicatorMeta?.label ?? 'registros'} por CISP, ${periodRange}${selectedCisp ? `, CISP ${selectedCisp} selecionada` : ', visão da cidade'}`;
+  const mapInstructions = `Use as setas para mover o mapa e + ou − para ajustar o zoom. Use Lista para consultar ${cameras.active ? 'câmeras' : 'regiões'}.`;
+  useEffect(() => {
+    const canvas = (mapRef.current ?? cameraMap)?.getCanvas();
+    if (!canvas) return;
+    canvas.setAttribute('aria-label', mapAccessibleName);
+    canvas.setAttribute('aria-describedby', 'atlas-map-instructions');
+  }, [cameraMap, mapAccessibleName]);
   const displayUnit =
     indicator === 'registro_ocorrencias' ? 'registros' : indicatorMeta?.unit;
   const selected = stats.find((item) => item.cisp === selectedCisp);
@@ -1265,16 +1305,16 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
   useEffect(() => {
     const map = mapRef.current;
     if (!map?.getLayer('cisp-line')) return;
-    if (map.getLayer('bairro-line')) map.setLayoutProperty(
-      'bairro-line',
-      'visibility',
-      showNeighborhoods && neighborhoodLoadState === 'ready' ? 'visible' : 'none',
-    );
-    map.setLayoutProperty(
-      'cisp-line',
-      'visibility',
-      showBoundaries && !cameras.active ? 'visible' : 'none',
-    );
+    const neighborhoodVisibility =
+      showNeighborhoods && neighborhoodLoadState === 'ready' ? 'visible' : 'none';
+    for (const id of ['bairro-line-halo', 'bairro-line']) {
+      if (map.getLayer(id))
+        map.setLayoutProperty(id, 'visibility', neighborhoodVisibility);
+    }
+    const boundaryVisibility =
+      showBoundaries && !cameras.active ? 'visible' : 'none';
+    for (const id of ['cisp-line-halo', 'cisp-line'])
+      map.setLayoutProperty(id, 'visibility', boundaryVisibility);
     map.setLayoutProperty(
       'osm',
       'visibility',
@@ -1419,7 +1459,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
     if (!layersOpen) return null;
     return (
       <div id="atlas-layer-options" className="mt-2 grid gap-2 rounded-2xl border border-[#dce2ed] bg-white p-2 sm:mt-3 sm:grid-cols-3 sm:p-4">
-        <label htmlFor="layer-cisp" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Limites das CISPs <Switch id="layer-cisp" checked={showBoundaries} onCheckedChange={setShowBoundaries} /></label>
+        {!cameras.active && <label htmlFor="layer-cisp" className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-[#f3f5fa] px-3 text-sm">Limites das CISPs <Switch id="layer-cisp" checked={showBoundaries} onCheckedChange={setShowBoundaries} /></label>}
         <div className="rounded-xl bg-[#f3f5fa] px-3 py-2">
           <label htmlFor="layer-bairro" className="flex min-h-7 items-center justify-between gap-3 text-sm">Limites dos bairros <Switch id="layer-bairro" checked={showNeighborhoods} onCheckedChange={setShowNeighborhoods} /></label>
           {showNeighborhoods && neighborhoodLoadState === 'loading' && <p aria-live="polite" className="mt-1 text-xs text-[#526078]">Carregando limites dos bairros…</p>}
@@ -1622,6 +1662,9 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
         </Dialog>
 
         <p className="mb-1 hidden text-xs leading-5 text-[#526078] sm:block lg:hidden">Amplie para mover com um dedo. No mapa compacto, use dois dedos.</p>
+        <p id="atlas-map-instructions" className="sr-only mb-1 text-xs leading-5 text-[#526078] sm:not-sr-only">
+          {mapInstructions}
+        </p>
         <section className="atlas-workspace overflow-hidden rounded-xl border border-[#dce2ed] bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_350px]">
           <div className={`atlas-map relative ${mapExpanded ? 'atlas-map-expanded' : ''}`}>
             <div className="absolute left-3 top-3 z-20 flex rounded-xl border border-[#dce2ed] bg-white/94 p-1 shadow-lg backdrop-blur md:left-4 md:top-4">
@@ -1650,7 +1693,7 @@ export function CrimeAtlas({ showHeader = true, cameraDestination = false, initi
               <div
                 ref={mapNode}
                 role="application"
-                aria-label={cameras.active ? 'Mapa de locais de referência de câmeras públicas no Rio de Janeiro' : `${indicatorMeta?.label ?? 'Registros'} por CISP, ${periodRange}`}
+                aria-label={mapAccessibleName}
                 className="h-full w-full"
               />
             </div>
