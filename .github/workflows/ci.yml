@@ -23,6 +23,7 @@ jobs:
       - run: node scripts/validate-cameras.mjs
       - run: python3 scripts/cameras/test_stream_identity_rebuild.py
       - run: npm test
+      - run: npm run test:camera-observations
       - run: npm run test:integration
       - run: npm run typecheck
       - run: npm run lint

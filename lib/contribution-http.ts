@@ -11,7 +11,7 @@ export function userId(request: Request) {
   return request.headers.get('oai-authenticated-user-id');
 }
 
-export function requireModerator(request: Request) {
+export function requireModerator(request: Request): string {
   const id = userId(request);
   const authorization = moderatorAuthorization(id, env.MODERATOR_USER_IDS);
   if (!authorization.ok)
@@ -21,7 +21,7 @@ export function requireModerator(request: Request) {
         : 'Acesso negado.',
       { status: authorization.status },
     );
-  return id;
+  return id as string;
 }
 
 export function noStoreJson(value: unknown, init: ResponseInit = {}) {

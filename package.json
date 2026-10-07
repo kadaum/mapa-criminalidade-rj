@@ -27,7 +27,8 @@
     "check:population-source": "node scripts/check-population-source.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "lint": "oxlint app components/*.tsx lib scripts/setup-local-data.mjs scripts/sync-data.mjs scripts/sync-history.mjs scripts/sync-neighborhood-context.mjs scripts/build-icons.mjs scripts/build-share-cards.mjs scripts/validate-data.mjs scripts/validate-cameras.mjs",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "test:camera-observations": "node --experimental-strip-types --test scripts/camera-observation-service.test.ts scripts/camera-mcp-protocol.test.ts"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
