@@ -1,10 +1,13 @@
 'use client';
 /* oxlint-disable next/no-html-link-for-pages, react/react-compiler, jsx-a11y/prefer-tag-over-role */
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, MapPin, Share2, TrendingUp } from 'lucide-react';
 import { SiteHeader } from './site-header';
 import { ExploreNavigation } from './explore-navigation';
+import { PeriodPicker } from './period-picker';
+import { monthCount, comparisonRange } from '@/lib/period-range';
 import { InsightsPanorama } from './insights-panorama';
 import { indicatorGroups } from '@/lib/indicator-groups';
 import {
@@ -19,6 +22,11 @@ import {
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import {
+  readRegionFilters,
+  regionFilterQuery,
+  type RegionFilters,
+} from './region-filter-state';
+import {
   cityMetric,
   factualInsights,
   historicalInsights,
@@ -30,6 +38,8 @@ import {
   windowPeriods,
   type CrimeRow,
 } from '@/lib/crime-analysis';
+import { emitProductEvent, emitRegionSelect, pinnedShareUrl } from '@/lib/product-analytics';
+const analyticsNeighborhoods = ['centro', 'copacabana', 'tijuca', 'barra-da-tijuca', 'campo-grande'] as const;
 type Mode = 'meu-bairro' | 'comparar' | 'rankings' | 'insights';
 type Indicator = {
   id: string;
@@ -93,56 +103,82 @@ function Choice({
           </SelectValue>
         </SelectTrigger>
         <SelectContent className="max-h-80 max-w-[90vw]">
-          {grouped ? indicatorGroups.map(group => <SelectGroup key={group.label}><SelectLabel className="text-xs font-semibold text-[#59667b]">{group.label}</SelectLabel>{group.ids.map(id => {const o=options.find(o=>o.value===id);return o ? <SelectItem key={id} value={id}>{o.label}</SelectItem> : null;})}</SelectGroup>) : options.map((o) => (
-            <SelectItem key={o.value} value={o.value}>
-              {o.label}
-            </SelectItem>
-          ))}
+          {grouped
+            ? indicatorGroups.map((group) => (
+                <SelectGroup key={group.label}>
+                  <SelectLabel className="text-xs font-semibold text-[#59667b]">
+                    {group.label}
+                  </SelectLabel>
+                  {group.ids.map((id) => {
+                    const o = options.find((o) => o.value === id);
+                    return o ? (
+                      <SelectItem key={id} value={id}>
+                        {o.label}
+                      </SelectItem>
+                    ) : null;
+                  })}
+                </SelectGroup>
+              ))
+            : options.map((o) => (
+                <SelectItem key={o.value} value={o.value}>
+                  {o.label}
+                </SelectItem>
+              ))}
         </SelectContent>
       </Select>
     </div>
   );
 }
-export function RegionExplorer({ mode }: { mode: Mode }) {
+export function RegionExplorer({
+  mode,
+  showHeader = true,
+}: {
+  mode: Mode;
+  showHeader?: boolean;
+}) {
   const reduced = useReducedMotion();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [showAll, setShowAll] = useState(false);
   const [insightMode, setInsightMode] = useState('panorama');
   const [data, setData] = useState<Data | null>(null),
     [territories, setTerritories] = useState<Territory[]>([]),
     [pop, setPop] = useState<{ cisp: number; population: number }[]>([]);
   const [error, setError] = useState(false),
-    [ready, setReady] = useState(false),
     [search, setSearch] = useState(''),
-    [bairro, setBairro] = useState('');
-  const [cisp, setCisp] = useState(0),
-    [other, setOther] = useState('rio'),
-    [indicator, setIndicator] = useState('total_furtos'),
-    [months, setMonths] = useState('12'),
-    [end, setEnd] = useState('latest'),
-    [field, setField] = useState<'rate' | 'count'>('rate'),
     [shared, setShared] = useState('');
+  const filters = useMemo(
+    () =>
+      readRegionFilters(searchParams, {
+        validCisps: territories.length
+          ? territories.map((territory) => territory.cisp)
+          : undefined,
+        validIndicators: data?.indicators.map((item) => item.id),
+      }),
+    [data, searchParams, territories],
+  );
+  const {
+    cisp,
+    bairro,
+    other,
+    indicator,
+    months,
+    end,
+    comparison: timeComparison,
+    field,
+  } = filters;
+  const updateFilters = useCallback(
+    (patch: Partial<RegionFilters>) => {
+      const next = regionFilterQuery({ ...filters, ...patch });
+      router.replace(`/${mode}?${next}`, { scroll: false });
+    },
+    [filters, mode, router],
+  );
   useEffect(() => {
-    const p = new URLSearchParams(location.search);
-    setCisp(Number(p.get('cisp')) || 0);
-    setBairro(p.get('bairro') || '');
-    setOther(p.get('outra') || 'rio');
-    setIndicator(p.get('indicador') || 'total_furtos');
-    setEnd(p.get('fim') || 'latest');
-    if (['1', '3', '6', '12'].includes(p.get('meses') || ''))
-      setMonths(p.get('meses')!);
-    setField(p.get('visualizacao') === 'quantidade' ? 'count' : 'rate');
-    setReady(true);
     async function load() {
-      let snapshot: Data;
-      try {
-        const r = await fetch('/api/crime');
-        if (!r.ok) throw Error();
-        snapshot = await r.json();
-      } catch {
-        const r = await fetch('/data/crime-rio-snapshot.json');
-        if (!r.ok) throw Error();
-        snapshot = { ...(await r.json()), live: false };
-      }
+      const r = await fetch('/data/crime-rio-snapshot.json');
+      if (!r.ok) throw Error('Snapshot indisponível');
+      const snapshot: Data = { ...(await r.json()), live: true };
       const [t, population] = await Promise.all([
         fetch('/data/cisp-neighborhoods.json').then((r) => r.json()),
         fetch('/data/cisp-population.json').then((r) => r.json()),
@@ -190,8 +226,8 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
       end !== 'latest' &&
       (!periods.includes(end) || periods.indexOf(end) < Number(months) - 1)
     )
-      setEnd('latest');
-  }, [data, end, months, periods]);
+      updateFilters({ end: 'latest' });
+  }, [data, end, months, periods, updateFilters]);
   const effectiveEnd =
     end === 'latest'
       ? data?.latestPeriod
@@ -202,22 +238,25 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
     data?.indicators.find((i) => i.id === indicator) ??
     data?.indicators.find((i) => i.id === 'total_furtos');
   const id = validIndicator?.id ?? indicator;
-  const query = new URLSearchParams({
-    indicador: id,
-    meses: months,
-    fim: end,
-    visualizacao: field === 'rate' ? 'taxa' : 'quantidade',
-    ...(cisp ? { cisp: String(cisp) } : {}),
-    ...(bairro ? { bairro } : {}),
-    ...(other !== 'rio' ? { outra: other } : {}),
-  });
+  const query = useMemo(
+    () => regionFilterQuery({ ...filters, indicator: id }),
+    [filters, id],
+  );
   const queryString = `?${query}`;
   useEffect(() => {
-    if (ready) window.history.replaceState(null, '', `/${mode}${queryString}`);
-  }, [ready, mode, queryString]);
+    if (searchParams.toString() !== query.toString())
+      router.replace(`/${mode}${queryString}`, { scroll: false });
+  }, [mode, query, queryString, router, searchParams]);
   const metrics =
     data && effectiveEnd
-      ? regionMetrics(data.rows, pop, id, effectiveEnd, Number(months))
+      ? regionMetrics(
+          data.rows,
+          pop,
+          id,
+          effectiveEnd,
+          Number(months),
+          timeComparison,
+        )
       : [];
   const selected = metrics.find((m) => m.cisp === cisp),
     selectedTerritory = territories.find((t) => t.cisp === cisp);
@@ -233,14 +272,21 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
       bairro &&
       (!chosen || (cisp > 0 && !chosen.cisps.includes(cisp)))
     )
-      setBairro('');
-  }, [territories, bairro, cisp, chosen]);
+      updateFilters({ bairro: '' });
+  }, [territories, bairro, cisp, chosen, updateFilters]);
   const range = effectiveEnd
     ? `${dateLabel(monthShift(effectiveEnd, 1 - Number(months)))} – ${dateLabel(effectiveEnd)}`
     : 'Carregando período…';
-  const prior = effectiveEnd
-    ? `${dateLabel(monthShift(effectiveEnd, 1 - 2 * Number(months)))} – ${dateLabel(monthShift(effectiveEnd, -Number(months)))}`
-    : '';
+  const comparisonDates = effectiveEnd
+    ? comparisonRange(
+        monthShift(effectiveEnd, 1 - Number(months)),
+        effectiveEnd,
+        timeComparison,
+      )
+    : null;
+  const prior = comparisonDates
+    ? `${dateLabel(comparisonDates.start)} – ${dateLabel(comparisonDates.end)}`
+    : 'sem comparação';
   const unit =
     field === 'rate'
       ? `${validIndicator?.unit ?? 'eventos'} por 100 mil moradores`
@@ -254,15 +300,20 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
   }
   async function share() {
     try {
-      const text = `CISP ${cisp}: ${validIndicator?.label}, ${range}. Dados da região policial. ${location.href}`;
+      if (!effectiveEnd) throw new Error('Período indisponível');
+      const shareUrl = pinnedShareUrl(location.href, effectiveEnd);
+      const text = `CISP ${cisp}: ${validIndicator?.label}, ${range}. Dados da região policial. ${shareUrl.href}`;
       if (navigator.share)
         await navigator.share({
           title: 'Mapa da Criminalidade RJ',
           text,
-          url: location.href,
+          url: shareUrl.href,
+        }).then(() => {
+          emitProductEvent({ name: 'share', mode: 'fixed', channel: 'link', content: 'neighborhood' });
         });
       else {
         await navigator.clipboard.writeText(text);
+        emitProductEvent({ name: 'share', mode: 'fixed', channel: 'link', content: 'neighborhood' });
         setShared('Link copiado');
       }
     } catch {
@@ -279,11 +330,20 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
   const changes = comparable === 41 ? factualInsights(metrics) : [];
   const history =
     data && effectiveEnd
-      ? historicalInsights(data.rows, pop, id, effectiveEnd, Number(months))
+      ? historicalInsights(
+          data.rows,
+          pop,
+          id,
+          effectiveEnd,
+          Number(months),
+          timeComparison,
+        )
       : [];
   return (
     <main className="explorer-page min-h-screen bg-[#f3f5fa] text-[#172235]">
-      <SiteHeader date={data ? dateLabel(data.latestPeriod) : undefined} />
+      {showHeader && (
+        <SiteHeader date={data ? dateLabel(data.latestPeriod) : undefined} />
+      )}
       <ExploreNavigation active={`/${mode}`} query={queryString} />
       <div className="mx-auto max-w-[1320px] px-5 py-7 md:px-8 md:py-10">
         <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
@@ -351,9 +411,16 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                           key={n.name}
                           className="flex min-h-12 items-center justify-between rounded-xl border border-[#dce2ed] p-3 text-left hover:bg-[#eaf0fc]"
                           onClick={() => {
-                            setBairro(n.name);
                             setSearch('');
-                            setCisp(n.cisps.length === 1 ? n.cisps[0] : 0);
+                            const neighborhood = normalizeName(n.name).replace(/\s+/g, '-');
+                            const selectedCisp = n.cisps.length === 1 ? n.cisps[0] : 0;
+                            if (selectedCisp && analyticsNeighborhoods.includes(neighborhood as typeof analyticsNeighborhoods[number]))
+                              emitProductEvent({ name: 'neighborhood_select', neighborhood: neighborhood as typeof analyticsNeighborhoods[number], cisp: selectedCisp });
+                            if (selectedCisp) emitRegionSelect(selectedCisp);
+                            updateFilters({
+                              bairro: n.name,
+                              cisp: selectedCisp,
+                            });
                           }}
                         >
                           {n.name}
@@ -383,7 +450,13 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                         >
                           <button
                             aria-pressed={cisp === area}
-                            onClick={() => setCisp(area)}
+                            onClick={() => {
+                              const neighborhood = normalizeName(chosen.name).replace(/\s+/g, '-');
+                              if (analyticsNeighborhoods.includes(neighborhood as typeof analyticsNeighborhoods[number]))
+                                emitProductEvent({ name: 'neighborhood_select', neighborhood: neighborhood as typeof analyticsNeighborhoods[number], cisp: area });
+                              emitRegionSelect(area);
+                              updateFilters({ cisp: area });
+                            }}
                             className="block min-h-11 w-full text-left font-semibold"
                           >
                             Selecionar CISP {area}
@@ -409,7 +482,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
             )}
             <section
               aria-label="Filtros"
-              className="mb-6 grid grid-cols-2 gap-4 rounded-xl border border-[#dce2ed] bg-white p-4 lg:grid-cols-4"
+              className="mb-6 grid grid-cols-1 gap-4 rounded-xl border border-[#dce2ed] bg-white p-4 sm:grid-cols-2 lg:grid-cols-4"
             >
               {mode === 'insights' && (
                 <Choice
@@ -430,39 +503,51 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   label="Indicador"
                   grouped
                   value={id}
-                  onChange={setIndicator}
+                  onChange={(indicator) => updateFilters({ indicator })}
                   options={data.indicators.map((i) => ({
                     value: i.id,
                     label: i.label,
                   }))}
                 />
               )}
-              <Choice
-                label="Período"
-                value={months}
-                onChange={setMonths}
-                options={['1', '3', '6', '12'].map((m) => ({
-                  value: m,
-                  label: m === '1' ? '1 mês' : `${m} meses`,
-                }))}
-              />
-              <Choice
-                label="Mês final"
-                value={end}
-                onChange={setEnd}
-                options={[
-                  { value: 'latest', label: 'Último mês disponível' },
-                  ...periods
-                    .slice(Number(months) - 1)
-                    .reverse()
-                    .map((p) => ({ value: p, label: dateLabel(p) })),
-                ]}
-              />
+              <div className="sm:col-span-2">
+                <p className="mb-2 text-sm font-semibold">
+                  Período e comparação
+                </p>
+                <PeriodPicker
+                  min="2003-01"
+                  mapFrom={periods[0]}
+                  max={periods.at(-1) ?? ''}
+                  start={
+                    effectiveEnd
+                      ? monthShift(effectiveEnd, 1 - Number(months))
+                      : ''
+                  }
+                  end={effectiveEnd ?? ''}
+                  comparison={timeComparison}
+                  onApply={(a, b, c) => {
+                    if (a < periods[0]) {
+                      window.location.assign(
+                        `/historico?${new URLSearchParams({ indicador: id, inicio: a, fim: b, comparacao: c })}`,
+                      );
+                      return;
+                    }
+                    updateFilters({
+                      months: String(monthCount(a, b)),
+                      end: b,
+                      comparison: c,
+                    });
+                  }}
+                  historyHref={`/historico?indicador=${id}`}
+                />
+              </div>
               {mode !== 'insights' && (
                 <Choice
                   label="Mostrar por"
                   value={field}
-                  onChange={(s) => setField(s as 'rate' | 'count')}
+                  onChange={(s) =>
+                    updateFilters({ field: s as 'rate' | 'count' })
+                  }
                   options={[
                     { value: 'rate', label: 'Taxa por 100 mil' },
                     { value: 'count', label: 'Quantidade' },
@@ -473,7 +558,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                 {range} ·{' '}
                 {end === 'latest'
                   ? 'Acompanha automaticamente o último mês publicado.'
-                  : 'Período histórico fixo. Escolha “Último mês disponível” para acompanhar novas publicações.'}
+                  : 'Período fixo. Use “Período e comparação” para escolher outro intervalo.'}
               </p>
             </section>
             {(mode !== 'insights' || insightMode === 'indicador') && (
@@ -498,8 +583,9 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   label="Sua região policial"
                   value={String(cisp)}
                   onChange={(s) => {
-                    setCisp(Number(s));
-                    setBairro('');
+                    const territory = territories.find((item) => item.cisp === Number(s));
+                    if (territory) emitRegionSelect(Number(s));
+                    updateFilters({ cisp: Number(s), bairro: '' });
                   }}
                   options={[
                     { value: '0', label: 'Selecione uma região' },
@@ -510,7 +596,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
                   <Choice
                     label="Comparar com"
                     value={other}
-                    onChange={setOther}
+                    onChange={(other) => updateFilters({ other })}
                     options={[
                       { value: 'rio', label: 'Rio inteiro' },
                       ...areaOptions,
@@ -815,6 +901,7 @@ export function RegionExplorer({ mode }: { mode: Mode }) {
               insightMode === 'panorama' &&
               effectiveEnd && (
                 <InsightsPanorama
+                  comparison={timeComparison}
                   followLatest={end === 'latest'}
                   rows={data.rows}
                   populations={pop}

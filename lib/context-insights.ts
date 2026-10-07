@@ -25,6 +25,7 @@ export function contextInsights(
   populations: { cisp: number; population: number }[],
   end: string,
   months: number,
+  comparison: 'previous' | 'year' | 'none' = 'previous',
 ): ContextInsight[] {
   if (
     populations.length !== 41 ||
@@ -41,7 +42,7 @@ export function contextInsights(
     'furto_celular',
   ];
   const byId = new Map(
-    ids.map((id) => [id, regionMetrics(rows, populations, id, end, months)]),
+    ids.map((id) => [id, regionMetrics(rows, populations, id, end, months, comparison)]),
   );
   const city = new Map(ids.map((id) => [id, cityMetric(byId.get(id)!)]));
   const out: ContextInsight[] = [];

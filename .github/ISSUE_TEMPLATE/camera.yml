@@ -1,0 +1,52 @@
+name: Referência de câmera pública
+description: Corrija uma referência ou relate uma observação reproduzível de câmera pública.
+title: "[camera] "
+labels:
+  - camera
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use apenas fontes públicas, sem autenticação. Um carregamento de página não prova imagem ou transmissão. Não inclua dados pessoais ou endereço exato de pessoa.
+  - type: input
+    id: camera-id
+    attributes:
+      label: ID permanente da câmera
+      description: Exemplo de formato aceito: camerasrj-1698. Não use o ID efêmero de um vídeo descoberto.
+      placeholder: camerasrj-1698
+    validations:
+      required: true
+  - type: input
+    id: source-url
+    attributes:
+      label: URL pública da fonte
+      description: Informe a URL que qualquer visitante pode abrir.
+    validations:
+      required: true
+  - type: input
+    id: observed-at
+    attributes:
+      label: Data da observação
+      description: Use uma data ISO, por exemplo 2026-10-07.
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: dropdown
+    id: observation
+    attributes:
+      label: O que foi observado?
+      options:
+        - referência pública acessível
+        - página sem imagem confirmada
+        - primeiro quadro observado
+        - progresso de vídeo observado
+        - fonte indisponível na data
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidência e limite
+      description: Explique o que foi observado, sem afirmar disponibilidade contínua ou transmissão ao vivo além da evidência.
+    validations:
+      required: true

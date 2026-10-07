@@ -2,6 +2,9 @@ import { ArrowLeft, CheckCircle2, Database, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { SiteHeader } from '@/components/site-header';
+import { canonical, data, monthLabel, period, sourceUpdated } from '@/lib/organic-data';
+
+export const metadata = { title: 'Metodologia | Mapa da Criminalidade RJ', alternates: { canonical: canonical('/metodologia') } };
 
 const checks = [
   'Download oficial precisa responder e conter as 41 CISPs em cada mês da série.',
@@ -33,7 +36,7 @@ export default function Methodology() {
       </header>
       <article className="mx-auto max-w-5xl px-4 py-10 md:px-7 md:py-16">
         <Badge className="bg-primary/10 text-primary">
-          Versão piloto · 04/09/2026
+          Série validada · {monthLabel(period)}
         </Badge>
         <h1 className="mt-4 max-w-3xl font-heading text-4xl font-bold tracking-[-0.04em] md:text-6xl">
           O que o mapa mede — e o que ele não pode prometer.
@@ -72,9 +75,11 @@ export default function Methodology() {
           <h2>Fonte e cobertura</h2>
           <p>
             A base principal é a série mensal por CISP do Instituto de Segurança
-            Pública do Estado do Rio de Janeiro. No corte validado, ela contém
-            38.136 linhas, 65 colunas, 137 CISPs no estado e 41 no município do
-            Rio, de janeiro de 2003 a julho de 2026.
+            Pública do Estado do Rio de Janeiro. O snapshot recente validado
+            contém {data.rows.length.toLocaleString('pt-BR')} linhas de CISP/mês,
+            cobrindo as 41 CISPs do município do Rio entre {monthLabel(data.rows[0].period)}
+            {' '}e {monthLabel(period)}. A série histórica consultável começa em janeiro de 2003.
+            O arquivo oficial foi observado como modificado em {sourceUpdated}.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
             <a
@@ -108,7 +113,8 @@ export default function Methodology() {
             equivalente imediatamente anterior:{' '}
             <code>100 × (atual / anterior − 1)</code>. Quando as duas janelas
             somam menos de 20 registros ou a anterior é zero, o destaque
-            percentual é suprimido como volume instável.
+            percentual é suprimido quando a janela anterior tem menos de 20
+            registros ou é zero.
           </p>
           <p className="mt-3">
             Casos e vítimas nunca são combinados. Não existe “score de
@@ -225,18 +231,17 @@ export default function Methodology() {
         <section className="method-section">
           <h2>Atualização e contingência</h2>
           <p>
-            O site consulta o CSV oficial por uma rota própria e guarda o
-            resultado em cache por seis horas. Quando a fonte não responde, a
-            interface usa o último snapshot validado incluído na publicação e
-            informa que está em contingência. A fonte é mensal, não em tempo
-            real.
+            As páginas e o mapa usam o mesmo snapshot validado incluído na
+            publicação. O refresh consulta os arquivos oficiais, valida a
+            cobertura e só muda o snapshot quando os insumos mudam. Se a fonte
+            não responder, a versão anterior permanece publicada e sua data
+            verdadeira continua visível. A fonte é mensal, não em tempo real.
           </p>
           <p className="mt-3">
-            Os insights são recalculados ao carregar a página, sem redação
-            manual ou modelo de IA. “Último mês disponível” acompanha novas
-            publicações; datas históricas permanecem fixas. A aba aberta não
-            consulta continuamente a fonte. O cache pode servir a versão
-            anterior enquanto revalida.
+            Os insights são recalculados a partir do snapshot publicado, sem
+            redação manual ou modelo de IA. “Último mês disponível” acompanha
+            uma nova publicação após validação; datas históricas permanecem
+            fixas. A aba aberta não consulta continuamente a fonte.
           </p>
           <p className="mt-3">
             A fase 2 significa consolidado sem errata; a fase 3 indica que a

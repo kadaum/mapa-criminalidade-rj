@@ -1,0 +1,38 @@
+name: Atualizar e validar dados do ISP-RJ
+
+on:
+  schedule:
+    - cron: '17 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run prepare:public-data
+      - run: npm run check:population-source
+      - run: npm run sync:data
+      - run: npm run build:share-cards
+      - run: npm run validate:data
+      - run: npm run test:history
+      - run: npm run build
+      - name: Registrar novo snapshot quando a fonte mudar
+        run: |
+          if git diff --quiet -- public/data/crime-rio-snapshot.json public/data/crime-rio-history.json public/data/crime-rio-history-cisp.csv; then
+            echo "Sem mudança no arquivo oficial"
+            exit 0
+          fi
+          git config user.name "mapa-aberto-rj-bot"
+          git config user.email "mapa-aberto-rj-bot@users.noreply.github.com"
+          git add public/data/crime-rio-snapshot.json public/data/crime-rio-history.json public/data/crime-rio-history-cisp.csv
+          git commit -m "data: atualizar estatísticas do ISP-RJ"
+          git push

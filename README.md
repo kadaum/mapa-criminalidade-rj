@@ -1,50 +1,77 @@
 # Mapa da Criminalidade RJ
 
-Ferramenta cívica de código aberto para explorar **registros policiais por CISP** no município do Rio de Janeiro: mapa, comparação de regiões, rankings e insights com períodos explícitos.
+Monitor territorial open source de registros policiais por CISP no município do Rio de Janeiro.
 
-[Abrir o site](https://mapa-aberto-rj.ricardo-guia.chatgpt.site) · [Como contribuir](CONTRIBUTING.md) · [Fontes e limites](DATA_SOURCES.md) · [Segurança](SECURITY.md)
+O produto responde uma pergunta estreita: **o que mudou nos registros comunicados à Polícia Civil nesta área, comparando dois períodos equivalentes?** Ele não calcula risco individual, não recomenda rotas e não classifica ruas como seguras ou perigosas.
 
-Não é um mapa de risco individual nem uma contagem de todos os crimes ocorridos. A busca por bairro aponta para a área de delegacia correspondente, não desagrega registros por bairro. Um registro pode conter múltiplos títulos e fatos não criminais. Não some indicadores agregados e seus componentes.
+## Dados
 
-## Rodar localmente
+- Série mensal por CISP: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/BaseDPEvolucaoMensalCisp.csv).
+- Dicionário: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/BaseDpDicionarioDeVariaveis.xlsx).
+- Limites territoriais: [ISP-RJ](https://www.ispdados.rj.gov.br/Conteudo.html).
+- Relação oficial entre CISP e bairros: [ISP-RJ](https://www.ispdados.rj.gov.br/Arquivos/Relacao_RISPxAISPxCISP.csv).
+- Limites municipais de bairros: [Prefeitura do Rio](https://services1.arcgis.com/OlP4dGNtIcnD3RYf/ArcGIS/rest/services/db_MI_Bairros/FeatureServer/0).
+- População residente por setor censitário: [IBGE, Censo 2022](https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html?edicao=41852&t=resultados).
+- A população por CISP é derivada com o [SHP oficial completo das CISPs de 2026](https://www.ispdados.rj.gov.br/Arquivos/CISPshp.rar), atribuindo cada setor à CISP com maior área de interseção. Os 13.782 setores somam 6.211.223 residentes, exatamente o total municipal do Censo 2022. A geometria simplificada do mapa nunca entra nesse cálculo.
+- O site consulta o CSV oficial e mantém cache por seis horas. Se a fonte falhar, usa o último snapshot validado.
+- O snapshot registra ETag, Last-Modified, SHA-256, bytes e horário de coleta.
 
-Requer Node.js 22.13+ e npm. Não é necessário criar conta nem fornecer chave de API.
+## Rodar
 
-```sh
+```bash
 npm ci
-npm test
-npm run typecheck
-```
-
-Os dados de terceiros **não estão incluídos** na licença MIT nem versionados neste repositório. Para visualizar o mapa, leia [DATA_SOURCES.md](DATA_SOURCES.md) e obtenha as cópias locais:
-
-```sh
-npm run data:setup -- --accept-source-terms
+npm run prepare:public-data
+npm run sync:data
 npm run validate:data
 npm run dev
 ```
 
-O comando baixa os cinco arquivos públicos que o site usa, sem credenciais. Depende da disponibilidade do site e não concede uma licença nova para esses arquivos. Eles ficam ignorados pelo Git. Sem essa etapa, os testes unitários e o build funcionam, mas a interface não terá as camadas e a população necessárias. Abra o endereço local informado pelo terminal.
+`npm run prepare:public-data` baixa seis artefatos de runtime do snapshot público existente, baixa temporariamente os ZIPs compactos oficiais do IBGE, deriva o contexto local e gera os cards de bairro. O comando não usa credenciais, não baixa mídia e não mantém os ZIPs de origem. As licenças específicas desses conjuntos continuam não confirmadas; os arquivos gerados são saídas locais, não uma alegação de licença MIT.
 
-```sh
-npm run build
-npm start
+## Dados públicos do candidato
+
+O espelho público contém o código, a proveniência e os snapshots estatísticos do ISP-RJ com licença PDDL. Para executar localmente as telas que dependem de catálogo ou geometria, faça bootstrap somente dos caminhos allowlisted abaixo a partir do snapshot público existente do Site; não trate esse espelho como a fonte primária nem redistribua esses arquivos sem confirmar a licença do publicador:
+
+```text
+https://mapa-criminalidade-rj.ricardoguia.com/data/camera-location-evidence.json
+https://mapa-criminalidade-rj.ricardoguia.com/data/cisp-neighborhoods.json
+https://mapa-criminalidade-rj.ricardoguia.com/data/cisp-population.json
+https://mapa-criminalidade-rj.ricardoguia.com/data/cisp-rio.geojson
+https://mapa-criminalidade-rj.ricardoguia.com/data/neighborhoods-rio.geojson
+https://mapa-criminalidade-rj.ricardoguia.com/data/public-cameras.json
 ```
 
-## Atualização e confiabilidade
+Esses seis artefatos ficam fora do candidato por terem licença específica não confirmada (incluindo geometrias, catálogo CamerasRJ, evidências e população derivada). O bootstrap é local, sem credenciais e sem download de vídeo ou mídia; preserve a atribuição e as limitações documentadas no Site. As estatísticas ISP-RJ continuam reproduzíveis por `npm run sync:data` e `npm run validate:data`.
 
-A API do aplicativo consulta uma URL fixa do ISP, com timeout e limite de tamanho. A série é **mensal, não em tempo real**; publicação e revisões dependem do ISP. O cabeçalho de cache permite seis horas em um CDN compatível, mas cada hospedagem precisa configurar/verificar seu cache. A navegação consulta a API; uma aba deixada aberta não faz atualização periódica. Na falha, o cliente tenta o snapshot local.
+## Validação
 
-A população é uma derivação do Censo 2022 e dos limites das CISPs, não uma estimativa mensal. Alterações territoriais exigem recálculo e revisão; não prometemos manutenção zero. Os insights são regras determinísticas calculadas sobre os dados carregados, não textos de IA atualizados manualmente.
+`npm run validate:data` bloqueia a publicação se houver duplicidade de CISP/mês, valor negativo ou não inteiro, quebra no conjunto de colunas, CISP sem geometria, geometria sem CISP atual, menos de 41 áreas da capital, população sem reconciliação ou falta do hash da fonte.
 
-`npm run sync:data` atualiza estatísticas, relação CISP/bairros e bairros, mas **não recalcula população nem reconstrói os limites das CISPs**. Consulte as fontes e scripts antes de publicar uma instância independente.
+O workflow em `.github/workflows/update-data.yml` consulta a fonte diariamente, valida, recompila e versiona o snapshot apenas quando o arquivo muda.
 
-## Testes e contribuições
+Ao atualizar estatísticas manualmente depois do primeiro bootstrap, rode `npm run sync:data` e em seguida `npm run build:share-cards`; assim os cards de boletim usam a mesma competência do snapshot. Os cinco cards de bairro e os dados de licença não confirmada continuam locais. O workflow gera os cards para validar o build, mas versiona somente os três snapshots estatísticos do ISP-RJ.
 
-`npm test` executa testes sintéticos de taxas, janelas, empates e dados ausentes, sem rede. `npm run test:integration` também executa regressões de referência com dados reais; algumas expectativas são específicas do snapshot de julho de 2026 e precisam ser revisadas quando a referência muda. Não confunda testes unitários aprovados com validação de uma base nova.
+O clone público usa um binding D1 local com ID fictício para desenvolvimento e build. Em produção, a área moderadora exige a identidade injetada de forma confiável pelo OpenAI Sites ou por um gateway autenticado equivalente; veja [SECURITY.md](SECURITY.md). O servidor local não é uma configuração de autenticação para produção.
 
-PRs passam por verificações automáticas, mas não publicam em produção. Sugestões, correções de acessibilidade, UX, testes e auditorias dos dados são bem-vindas. Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+A mesma rotina verifica `Last-Modified` e `ETag` do SHP oficial das CISPs. Se o limite territorial mudar, ela falha de forma explícita e exige o recálculo populacional com a geometria completa antes de aceitar uma nova publicação. A população não é interpolada mensalmente.
+
+## Princípios editoriais
+
+- Dizer “registros comunicados à polícia”, não “crimes que aconteceram”.
+- Mostrar competência e fase de revisão.
+- Abrir o mapa em taxa por 100 mil, mantendo quantidade bruta, população usada e ressalva de população flutuante sempre visíveis.
+- Usar `registro_ocorrencias` como visão geral oficial, com o rótulo “Registros de ocorrência”; nunca chamar esse campo de “total de crimes”.
+- Organizar os demais indicadores em grupos de navegação, sem somá-los: agregados e componentes se sobrepõem.
+- Explicar que a taxa não corrige população flutuante em áreas centrais, turísticas ou de transporte.
+- Nunca misturar casos e vítimas.
+- Suprimir variação percentual quando as duas janelas somam menos de 20 registros.
+- Não oferecer score, previsão, GPS ou rota segura.
+- Preservar o indicador agregado que o ISP publicou, mesmo quando a documentação antiga não permite reconstruí-lo.
 
 ## Licença
 
-Código sob [MIT](LICENSE). Dados, mapas-base e bibliotecas têm seus próprios termos. O repositório público é um snapshot limpo do código; não contém histórico operacional, configurações de hospedagem ou credenciais. Isso reduz exposição, mas não constitui garantia de ausência de vulnerabilidades.
+O código é MIT. A base de estatísticas é publicada no catálogo estadual sob Open Data Commons PDDL. Os limites territoriais devem sempre manter atribuição ao ISP-RJ; a licença específica do conjunto cartográfico precisa ser confirmada antes de uma redistribuição pública ampla.
+
+## Câmeras públicas
+
+O mapa inclui uma camada opcional de referências públicas, com agrupamento por proximidade, busca, precisão da localização e fonte. A lista separa coordenadas mapeadas de localização pendente e não confunde catálogo com transmissão funcionando. [Fluxo, fontes e limites](docs/public-cameras.md). Atribuição e licença do catálogo e de cada transmissão são próprias; não herdam MIT/PDDL.
