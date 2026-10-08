@@ -1,0 +1,6785 @@
+{
+  "schemaVersion": 1,
+  "scope": "Recorte de pontos cadastrados na camada municipal Paradas (SPPO) para cinco bairros piloto, por interseção pontual com os limites municipais simplificados.",
+  "source": {
+    "sourceVersion": "v85",
+    "title": "Pontos de Parada da rede de transporte público por ônibus (SPPO)",
+    "provider": "Prefeitura da Cidade do Rio de Janeiro, Secretaria Municipal de Transportes, Coordenadoria de Gestão de Rede - TR/SUBP/CGR",
+    "itemId": "fd07613c9a1c45299389c0f7cff8e2a0",
+    "itemUrl": "https://www.arcgis.com/home/item.html?id=fd07613c9a1c45299389c0f7cff8e2a0",
+    "layerUrl": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Hosted/Rede_%C3%94nibus_SPPO_2_visualiza%C3%A7%C3%A3o/FeatureServer/0",
+    "license": "CC BY 4.0 International",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "itemModified": "2026-09-09T15:00:14.000Z",
+    "layerLastEditDate": "2026-09-23T14:43:35.462Z",
+    "retrievedAt": "2026-10-07T23:43:08.501Z",
+    "candidateSha256": "30ef88e37108b90b8cd9931ad6938b2102f39cc5cd1928fa803bed62749a1ad9",
+    "itemMetadataSha256": "50764b6c2b21613677cba00eaabd9124c720946425b8519085f3054063477b70",
+    "layerMetadataSha256": "8918989540b129f3bc96dbd360522a21138789beb52710716e88c68de3cf5003",
+    "qaSha256": "ad0045ef8f859c0a78b07685d06f395aad1c51ebbd6b9f4620827c599ef46d2b",
+    "rawQuerySha256": "89cfa602613bdff9a343ac8a5ba7899d2450c5f18a6e5634fde5ebd80e1f44d6"
+  },
+  "geography": {
+    "title": "Limite de Bairros",
+    "provider": "Prefeitura da Cidade do Rio de Janeiro",
+    "url": "https://services1.arcgis.com/OlP4dGNtIcnD3RYf/ArcGIS/rest/services/db_MI_Bairros/FeatureServer/0/query?where=1%3D1&outFields=Codigo%2CNOME%2CRA%2CAreaBairro&orderByFields=Codigo&outSR=4326&geometryPrecision=5&maxAllowableOffset=0.00003&f=geojson",
+    "fileSha256": "36ff3f0c16716baf7a2013e2de3d0718c231d1861b533048db9d1a922ed0fbaf",
+    "upstreamSha256": "a83ce342de8154cb625fc23ee977280759411e26e6c67b889e2ef4ca11d94240",
+    "note": "Os códigos 5, 24, 33, 128 e 144 são códigos municipais presentes neste arquivo; não são códigos IBGE."
+  },
+  "method": {
+    "rule": "Ponto no interior de um único polígono alvo. Pontos a até 1e-9 grau de uma borda ou em mais de um alvo são excluídos das contagens e listados como exceções.",
+    "boundaryToleranceDegrees": 1e-9,
+    "fields": [
+      "stop_id",
+      "stop_name",
+      "stop_lat",
+      "stop_lon"
+    ],
+    "unit": "Registro distinto da camada municipal Paradas, identificado por stop_id; não representa deduplicação de estação física ou plataforma."
+  },
+  "neighborhoods": [
+    {
+      "code": 5,
+      "name": "Centro",
+      "slug": "centro",
+      "geometryType": "MultiPolygon",
+      "count": 135,
+      "stops": [
+        {
+          "stop_id": "1005O00046C2",
+          "stop_name": "Ponto Final: Candelária :: Linhas 324 e 329",
+          "stop_lat": -22.90243,
+          "stop_lon": -43.181646
+        },
+        {
+          "stop_id": "1005O00101C0",
+          "stop_name": "Miguel Couto",
+          "stop_lat": -22.90005,
+          "stop_lon": -43.18171
+        },
+        {
+          "stop_id": "1005O00125C0",
+          "stop_name": "Marrecas",
+          "stop_lat": -22.91183,
+          "stop_lon": -43.17866
+        },
+        {
+          "stop_id": "1005O00131C0",
+          "stop_name": "São Bento",
+          "stop_lat": -22.89798,
+          "stop_lon": -43.18086
+        },
+        {
+          "stop_id": "1005O00135C0",
+          "stop_name": "Treze de Maio",
+          "stop_lat": -22.9099,
+          "stop_lon": -43.17701
+        },
+        {
+          "stop_id": "1005O00142C0",
+          "stop_name": "Ponto Final: Candelária :: Linha 343",
+          "stop_lat": -22.90232,
+          "stop_lon": -43.18185
+        },
+        {
+          "stop_id": "1005O00029S0",
+          "stop_name": "BRS 1,2,3: Beira Mar",
+          "stop_lat": -22.91079,
+          "stop_lon": -43.1713
+        },
+        {
+          "stop_id": "1005O00063S0",
+          "stop_name": "BRS 1,2,4: General Caldwell",
+          "stop_lat": -22.90978,
+          "stop_lon": -43.19101
+        },
+        {
+          "stop_id": "1005O00146S0",
+          "stop_name": "BRS 1,2,3,4,5,I: Cruz Vermelha",
+          "stop_lat": -22.9124,
+          "stop_lon": -43.18938
+        },
+        {
+          "stop_id": "1005O00020S0",
+          "stop_name": "BRS 1,4,5,I: Praça Tiradentes",
+          "stop_lat": -22.90723,
+          "stop_lon": -43.18272
+        },
+        {
+          "stop_id": "1005O00016S9",
+          "stop_name": "BRS 1,2: Treze de Maio",
+          "stop_lat": -22.90836,
+          "stop_lon": -43.17734
+        },
+        {
+          "stop_id": "1005O00043S9",
+          "stop_name": "BRS 2,3,4,I: Senado",
+          "stop_lat": -22.91118,
+          "stop_lon": -43.19203
+        },
+        {
+          "stop_id": "1005O00018S0",
+          "stop_name": "BRS 1,2,3,4,I: Santa Luzia",
+          "stop_lat": -22.90853,
+          "stop_lon": -43.17225
+        },
+        {
+          "stop_id": "1005O00152S0",
+          "stop_name": "BRS 1,2,3,4,5,I: Erasmo Braga",
+          "stop_lat": -22.90519,
+          "stop_lon": -43.17367
+        },
+        {
+          "stop_id": "1005O00041C0",
+          "stop_name": "Riachuelo",
+          "stop_lat": -22.91448,
+          "stop_lon": -43.18843
+        },
+        {
+          "stop_id": "1005O00059S0",
+          "stop_name": "BRS 1,3: Rua de Santana",
+          "stop_lat": -22.90688,
+          "stop_lon": -43.19524
+        },
+        {
+          "stop_id": "1005O00005P0",
+          "stop_name": "Terminal Procópio Ferreira :: Plat. Central",
+          "stop_lat": -22.904898,
+          "stop_lon": -43.192358
+        },
+        {
+          "stop_id": "1005O00140C0",
+          "stop_name": "Praça dos Estivadores",
+          "stop_lat": -22.899467,
+          "stop_lon": -43.187639
+        },
+        {
+          "stop_id": "1005O00034S9",
+          "stop_name": "Debret",
+          "stop_lat": -22.90732,
+          "stop_lon": -43.17396
+        },
+        {
+          "stop_id": "1005O00052S0",
+          "stop_name": "BRS 5: Rio Branco",
+          "stop_lat": -22.90143,
+          "stop_lon": -43.18009
+        },
+        {
+          "stop_id": "1005O00155S0",
+          "stop_name": "BRS 4: Rio Branco",
+          "stop_lat": -22.90175,
+          "stop_lon": -43.18107
+        },
+        {
+          "stop_id": "1005O00055S0",
+          "stop_name": "BRS 1,3: Uruguaiana",
+          "stop_lat": -22.9021,
+          "stop_lon": -43.182164
+        },
+        {
+          "stop_id": "1005O00031S0",
+          "stop_name": "BRS 2: Uruguaiana",
+          "stop_lat": -22.902414,
+          "stop_lon": -43.183098
+        },
+        {
+          "stop_id": "1005O00156S0",
+          "stop_name": "BRS 2: Passos",
+          "stop_lat": -22.90329,
+          "stop_lon": -43.18583
+        },
+        {
+          "stop_id": "1005O00053S0",
+          "stop_name": "BRS 5: Tomé de Sousa",
+          "stop_lat": -22.90384,
+          "stop_lon": -43.18753
+        },
+        {
+          "stop_id": "1005O00157S0",
+          "stop_name": "BRS 2,3: Praça da República",
+          "stop_lat": -22.90446,
+          "stop_lon": -43.18946
+        },
+        {
+          "stop_id": "1005O00033S0",
+          "stop_name": "BRS 4: Central",
+          "stop_lat": -22.90542,
+          "stop_lon": -43.1924
+        },
+        {
+          "stop_id": "1005O00054S0",
+          "stop_name": "BRS 5: Central",
+          "stop_lat": -22.90573,
+          "stop_lon": -43.19337
+        },
+        {
+          "stop_id": "1005L00022S0",
+          "stop_name": "BRS 1,2,3: Central",
+          "stop_lat": -22.90591,
+          "stop_lon": -43.19395
+        },
+        {
+          "stop_id": "1005O00069S0",
+          "stop_name": "BRS 4: Tomé de Sousa",
+          "stop_lat": -22.90371,
+          "stop_lon": -43.18711
+        },
+        {
+          "stop_id": "1005O00004S0",
+          "stop_name": "BRS 2,4: Central",
+          "stop_lat": -22.905275,
+          "stop_lon": -43.192459
+        },
+        {
+          "stop_id": "1005O00019S0",
+          "stop_name": "BRS 5,I: Central",
+          "stop_lat": -22.90609,
+          "stop_lon": -43.19353
+        },
+        {
+          "stop_id": "1005O00025S0",
+          "stop_name": "BRS 3,4: Central",
+          "stop_lat": -22.9059,
+          "stop_lon": -43.19296
+        },
+        {
+          "stop_id": "1005O00056S0",
+          "stop_name": "BRS 1,2: Central",
+          "stop_lat": -22.90541,
+          "stop_lon": -43.19145
+        },
+        {
+          "stop_id": "1005O00064S0",
+          "stop_name": "BRS 2B: Praça da República",
+          "stop_lat": -22.904784,
+          "stop_lon": -43.189485
+        },
+        {
+          "stop_id": "1005O00150S0",
+          "stop_name": "BRS 5,I: Praça da República",
+          "stop_lat": -22.90454,
+          "stop_lon": -43.18876
+        },
+        {
+          "stop_id": "1005O00026S9",
+          "stop_name": "BRS 3,4: Passos",
+          "stop_lat": -22.90344,
+          "stop_lon": -43.18532
+        },
+        {
+          "stop_id": "1005O00057S0",
+          "stop_name": "BRS 1,2,5: Passos",
+          "stop_lat": -22.90319,
+          "stop_lon": -43.18456
+        },
+        {
+          "stop_id": "1005O00027S0",
+          "stop_name": "BRS 4: Central",
+          "stop_lat": -22.90562,
+          "stop_lon": -43.19151
+        },
+        {
+          "stop_id": "1005O00061S0",
+          "stop_name": "BRS 1,2,3: Praça da República",
+          "stop_lat": -22.90481,
+          "stop_lon": -43.189
+        },
+        {
+          "stop_id": "1005O00094C0",
+          "stop_name": "Aeroporto Santos Dumont",
+          "stop_lat": -22.90988,
+          "stop_lon": -43.16846
+        },
+        {
+          "stop_id": "1005O00013S0",
+          "stop_name": "BRS 4,5: Rua de Santana",
+          "stop_lat": -22.90677,
+          "stop_lon": -43.19493
+        },
+        {
+          "stop_id": "1005O00151S0",
+          "stop_name": "Franklin Roosevelt",
+          "stop_lat": -22.910264,
+          "stop_lon": -43.171781
+        },
+        {
+          "stop_id": "1005O00068S0",
+          "stop_name": "Almirante Barroso",
+          "stop_lat": -22.907564,
+          "stop_lon": -43.172783
+        },
+        {
+          "stop_id": "1005O00129P0",
+          "stop_name": "Terminal Procópio Ferreira :: Plat. Norte",
+          "stop_lat": -22.904565,
+          "stop_lon": -43.191892
+        },
+        {
+          "stop_id": "1005O00076P0",
+          "stop_name": "Terminal Rodoviário Menezes Cortes :: Plat. B",
+          "stop_lat": -22.905406,
+          "stop_lon": -43.174822
+        },
+        {
+          "stop_id": "1005O00120C2",
+          "stop_name": "Ponto Final: Candelária :: Linha 326",
+          "stop_lat": -22.902564,
+          "stop_lon": -43.182057
+        },
+        {
+          "stop_id": "1005O00164C0",
+          "stop_name": "Ponto Regulador: Castelo :: Linha 006",
+          "stop_lat": -22.90883,
+          "stop_lon": -43.17477
+        },
+        {
+          "stop_id": "1005O00189C0",
+          "stop_name": "Anfilófio de Carvalho",
+          "stop_lat": -22.90843,
+          "stop_lon": -43.17465
+        },
+        {
+          "stop_id": "1005O00190C0",
+          "stop_name": "Ancine",
+          "stop_lat": -22.909323,
+          "stop_lon": -43.174306
+        },
+        {
+          "stop_id": "1005O00202C0",
+          "stop_name": "Ponto Final: Castelo :: Linha 2114",
+          "stop_lat": -22.90441,
+          "stop_lon": -43.17505
+        },
+        {
+          "stop_id": "1005O00211C0",
+          "stop_name": "Professor Clementino Fraga",
+          "stop_lat": -22.90859,
+          "stop_lon": -43.19501
+        },
+        {
+          "stop_id": "1005O00090C0",
+          "stop_name": "Marechal Floriano",
+          "stop_lat": -22.90162,
+          "stop_lon": -43.18528
+        },
+        {
+          "stop_id": "1005O00215C0",
+          "stop_name": "Costa Barros",
+          "stop_lat": -22.9148,
+          "stop_lon": -43.18904
+        },
+        {
+          "stop_id": "1005O00222C0",
+          "stop_name": "Irineu Marinho",
+          "stop_lat": -22.90925,
+          "stop_lon": -43.1935
+        },
+        {
+          "stop_id": "1005O00223C0",
+          "stop_name": "Igreja de Sant'Ana",
+          "stop_lat": -22.90773,
+          "stop_lon": -43.19399
+        },
+        {
+          "stop_id": "1005O00224C0",
+          "stop_name": "Frederico Silva",
+          "stop_lat": -22.9078,
+          "stop_lon": -43.19226
+        },
+        {
+          "stop_id": "1005O00225C0",
+          "stop_name": "Moncorvo Filho",
+          "stop_lat": -22.90958,
+          "stop_lon": -43.19173
+        },
+        {
+          "stop_id": "1005O00239C0",
+          "stop_name": "Igreja de Santa Luzia",
+          "stop_lat": -22.9099,
+          "stop_lon": -43.17266
+        },
+        {
+          "stop_id": "1005O00143C0",
+          "stop_name": "Central do Brasil",
+          "stop_lat": -22.90307,
+          "stop_lon": -43.19083
+        },
+        {
+          "stop_id": "1005O00243C0",
+          "stop_name": "Castelo :: Linha 2110",
+          "stop_lat": -22.90484,
+          "stop_lon": -43.17577
+        },
+        {
+          "stop_id": "1005O00253C2",
+          "stop_name": "Ponto Final: Castelo :: Linha 2111",
+          "stop_lat": -22.90463,
+          "stop_lon": -43.17543
+        },
+        {
+          "stop_id": "1005O00257C0",
+          "stop_name": "CAIXA Cultural - BNDES",
+          "stop_lat": -22.90873,
+          "stop_lon": -43.18033
+        },
+        {
+          "stop_id": "1005O00258C0",
+          "stop_name": "CAIXA Cultural - BNDES",
+          "stop_lat": -22.9088,
+          "stop_lon": -43.18051
+        },
+        {
+          "stop_id": "1005O00198C0",
+          "stop_name": "BRS 1,4: Buenos Aires",
+          "stop_lat": -22.9044,
+          "stop_lon": -43.18332
+        },
+        {
+          "stop_id": "1005O00197C0",
+          "stop_name": "BRS 2,3,5,I: Luis de Camões",
+          "stop_lat": -22.905593,
+          "stop_lon": -43.182786
+        },
+        {
+          "stop_id": "1005O00180C0",
+          "stop_name": "BRS 1,2,3,4,5,I: Uruguaiana",
+          "stop_lat": -22.90664,
+          "stop_lon": -43.18006
+        },
+        {
+          "stop_id": "1005O00181C0",
+          "stop_name": "BRS 1,2,3,4,5,I: Largo da Carioca",
+          "stop_lat": -22.90649,
+          "stop_lon": -43.17764
+        },
+        {
+          "stop_id": "1005O00231S0",
+          "stop_name": "BRS 4,I: Praça da República I",
+          "stop_lat": -22.90864,
+          "stop_lon": -43.18772
+        },
+        {
+          "stop_id": "1005O00238S0",
+          "stop_name": "BRS 4: República do Paraguai",
+          "stop_lat": -22.909,
+          "stop_lon": -43.17926
+        },
+        {
+          "stop_id": "1005O00184C0",
+          "stop_name": "Ponto Final: Castelo :: Ônibus Executivos (Linhas para a Ilha do Governador)",
+          "stop_lat": -22.90705,
+          "stop_lon": -43.17404
+        },
+        {
+          "stop_id": "1005O00193S9",
+          "stop_name": "BRS 1,2: Alfândega",
+          "stop_lat": -22.90242,
+          "stop_lon": -43.17877
+        },
+        {
+          "stop_id": "1005O00194S9",
+          "stop_name": "BRS 1,2: Sete de Setembro",
+          "stop_lat": -22.90467,
+          "stop_lon": -43.17793
+        },
+        {
+          "stop_id": "1005O00249S0",
+          "stop_name": "BRS 1,2,3,4,5,I: Ouvidor",
+          "stop_lat": -22.90266,
+          "stop_lon": -43.17553
+        },
+        {
+          "stop_id": "1005O00241C0",
+          "stop_name": "Terreirão do Samba",
+          "stop_lat": -22.90795,
+          "stop_lon": -43.19572
+        },
+        {
+          "stop_id": "1005O00267P0",
+          "stop_name": "Terminal Churchill :: Plataforma Norte",
+          "stop_lat": -22.908874,
+          "stop_lon": -43.170562
+        },
+        {
+          "stop_id": "1005O00218C0",
+          "stop_name": "Academia Brasileira de Letras",
+          "stop_lat": -22.91051,
+          "stop_lon": -43.172587
+        },
+        {
+          "stop_id": "1005O00212C0",
+          "stop_name": "ACADEPOL - Academia de Polícia",
+          "stop_lat": -22.9106,
+          "stop_lon": -43.19392
+        },
+        {
+          "stop_id": "1005O00259C0",
+          "stop_name": "Catedral Metropolitana",
+          "stop_lat": -22.909364,
+          "stop_lon": -43.180294
+        },
+        {
+          "stop_id": "1005O00248C0",
+          "stop_name": "Senado",
+          "stop_lat": -22.91073,
+          "stop_lon": -43.188238
+        },
+        {
+          "stop_id": "1005O00364C0",
+          "stop_name": "Ponto Regulador: Castelo :: Linha 265",
+          "stop_lat": -22.908115,
+          "stop_lon": -43.170819
+        },
+        {
+          "stop_id": "1005O00367C2",
+          "stop_name": "Ponto Final: Candelária :: Linhas para Zona Norte",
+          "stop_lat": -22.902005,
+          "stop_lon": -43.180841
+        },
+        {
+          "stop_id": "1005O00158S0",
+          "stop_name": "BRS 4,5: Tomé de Sousa",
+          "stop_lat": -22.903662,
+          "stop_lon": -43.187524
+        },
+        {
+          "stop_id": "1005O00159S0",
+          "stop_name": "BRS 1,2,3: Tomé de Sousa",
+          "stop_lat": -22.90382,
+          "stop_lon": -43.18806
+        },
+        {
+          "stop_id": "1005O00246S0",
+          "stop_name": "BRS 1,2,3: Central",
+          "stop_lat": -22.905862,
+          "stop_lon": -43.192264
+        },
+        {
+          "stop_id": "1005O00359S0",
+          "stop_name": "BRS 5,I: Praça da República",
+          "stop_lat": -22.905052,
+          "stop_lon": -43.189782
+        },
+        {
+          "stop_id": "1005O00199C0",
+          "stop_name": "Parada São Bento",
+          "stop_lat": -22.89915,
+          "stop_lon": -43.17999
+        },
+        {
+          "stop_id": "1005O00192C0",
+          "stop_name": "Presidente Vargas",
+          "stop_lat": -22.90054,
+          "stop_lon": -43.17948
+        },
+        {
+          "stop_id": "1005O00250C0",
+          "stop_name": "Visconde de Inhaúma",
+          "stop_lat": -22.89948,
+          "stop_lon": -43.17708
+        },
+        {
+          "stop_id": "1005O00242P0",
+          "stop_name": "Terminal Churchill :: Plataforma Sul",
+          "stop_lat": -22.908986,
+          "stop_lon": -43.170703
+        },
+        {
+          "stop_id": "1005O00263P0",
+          "stop_name": "Terminal Procópio Ferreira :: Plat. Sul",
+          "stop_lat": -22.904988,
+          "stop_lon": -43.192317
+        },
+        {
+          "stop_id": "1005O00236C0",
+          "stop_name": "Terminal Jamil Amiden :: Ônibus Executivos",
+          "stop_lat": -22.90917,
+          "stop_lon": -43.18048
+        },
+        {
+          "stop_id": "1005O00172C0",
+          "stop_name": "Ponto Final: Praça Tiradentes",
+          "stop_lat": -22.90731,
+          "stop_lon": -43.183
+        },
+        {
+          "stop_id": "1005O00227C0",
+          "stop_name": "Terminal Jamil Amiden :: Linha 229",
+          "stop_lat": -22.90837,
+          "stop_lon": -43.17813
+        },
+        {
+          "stop_id": "1005O00369C2",
+          "stop_name": "Ponto Final: Candelária :: Linha 328",
+          "stop_lat": -22.902674,
+          "stop_lon": -43.18239
+        },
+        {
+          "stop_id": "1005O00372C1",
+          "stop_name": "Ponto Final: Candelária :: Linha 369",
+          "stop_lat": -22.901438,
+          "stop_lon": -43.18065
+        },
+        {
+          "stop_id": "1005O00260C0",
+          "stop_name": "Franklin Roosevelt :: Pista Esquerda",
+          "stop_lat": -22.90957,
+          "stop_lon": -43.17046
+        },
+        {
+          "stop_id": "1005O00208C0",
+          "stop_name": "Franklin Roosevelt :: Pista Direita",
+          "stop_lat": -22.90952,
+          "stop_lon": -43.17067
+        },
+        {
+          "stop_id": "1005O00370C1",
+          "stop_name": "Ponto Final: Candelária :: Linhas 388 e SR388",
+          "stop_lat": -22.901944,
+          "stop_lon": -43.182203
+        },
+        {
+          "stop_id": "1005O00376S2",
+          "stop_name": "BRS 1,4: Passos",
+          "stop_lat": -22.903617,
+          "stop_lon": -43.185315
+        },
+        {
+          "stop_id": "1005O00375S2",
+          "stop_name": "BRS 2,3,5,I: Passos",
+          "stop_lat": -22.903332,
+          "stop_lon": -43.184461
+        },
+        {
+          "stop_id": "1005O00374C2",
+          "stop_name": "Comando Aéreo Leste",
+          "stop_lat": -22.908598,
+          "stop_lon": -43.168241
+        },
+        {
+          "stop_id": "1014O00213C0",
+          "stop_name": "Senado",
+          "stop_lat": -22.91239,
+          "stop_lon": -43.19232
+        },
+        {
+          "stop_id": "1161O00023C0",
+          "stop_name": "André Cavalcanti",
+          "stop_lat": -22.91488,
+          "stop_lon": -43.18542
+        },
+        {
+          "stop_id": "1161O00029C0",
+          "stop_name": "Rezende",
+          "stop_lat": -22.91138,
+          "stop_lon": -43.18243
+        },
+        {
+          "stop_id": "2016O00055C0",
+          "stop_name": "Calógeras",
+          "stop_lat": -22.912168,
+          "stop_lon": -43.172982
+        },
+        {
+          "stop_id": "1005O00226C0",
+          "stop_name": "Henrique Valadares",
+          "stop_lat": -22.91219,
+          "stop_lon": -43.19057
+        },
+        {
+          "stop_id": "1005O00214C0",
+          "stop_name": "Henrique Valadares",
+          "stop_lat": -22.91362,
+          "stop_lon": -43.1907
+        },
+        {
+          "stop_id": "1005O00109C0",
+          "stop_name": "Ponto Final: Candelária :: Linhas para Jacarepaguá",
+          "stop_lat": -22.901154,
+          "stop_lon": -43.177501
+        },
+        {
+          "stop_id": "1005O00012S0",
+          "stop_name": "BRS 1,3,5: Central",
+          "stop_lat": -22.905624,
+          "stop_lon": -43.193575
+        },
+        {
+          "stop_id": "1005O00219C0",
+          "stop_name": "Rio Branco",
+          "stop_lat": -22.912419,
+          "stop_lon": -43.174325
+        },
+        {
+          "stop_id": "1005O00170C0",
+          "stop_name": "Ponto Final: Candelária :: Linhas para Zona Oeste",
+          "stop_lat": -22.901611,
+          "stop_lon": -43.179679
+        },
+        {
+          "stop_id": "1005O00149S9",
+          "stop_name": "BRS 2,3,4,I: Carlos de Carvalho",
+          "stop_lat": -22.91168,
+          "stop_lon": -43.18936
+        },
+        {
+          "stop_id": "1005O00232S0",
+          "stop_name": "BRS 1,2,5: Praça da República II",
+          "stop_lat": -22.90879,
+          "stop_lon": -43.18819
+        },
+        {
+          "stop_id": "5o6j",
+          "stop_name": "BRS 1,2,3,4,5,I: Graça Aranha",
+          "stop_lat": -22.906503,
+          "stop_lon": -43.17581
+        },
+        {
+          "stop_id": "1005O00240C0",
+          "stop_name": "Ponto Regulador: Castelo :: Linhas para a Zona Norte",
+          "stop_lat": -22.90878,
+          "stop_lon": -43.17147
+        },
+        {
+          "stop_id": "2gyu",
+          "stop_name": "BRS 1,2,4: Lavradio",
+          "stop_lat": -22.909873,
+          "stop_lon": -43.181997
+        },
+        {
+          "stop_id": "4aih",
+          "stop_name": "BRS 1,2,4,I: Moncorvo Filho",
+          "stop_lat": -22.910706,
+          "stop_lon": -43.192646
+        },
+        {
+          "stop_id": "1005O00040C0",
+          "stop_name": "Washington Luis",
+          "stop_lat": -22.91343,
+          "stop_lon": -43.18832
+        },
+        {
+          "stop_id": "1005O00030S0",
+          "stop_name": "Igreja Nossa Senhora da Candelária",
+          "stop_lat": -22.900515,
+          "stop_lon": -43.177892
+        },
+        {
+          "stop_id": "1005O00266T0",
+          "stop_name": "Terminal Rodoviário Menezes Cortes :: Plat. A",
+          "stop_lat": -22.905313,
+          "stop_lon": -43.174898
+        },
+        {
+          "stop_id": "t0a6",
+          "stop_name": "Visconde do Rio Branco",
+          "stop_lat": -22.908436,
+          "stop_lon": -43.184893
+        },
+        {
+          "stop_id": "8k09",
+          "stop_name": "Comando Aéreo Leste",
+          "stop_lat": -22.907379,
+          "stop_lon": -43.168683
+        },
+        {
+          "stop_id": "1005O00371C1",
+          "stop_name": "Ponto Final: Candelária :: Linhas 397 e SR397",
+          "stop_lat": -22.901278,
+          "stop_lon": -43.18014
+        },
+        {
+          "stop_id": "1005O00234C0",
+          "stop_name": "Ponto Final: Praça da República :: Linhas 371, 383, SN624 e SV391",
+          "stop_lat": -22.908392,
+          "stop_lon": -43.189263
+        },
+        {
+          "stop_id": "1005O00171C1",
+          "stop_name": "Ponto Final: Candelária :: Linhas 393, 2310, SN388 e SR393",
+          "stop_lat": -22.901639,
+          "stop_lon": -43.181276
+        },
+        {
+          "stop_id": "1005O00235C0",
+          "stop_name": "Hospital Municipal Souza Aguiar",
+          "stop_lat": -22.907849,
+          "stop_lon": -43.189799
+        },
+        {
+          "stop_id": "1005O00060C0",
+          "stop_name": "BRS 1,2,4,5: General Caldwell",
+          "stop_lat": -22.90623,
+          "stop_lon": -43.193405
+        },
+        {
+          "stop_id": "1005O00072C0",
+          "stop_name": "Graças",
+          "stop_lat": -22.91565,
+          "stop_lon": -43.1882
+        },
+        {
+          "stop_id": "1005O00360C2",
+          "stop_name": "Ponto Final: Castelo :: Linha 306",
+          "stop_lat": -22.90507,
+          "stop_lon": -43.17617
+        },
+        {
+          "stop_id": "1005O00228C0",
+          "stop_name": "Terminal Jamil Amiden :: Linhas 217 e 249",
+          "stop_lat": -22.90881,
+          "stop_lon": -43.17938
+        },
+        {
+          "stop_id": "1005O00361C0",
+          "stop_name": "Ponto Final: Castelo :: Linha 361",
+          "stop_lat": -22.90526,
+          "stop_lon": -43.17648
+        },
+        {
+          "stop_id": "1005O00071C0",
+          "stop_name": "Ponto Final: Bairro de Fátima :: Nossa Senhora de Fátima",
+          "stop_lat": -22.91698,
+          "stop_lon": -43.18823
+        },
+        {
+          "stop_id": "1005O00270C0",
+          "stop_name": "Praça Presidente Aguirre Cerda",
+          "stop_lat": -22.917883,
+          "stop_lon": -43.188216
+        },
+        {
+          "stop_id": "1005O00262C0",
+          "stop_name": "Ponto Regulador: Castelo :: Linhas Área Central",
+          "stop_lat": -22.908248,
+          "stop_lon": -43.170956
+        }
+      ]
+    },
+    {
+      "code": 24,
+      "name": "Copacabana",
+      "slug": "copacabana",
+      "geometryType": "Polygon",
+      "count": 84,
+      "stops": [
+        {
+          "stop_id": "2024O00007S0",
+          "stop_name": "BRS 1,3,I: Sousa Lima",
+          "stop_lat": -22.98239,
+          "stop_lon": -43.19094
+        },
+        {
+          "stop_id": "2024O00035C2",
+          "stop_name": "BRS 2: Sá Ferreira",
+          "stop_lat": -22.98044,
+          "stop_lon": -43.191017
+        },
+        {
+          "stop_id": "2024O00014S0",
+          "stop_name": "BRS 1,3,I: Djalma Ulrich",
+          "stop_lat": -22.97936,
+          "stop_lon": -43.19089
+        },
+        {
+          "stop_id": "2024O00036S0",
+          "stop_name": "BRS 1,3,I: Constante Ramos",
+          "stop_lat": -22.97361,
+          "stop_lon": -43.18856
+        },
+        {
+          "stop_id": "2024O00009S0",
+          "stop_name": "BRS 2: Raimundo Corrêa",
+          "stop_lat": -22.97303,
+          "stop_lon": -43.18818
+        },
+        {
+          "stop_id": "2024O00037S0",
+          "stop_name": "BRS 2: Figueiredo Magalhães",
+          "stop_lat": -22.97113,
+          "stop_lon": -43.18675
+        },
+        {
+          "stop_id": "2024O00010S0",
+          "stop_name": "BRS 1,3,I: Siqueira Campos",
+          "stop_lat": -22.96959,
+          "stop_lon": -43.18506
+        },
+        {
+          "stop_id": "2024O00004S0",
+          "stop_name": "BRS 2: República do Peru",
+          "stop_lat": -22.96725,
+          "stop_lon": -43.18096
+        },
+        {
+          "stop_id": "2024O00011S0",
+          "stop_name": "BRS 1,3,I: Fernando Mendes",
+          "stop_lat": -22.96685,
+          "stop_lon": -43.17974
+        },
+        {
+          "stop_id": "2024O00017S0",
+          "stop_name": "BRS 1,2: Demétrio Ribeiro",
+          "stop_lat": -22.961987,
+          "stop_lon": -43.174865
+        },
+        {
+          "stop_id": "2024O00034S0",
+          "stop_name": "BRS 1,2,3,I: Conselheiro Lafaiete",
+          "stop_lat": -22.983611,
+          "stop_lon": -43.193179
+        },
+        {
+          "stop_id": "2024O00104C0",
+          "stop_name": "Barata Ribeiro",
+          "stop_lat": -22.96883,
+          "stop_lon": -43.1871
+        },
+        {
+          "stop_id": "2024O00106C0",
+          "stop_name": "Tenente Marones de Gusmão",
+          "stop_lat": -22.96583,
+          "stop_lon": -43.18964
+        },
+        {
+          "stop_id": "2024O00107C0",
+          "stop_name": "Figueiredo Magalhães",
+          "stop_lat": -22.964774,
+          "stop_lon": -43.189964
+        },
+        {
+          "stop_id": "2024O00025C0",
+          "stop_name": "Metrô Cantagalo",
+          "stop_lat": -22.97528,
+          "stop_lon": -43.19346
+        },
+        {
+          "stop_id": "2024O00023C0",
+          "stop_name": "Anita Garibaldi",
+          "stop_lat": -22.96828,
+          "stop_lon": -43.18842
+        },
+        {
+          "stop_id": "2024O00001C0",
+          "stop_name": "Lacerda Coutinho",
+          "stop_lat": -22.96929,
+          "stop_lon": -43.18998
+        },
+        {
+          "stop_id": "2024O00065S0",
+          "stop_name": "BRS 2: Raul Pompéia",
+          "stop_lat": -22.985165,
+          "stop_lon": -43.191863
+        },
+        {
+          "stop_id": "2024O00105C0",
+          "stop_name": "Metrô Siqueira Campos",
+          "stop_lat": -22.96731,
+          "stop_lon": -43.18838
+        },
+        {
+          "stop_id": "2024O00082C0",
+          "stop_name": "Leopoldo Miguez",
+          "stop_lat": -22.97773,
+          "stop_lon": -43.19181
+        },
+        {
+          "stop_id": "2024O00091S0",
+          "stop_name": "BRS 1: Ronald de Carvalho",
+          "stop_lat": -22.9629,
+          "stop_lon": -43.177096
+        },
+        {
+          "stop_id": "2024O00028S0",
+          "stop_name": "BRS 1,3,I: Hilário de Gouveia",
+          "stop_lat": -22.96748,
+          "stop_lon": -43.18412
+        },
+        {
+          "stop_id": "2024O00092S0",
+          "stop_name": "BRS 1: Rodolfo Dantas",
+          "stop_lat": -22.96443,
+          "stop_lon": -43.17945
+        },
+        {
+          "stop_id": "2024O00027S0",
+          "stop_name": "BRS 2: Cardeal Arcoverde",
+          "stop_lat": -22.96519,
+          "stop_lon": -43.18062
+        },
+        {
+          "stop_id": "2024O00047S0",
+          "stop_name": "BRS 2: Paula Freitas",
+          "stop_lat": -22.96688,
+          "stop_lon": -43.18321
+        },
+        {
+          "stop_id": "2024O00048S0",
+          "stop_name": "BRS 1,3,I: Anita Garibaldi",
+          "stop_lat": -22.96953,
+          "stop_lon": -43.18727
+        },
+        {
+          "stop_id": "2024O00042S0",
+          "stop_name": "BRS 2: Figueiredo Magalhães",
+          "stop_lat": -22.96875,
+          "stop_lon": -43.18608
+        },
+        {
+          "stop_id": "2024O00008S0",
+          "stop_name": "BRS 1,3,I: Bolívar",
+          "stop_lat": -22.977503,
+          "stop_lon": -43.190416
+        },
+        {
+          "stop_id": "2024O00043S0",
+          "stop_name": "BRS 1,3,I: Raimundo Corrêa",
+          "stop_lat": -22.9716,
+          "stop_lon": -43.18967
+        },
+        {
+          "stop_id": "2024O00029S0",
+          "stop_name": "BRS 2: Santa Clara",
+          "stop_lat": -22.96988,
+          "stop_lon": -43.18782
+        },
+        {
+          "stop_id": "2024O00030S0",
+          "stop_name": "BRS 1,3,I: Barão de Ipanema",
+          "stop_lat": -22.97362,
+          "stop_lon": -43.1913
+        },
+        {
+          "stop_id": "2024O00049S0",
+          "stop_name": "BRS 2: Constante Ramos",
+          "stop_lat": -22.97249,
+          "stop_lon": -43.19054
+        },
+        {
+          "stop_id": "2024O00093S0",
+          "stop_name": "BRS 1,3,I: Xavier da Silveira",
+          "stop_lat": -22.97608,
+          "stop_lon": -43.19251
+        },
+        {
+          "stop_id": "2024O00044S0",
+          "stop_name": "BRS 2: Bolívar",
+          "stop_lat": -22.9753,
+          "stop_lon": -43.1922
+        },
+        {
+          "stop_id": "2024O00045S0",
+          "stop_name": "BRS 1,3,I: Sousa Lima",
+          "stop_lat": -22.9818,
+          "stop_lon": -43.19247
+        },
+        {
+          "stop_id": "2024O00031S0",
+          "stop_name": "BRS 2: Miguel Lemos",
+          "stop_lat": -22.97702,
+          "stop_lon": -43.19276
+        },
+        {
+          "stop_id": "2024O00032S0",
+          "stop_name": "BRS 1,3,I: Júlio de Castilhos",
+          "stop_lat": -22.983906,
+          "stop_lon": -43.191828
+        },
+        {
+          "stop_id": "2024O00119C0",
+          "stop_name": "Atlântica",
+          "stop_lat": -22.964963,
+          "stop_lon": -43.174534
+        },
+        {
+          "stop_id": "2024O00013S0",
+          "stop_name": "BRS 1,2,3,I: Raul Pompeia",
+          "stop_lat": -22.983389,
+          "stop_lon": -43.192411
+        },
+        {
+          "stop_id": "2024O00026S0",
+          "stop_name": "BRS 1,2,3,I: Duvivier",
+          "stop_lat": -22.963709,
+          "stop_lon": -43.178321
+        },
+        {
+          "stop_id": "2024O00024C0",
+          "stop_name": "Constante Ramos",
+          "stop_lat": -22.973048,
+          "stop_lon": -43.192355
+        },
+        {
+          "stop_id": "2024O00006S0",
+          "stop_name": "BRS 3: Joaquim Nabuco",
+          "stop_lat": -22.98607,
+          "stop_lon": -43.189898
+        },
+        {
+          "stop_id": "2024O00022C0",
+          "stop_name": "Metrô Siqueira Campos",
+          "stop_lat": -22.9676,
+          "stop_lon": -43.18724
+        },
+        {
+          "stop_id": "2024O00128C0",
+          "stop_name": "Belfort Roxo",
+          "stop_lat": -22.96563,
+          "stop_lon": -43.17505
+        },
+        {
+          "stop_id": "2024O00070C0",
+          "stop_name": "Siqueira Campos",
+          "stop_lat": -22.971253,
+          "stop_lon": -43.183586
+        },
+        {
+          "stop_id": "2024O00134C0",
+          "stop_name": "Santa Clara",
+          "stop_lat": -22.97277,
+          "stop_lon": -43.18573
+        },
+        {
+          "stop_id": "2024O00069C0",
+          "stop_name": "Bolívar",
+          "stop_lat": -22.97589,
+          "stop_lon": -43.18755
+        },
+        {
+          "stop_id": "2024O00135C0",
+          "stop_name": "Bolívar",
+          "stop_lat": -22.97629,
+          "stop_lon": -43.1882
+        },
+        {
+          "stop_id": "2024O00136C0",
+          "stop_name": "Miguel Lemos",
+          "stop_lat": -22.97779,
+          "stop_lon": -43.18889
+        },
+        {
+          "stop_id": "2024O00068C0",
+          "stop_name": "Miguel Lemos",
+          "stop_lat": -22.97858,
+          "stop_lon": -43.1888
+        },
+        {
+          "stop_id": "2024O00137C0",
+          "stop_name": "Djalma Ulrich",
+          "stop_lat": -22.9795,
+          "stop_lon": -43.1895
+        },
+        {
+          "stop_id": "2024O00138C0",
+          "stop_name": "Sousa Lima",
+          "stop_lat": -22.98206,
+          "stop_lon": -43.18997
+        },
+        {
+          "stop_id": "2024O00139C0",
+          "stop_name": "Júlio de Castilhos",
+          "stop_lat": -22.98351,
+          "stop_lon": -43.189451
+        },
+        {
+          "stop_id": "2024O00125C0",
+          "stop_name": "Joaquim Nabuco",
+          "stop_lat": -22.98536,
+          "stop_lon": -43.18891
+        },
+        {
+          "stop_id": "2024O00050C0",
+          "stop_name": "Ministro Viveiros de Castro",
+          "stop_lat": -22.963549,
+          "stop_lon": -43.17452
+        },
+        {
+          "stop_id": "2024O00083S0",
+          "stop_name": "BRS 2: Rainha Elizabeth",
+          "stop_lat": -22.985066,
+          "stop_lon": -43.19019
+        },
+        {
+          "stop_id": "2024O00096S0",
+          "stop_name": "BRS 2: Miguel Lemos",
+          "stop_lat": -22.9783,
+          "stop_lon": -43.19061
+        },
+        {
+          "stop_id": "2024O00097S0",
+          "stop_name": "BRS 2: Barão de Ipanema",
+          "stop_lat": -22.97536,
+          "stop_lon": -43.18965
+        },
+        {
+          "stop_id": "2024O00038S0",
+          "stop_name": "BRS 1,3,I: Paula Freitas",
+          "stop_lat": -22.96827,
+          "stop_lon": -43.18313
+        },
+        {
+          "stop_id": "2024O00039S0",
+          "stop_name": "BRS 2: Rodolfo Dantas",
+          "stop_lat": -22.96599,
+          "stop_lon": -43.17815
+        },
+        {
+          "stop_id": "2024O00120S0",
+          "stop_name": "BRS 3,I: Nossa Senhora de Copacabana",
+          "stop_lat": -22.96307,
+          "stop_lon": -43.17426
+        },
+        {
+          "stop_id": "2024O00098S0",
+          "stop_name": "BRS 1,3,I: Belfort Roxo",
+          "stop_lat": -22.965,
+          "stop_lon": -43.17623
+        },
+        {
+          "stop_id": "2024O00133C0",
+          "stop_name": "Siqueira Campos",
+          "stop_lat": -22.970706,
+          "stop_lon": -43.183562
+        },
+        {
+          "stop_id": "2024O00071C0",
+          "stop_name": "República do Peru",
+          "stop_lat": -22.96915,
+          "stop_lon": -43.18073
+        },
+        {
+          "stop_id": "2024O00122C0",
+          "stop_name": "Paula Freitas",
+          "stop_lat": -22.96603,
+          "stop_lon": -43.18415
+        },
+        {
+          "stop_id": "2024O00131C0",
+          "stop_name": "República do Peru",
+          "stop_lat": -22.968873,
+          "stop_lon": -43.180922
+        },
+        {
+          "stop_id": "2024O00072C0",
+          "stop_name": "Rodolfo Dantas",
+          "stop_lat": -22.967821,
+          "stop_lon": -43.178528
+        },
+        {
+          "stop_id": "2024O00073C0",
+          "stop_name": "Prado Júnior",
+          "stop_lat": -22.965785,
+          "stop_lon": -43.174538
+        },
+        {
+          "stop_id": "2024O00126C0",
+          "stop_name": "Júlio de Castilhos",
+          "stop_lat": -22.983903,
+          "stop_lon": -43.189781
+        },
+        {
+          "stop_id": "2024O00129C0",
+          "stop_name": "Duvivier",
+          "stop_lat": -22.966789,
+          "stop_lon": -43.177345
+        },
+        {
+          "stop_id": "2024O00140C0",
+          "stop_name": "Santa Clara",
+          "stop_lat": -22.973667,
+          "stop_lon": -43.186047
+        },
+        {
+          "stop_id": "2024O00123C0",
+          "stop_name": "Metrô Cardeal Arcoverde",
+          "stop_lat": -22.96493,
+          "stop_lon": -43.18197
+        },
+        {
+          "stop_id": "2024O00095C0",
+          "stop_name": "Ponto Final: Copacabana :: Estação Siqueira Campos",
+          "stop_lat": -22.966743,
+          "stop_lon": -43.186819
+        },
+        {
+          "stop_id": "2024O00015S0",
+          "stop_name": "BRS 1,3,I: Santa Clara",
+          "stop_lat": -22.97243,
+          "stop_lon": -43.18779
+        },
+        {
+          "stop_id": "2024O00016S0",
+          "stop_name": "BRS 2: Hilário de Gouveia",
+          "stop_lat": -22.9688,
+          "stop_lon": -43.18396
+        },
+        {
+          "stop_id": "2024O00163C0",
+          "stop_name": "Ponto Final: Prado Júnior",
+          "stop_lat": -22.96506,
+          "stop_lon": -43.174486
+        },
+        {
+          "stop_id": "2024O00103C0",
+          "stop_name": "Nossa Senhora de Copacabana",
+          "stop_lat": -22.970764,
+          "stop_lon": -43.185404
+        },
+        {
+          "stop_id": "2024O00041S0",
+          "stop_name": "BRS 1,3,I: República do Peru",
+          "stop_lat": -22.96616,
+          "stop_lon": -43.1821
+        },
+        {
+          "stop_id": "6y3m",
+          "stop_name": "Praça Serzedelo Corrêa",
+          "stop_lat": -22.969704,
+          "stop_lon": -43.184233
+        },
+        {
+          "stop_id": "zmv1",
+          "stop_name": "Metrô Siqueira Campos",
+          "stop_lat": -22.966283,
+          "stop_lon": -43.187512
+        },
+        {
+          "stop_id": "5rbo",
+          "stop_name": "Ronald de Carvalho",
+          "stop_lat": -22.964337,
+          "stop_lon": -43.177476
+        },
+        {
+          "stop_id": "2024O00102C0",
+          "stop_name": "Ponto Final: Lido :: Viveiros de Castro",
+          "stop_lat": -22.963702,
+          "stop_lon": -43.176042
+        },
+        {
+          "stop_id": "82g2",
+          "stop_name": "Ponto Final: Copacabana :: Cassino Atlântico",
+          "stop_lat": -22.986423,
+          "stop_lon": -43.189794
+        },
+        {
+          "stop_id": "2024O00033C0",
+          "stop_name": "Ponto Final: Copacabana :: Linhas: 455 e 456",
+          "stop_lat": -22.986714,
+          "stop_lon": -43.190978
+        }
+      ]
+    },
+    {
+      "code": 33,
+      "name": "Tijuca",
+      "slug": "tijuca",
+      "geometryType": "Polygon",
+      "count": 127,
+      "stops": [
+        {
+          "stop_id": "2036O00061C0",
+          "stop_name": "Praça Varnhagen",
+          "stop_lat": -22.92032,
+          "stop_lon": -43.2353
+        },
+        {
+          "stop_id": "2033O00100C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linha 409",
+          "stop_lat": -22.931494,
+          "stop_lon": -43.234319
+        },
+        {
+          "stop_id": "2033O00127C0",
+          "stop_name": "Ponto Final: Muda",
+          "stop_lat": -22.932232,
+          "stop_lon": -43.247523
+        },
+        {
+          "stop_id": "2033O00128C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linha 629",
+          "stop_lat": -22.922814,
+          "stop_lon": -43.232537
+        },
+        {
+          "stop_id": "2033O00152C0",
+          "stop_name": "Santa Carolina",
+          "stop_lat": -22.943884,
+          "stop_lon": -43.254209
+        },
+        {
+          "stop_id": "2033O00156C0",
+          "stop_name": "São Miguel",
+          "stop_lat": -22.943706,
+          "stop_lon": -43.254835
+        },
+        {
+          "stop_id": "2033O00022S0",
+          "stop_name": "BRS 2,3,4: Moraes e Silva",
+          "stop_lat": -22.91656,
+          "stop_lon": -43.22631
+        },
+        {
+          "stop_id": "2033O00141C0",
+          "stop_name": "Dona Delfina",
+          "stop_lat": -22.93141,
+          "stop_lon": -43.23913
+        },
+        {
+          "stop_id": "2033O00133C0",
+          "stop_name": "Haddock Lobo",
+          "stop_lat": -22.920639,
+          "stop_lon": -43.215215
+        },
+        {
+          "stop_id": "2033O00104C0",
+          "stop_name": "Professor Gabizo",
+          "stop_lat": -22.92297,
+          "stop_lon": -43.21738
+        },
+        {
+          "stop_id": "2033O00105C0",
+          "stop_name": "Araújo Pena",
+          "stop_lat": -22.92366,
+          "stop_lon": -43.21854
+        },
+        {
+          "stop_id": "2033O00045S0",
+          "stop_name": "BRS 1,2,3,6,I: Pereira de Siqueira",
+          "stop_lat": -22.919613,
+          "stop_lon": -43.223519
+        },
+        {
+          "stop_id": "2033O00180C0",
+          "stop_name": "Ponto Final: Saens Peña :: 603, 626, 645",
+          "stop_lat": -22.923826,
+          "stop_lon": -43.231994
+        },
+        {
+          "stop_id": "2033O00039C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linha 639",
+          "stop_lat": -22.923392,
+          "stop_lon": -43.234752
+        },
+        {
+          "stop_id": "2033O00088C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linhas 622, 625, 627, 630",
+          "stop_lat": -22.922718,
+          "stop_lon": -43.233199
+        },
+        {
+          "stop_id": "2033O00147C1",
+          "stop_name": "Hospital São Francisco",
+          "stop_lat": -22.940248,
+          "stop_lon": -43.249662
+        },
+        {
+          "stop_id": "2033O00095C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linhas 621 e 623",
+          "stop_lat": -22.920484,
+          "stop_lon": -43.223411
+        },
+        {
+          "stop_id": "2033O00122S9",
+          "stop_name": "BRS 1,6: Saens Peña II",
+          "stop_lat": -22.92408,
+          "stop_lon": -43.23273
+        },
+        {
+          "stop_id": "2033O00172C0",
+          "stop_name": "Alves de Brito",
+          "stop_lat": -22.933795,
+          "stop_lon": -43.242101
+        },
+        {
+          "stop_id": "2033O00177C0",
+          "stop_name": "General Roca",
+          "stop_lat": -22.92498,
+          "stop_lon": -43.23366
+        },
+        {
+          "stop_id": "2033O00135C0",
+          "stop_name": "Pinto de Figueiredo",
+          "stop_lat": -22.92556,
+          "stop_lon": -43.23475
+        },
+        {
+          "stop_id": "2033O00136C0",
+          "stop_name": "Abelardo Chacrinha Barbosa",
+          "stop_lat": -22.926048,
+          "stop_lon": -43.235176
+        },
+        {
+          "stop_id": "2033O00176C0",
+          "stop_name": "Abelardo Chacrinha Barbosa",
+          "stop_lat": -22.927087,
+          "stop_lon": -43.235595
+        },
+        {
+          "stop_id": "2033O00137C0",
+          "stop_name": "Conde de Itaguaí",
+          "stop_lat": -22.92755,
+          "stop_lon": -43.23615
+        },
+        {
+          "stop_id": "2033O00175C0",
+          "stop_name": "Henry Ford",
+          "stop_lat": -22.928422,
+          "stop_lon": -43.2364
+        },
+        {
+          "stop_id": "2033O00139C0",
+          "stop_name": "Clóvis Bevilaqua",
+          "stop_lat": -22.92911,
+          "stop_lon": -43.23706
+        },
+        {
+          "stop_id": "2033O00140C0",
+          "stop_name": "José Higino",
+          "stop_lat": -22.929518,
+          "stop_lon": -43.237305
+        },
+        {
+          "stop_id": "2033O00174C0",
+          "stop_name": "Vicente de Cabo Frio",
+          "stop_lat": -22.93111,
+          "stop_lon": -43.23833
+        },
+        {
+          "stop_id": "2033O00143C0",
+          "stop_name": "Alves de Brito",
+          "stop_lat": -22.93386,
+          "stop_lon": -43.24241
+        },
+        {
+          "stop_id": "2033O00144C0",
+          "stop_name": "Radmaker",
+          "stop_lat": -22.93489,
+          "stop_lon": -43.24342
+        },
+        {
+          "stop_id": "2033O00168C0",
+          "stop_name": "Natalina",
+          "stop_lat": -22.936322,
+          "stop_lon": -43.244759
+        },
+        {
+          "stop_id": "2033O00169C0",
+          "stop_name": "Garibaldi",
+          "stop_lat": -22.935682,
+          "stop_lon": -43.244028
+        },
+        {
+          "stop_id": "2033O00145C0",
+          "stop_name": "Natalina",
+          "stop_lat": -22.93644,
+          "stop_lon": -43.245151
+        },
+        {
+          "stop_id": "2033O00159C0",
+          "stop_name": "Santa Carolina",
+          "stop_lat": -22.94328,
+          "stop_lon": -43.253822
+        },
+        {
+          "stop_id": "2033O00158C0",
+          "stop_name": "Santa Carolina",
+          "stop_lat": -22.943307,
+          "stop_lon": -43.254891
+        },
+        {
+          "stop_id": "2033O00155C0",
+          "stop_name": "São Rafael",
+          "stop_lat": -22.946068,
+          "stop_lon": -43.255223
+        },
+        {
+          "stop_id": "2033O00153C0",
+          "stop_name": "São Rafael",
+          "stop_lat": -22.94601,
+          "stop_lon": -43.25533
+        },
+        {
+          "stop_id": "2033O00106C0",
+          "stop_name": "Barão de Itapagipe",
+          "stop_lat": -22.92446,
+          "stop_lon": -43.22172
+        },
+        {
+          "stop_id": "2033O00131C0",
+          "stop_name": "Ponto Final: Saens Peña :: Praça Aldir Blanc",
+          "stop_lat": -22.926855,
+          "stop_lon": -43.233743
+        },
+        {
+          "stop_id": "2033O00111S9",
+          "stop_name": "BRS 2,5,7,I: Saens Peña I",
+          "stop_lat": -22.923736,
+          "stop_lon": -43.232262
+        },
+        {
+          "stop_id": "2033O00212C0",
+          "stop_name": "Condomínio Edifício Madri",
+          "stop_lat": -22.9277,
+          "stop_lon": -43.2318
+        },
+        {
+          "stop_id": "2033O00178C0",
+          "stop_name": "Praça Saens Peña",
+          "stop_lat": -22.924441,
+          "stop_lon": -43.232888
+        },
+        {
+          "stop_id": "2033O00164C0",
+          "stop_name": "Colégio Marista São José",
+          "stop_lat": -22.940855,
+          "stop_lon": -43.250411
+        },
+        {
+          "stop_id": "2033O00220C0",
+          "stop_name": "Pinto Guedes",
+          "stop_lat": -22.93456,
+          "stop_lon": -43.24691
+        },
+        {
+          "stop_id": "2033O00219C0",
+          "stop_name": "Gurindiba",
+          "stop_lat": -22.933544,
+          "stop_lon": -43.247906
+        },
+        {
+          "stop_id": "2033O00173C0",
+          "stop_name": "Metrô Uruguai",
+          "stop_lat": -22.932316,
+          "stop_lon": -43.240406
+        },
+        {
+          "stop_id": "2033O00225C0",
+          "stop_name": "Vitorio Emanuel",
+          "stop_lat": -22.920736,
+          "stop_lon": -43.231648
+        },
+        {
+          "stop_id": "2033O00197C0",
+          "stop_name": "Pareto",
+          "stop_lat": -22.92174,
+          "stop_lon": -43.2297
+        },
+        {
+          "stop_id": "2033O00226C0",
+          "stop_name": "São Francisco Xavier",
+          "stop_lat": -22.916901,
+          "stop_lon": -43.229011
+        },
+        {
+          "stop_id": "2033O00194C0",
+          "stop_name": "Supermercados Guanabara - Tijuca",
+          "stop_lat": -22.92034,
+          "stop_lon": -43.22725
+        },
+        {
+          "stop_id": "2033O00234C0",
+          "stop_name": "Marques de Valença",
+          "stop_lat": -22.92018,
+          "stop_lon": -43.22617
+        },
+        {
+          "stop_id": "2033O00236C0",
+          "stop_name": "Pereira de Siqueira",
+          "stop_lat": -22.920386,
+          "stop_lon": -43.225752
+        },
+        {
+          "stop_id": "2033O00192C0",
+          "stop_name": "São Francisco Xavier",
+          "stop_lat": -22.91844,
+          "stop_lon": -43.22488
+        },
+        {
+          "stop_id": "2033O00191C0",
+          "stop_name": "Mariz e Barros",
+          "stop_lat": -22.91512,
+          "stop_lon": -43.2187
+        },
+        {
+          "stop_id": "2033O00208C0",
+          "stop_name": "Silva Ramos",
+          "stop_lat": -22.91706,
+          "stop_lon": -43.2211
+        },
+        {
+          "stop_id": "2033O00190C0",
+          "stop_name": "Gonçalves Crespo",
+          "stop_lat": -22.91684,
+          "stop_lon": -43.2179
+        },
+        {
+          "stop_id": "2033O00239C0",
+          "stop_name": "Campos Sales",
+          "stop_lat": -22.916,
+          "stop_lon": -43.21721
+        },
+        {
+          "stop_id": "2033O00204C0",
+          "stop_name": "Martins Pena",
+          "stop_lat": -22.9186,
+          "stop_lon": -43.21966
+        },
+        {
+          "stop_id": "2033O00209C0",
+          "stop_name": "Henry Ford",
+          "stop_lat": -22.929797,
+          "stop_lon": -43.234198
+        },
+        {
+          "stop_id": "2033O00232C0",
+          "stop_name": "Conde de Bonfim",
+          "stop_lat": -22.93184,
+          "stop_lon": -43.24159
+        },
+        {
+          "stop_id": "2033O00237C0",
+          "stop_name": "Heitor Beltrão",
+          "stop_lat": -22.917785,
+          "stop_lon": -43.219874
+        },
+        {
+          "stop_id": "2033O00214C0",
+          "stop_name": "Maracanã",
+          "stop_lat": -22.92908,
+          "stop_lon": -43.23908
+        },
+        {
+          "stop_id": "2033O00215C0",
+          "stop_name": "Maria Amália",
+          "stop_lat": -22.92768,
+          "stop_lon": -43.23988
+        },
+        {
+          "stop_id": "2033O00216C0",
+          "stop_name": "Doutor Aníbal Moreira",
+          "stop_lat": -22.92534,
+          "stop_lon": -43.240261
+        },
+        {
+          "stop_id": "2033O00162C0",
+          "stop_name": "Agostinho",
+          "stop_lat": -22.942037,
+          "stop_lon": -43.252772
+        },
+        {
+          "stop_id": "2033O00179C0",
+          "stop_name": "Ponto Final: Saens Peña :: 608",
+          "stop_lat": -22.92417,
+          "stop_lon": -43.232446
+        },
+        {
+          "stop_id": "2033O00021S0",
+          "stop_name": "BRS 6,7: Barão de Mesquita",
+          "stop_lat": -22.916428,
+          "stop_lon": -43.227624
+        },
+        {
+          "stop_id": "2033O00182C0",
+          "stop_name": "Conselheiro Zenha",
+          "stop_lat": -22.924382,
+          "stop_lon": -43.22783
+        },
+        {
+          "stop_id": "2033O00149C0",
+          "stop_name": "Colégio Marista São José",
+          "stop_lat": -22.94103,
+          "stop_lon": -43.25168
+        },
+        {
+          "stop_id": "2033O00118C0",
+          "stop_name": "Igreja Nossa Senhora da Conceição",
+          "stop_lat": -22.93912,
+          "stop_lon": -43.24779
+        },
+        {
+          "stop_id": "2033O00146C0",
+          "stop_name": "Igreja Nossa Senhora da Conceição",
+          "stop_lat": -22.938999,
+          "stop_lon": -43.247835
+        },
+        {
+          "stop_id": "2033O00181C0",
+          "stop_name": "Saens Peña Medical Center",
+          "stop_lat": -22.92361,
+          "stop_lon": -43.229666
+        },
+        {
+          "stop_id": "2033O00196C0",
+          "stop_name": "CIEP Samuel Wainer",
+          "stop_lat": -22.921084,
+          "stop_lon": -43.228001
+        },
+        {
+          "stop_id": "2033O00142C0",
+          "stop_name": "Metrô Uruguai",
+          "stop_lat": -22.93223,
+          "stop_lon": -43.24084
+        },
+        {
+          "stop_id": "2033O00246C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linha 665",
+          "stop_lat": -22.922176,
+          "stop_lon": -43.232577
+        },
+        {
+          "stop_id": "2033O00026S9",
+          "stop_name": "BRS 1,2,5,6,7,I: Carmela Dutra",
+          "stop_lat": -22.92097,
+          "stop_lon": -43.22676
+        },
+        {
+          "stop_id": "2033O00042S9",
+          "stop_name": "BRS 1,2,5,6,7,I: Conselheiro Zenha",
+          "stop_lat": -22.92163,
+          "stop_lon": -43.22848
+        },
+        {
+          "stop_id": "2033O00132C0",
+          "stop_name": "Ponto Final: Saens Peña :: Rua General Roca",
+          "stop_lat": -22.9253,
+          "stop_lon": -43.23282
+        },
+        {
+          "stop_id": "2033O00151C0",
+          "stop_name": "Ary Kerner",
+          "stop_lat": -22.941926,
+          "stop_lon": -43.253027
+        },
+        {
+          "stop_id": "2033O00247C0",
+          "stop_name": "Ponto Final: Saens Peña :: Linha 410",
+          "stop_lat": -22.923941,
+          "stop_lon": -43.235854
+        },
+        {
+          "stop_id": "2033O00248P0",
+          "stop_name": "Terminal Prof. Carlos Manes Bandeira (Usina) :: Plat. B",
+          "stop_lat": -22.946307,
+          "stop_lon": -43.256828
+        },
+        {
+          "stop_id": "2033O00249P0",
+          "stop_name": "Terminal Prof. Carlos Manes Bandeira (Usina) :: Plat. C",
+          "stop_lat": -22.9463,
+          "stop_lon": -43.25666
+        },
+        {
+          "stop_id": "2033O00206C0",
+          "stop_name": "Silva Guimarães",
+          "stop_lat": -22.927782,
+          "stop_lon": -43.233559
+        },
+        {
+          "stop_id": "2033O00188C0",
+          "stop_name": "Bispo",
+          "stop_lat": -22.919841,
+          "stop_lon": -43.215123
+        },
+        {
+          "stop_id": "2033O00185C0",
+          "stop_name": "Felix da Cunha",
+          "stop_lat": -22.922754,
+          "stop_lon": -43.222164
+        },
+        {
+          "stop_id": "2033O00228C0",
+          "stop_name": "Heitor Beltrão",
+          "stop_lat": -22.92263,
+          "stop_lon": -43.23019
+        },
+        {
+          "stop_id": "2033O00198C0",
+          "stop_name": "Major Ávila",
+          "stop_lat": -22.92259,
+          "stop_lon": -43.23193
+        },
+        {
+          "stop_id": "2033O00202C0",
+          "stop_name": "Soriano de Sousa",
+          "stop_lat": -22.924244,
+          "stop_lon": -43.234879
+        },
+        {
+          "stop_id": "2033O00227C0",
+          "stop_name": "Shopping Tijuca",
+          "stop_lat": -22.92229,
+          "stop_lon": -43.23609
+        },
+        {
+          "stop_id": "2033O00040S9",
+          "stop_name": "BRS 1,2,3,4,5,6,I: Domício da Gama",
+          "stop_lat": -22.91704,
+          "stop_lon": -43.21443
+        },
+        {
+          "stop_id": "2033O00217C0",
+          "stop_name": "João Alfredo",
+          "stop_lat": -22.931375,
+          "stop_lon": -43.245786
+        },
+        {
+          "stop_id": "2034L00039C0",
+          "stop_name": "São Miguel",
+          "stop_lat": -22.946807,
+          "stop_lon": -43.257169
+        },
+        {
+          "stop_id": "2033O00221C0",
+          "stop_name": "Conde de Bonfim",
+          "stop_lat": -22.93647,
+          "stop_lon": -43.24563
+        },
+        {
+          "stop_id": "2033O00254C0",
+          "stop_name": "Casa Branca",
+          "stop_lat": -22.936476,
+          "stop_lon": -43.246842
+        },
+        {
+          "stop_id": "2033O00253C0",
+          "stop_name": "Livreiro Francisco Alves",
+          "stop_lat": -22.93788,
+          "stop_lon": -43.249018
+        },
+        {
+          "stop_id": "2033O00252C0",
+          "stop_name": "Livreiro Francisco Alves",
+          "stop_lat": -22.938137,
+          "stop_lon": -43.249194
+        },
+        {
+          "stop_id": "2033O00187C0",
+          "stop_name": "Club Municipal",
+          "stop_lat": -22.920869,
+          "stop_lon": -43.217647
+        },
+        {
+          "stop_id": "2033O00229C0",
+          "stop_name": "Maracanã",
+          "stop_lat": -22.919985,
+          "stop_lon": -43.233785
+        },
+        {
+          "stop_id": "2033O00244S2",
+          "stop_name": "BRS 2,3,4: Almirante Cóchrane",
+          "stop_lat": -22.918427,
+          "stop_lon": -43.224324
+        },
+        {
+          "stop_id": "2033O00183C0",
+          "stop_name": "Araújos",
+          "stop_lat": -22.925011,
+          "stop_lon": -43.226231
+        },
+        {
+          "stop_id": "2033O00184C0",
+          "stop_name": "Rego Lopes",
+          "stop_lat": -22.924276,
+          "stop_lon": -43.22377
+        },
+        {
+          "stop_id": "2033O00186C0",
+          "stop_name": "Araújo Pena",
+          "stop_lat": -22.921477,
+          "stop_lon": -43.219876
+        },
+        {
+          "stop_id": "2033O00189C0",
+          "stop_name": "Matoso",
+          "stop_lat": -22.918276,
+          "stop_lon": -43.21223
+        },
+        {
+          "stop_id": "2033O00211C0",
+          "stop_name": "Hospital Casa Evangélico",
+          "stop_lat": -22.929227,
+          "stop_lon": -43.231453
+        },
+        {
+          "stop_id": "2033O00199C0",
+          "stop_name": "General Roca",
+          "stop_lat": -22.923546,
+          "stop_lon": -43.233767
+        },
+        {
+          "stop_id": "2033O00223C0",
+          "stop_name": "General Roca",
+          "stop_lat": -22.923148,
+          "stop_lon": -43.234251
+        },
+        {
+          "stop_id": "2033O00233C0",
+          "stop_name": "General Espírito Santo Cardoso",
+          "stop_lat": -22.92929,
+          "stop_lon": -43.243333
+        },
+        {
+          "stop_id": "2033O00046S0",
+          "stop_name": "BRS 4,7: Heitor Beltrão",
+          "stop_lat": -22.920171,
+          "stop_lon": -43.223082
+        },
+        {
+          "stop_id": "2033O00245S0",
+          "stop_name": "BRS 6,7: Benevenuto Berna",
+          "stop_lat": -22.91739,
+          "stop_lon": -43.225
+        },
+        {
+          "stop_id": "2mms",
+          "stop_name": "Antônio Basílio",
+          "stop_lat": -22.925295,
+          "stop_lon": -43.235482
+        },
+        {
+          "stop_id": "r9y3",
+          "stop_name": "Embaixador Ramon Carcano",
+          "stop_lat": -22.938841,
+          "stop_lon": -43.250062
+        },
+        {
+          "stop_id": "bu5b",
+          "stop_name": "Embaixador Ramon Carcano",
+          "stop_lat": -22.938785,
+          "stop_lon": -43.250162
+        },
+        {
+          "stop_id": "l03m",
+          "stop_name": "Borel",
+          "stop_lat": -22.939395,
+          "stop_lon": -43.252022
+        },
+        {
+          "stop_id": "kzpg",
+          "stop_name": "Borel",
+          "stop_lat": -22.93951,
+          "stop_lon": -43.251978
+        },
+        {
+          "stop_id": "ewn2",
+          "stop_name": "EDI Borel",
+          "stop_lat": -22.941104,
+          "stop_lon": -43.25361
+        },
+        {
+          "stop_id": "2033O00167C0",
+          "stop_name": "Medeiros Pássaro",
+          "stop_lat": -22.938165,
+          "stop_lon": -43.246699
+        },
+        {
+          "stop_id": "oua6",
+          "stop_name": "Cascata",
+          "stop_lat": -22.938315,
+          "stop_lon": -43.247061
+        },
+        {
+          "stop_id": "epuw",
+          "stop_name": "EDI Borel",
+          "stop_lat": -22.941447,
+          "stop_lon": -43.253822
+        },
+        {
+          "stop_id": "tfa7",
+          "stop_name": "Casa Branca",
+          "stop_lat": -22.936393,
+          "stop_lon": -43.246908
+        },
+        {
+          "stop_id": "2033O00243C0",
+          "stop_name": "Metrô Uruguai",
+          "stop_lat": -22.930695,
+          "stop_lon": -43.23786
+        },
+        {
+          "stop_id": "2033O00166C0",
+          "stop_name": "Hospital São Francisco",
+          "stop_lat": -22.939859,
+          "stop_lon": -43.248842
+        },
+        {
+          "stop_id": "2033O00025S9",
+          "stop_name": "BRS 1,2,5,6,I: São Francisco Xavier",
+          "stop_lat": -22.920703,
+          "stop_lon": -43.223207
+        },
+        {
+          "stop_id": "2033O00041S9",
+          "stop_name": "BRS 1,2,5,6,I: Afonso Pena",
+          "stop_lat": -22.91847,
+          "stop_lon": -43.21807
+        },
+        {
+          "stop_id": "2033O00120S9",
+          "stop_name": "BRS 1,2,5,6,I: Professor Gabizo",
+          "stop_lat": -22.91935,
+          "stop_lon": -43.22004
+        },
+        {
+          "stop_id": "2033O00250P0",
+          "stop_name": "Terminal Prof. Carlos Manes Bandeira (Usina) :: Plat. D",
+          "stop_lat": -22.946357,
+          "stop_lon": -43.256559
+        },
+        {
+          "stop_id": "2033O00073P0",
+          "stop_name": "Terminal Prof. Carlos Manes Bandeira (Usina) :: Plat. A",
+          "stop_lat": -22.946292,
+          "stop_lon": -43.256964
+        },
+        {
+          "stop_id": "2033O00121S9",
+          "stop_name": "Ponto Final: Saens Peña :: Linhas 600 e 601",
+          "stop_lat": -22.92078,
+          "stop_lon": -43.22418
+        }
+      ]
+    },
+    {
+      "code": 128,
+      "name": "Barra da Tijuca",
+      "slug": "barra-da-tijuca",
+      "geometryType": "MultiPolygon",
+      "count": 234,
+      "stops": [
+        {
+          "stop_id": "4115O00079C0",
+          "stop_name": "Jorge Farah",
+          "stop_lat": -22.97297,
+          "stop_lon": -43.3919
+        },
+        {
+          "stop_id": "4115O00078C0",
+          "stop_name": "Centro Aquático Maria Lenk",
+          "stop_lat": -22.973002,
+          "stop_lon": -43.387243
+        },
+        {
+          "stop_id": "4115O00080C0",
+          "stop_name": "Salvador Allende",
+          "stop_lat": -22.972899,
+          "stop_lon": -43.39813
+        },
+        {
+          "stop_id": "4115O00192C0",
+          "stop_name": "Rio 2",
+          "stop_lat": -22.973001,
+          "stop_lon": -43.384766
+        },
+        {
+          "stop_id": "4115O00194C0",
+          "stop_name": "Parque Olímpico",
+          "stop_lat": -22.972924,
+          "stop_lon": -43.395984
+        },
+        {
+          "stop_id": "4126O00078C0",
+          "stop_name": "Fleming",
+          "stop_lat": -23.00943,
+          "stop_lon": -43.294908
+        },
+        {
+          "stop_id": "4128O00010C0",
+          "stop_name": "Hélio Pellegrino",
+          "stop_lat": -23.00071,
+          "stop_lon": -43.39259
+        },
+        {
+          "stop_id": "4128O00007C0",
+          "stop_name": "João Saldanha",
+          "stop_lat": -23.00041,
+          "stop_lon": -43.40392
+        },
+        {
+          "stop_id": "4128O00030C0",
+          "stop_name": "Comitê Olímpico do Brasil",
+          "stop_lat": -23.004069,
+          "stop_lon": -43.323149
+        },
+        {
+          "stop_id": "4128O00034C0",
+          "stop_name": "Gilberto Amado",
+          "stop_lat": -23.01268,
+          "stop_lon": -43.29911
+        },
+        {
+          "stop_id": "4128O00056C0",
+          "stop_name": "Prefeito Dulcídio Cardoso",
+          "stop_lat": -23.00452,
+          "stop_lon": -43.36595
+        },
+        {
+          "stop_id": "4128O00062C0",
+          "stop_name": "Via Parque Shopping",
+          "stop_lat": -22.98431,
+          "stop_lon": -43.3652
+        },
+        {
+          "stop_id": "4128O00063C0",
+          "stop_name": "Shopping Aerotown",
+          "stop_lat": -22.984452,
+          "stop_lon": -43.366121
+        },
+        {
+          "stop_id": "4128O00029C0",
+          "stop_name": "Coronel Paulo Malta Rezende",
+          "stop_lat": -23.00221,
+          "stop_lon": -43.327861
+        },
+        {
+          "stop_id": "4128O00025C0",
+          "stop_name": "Dalcidio Jurandir",
+          "stop_lat": -23.000678,
+          "stop_lon": -43.339595
+        },
+        {
+          "stop_id": "4128O00050C0",
+          "stop_name": "Comandante Júlio de Moura",
+          "stop_lat": -23.01421,
+          "stop_lon": -43.30551
+        },
+        {
+          "stop_id": "4128O00052C0",
+          "stop_name": "Gilberto Amado",
+          "stop_lat": -23.01167,
+          "stop_lon": -43.30495
+        },
+        {
+          "stop_id": "4128O00112C0",
+          "stop_name": "Praça do Ó",
+          "stop_lat": -23.0124,
+          "stop_lon": -43.31865
+        },
+        {
+          "stop_id": "4128O00048C0",
+          "stop_name": "General Ivan Raposo",
+          "stop_lat": -23.013985,
+          "stop_lon": -43.314237
+        },
+        {
+          "stop_id": "4128O00065C0",
+          "stop_name": "Subprefeitura da Barra",
+          "stop_lat": -22.99295,
+          "stop_lon": -43.36629
+        },
+        {
+          "stop_id": "4128O00064C0",
+          "stop_name": "Aeroporto de Jacarepaguá",
+          "stop_lat": -22.98764,
+          "stop_lon": -43.36619
+        },
+        {
+          "stop_id": "4128O00061C0",
+          "stop_name": "Aeroporto de Jacarepaguá",
+          "stop_lat": -22.987624,
+          "stop_lon": -43.365336
+        },
+        {
+          "stop_id": "4128O00084C0",
+          "stop_name": "Coronel Paulo Malta Rezende",
+          "stop_lat": -23.00146,
+          "stop_lon": -43.32749
+        },
+        {
+          "stop_id": "4128O00085C0",
+          "stop_name": "José Leal da Silva",
+          "stop_lat": -23.00054,
+          "stop_lon": -43.33026
+        },
+        {
+          "stop_id": "4128O00087C0",
+          "stop_name": "Dalcidio Jurandir",
+          "stop_lat": -22.99995,
+          "stop_lon": -43.33863
+        },
+        {
+          "stop_id": "4128O00012C0",
+          "stop_name": "RioDesign Barra",
+          "stop_lat": -23.00087,
+          "stop_lon": -43.38596
+        },
+        {
+          "stop_id": "4128O00103C0",
+          "stop_name": "José Eiras Pinheiro",
+          "stop_lat": -22.999665,
+          "stop_lon": -43.402786
+        },
+        {
+          "stop_id": "4128O00071C0",
+          "stop_name": "Hospital Municipal Lourenço Jorge",
+          "stop_lat": -22.995469,
+          "stop_lon": -43.363517
+        },
+        {
+          "stop_id": "4128O00003C1",
+          "stop_name": "Estação Interlagos",
+          "stop_lat": -23.000458,
+          "stop_lon": -43.417253
+        },
+        {
+          "stop_id": "4128O00006C0",
+          "stop_name": "Riomar",
+          "stop_lat": -23.000324,
+          "stop_lon": -43.408534
+        },
+        {
+          "stop_id": "4128O00016C0",
+          "stop_name": "Raymundo Magalhães Jr.",
+          "stop_lat": -23.000623,
+          "stop_lon": -43.372192
+        },
+        {
+          "stop_id": "4128O00104C0",
+          "stop_name": "Riomar",
+          "stop_lat": -22.999431,
+          "stop_lon": -43.407351
+        },
+        {
+          "stop_id": "4128O00053C0",
+          "stop_name": "Praça Euvaldo Lodi",
+          "stop_lat": -23.00916,
+          "stop_lon": -43.30439
+        },
+        {
+          "stop_id": "4128O00100C0",
+          "stop_name": "Santa Monica",
+          "stop_lat": -23.00006,
+          "stop_lon": -43.38769
+        },
+        {
+          "stop_id": "4128O00011C0",
+          "stop_name": "Estação Américas Park",
+          "stop_lat": -23.00081,
+          "stop_lon": -43.38912
+        },
+        {
+          "stop_id": "4128O00013C0",
+          "stop_name": "Novo Leblon",
+          "stop_lat": -23.00077,
+          "stop_lon": -43.38151
+        },
+        {
+          "stop_id": "4128O00057C0",
+          "stop_name": "BarraShopping - Américas",
+          "stop_lat": -22.999349,
+          "stop_lon": -43.35729
+        },
+        {
+          "stop_id": "4128O00028C0",
+          "stop_name": "Estação Paulo Malta Resende",
+          "stop_lat": -23.00156,
+          "stop_lon": -43.3295
+        },
+        {
+          "stop_id": "4128O00069C0",
+          "stop_name": "Centro Aquático Maria Lenk",
+          "stop_lat": -22.973546,
+          "stop_lon": -43.386536
+        },
+        {
+          "stop_id": "4128O00066C0",
+          "stop_name": "Mercado do Produtor",
+          "stop_lat": -22.99442,
+          "stop_lon": -43.36632
+        },
+        {
+          "stop_id": "4128O00082C0",
+          "stop_name": "Downtown",
+          "stop_lat": -23.004624,
+          "stop_lon": -43.319744
+        },
+        {
+          "stop_id": "4128O00091C0",
+          "stop_name": "VillageMall",
+          "stop_lat": -22.99971,
+          "stop_lon": -43.35033
+        },
+        {
+          "stop_id": "4128O00109C0",
+          "stop_name": "Metrô Jardim Oceânico",
+          "stop_lat": -23.00633,
+          "stop_lon": -43.312271
+        },
+        {
+          "stop_id": "4128O00072C0",
+          "stop_name": "Hospital Maternidade Leila Diniz",
+          "stop_lat": -22.995466,
+          "stop_lon": -43.361904
+        },
+        {
+          "stop_id": "4128O00018C0",
+          "stop_name": "BarraShopping",
+          "stop_lat": -23.000356,
+          "stop_lon": -43.357617
+        },
+        {
+          "stop_id": "4128O00086C0",
+          "stop_name": "Freeway",
+          "stop_lat": -23.000258,
+          "stop_lon": -43.333797
+        },
+        {
+          "stop_id": "4128O00105C0",
+          "stop_name": "Estação Golfe Olímpico",
+          "stop_lat": -22.999656,
+          "stop_lon": -43.41223
+        },
+        {
+          "stop_id": "4128O00005C0",
+          "stop_name": "Estação Golfe Olímpico",
+          "stop_lat": -23.000633,
+          "stop_lon": -43.413882
+        },
+        {
+          "stop_id": "4128O00015C0",
+          "stop_name": "Estação Bosque da Barra",
+          "stop_lat": -23.000738,
+          "stop_lon": -43.376048
+        },
+        {
+          "stop_id": "4128O00020C0",
+          "stop_name": "Estação Parque das Rosas",
+          "stop_lat": -23.000453,
+          "stop_lon": -43.352329
+        },
+        {
+          "stop_id": "4128O00021C0",
+          "stop_name": "Parque das Rosas",
+          "stop_lat": -23.000491,
+          "stop_lon": -43.349954
+        },
+        {
+          "stop_id": "4128O00024C0",
+          "stop_name": "Barra Garden",
+          "stop_lat": -23.000634,
+          "stop_lon": -43.342706
+        },
+        {
+          "stop_id": "4128O00089C0",
+          "stop_name": "Senador Generoso Ponce",
+          "stop_lat": -22.999832,
+          "stop_lon": -43.343872
+        },
+        {
+          "stop_id": "4128O00055C0",
+          "stop_name": "Alfa Barra",
+          "stop_lat": -23.008606,
+          "stop_lon": -43.366011
+        },
+        {
+          "stop_id": "4128O00060C0",
+          "stop_name": "CasaShopping",
+          "stop_lat": -22.99168,
+          "stop_lon": -43.3654
+        },
+        {
+          "stop_id": "4128O00068C0",
+          "stop_name": "Salvador Allende",
+          "stop_lat": -22.97348,
+          "stop_lon": -43.39888
+        },
+        {
+          "stop_id": "4128O00083C0",
+          "stop_name": "Evandro Lins e Silva",
+          "stop_lat": -23.002636,
+          "stop_lon": -43.324602
+        },
+        {
+          "stop_id": "4128O00027C0",
+          "stop_name": "ION Intelligent Center",
+          "stop_lat": -23.00115,
+          "stop_lon": -43.331866
+        },
+        {
+          "stop_id": "4128O00106C0",
+          "stop_name": "Pedra de Itaúna",
+          "stop_lat": -23.002707,
+          "stop_lon": -43.424719
+        },
+        {
+          "stop_id": "4128O00002C0",
+          "stop_name": "Pedra de Itaúna",
+          "stop_lat": -23.00346,
+          "stop_lon": -43.424448
+        },
+        {
+          "stop_id": "4128O00110C0",
+          "stop_name": "Praça Professor Souza Araújo",
+          "stop_lat": -23.00705,
+          "stop_lon": -43.31649
+        },
+        {
+          "stop_id": "4128O00073C0",
+          "stop_name": "BarraShopping - Lagoa",
+          "stop_lat": -22.995884,
+          "stop_lon": -43.357993
+        },
+        {
+          "stop_id": "4128O00040C0",
+          "stop_name": "Peregrino Junior",
+          "stop_lat": -23.01041,
+          "stop_lon": -43.345634
+        },
+        {
+          "stop_id": "4128O00038C0",
+          "stop_name": "Rodolfo de Campos",
+          "stop_lat": -23.010489,
+          "stop_lon": -43.355245
+        },
+        {
+          "stop_id": "4128O00118C0",
+          "stop_name": "Peregrino Junior",
+          "stop_lat": -23.010127,
+          "stop_lon": -43.345727
+        },
+        {
+          "stop_id": "4128O00037C0",
+          "stop_name": "São Regulo",
+          "stop_lat": -23.010655,
+          "stop_lon": -43.359393
+        },
+        {
+          "stop_id": "4128O00116C0",
+          "stop_name": "Clube Riviera",
+          "stop_lat": -23.010462,
+          "stop_lon": -43.335109
+        },
+        {
+          "stop_id": "4128O00045C0",
+          "stop_name": "Embaixador Egberto Mafra",
+          "stop_lat": -23.01188,
+          "stop_lon": -43.323682
+        },
+        {
+          "stop_id": "4128O00047C0",
+          "stop_name": "Praça do Ó",
+          "stop_lat": -23.013228,
+          "stop_lon": -43.317379
+        },
+        {
+          "stop_id": "4128O00035C0",
+          "stop_name": "Padre Alfredo Gonzales",
+          "stop_lat": -23.010986,
+          "stop_lon": -43.367933
+        },
+        {
+          "stop_id": "4128O00178C0",
+          "stop_name": "Desembargador Araújo Jorge",
+          "stop_lat": -23.01052,
+          "stop_lon": -43.29741
+        },
+        {
+          "stop_id": "4128O00207C0",
+          "stop_name": "Isidoro Lopes",
+          "stop_lat": -22.999952,
+          "stop_lon": -43.392958
+        },
+        {
+          "stop_id": "4128O00182C0",
+          "stop_name": "Parque dos Atletas",
+          "stop_lat": -22.981476,
+          "stop_lon": -43.409554
+        },
+        {
+          "stop_id": "4128O00130C0",
+          "stop_name": "Professor Ferreira da Rosa",
+          "stop_lat": -23.00813,
+          "stop_lon": -43.29665
+        },
+        {
+          "stop_id": "4128O00133C0",
+          "stop_name": "Vitor Konder",
+          "stop_lat": -23.00888,
+          "stop_lon": -43.29829
+        },
+        {
+          "stop_id": "4128O00177C0",
+          "stop_name": "Calheiros Gomes",
+          "stop_lat": -23.0094,
+          "stop_lon": -43.29959
+        },
+        {
+          "stop_id": "4128O00128C0",
+          "stop_name": "Comandante Júlio de Moura",
+          "stop_lat": -23.01278,
+          "stop_lon": -43.3121
+        },
+        {
+          "stop_id": "4128O00126C0",
+          "stop_name": "Aldo Bonadei",
+          "stop_lat": -23.01014,
+          "stop_lon": -43.30787
+        },
+        {
+          "stop_id": "4128O00134C0",
+          "stop_name": "Olegário Maciel",
+          "stop_lat": -23.015159,
+          "stop_lon": -43.305776
+        },
+        {
+          "stop_id": "4128O00137C0",
+          "stop_name": "Prefeito Dulcídio Cardoso",
+          "stop_lat": -23.005803,
+          "stop_lon": -43.318757
+        },
+        {
+          "stop_id": "4129O00014C0",
+          "stop_name": "Ilha Pura",
+          "stop_lat": -22.988319,
+          "stop_lon": -43.416351
+        },
+        {
+          "stop_id": "4128O00190C0",
+          "stop_name": "Parque Olímpico",
+          "stop_lat": -22.973512,
+          "stop_lon": -43.393613
+        },
+        {
+          "stop_id": "4128O00208C0",
+          "stop_name": "Estação Aeroporto de Jacarepaguá",
+          "stop_lat": -22.989706,
+          "stop_lon": -43.366213
+        },
+        {
+          "stop_id": "4128O00206C0",
+          "stop_name": "Paulo Areal",
+          "stop_lat": -22.999932,
+          "stop_lon": -43.380227
+        },
+        {
+          "stop_id": "4128O00138C0",
+          "stop_name": "Metrô Jardim Oceânico :: Ônibus Convencionais",
+          "stop_lat": -23.007165,
+          "stop_lon": -43.310983
+        },
+        {
+          "stop_id": "4128O00204C0",
+          "stop_name": "Sorimã",
+          "stop_lat": -23.008258,
+          "stop_lon": -43.293101
+        },
+        {
+          "stop_id": "4128O00237C0",
+          "stop_name": "Condomínio Mansões",
+          "stop_lat": -23.001022,
+          "stop_lon": -43.416225
+        },
+        {
+          "stop_id": "4128O00114C0",
+          "stop_name": "Praia da Barra - Posto 4",
+          "stop_lat": -23.011221,
+          "stop_lon": -43.326344
+        },
+        {
+          "stop_id": "4128O00183C0",
+          "stop_name": "Afrânio Costa",
+          "stop_lat": -23.000909,
+          "stop_lon": -43.335715
+        },
+        {
+          "stop_id": "4128O00195C0",
+          "stop_name": "Bosque da Barra",
+          "stop_lat": -22.999797,
+          "stop_lon": -43.370987
+        },
+        {
+          "stop_id": "4128O00209C0",
+          "stop_name": "Alfabarra II",
+          "stop_lat": -23.009037,
+          "stop_lon": -43.366327
+        },
+        {
+          "stop_id": "4128O00173C0",
+          "stop_name": "Metrô Jardim Oceânico :: Ônibus Executivos",
+          "stop_lat": -23.007149,
+          "stop_lon": -43.311305
+        },
+        {
+          "stop_id": "4128O00046C0",
+          "stop_name": "Praia da Barra - Posto 3",
+          "stop_lat": -23.012914,
+          "stop_lon": -43.319149
+        },
+        {
+          "stop_id": "4128O00113C0",
+          "stop_name": "Prudência do Amaral",
+          "stop_lat": -23.012021,
+          "stop_lon": -43.321532
+        },
+        {
+          "stop_id": "4128O00044C0",
+          "stop_name": "Praia da Barra - Posto 4",
+          "stop_lat": -23.011352,
+          "stop_lon": -43.327516
+        },
+        {
+          "stop_id": "4128O00115C0",
+          "stop_name": "Praia da Barra - Posto 5",
+          "stop_lat": -23.010668,
+          "stop_lon": -43.331067
+        },
+        {
+          "stop_id": "4128O00117C0",
+          "stop_name": "Praia da Barra - Posto 6",
+          "stop_lat": -23.010225,
+          "stop_lon": -43.340079
+        },
+        {
+          "stop_id": "4128O00174C0",
+          "stop_name": "Passarela da Barra",
+          "stop_lat": -23.008067,
+          "stop_lon": -43.303417
+        },
+        {
+          "stop_id": "4128O00033C0",
+          "stop_name": "Passarela da Barra",
+          "stop_lat": -23.008462,
+          "stop_lon": -43.303731
+        },
+        {
+          "stop_id": "4128O00125C0",
+          "stop_name": "Praça Euvaldo Lodi",
+          "stop_lat": -23.00862,
+          "stop_lon": -43.30542
+        },
+        {
+          "stop_id": "4128O00223C0",
+          "stop_name": "Passarela da Barra",
+          "stop_lat": -23.007562,
+          "stop_lon": -43.303971
+        },
+        {
+          "stop_id": "4128O00042C0",
+          "stop_name": "Clube Riviera",
+          "stop_lat": -23.010792,
+          "stop_lon": -43.33433
+        },
+        {
+          "stop_id": "4128O00039C0",
+          "stop_name": "Praia da Barra - Posto 7",
+          "stop_lat": -23.010385,
+          "stop_lon": -43.351093
+        },
+        {
+          "stop_id": "4128O00122C0",
+          "stop_name": "Praia da Barra - Posto 8",
+          "stop_lat": -23.010488,
+          "stop_lon": -43.363708
+        },
+        {
+          "stop_id": "4128O00184C0",
+          "stop_name": "Evandro Lins e Silva",
+          "stop_lat": -23.00346,
+          "stop_lon": -43.324697
+        },
+        {
+          "stop_id": "4128O00127C0",
+          "stop_name": "Praça Professor José Bernardino",
+          "stop_lat": -23.010857,
+          "stop_lon": -43.309767
+        },
+        {
+          "stop_id": "4128O00139C0",
+          "stop_name": "Paulo Mazzucchelli",
+          "stop_lat": -23.007424,
+          "stop_lon": -43.306098
+        },
+        {
+          "stop_id": "4128O00172C0",
+          "stop_name": "Barra Private",
+          "stop_lat": -23.0065,
+          "stop_lon": -43.309209
+        },
+        {
+          "stop_id": "4128O00188C0",
+          "stop_name": "Daut Peres",
+          "stop_lat": -23.005994,
+          "stop_lon": -43.315406
+        },
+        {
+          "stop_id": "4128O00189C0",
+          "stop_name": "Praça Professor Souza Araújo",
+          "stop_lat": -23.006777,
+          "stop_lon": -43.316208
+        },
+        {
+          "stop_id": "4128O00036C0",
+          "stop_name": "Praia da Barra - Posto 8",
+          "stop_lat": -23.010876,
+          "stop_lon": -43.36521
+        },
+        {
+          "stop_id": "4128O00043C0",
+          "stop_name": "Praia da Barra - Posto 5",
+          "stop_lat": -23.011052,
+          "stop_lon": -43.330518
+        },
+        {
+          "stop_id": "4128O00049C0",
+          "stop_name": "Praia da Barra - Posto 2",
+          "stop_lat": -23.014765,
+          "stop_lon": -43.309963
+        },
+        {
+          "stop_id": "4128O00191C0",
+          "stop_name": "Vila Residencial da Aeronáutica",
+          "stop_lat": -22.973547,
+          "stop_lon": -43.384621
+        },
+        {
+          "stop_id": "4128O00129C0",
+          "stop_name": "Praça do Ó",
+          "stop_lat": -23.012906,
+          "stop_lon": -43.31765
+        },
+        {
+          "stop_id": "4128O00120C0",
+          "stop_name": "Rodolfo de Campos",
+          "stop_lat": -23.010196,
+          "stop_lon": -43.355095
+        },
+        {
+          "stop_id": "4128O00203C0",
+          "stop_name": "Jornalista Pierre Plancher",
+          "stop_lat": -23.010628,
+          "stop_lon": -43.337755
+        },
+        {
+          "stop_id": "4128O00205C0",
+          "stop_name": "Ponto Final: Downtown",
+          "stop_lat": -23.0048,
+          "stop_lon": -43.31925
+        },
+        {
+          "stop_id": "4128O00121C0",
+          "stop_name": "São Regulo",
+          "stop_lat": -23.010394,
+          "stop_lon": -43.359938
+        },
+        {
+          "stop_id": "4128O00135C0",
+          "stop_name": "Praia do Pepê",
+          "stop_lat": -23.014737,
+          "stop_lon": -43.30191
+        },
+        {
+          "stop_id": "4128O00175C0",
+          "stop_name": "Ponto Final: Barra da Tijuca :: Linhas 2801, 2803 e 2804",
+          "stop_lat": -23.007657,
+          "stop_lon": -43.303874
+        },
+        {
+          "stop_id": "4128O00136C0",
+          "stop_name": "Praia da Barra - Quebra Mar",
+          "stop_lat": -23.014333,
+          "stop_lon": -43.298588
+        },
+        {
+          "stop_id": "4128O00097C0",
+          "stop_name": "Novo Leblon",
+          "stop_lat": -23.000049,
+          "stop_lon": -43.384509
+        },
+        {
+          "stop_id": "4128O00023C0",
+          "stop_name": "Jornalista Ricardo Marinho",
+          "stop_lat": -23.000556,
+          "stop_lon": -43.346124
+        },
+        {
+          "stop_id": "4128O00119C0",
+          "stop_name": "Praia da Barra - Posto 7",
+          "stop_lat": -23.010083,
+          "stop_lon": -43.350392
+        },
+        {
+          "stop_id": "4128O00154P0",
+          "stop_name": "Terminal Nuta James",
+          "stop_lat": -23.005478,
+          "stop_lon": -43.312534
+        },
+        {
+          "stop_id": "5r7j",
+          "stop_name": "Gumercindo da Silva",
+          "stop_lat": -23.006973,
+          "stop_lon": -43.313903
+        },
+        {
+          "stop_id": "4128O00059C0",
+          "stop_name": "Hospital Municipal Lourenço Jorge",
+          "stop_lat": -22.993732,
+          "stop_lon": -43.36544
+        },
+        {
+          "stop_id": "dhos",
+          "stop_name": "Colégio Estadual Vicente Jannuzzi",
+          "stop_lat": -22.999869,
+          "stop_lon": -43.376974
+        },
+        {
+          "stop_id": "44wg",
+          "stop_name": "Passarela da Barra",
+          "stop_lat": -23.007443,
+          "stop_lon": -43.304035
+        },
+        {
+          "stop_id": "4128O00224C0",
+          "stop_name": "Ponto Final: BarraShopping :: Linha 862",
+          "stop_lat": -22.999341,
+          "stop_lon": -43.357856
+        },
+        {
+          "stop_id": "4128O00090C0",
+          "stop_name": "Jornalista Tim Lopes",
+          "stop_lat": -22.999791,
+          "stop_lon": -43.346258
+        },
+        {
+          "stop_id": "4128O00041C0",
+          "stop_name": "Praia da Barra - Posto 6",
+          "stop_lat": -23.010518,
+          "stop_lon": -43.339939
+        },
+        {
+          "stop_id": "ort8",
+          "stop_name": "Terminal Alvorada :: Plataforma C9",
+          "stop_lat": -23.001491,
+          "stop_lon": -43.366115
+        },
+        {
+          "stop_id": "ohzk",
+          "stop_name": "Terminal Alvorada :: Plataforma D7",
+          "stop_lat": -23.001558,
+          "stop_lon": -43.365079
+        },
+        {
+          "stop_id": "2ghw",
+          "stop_name": "Terminal Alvorada :: Plataforma D13",
+          "stop_lat": -23.001565,
+          "stop_lon": -43.365441
+        },
+        {
+          "stop_id": "cb38",
+          "stop_name": "Terminal Alvorada :: Plataforma C6",
+          "stop_lat": -23.00148,
+          "stop_lon": -43.365475
+        },
+        {
+          "stop_id": "mts8",
+          "stop_name": "Terminal Alvorada :: Plataforma D16",
+          "stop_lat": -23.001571,
+          "stop_lon": -43.365648
+        },
+        {
+          "stop_id": "j89g",
+          "stop_name": "Terminal Alvorada :: Plataforma D28",
+          "stop_lat": -23.001573,
+          "stop_lon": -43.366171
+        },
+        {
+          "stop_id": "ntef",
+          "stop_name": "Terminal Alvorada :: Plataforma D35",
+          "stop_lat": -23.001576,
+          "stop_lon": -43.366391
+        },
+        {
+          "stop_id": "c3qq",
+          "stop_name": "Terminal Alvorada :: Plataforma D42",
+          "stop_lat": -23.001586,
+          "stop_lon": -43.366914
+        },
+        {
+          "stop_id": "a3cr",
+          "stop_name": "Centro Empresarial BarraShopping",
+          "stop_lat": -22.999633,
+          "stop_lon": -43.353628
+        },
+        {
+          "stop_id": "jwsq",
+          "stop_name": "Terminal Alvorada :: Plataforma C7",
+          "stop_lat": -23.001482,
+          "stop_lon": -43.365629
+        },
+        {
+          "stop_id": "4128O00008C0",
+          "stop_name": "Vogue Square",
+          "stop_lat": -23.00062,
+          "stop_lon": -43.397412
+        },
+        {
+          "stop_id": "l27x",
+          "stop_name": "Praia da Barra - Posto 8",
+          "stop_lat": -23.010718,
+          "stop_lon": -43.36118
+        },
+        {
+          "stop_id": "6vr5",
+          "stop_name": "Hercílio Gonçalves",
+          "stop_lat": -23.010571,
+          "stop_lon": -43.357402
+        },
+        {
+          "stop_id": "i6vi",
+          "stop_name": "Marcelo Roberto",
+          "stop_lat": -23.010433,
+          "stop_lon": -43.353129
+        },
+        {
+          "stop_id": "csie",
+          "stop_name": "Praia da Barra - Posto 6",
+          "stop_lat": -23.010471,
+          "stop_lon": -43.342274
+        },
+        {
+          "stop_id": "2vbd",
+          "stop_name": "Prudência do Amaral",
+          "stop_lat": -23.012392,
+          "stop_lon": -43.321295
+        },
+        {
+          "stop_id": "fnc4",
+          "stop_name": "Eugênio Lyra Neto",
+          "stop_lat": -23.010367,
+          "stop_lon": -43.34851
+        },
+        {
+          "stop_id": "nvbc",
+          "stop_name": "Terminal Alvorada :: Plataforma D20",
+          "stop_lat": -23.001567,
+          "stop_lon": -43.365937
+        },
+        {
+          "stop_id": "kytt",
+          "stop_name": "Olof Palme",
+          "stop_lat": -22.98463,
+          "stop_lon": -43.412812
+        },
+        {
+          "stop_id": "r7yl",
+          "stop_name": "Estação Tapebuias",
+          "stop_lat": -23.000802,
+          "stop_lon": -43.430143
+        },
+        {
+          "stop_id": "igaf",
+          "stop_name": "Instituto de Radioproteção e Dosimetria",
+          "stop_lat": -22.992143,
+          "stop_lon": -43.420586
+        },
+        {
+          "stop_id": "9ani",
+          "stop_name": "31º Batalhão da Polícia Militar",
+          "stop_lat": -22.989413,
+          "stop_lon": -43.417006
+        },
+        {
+          "stop_id": "qbpr",
+          "stop_name": "Olof Palme",
+          "stop_lat": -22.984879,
+          "stop_lon": -43.412353
+        },
+        {
+          "stop_id": "6ky3",
+          "stop_name": "Estação Américas Park",
+          "stop_lat": -23.000039,
+          "stop_lon": -43.389543
+        },
+        {
+          "stop_id": "wfp1",
+          "stop_name": "Albert Sabin",
+          "stop_lat": -23.00158,
+          "stop_lon": -43.421313
+        },
+        {
+          "stop_id": "4128O00003C0",
+          "stop_name": "Luiz Aranha",
+          "stop_lat": -23.001691,
+          "stop_lon": -43.418949
+        },
+        {
+          "stop_id": "4128O00107C0",
+          "stop_name": "César Lattes",
+          "stop_lat": -23.003938,
+          "stop_lon": -43.428408
+        },
+        {
+          "stop_id": "4128O00196C0",
+          "stop_name": "Vogue Square",
+          "stop_lat": -22.999849,
+          "stop_lon": -43.396365
+        },
+        {
+          "stop_id": "cq5g",
+          "stop_name": "Adão Pereira Nunes",
+          "stop_lat": -23.010774,
+          "stop_lon": -43.370846
+        },
+        {
+          "stop_id": "4128O00001C0",
+          "stop_name": "Condomínio Barra Sul",
+          "stop_lat": -23.00515,
+          "stop_lon": -43.42958
+        },
+        {
+          "stop_id": "xl0i",
+          "stop_name": "Condomínio Pontões da Barra",
+          "stop_lat": -23.004717,
+          "stop_lon": -43.430698
+        },
+        {
+          "stop_id": "wcdt",
+          "stop_name": "Terminal Alvorada :: Plataforma C4",
+          "stop_lat": -23.001475,
+          "stop_lon": -43.3652
+        },
+        {
+          "stop_id": "4128BO0002U2",
+          "stop_name": "Pedra de Itaúna",
+          "stop_lat": -23.00287,
+          "stop_lon": -43.42405
+        },
+        {
+          "stop_id": "4128BO0003U1",
+          "stop_name": "Interlagos",
+          "stop_lat": -23.00092,
+          "stop_lon": -43.41743
+        },
+        {
+          "stop_id": "4128BO0003C1",
+          "stop_name": "Interlagos",
+          "stop_lat": -23.000831,
+          "stop_lon": -43.417485
+        },
+        {
+          "stop_id": "4128BO0004U2",
+          "stop_name": "Golfe Olímpico",
+          "stop_lat": -22.99998,
+          "stop_lon": -43.41221
+        },
+        {
+          "stop_id": "4128BO0005U1",
+          "stop_name": "Riomar",
+          "stop_lat": -22.99999,
+          "stop_lon": -43.40692
+        },
+        {
+          "stop_id": "4128BO0005U2",
+          "stop_name": "Riomar",
+          "stop_lat": -22.9999,
+          "stop_lon": -43.40689
+        },
+        {
+          "stop_id": "4128BO0211U1",
+          "stop_name": "Santa Monica Jardins",
+          "stop_lat": -23.00017,
+          "stop_lon": -43.398496
+        },
+        {
+          "stop_id": "4128BO0215U1",
+          "stop_name": "Américas Park",
+          "stop_lat": -23.000411,
+          "stop_lon": -43.389952
+        },
+        {
+          "stop_id": "4128BO0218U2",
+          "stop_name": "Novo Leblon",
+          "stop_lat": -23.000442,
+          "stop_lon": -43.383003
+        },
+        {
+          "stop_id": "4128BO0219U1",
+          "stop_name": "Novo Leblon",
+          "stop_lat": -23.000392,
+          "stop_lon": -43.383481
+        },
+        {
+          "stop_id": "4128BO0222U1",
+          "stop_name": "Bosque da Barra",
+          "stop_lat": -23.000271,
+          "stop_lon": -43.377688
+        },
+        {
+          "stop_id": "4128BC0004X2",
+          "stop_name": "Rio 2",
+          "stop_lat": -22.97328,
+          "stop_lon": -43.38234
+        },
+        {
+          "stop_id": "4128BC0002U2",
+          "stop_name": "Aeroporto de Jacarepaguá",
+          "stop_lat": -22.98903,
+          "stop_lon": -43.36584
+        },
+        {
+          "stop_id": "4128BC0001U2",
+          "stop_name": "Lourenço Jorge",
+          "stop_lat": -22.99461,
+          "stop_lon": -43.36593
+        },
+        {
+          "stop_id": "4128BL0003U1",
+          "stop_name": "Riocentro",
+          "stop_lat": -22.97695,
+          "stop_lon": -43.40641
+        },
+        {
+          "stop_id": "4128BL0001U1",
+          "stop_name": "Ilha Pura",
+          "stop_lat": -22.98957,
+          "stop_lon": -43.41762
+        },
+        {
+          "stop_id": "4128BL0001U2",
+          "stop_name": "Ilha Pura",
+          "stop_lat": -22.98951,
+          "stop_lon": -43.41767
+        },
+        {
+          "stop_id": "4132BL0003U1",
+          "stop_name": "Tapebuias",
+          "stop_lat": -23.00016,
+          "stop_lon": -43.42973
+        },
+        {
+          "stop_id": "4128BC0005U2",
+          "stop_name": "Parque Olímpico",
+          "stop_lat": -22.97316,
+          "stop_lon": -43.39352
+        },
+        {
+          "stop_id": "4128BC0004U1",
+          "stop_name": "Rio 2",
+          "stop_lat": -22.97319,
+          "stop_lon": -43.38326
+        },
+        {
+          "stop_id": "4128BC0004X1",
+          "stop_name": "Rio 2",
+          "stop_lat": -22.97319,
+          "stop_lon": -43.38234
+        },
+        {
+          "stop_id": "4128BC0003U1",
+          "stop_name": "Via Parque",
+          "stop_lat": -22.98397,
+          "stop_lon": -43.36567
+        },
+        {
+          "stop_id": "4128BC0001U1",
+          "stop_name": "Lourenço Jorge",
+          "stop_lat": -22.99462,
+          "stop_lon": -43.36585
+        },
+        {
+          "stop_id": "4128BO0018U1",
+          "stop_name": "Bosque Marapendi",
+          "stop_lat": -23.00336,
+          "stop_lon": -43.32396
+        },
+        {
+          "stop_id": "4128BO0018U2",
+          "stop_name": "Bosque Marapendi",
+          "stop_lat": -23.00327,
+          "stop_lon": -43.3239
+        },
+        {
+          "stop_id": "4128BO0018X1",
+          "stop_name": "Bosque Marapendi",
+          "stop_lat": -23.00373,
+          "stop_lon": -43.32303
+        },
+        {
+          "stop_id": "4128BO0017U2",
+          "stop_name": "Paulo Malta Rezende",
+          "stop_lat": -23.00124,
+          "stop_lon": -43.32906
+        },
+        {
+          "stop_id": "4128BO0014U2",
+          "stop_name": "Ricardo Marinho",
+          "stop_lat": -23.00011,
+          "stop_lon": -43.34654
+        },
+        {
+          "stop_id": "4128BO0176U2",
+          "stop_name": "Parque das Rosas",
+          "stop_lat": -23.000013,
+          "stop_lon": -43.352481
+        },
+        {
+          "stop_id": "4128BO0015U2",
+          "stop_name": "Riviera",
+          "stop_lat": -23.00021,
+          "stop_lon": -43.34202
+        },
+        {
+          "stop_id": "4128BO0015U1",
+          "stop_name": "Riviera",
+          "stop_lat": -23.0003,
+          "stop_lon": -43.3421
+        },
+        {
+          "stop_id": "4128BO0019P1",
+          "stop_name": "Terminal Jardim Oceânico :: Plataforma B",
+          "stop_lat": -23.00675,
+          "stop_lon": -43.31246
+        },
+        {
+          "stop_id": "4128BO0019P2",
+          "stop_name": "Terminal Jardim Oceânico :: Plataforma A",
+          "stop_lat": -23.0066,
+          "stop_lon": -43.31258
+        },
+        {
+          "stop_id": "4128BO0011U2",
+          "stop_name": "Barra Shopping - Parador",
+          "stop_lat": -22.99993,
+          "stop_lon": -43.36131
+        },
+        {
+          "stop_id": "4128BO0011U1",
+          "stop_name": "Barra Shopping - Parador",
+          "stop_lat": -23.00002,
+          "stop_lon": -43.3613
+        },
+        {
+          "stop_id": "4128BO0012X1",
+          "stop_name": "Barra Shopping - Expresso",
+          "stop_lat": -23.00004,
+          "stop_lon": -43.35986
+        },
+        {
+          "stop_id": "4128BO0016U1",
+          "stop_name": "Afrânio Costa - Teatro Nathalia Timberg",
+          "stop_lat": -23.000615,
+          "stop_lon": -43.335158
+        },
+        {
+          "stop_id": "4132BL0002U1",
+          "stop_name": "Catedral do Recreio",
+          "stop_lat": -23.00376,
+          "stop_lon": -43.43391
+        },
+        {
+          "stop_id": "4128BO0014U1",
+          "stop_name": "Ricardo Marinho",
+          "stop_lat": -23.00022,
+          "stop_lon": -43.3466
+        },
+        {
+          "stop_id": "4128BL0003U2",
+          "stop_name": "Riocentro",
+          "stop_lat": -22.97692,
+          "stop_lon": -43.40647
+        },
+        {
+          "stop_id": "4128BL0002U1",
+          "stop_name": "Olof Palme",
+          "stop_lat": -22.98179,
+          "stop_lon": -43.41018
+        },
+        {
+          "stop_id": "4128BL0002U2",
+          "stop_name": "Olof Palme",
+          "stop_lat": -22.98177,
+          "stop_lon": -43.41026
+        },
+        {
+          "stop_id": "4128BC0005U1",
+          "stop_name": "Parque Olímpico",
+          "stop_lat": -22.97328,
+          "stop_lon": -43.3935
+        },
+        {
+          "stop_id": "4128BC0004U2",
+          "stop_name": "Rio 2",
+          "stop_lat": -22.97327,
+          "stop_lon": -43.38322
+        },
+        {
+          "stop_id": "4128BC0003U2",
+          "stop_name": "Via Parque",
+          "stop_lat": -22.98396,
+          "stop_lon": -43.36576
+        },
+        {
+          "stop_id": "4128BC0002U1",
+          "stop_name": "Aeroporto de Jacarepaguá",
+          "stop_lat": -22.98903,
+          "stop_lon": -43.36576
+        },
+        {
+          "stop_id": "4128BO0018X2",
+          "stop_name": "Bosque Marapendi",
+          "stop_lat": -23.00365,
+          "stop_lon": -43.32298
+        },
+        {
+          "stop_id": "4128BO0017U1",
+          "stop_name": "Paulo Malta Rezende",
+          "stop_lat": -23.00132,
+          "stop_lon": -43.3291
+        },
+        {
+          "stop_id": "4128BO0013U1",
+          "stop_name": "Parque das Rosas",
+          "stop_lat": -23.00011,
+          "stop_lon": -43.35249
+        },
+        {
+          "stop_id": "4128BO0002U1",
+          "stop_name": "Pedra de Itaúna",
+          "stop_lat": -23.00295,
+          "stop_lon": -43.424
+        },
+        {
+          "stop_id": "4128BO0216U2",
+          "stop_name": "Américas Park",
+          "stop_lat": -23.000445,
+          "stop_lon": -43.389612
+        },
+        {
+          "stop_id": "4128BO0221U2",
+          "stop_name": "Bosque da Barra",
+          "stop_lat": -23.000352,
+          "stop_lon": -43.377256
+        },
+        {
+          "stop_id": "4128BO0212U2",
+          "stop_name": "Santa Monica Jardins",
+          "stop_lat": -23.000251,
+          "stop_lon": -43.398496
+        },
+        {
+          "stop_id": "4128BO0001U1",
+          "stop_name": "Pontões - Barrasul",
+          "stop_lat": -23.00551,
+          "stop_lon": -43.4319
+        },
+        {
+          "stop_id": "4128BO0012X2",
+          "stop_name": "Barra Shopping - Expresso",
+          "stop_lat": -22.99991,
+          "stop_lon": -43.35982
+        },
+        {
+          "stop_id": "4128BO0004U1",
+          "stop_name": "Golfe Olímpico",
+          "stop_lat": -23.00009,
+          "stop_lon": -43.41223
+        },
+        {
+          "stop_id": "sh6z",
+          "stop_name": "Terminal Alvorada :: Plataforma B5",
+          "stop_lat": -23.001313,
+          "stop_lon": -43.365249
+        },
+        {
+          "stop_id": "qnev",
+          "stop_name": "Terminal Alvorada :: Plataforma A2",
+          "stop_lat": -23.001055,
+          "stop_lon": -43.364593
+        },
+        {
+          "stop_id": "5bt4",
+          "stop_name": "Terminal Alvorada :: Plataforma B11",
+          "stop_lat": -23.001338,
+          "stop_lon": -43.366323
+        },
+        {
+          "stop_id": "03gr",
+          "stop_name": "Terminal Alvorada :: Plataforma B9",
+          "stop_lat": -23.00133,
+          "stop_lon": -43.36601
+        },
+        {
+          "stop_id": "3qix",
+          "stop_name": "Terminal Alvorada :: Plataforma A16",
+          "stop_lat": -23.001109,
+          "stop_lon": -43.367264
+        },
+        {
+          "stop_id": "jw9h",
+          "stop_name": "Terminal Alvorada :: Plataforma A14",
+          "stop_lat": -23.001097,
+          "stop_lon": -43.366824
+        },
+        {
+          "stop_id": "0kfe",
+          "stop_name": "Terminal Alvorada :: Plataforma A12",
+          "stop_lat": -23.001088,
+          "stop_lon": -43.366492
+        },
+        {
+          "stop_id": "tiy6",
+          "stop_name": "Terminal Alvorada :: Plataforma B13",
+          "stop_lat": -23.001337,
+          "stop_lon": -43.366596
+        },
+        {
+          "stop_id": "ceet",
+          "stop_name": "Terminal Alvorada :: Plataforma B3",
+          "stop_lat": -23.001306,
+          "stop_lon": -43.364808
+        },
+        {
+          "stop_id": "bam4",
+          "stop_name": "Terminal Alvorada :: Plataforma A10",
+          "stop_lat": -23.001087,
+          "stop_lon": -43.366157
+        },
+        {
+          "stop_id": "4wez",
+          "stop_name": "Terminal Alvorada :: Plataforma A19",
+          "stop_lat": -23.001118,
+          "stop_lon": -43.367816
+        },
+        {
+          "stop_id": "4128BO0001U2",
+          "stop_name": "Pontões - Barrasul",
+          "stop_lat": -23.00543,
+          "stop_lon": -43.43195
+        },
+        {
+          "stop_id": "4128BO0016U2",
+          "stop_name": "Afrânio Costa - Teatro Nathalia Timberg",
+          "stop_lat": -23.00052,
+          "stop_lon": -43.33515
+        }
+      ]
+    },
+    {
+      "code": 144,
+      "name": "Campo Grande",
+      "slug": "campo-grande",
+      "geometryType": "Polygon",
+      "count": 532,
+      "stops": [
+        {
+          "stop_id": "5144O00020C0",
+          "stop_name": "Professor José Oiticica",
+          "stop_lat": -22.90429,
+          "stop_lon": -43.55658
+        },
+        {
+          "stop_id": "5144O00022C9",
+          "stop_name": "Quitungo",
+          "stop_lat": -22.86029,
+          "stop_lon": -43.51662
+        },
+        {
+          "stop_id": "5144O00024C9",
+          "stop_name": "Carobinha",
+          "stop_lat": -22.8608,
+          "stop_lon": -43.53325
+        },
+        {
+          "stop_id": "5144O00025C9",
+          "stop_name": "Rio Rock",
+          "stop_lat": -22.86144,
+          "stop_lon": -43.54565
+        },
+        {
+          "stop_id": "5144O00028C0",
+          "stop_name": "Pedregoso",
+          "stop_lat": -22.86343,
+          "stop_lon": -43.56353
+        },
+        {
+          "stop_id": "5144O00029C9",
+          "stop_name": "Convenção",
+          "stop_lat": -22.86429,
+          "stop_lon": -43.56703
+        },
+        {
+          "stop_id": "5144O00030C9",
+          "stop_name": "Hermes",
+          "stop_lat": -22.86524,
+          "stop_lon": -43.5742
+        },
+        {
+          "stop_id": "5144O00031C9",
+          "stop_name": "CIAMPA - Tonelero",
+          "stop_lat": -22.86603,
+          "stop_lon": -43.58429
+        },
+        {
+          "stop_id": "5144O00032C0",
+          "stop_name": "Cabritos",
+          "stop_lat": -22.86941,
+          "stop_lon": -43.59844
+        },
+        {
+          "stop_id": "5144O00033C0",
+          "stop_name": "Reserva do Campo",
+          "stop_lat": -22.87449,
+          "stop_lon": -43.61051
+        },
+        {
+          "stop_id": "5144O00039C9",
+          "stop_name": "Campo Grande",
+          "stop_lat": -22.901865,
+          "stop_lon": -43.564785
+        },
+        {
+          "stop_id": "5144O00006C0",
+          "stop_name": "Major Bandeira de Mello",
+          "stop_lat": -22.939232,
+          "stop_lon": -43.57634
+        },
+        {
+          "stop_id": "5144O00034C9",
+          "stop_name": "Aldo Botelho",
+          "stop_lat": -22.909723,
+          "stop_lon": -43.580344
+        },
+        {
+          "stop_id": "5144O00001C0",
+          "stop_name": "Praça Dom João Esberard",
+          "stop_lat": -22.90602,
+          "stop_lon": -43.56249
+        },
+        {
+          "stop_id": "5144O00007C9",
+          "stop_name": "Aguinaldo dos Santos",
+          "stop_lat": -22.930964,
+          "stop_lon": -43.574075
+        },
+        {
+          "stop_id": "5144O00035C9",
+          "stop_name": "Estação Pina Rangel",
+          "stop_lat": -22.90755,
+          "stop_lon": -43.57542
+        },
+        {
+          "stop_id": "5144O00026C9",
+          "stop_name": "Santo Estanislau",
+          "stop_lat": -22.861709,
+          "stop_lon": -43.550874
+        },
+        {
+          "stop_id": "5144O00004C0",
+          "stop_name": "Irlando Regis",
+          "stop_lat": -22.943025,
+          "stop_lon": -43.576013
+        },
+        {
+          "stop_id": "5144O00017C9",
+          "stop_name": "Hospital Oeste D'Or",
+          "stop_lat": -22.909347,
+          "stop_lon": -43.559475
+        },
+        {
+          "stop_id": "5144O00027C9",
+          "stop_name": "AFBR - Associação dos Funcionários do Banco Real",
+          "stop_lat": -22.861888,
+          "stop_lon": -43.553994
+        },
+        {
+          "stop_id": "5144O00008C9",
+          "stop_name": "ParkShopping Campo Grande",
+          "stop_lat": -22.928685,
+          "stop_lon": -43.57339
+        },
+        {
+          "stop_id": "5144O00003C0",
+          "stop_name": "Campo Formoso",
+          "stop_lat": -22.94472,
+          "stop_lon": -43.576672
+        },
+        {
+          "stop_id": "5144O00051C9",
+          "stop_name": "Largo da Maçonaria",
+          "stop_lat": -22.88821,
+          "stop_lon": -43.55958
+        },
+        {
+          "stop_id": "5144O00068C9",
+          "stop_name": "Estação Campo Grande :: Sul",
+          "stop_lat": -22.90253,
+          "stop_lon": -43.56061
+        },
+        {
+          "stop_id": "5144O00091C9",
+          "stop_name": "Moreno Brandão",
+          "stop_lat": -22.89059,
+          "stop_lon": -43.58969
+        },
+        {
+          "stop_id": "5144O00088C9",
+          "stop_name": "VIna del Mar",
+          "stop_lat": -22.88219,
+          "stop_lon": -43.58887
+        },
+        {
+          "stop_id": "5144O00055C9",
+          "stop_name": "Solânea",
+          "stop_lat": -22.881773,
+          "stop_lon": -43.555999
+        },
+        {
+          "stop_id": "5144O00074C0",
+          "stop_name": "Armando de Sousa Melo",
+          "stop_lat": -22.909427,
+          "stop_lon": -43.580801
+        },
+        {
+          "stop_id": "5144O00066C9",
+          "stop_name": "Cabiuna",
+          "stop_lat": -22.900908,
+          "stop_lon": -43.549671
+        },
+        {
+          "stop_id": "5144O00065C9",
+          "stop_name": "Alfredo Mariano",
+          "stop_lat": -22.90223,
+          "stop_lon": -43.54923
+        },
+        {
+          "stop_id": "5144O00139C9",
+          "stop_name": "Mato Alto",
+          "stop_lat": -22.933006,
+          "stop_lon": -43.575501
+        },
+        {
+          "stop_id": "5144O00138C0",
+          "stop_name": "Escola Municipal Raymundo Corrêa",
+          "stop_lat": -22.93205,
+          "stop_lon": -43.57471
+        },
+        {
+          "stop_id": "5144O00134C0",
+          "stop_name": "Coriolano",
+          "stop_lat": -22.92625,
+          "stop_lon": -43.57174
+        },
+        {
+          "stop_id": "5144O00132C0",
+          "stop_name": "Geraldo",
+          "stop_lat": -22.924758,
+          "stop_lon": -43.56999
+        },
+        {
+          "stop_id": "5144O00125C0",
+          "stop_name": "Vila Verde",
+          "stop_lat": -22.917826,
+          "stop_lon": -43.563646
+        },
+        {
+          "stop_id": "5144O00123C9",
+          "stop_name": "Rodrigues de Oliveira",
+          "stop_lat": -22.91518,
+          "stop_lon": -43.56349
+        },
+        {
+          "stop_id": "5144O00094C0",
+          "stop_name": "Rodrigues de Oliveira",
+          "stop_lat": -22.91523,
+          "stop_lon": -43.56322
+        },
+        {
+          "stop_id": "5144O00122C9",
+          "stop_name": "Padre Belizário",
+          "stop_lat": -22.91321,
+          "stop_lon": -43.5641
+        },
+        {
+          "stop_id": "5144O00121C9",
+          "stop_name": "Ângelo Gils",
+          "stop_lat": -22.91154,
+          "stop_lon": -43.56534
+        },
+        {
+          "stop_id": "5144O00042C0",
+          "stop_name": "Ponto Final: Campo Grande :: Linhas para Zona Oeste (via Rua Lucília)",
+          "stop_lat": -22.902056,
+          "stop_lon": -43.559857
+        },
+        {
+          "stop_id": "5144O00044C2",
+          "stop_name": "Ponto Final: Campo Grande :: Linhas Executivas",
+          "stop_lat": -22.90172,
+          "stop_lon": -43.55816
+        },
+        {
+          "stop_id": "5144O00062C9",
+          "stop_name": "Guandu-Mirim",
+          "stop_lat": -22.862763,
+          "stop_lon": -43.542073
+        },
+        {
+          "stop_id": "5144O00060C9",
+          "stop_name": "São Guido",
+          "stop_lat": -22.864616,
+          "stop_lon": -43.548765
+        },
+        {
+          "stop_id": "5144O00059C9",
+          "stop_name": "Campina Grande",
+          "stop_lat": -22.865943,
+          "stop_lon": -43.551108
+        },
+        {
+          "stop_id": "5144O00058C9",
+          "stop_name": "Paulo Afonso",
+          "stop_lat": -22.869493,
+          "stop_lon": -43.554256
+        },
+        {
+          "stop_id": "5144O00078C9",
+          "stop_name": "Rio-São Paulo",
+          "stop_lat": -22.893987,
+          "stop_lon": -43.559913
+        },
+        {
+          "stop_id": "5144O00054C9",
+          "stop_name": "West Shopping",
+          "stop_lat": -22.88445,
+          "stop_lon": -43.556745
+        },
+        {
+          "stop_id": "5144O00050C9",
+          "stop_name": "Emaús",
+          "stop_lat": -22.89185,
+          "stop_lon": -43.55925
+        },
+        {
+          "stop_id": "5144O00049C9",
+          "stop_name": "Areinhas",
+          "stop_lat": -22.89362,
+          "stop_lon": -43.5589
+        },
+        {
+          "stop_id": "5144O00102C0",
+          "stop_name": "Trovador",
+          "stop_lat": -22.89339,
+          "stop_lon": -43.58613
+        },
+        {
+          "stop_id": "5144O00046C0",
+          "stop_name": "Butiá",
+          "stop_lat": -22.89938,
+          "stop_lon": -43.55485
+        },
+        {
+          "stop_id": "5144O00048C9",
+          "stop_name": "Santa Branca",
+          "stop_lat": -22.897671,
+          "stop_lon": -43.556189
+        },
+        {
+          "stop_id": "5144O00115C9",
+          "stop_name": "Ponta Grossa",
+          "stop_lat": -22.908517,
+          "stop_lon": -43.543169
+        },
+        {
+          "stop_id": "5144O00116C9",
+          "stop_name": "Seridó",
+          "stop_lat": -22.907029,
+          "stop_lon": -43.541848
+        },
+        {
+          "stop_id": "5144O00084C0",
+          "stop_name": "Santa Maria",
+          "stop_lat": -22.8818,
+          "stop_lon": -43.58069
+        },
+        {
+          "stop_id": "5144O00103C0",
+          "stop_name": "Horácio Alves Barbosa",
+          "stop_lat": -22.89597,
+          "stop_lon": -43.58231
+        },
+        {
+          "stop_id": "5144O00104C0",
+          "stop_name": "Abio",
+          "stop_lat": -22.89624,
+          "stop_lon": -43.58038
+        },
+        {
+          "stop_id": "5144O00105C0",
+          "stop_name": "Mogi das Cruzes",
+          "stop_lat": -22.895837,
+          "stop_lon": -43.578091
+        },
+        {
+          "stop_id": "5144O00101C0",
+          "stop_name": "Roberto Santiago",
+          "stop_lat": -22.89246,
+          "stop_lon": -43.58736
+        },
+        {
+          "stop_id": "5144O00100C0",
+          "stop_name": "Francisco Rebelo",
+          "stop_lat": -22.8916,
+          "stop_lon": -43.58892
+        },
+        {
+          "stop_id": "5144O00083C0",
+          "stop_name": "Leopoldo del Valle",
+          "stop_lat": -22.88316,
+          "stop_lon": -43.57696
+        },
+        {
+          "stop_id": "5144O00082C9",
+          "stop_name": "Ferroviários",
+          "stop_lat": -22.883658,
+          "stop_lon": -43.574206
+        },
+        {
+          "stop_id": "5144O00087C9",
+          "stop_name": "Bosque do Tingui",
+          "stop_lat": -22.88053,
+          "stop_lon": -43.58817
+        },
+        {
+          "stop_id": "5144O00086C0",
+          "stop_name": "Recanto do Tingui",
+          "stop_lat": -22.8806,
+          "stop_lon": -43.58663
+        },
+        {
+          "stop_id": "5144O00090C9",
+          "stop_name": "Assis",
+          "stop_lat": -22.888422,
+          "stop_lon": -43.589506
+        },
+        {
+          "stop_id": "5144O00119C9",
+          "stop_name": "Iaraquã",
+          "stop_lat": -22.9281,
+          "stop_lon": -43.55457
+        },
+        {
+          "stop_id": "5144O00113C9",
+          "stop_name": "Mora",
+          "stop_lat": -22.91108,
+          "stop_lon": -43.54729
+        },
+        {
+          "stop_id": "5144O00112C9",
+          "stop_name": "Maria Eugenia Celso",
+          "stop_lat": -22.910108,
+          "stop_lon": -43.548921
+        },
+        {
+          "stop_id": "5144O00111C9",
+          "stop_name": "Lebreton",
+          "stop_lat": -22.90926,
+          "stop_lon": -43.55019
+        },
+        {
+          "stop_id": "5144O00052C9",
+          "stop_name": "Almirante Grenfell",
+          "stop_lat": -22.886297,
+          "stop_lon": -43.558288
+        },
+        {
+          "stop_id": "5144O00114C9",
+          "stop_name": "Pré",
+          "stop_lat": -22.91216,
+          "stop_lon": -43.54557
+        },
+        {
+          "stop_id": "5144O00118C9",
+          "stop_name": "Avaré",
+          "stop_lat": -22.910267,
+          "stop_lon": -43.562146
+        },
+        {
+          "stop_id": "5144O00099C0",
+          "stop_name": "Professor Gonçalves",
+          "stop_lat": -22.90897,
+          "stop_lon": -43.56316
+        },
+        {
+          "stop_id": "5144O00056C9",
+          "stop_name": "Professor Daltro Santos",
+          "stop_lat": -22.878683,
+          "stop_lon": -43.554531
+        },
+        {
+          "stop_id": "5144O00057C9",
+          "stop_name": "Davi Canabarro",
+          "stop_lat": -22.874149,
+          "stop_lon": -43.553315
+        },
+        {
+          "stop_id": "5144O00179C9",
+          "stop_name": "Cara-Mimoso",
+          "stop_lat": -22.88819,
+          "stop_lon": -43.58935
+        },
+        {
+          "stop_id": "5144O00215C9",
+          "stop_name": "Mendanha",
+          "stop_lat": -22.86093,
+          "stop_lon": -43.54078
+        },
+        {
+          "stop_id": "5144O00226C9",
+          "stop_name": "Vitor Alves",
+          "stop_lat": -22.899952,
+          "stop_lon": -43.563434
+        },
+        {
+          "stop_id": "5144O00193C9",
+          "stop_name": "Campo Grande",
+          "stop_lat": -22.90288,
+          "stop_lon": -43.56672
+        },
+        {
+          "stop_id": "5144O00064C9",
+          "stop_name": "Ítalo Del Cima",
+          "stop_lat": -22.90184,
+          "stop_lon": -43.54693
+        },
+        {
+          "stop_id": "5144O00148C9",
+          "stop_name": "Luís de Sousa",
+          "stop_lat": -22.899759,
+          "stop_lon": -43.573237
+        },
+        {
+          "stop_id": "5144O00167C0",
+          "stop_name": "Rouxinol",
+          "stop_lat": -22.885067,
+          "stop_lon": -43.555716
+        },
+        {
+          "stop_id": "5144O00225C9",
+          "stop_name": "West Shopping",
+          "stop_lat": -22.884412,
+          "stop_lon": -43.557
+        },
+        {
+          "stop_id": "5144O00174C9",
+          "stop_name": "Tabelião Pinto",
+          "stop_lat": -22.900673,
+          "stop_lon": -43.55042
+        },
+        {
+          "stop_id": "5144O00175C9",
+          "stop_name": "Viúva Dantas",
+          "stop_lat": -22.90176,
+          "stop_lon": -43.55044
+        },
+        {
+          "stop_id": "5144O00176C9",
+          "stop_name": "Dom Sebastião I",
+          "stop_lat": -22.90248,
+          "stop_lon": -43.5488
+        },
+        {
+          "stop_id": "5144O00214C9",
+          "stop_name": "Sacramento Blacke",
+          "stop_lat": -22.906177,
+          "stop_lon": -43.554861
+        },
+        {
+          "stop_id": "5144O00213C9",
+          "stop_name": "Elias Lobo",
+          "stop_lat": -22.90749,
+          "stop_lon": -43.55275
+        },
+        {
+          "stop_id": "5144O00140C9",
+          "stop_name": "Campo Formoso",
+          "stop_lat": -22.934277,
+          "stop_lon": -43.577134
+        },
+        {
+          "stop_id": "5144O00156C0",
+          "stop_name": "Magarça",
+          "stop_lat": -22.93344,
+          "stop_lon": -43.57498
+        },
+        {
+          "stop_id": "5144O00216C9",
+          "stop_name": "Guandu-Mirim",
+          "stop_lat": -22.86238,
+          "stop_lon": -43.54234
+        },
+        {
+          "stop_id": "5144O00219C9",
+          "stop_name": "Campina Grande",
+          "stop_lat": -22.865475,
+          "stop_lon": -43.550804
+        },
+        {
+          "stop_id": "5144O00220C9",
+          "stop_name": "Paulo Afonso",
+          "stop_lat": -22.86935,
+          "stop_lon": -43.5545
+        },
+        {
+          "stop_id": "5144O00221C9",
+          "stop_name": "Virgolino Alves Cardia",
+          "stop_lat": -22.87209,
+          "stop_lon": -43.553919
+        },
+        {
+          "stop_id": "5144O00224C9",
+          "stop_name": "Solânea",
+          "stop_lat": -22.881326,
+          "stop_lon": -43.556061
+        },
+        {
+          "stop_id": "5144O00169C9",
+          "stop_name": "Largo da Maçonaria",
+          "stop_lat": -22.887202,
+          "stop_lon": -43.559338
+        },
+        {
+          "stop_id": "5144O00170C9",
+          "stop_name": "Edorézio Moura",
+          "stop_lat": -22.890821,
+          "stop_lon": -43.559679
+        },
+        {
+          "stop_id": "5144O00171C0",
+          "stop_name": "Capoeiras",
+          "stop_lat": -22.895229,
+          "stop_lon": -43.559393
+        },
+        {
+          "stop_id": "5144O00199C0",
+          "stop_name": "Vila Jurari",
+          "stop_lat": -22.93852,
+          "stop_lon": -43.57788
+        },
+        {
+          "stop_id": "5144O00188C0",
+          "stop_name": "Jape",
+          "stop_lat": -22.888709,
+          "stop_lon": -43.56788
+        },
+        {
+          "stop_id": "5144O00184C9",
+          "stop_name": "Santa Maria",
+          "stop_lat": -22.881965,
+          "stop_lon": -43.580524
+        },
+        {
+          "stop_id": "5144O00185C9",
+          "stop_name": "Armando Amaral Rebelo",
+          "stop_lat": -22.88376,
+          "stop_lon": -43.57405
+        },
+        {
+          "stop_id": "5144O00186C9",
+          "stop_name": "Condomínio Completo Campo Grande",
+          "stop_lat": -22.88452,
+          "stop_lon": -43.572013
+        },
+        {
+          "stop_id": "5144O00183C9",
+          "stop_name": "Felix Bernardelli",
+          "stop_lat": -22.880998,
+          "stop_lon": -43.584243
+        },
+        {
+          "stop_id": "5144O00181C9",
+          "stop_name": "Bosque do Tingui",
+          "stop_lat": -22.880633,
+          "stop_lon": -43.58753
+        },
+        {
+          "stop_id": "5144O00182C9",
+          "stop_name": "Recanto do Tingui",
+          "stop_lat": -22.880802,
+          "stop_lon": -43.586354
+        },
+        {
+          "stop_id": "5144O00205C9",
+          "stop_name": "Caboclos",
+          "stop_lat": -22.922378,
+          "stop_lon": -43.526514
+        },
+        {
+          "stop_id": "5144O00203C9",
+          "stop_name": "General Paulo de Oliveira",
+          "stop_lat": -22.92518,
+          "stop_lon": -43.51886
+        },
+        {
+          "stop_id": "5144O00204C9",
+          "stop_name": "São Marcelino",
+          "stop_lat": -22.924033,
+          "stop_lon": -43.522671
+        },
+        {
+          "stop_id": "5144O00197C9",
+          "stop_name": "Antonio Raimundo Lucena",
+          "stop_lat": -22.92012,
+          "stop_lon": -43.55133
+        },
+        {
+          "stop_id": "5144O00198C9",
+          "stop_name": "Desembargador Multon Barcelos",
+          "stop_lat": -22.92195,
+          "stop_lon": -43.55104
+        },
+        {
+          "stop_id": "5144O00159C0",
+          "stop_name": "Alemanha",
+          "stop_lat": -22.878375,
+          "stop_lon": -43.537706
+        },
+        {
+          "stop_id": "5144O00195C9",
+          "stop_name": "Centro Esportivo Miécimo da Silva",
+          "stop_lat": -22.915266,
+          "stop_lon": -43.553323
+        },
+        {
+          "stop_id": "5144O00211C9",
+          "stop_name": "Camaipí",
+          "stop_lat": -22.910225,
+          "stop_lon": -43.54844
+        },
+        {
+          "stop_id": "5144O00212C9",
+          "stop_name": "Lebreton",
+          "stop_lat": -22.909,
+          "stop_lon": -43.550344
+        },
+        {
+          "stop_id": "5144O00210C9",
+          "stop_name": "Novo Aripuana",
+          "stop_lat": -22.913225,
+          "stop_lon": -43.543668
+        },
+        {
+          "stop_id": "5144O00209C9",
+          "stop_name": "Itápolis",
+          "stop_lat": -22.914115,
+          "stop_lon": -43.542145
+        },
+        {
+          "stop_id": "5144O00168C9",
+          "stop_name": "Almirante Grenfell",
+          "stop_lat": -22.886032,
+          "stop_lon": -43.558335
+        },
+        {
+          "stop_id": "5144O00207C9",
+          "stop_name": "Glicina",
+          "stop_lat": -22.916755,
+          "stop_lon": -43.533778
+        },
+        {
+          "stop_id": "5144O00161C0",
+          "stop_name": "Campina Grande",
+          "stop_lat": -22.87916,
+          "stop_lon": -43.5437
+        },
+        {
+          "stop_id": "5144O00143C0",
+          "stop_name": "Carlos Delgado de Carvalho",
+          "stop_lat": -22.88245,
+          "stop_lon": -43.54823
+        },
+        {
+          "stop_id": "5144O00163C0",
+          "stop_name": "Carlos Delgado de Carvalho",
+          "stop_lat": -22.88242,
+          "stop_lon": -43.54847
+        },
+        {
+          "stop_id": "5144O00165C0",
+          "stop_name": "Escola Municipal Visconde do Rio Branco",
+          "stop_lat": -22.88468,
+          "stop_lon": -43.552
+        },
+        {
+          "stop_id": "5144O00166C0",
+          "stop_name": "Alves Pinheiro",
+          "stop_lat": -22.88456,
+          "stop_lon": -43.55386
+        },
+        {
+          "stop_id": "5144O00206C9",
+          "stop_name": "Partido",
+          "stop_lat": -22.920794,
+          "stop_lon": -43.528127
+        },
+        {
+          "stop_id": "5144O00283C9",
+          "stop_name": "Itápolis",
+          "stop_lat": -22.916333,
+          "stop_lon": -43.539302
+        },
+        {
+          "stop_id": "5144O00563C9",
+          "stop_name": "Mendanha",
+          "stop_lat": -22.83691,
+          "stop_lon": -43.5628
+        },
+        {
+          "stop_id": "5144O00089C9",
+          "stop_name": "Pedro Geraldo de Almeida",
+          "stop_lat": -22.883335,
+          "stop_lon": -43.588967
+        },
+        {
+          "stop_id": "5144O00272C9",
+          "stop_name": "Campinho",
+          "stop_lat": -22.903759,
+          "stop_lon": -43.569616
+        },
+        {
+          "stop_id": "5144O00223C9",
+          "stop_name": "Professor Daltro Santos",
+          "stop_lat": -22.878449,
+          "stop_lon": -43.554741
+        },
+        {
+          "stop_id": "5144O00222C9",
+          "stop_name": "Davi Canabarro",
+          "stop_lat": -22.874239,
+          "stop_lon": -43.553812
+        },
+        {
+          "stop_id": "5144O00142C0",
+          "stop_name": "Paulo Sérgio",
+          "stop_lat": -22.883994,
+          "stop_lon": -43.549333
+        },
+        {
+          "stop_id": "5144O00164C0",
+          "stop_name": "Paulo Sérgio",
+          "stop_lat": -22.883919,
+          "stop_lon": -43.549505
+        },
+        {
+          "stop_id": "5144O00160C0",
+          "stop_name": "Maria do Carmo Castro",
+          "stop_lat": -22.879365,
+          "stop_lon": -43.539923
+        },
+        {
+          "stop_id": "5144O00145C0",
+          "stop_name": "Maria do Carmo Castro",
+          "stop_lat": -22.879498,
+          "stop_lon": -43.539742
+        },
+        {
+          "stop_id": "5144O00144C0",
+          "stop_name": "Ipatinga",
+          "stop_lat": -22.879728,
+          "stop_lon": -43.542065
+        },
+        {
+          "stop_id": "5144O00146C0",
+          "stop_name": "Mauro Ferreira Leão",
+          "stop_lat": -22.878156,
+          "stop_lon": -43.536229
+        },
+        {
+          "stop_id": "5144O00158C0",
+          "stop_name": "Clínica da Família Maria José Papera de Azevedo",
+          "stop_lat": -22.877747,
+          "stop_lon": -43.535955
+        },
+        {
+          "stop_id": "5144O00147C0",
+          "stop_name": "Brejo",
+          "stop_lat": -22.896745,
+          "stop_lon": -43.576507
+        },
+        {
+          "stop_id": "5144O00276C9",
+          "stop_name": "Campinho",
+          "stop_lat": -22.903915,
+          "stop_lon": -43.569532
+        },
+        {
+          "stop_id": "5144O00152C9",
+          "stop_name": "Praça dos Estudantes",
+          "stop_lat": -22.903446,
+          "stop_lon": -43.567138
+        },
+        {
+          "stop_id": "5144O00187C0",
+          "stop_name": "Alcatifa",
+          "stop_lat": -22.886004,
+          "stop_lon": -43.569103
+        },
+        {
+          "stop_id": "5144O00191C9",
+          "stop_name": "Supermercados Guanabara - Campo Grande",
+          "stop_lat": -22.896358,
+          "stop_lon": -43.563343
+        },
+        {
+          "stop_id": "5144O00196C9",
+          "stop_name": "Francisco Morais",
+          "stop_lat": -22.915889,
+          "stop_lon": -43.550327
+        },
+        {
+          "stop_id": "5144O00289C9",
+          "stop_name": "Paraibano",
+          "stop_lat": -22.85678,
+          "stop_lon": -43.54155
+        },
+        {
+          "stop_id": "5144O00290C9",
+          "stop_name": "Pernambucano",
+          "stop_lat": -22.85508,
+          "stop_lon": -43.54231
+        },
+        {
+          "stop_id": "5144O00291C9",
+          "stop_name": "Baiano",
+          "stop_lat": -22.85245,
+          "stop_lon": -43.54343
+        },
+        {
+          "stop_id": "5144O00292C9",
+          "stop_name": "Paraense",
+          "stop_lat": -22.85056,
+          "stop_lon": -43.5434
+        },
+        {
+          "stop_id": "5144O00294C9",
+          "stop_name": "Baiano",
+          "stop_lat": -22.85259,
+          "stop_lon": -43.54364
+        },
+        {
+          "stop_id": "5144O00295C9",
+          "stop_name": "Guaracamp",
+          "stop_lat": -22.85852,
+          "stop_lon": -43.54155
+        },
+        {
+          "stop_id": "5144O00177C9",
+          "stop_name": "Ítalo Del Cima",
+          "stop_lat": -22.90211,
+          "stop_lon": -43.5465
+        },
+        {
+          "stop_id": "5144O00245C0",
+          "stop_name": "Trovador",
+          "stop_lat": -22.892937,
+          "stop_lon": -43.58634
+        },
+        {
+          "stop_id": "5144O00278C9",
+          "stop_name": "Lupércio",
+          "stop_lat": -22.938865,
+          "stop_lon": -43.558956
+        },
+        {
+          "stop_id": "5144O00256C9",
+          "stop_name": "Alba Valdez",
+          "stop_lat": -22.883497,
+          "stop_lon": -43.567393
+        },
+        {
+          "stop_id": "5144O00259C9",
+          "stop_name": "Pedro Geraldo de Almeida",
+          "stop_lat": -22.884636,
+          "stop_lon": -43.579696
+        },
+        {
+          "stop_id": "5144O00239C9",
+          "stop_name": "Ramalho Novo",
+          "stop_lat": -22.884297,
+          "stop_lon": -43.579709
+        },
+        {
+          "stop_id": "5144O00238C9",
+          "stop_name": "Lucélia",
+          "stop_lat": -22.886271,
+          "stop_lon": -43.57919
+        },
+        {
+          "stop_id": "5144O00260C9",
+          "stop_name": "Antônio Lago",
+          "stop_lat": -22.886398,
+          "stop_lon": -43.579321
+        },
+        {
+          "stop_id": "5144O00300C9",
+          "stop_name": "José Siqueira Junior",
+          "stop_lat": -22.876641,
+          "stop_lon": -43.582803
+        },
+        {
+          "stop_id": "5144O00258C9",
+          "stop_name": "Gutman Bicho",
+          "stop_lat": -22.882537,
+          "stop_lon": -43.580371
+        },
+        {
+          "stop_id": "5144O00240C9",
+          "stop_name": "Gutman Bicho",
+          "stop_lat": -22.882647,
+          "stop_lon": -43.580222
+        },
+        {
+          "stop_id": "5144O00236C0",
+          "stop_name": "Horácio Alves Barbosa",
+          "stop_lat": -22.895812,
+          "stop_lon": -43.582178
+        },
+        {
+          "stop_id": "5144O00235C0",
+          "stop_name": "São Magno",
+          "stop_lat": -22.895916,
+          "stop_lon": -43.579806
+        },
+        {
+          "stop_id": "5144O00234C0",
+          "stop_name": "Guaraciaba",
+          "stop_lat": -22.895521,
+          "stop_lon": -43.578282
+        },
+        {
+          "stop_id": "5144O00230C0",
+          "stop_name": "Luís de Sousa",
+          "stop_lat": -22.899315,
+          "stop_lon": -43.573273
+        },
+        {
+          "stop_id": "5144O00257C9",
+          "stop_name": "Rio-São Paulo",
+          "stop_lat": -22.884244,
+          "stop_lon": -43.569327
+        },
+        {
+          "stop_id": "5144O00254C0",
+          "stop_name": "Martin Pescador",
+          "stop_lat": -22.88408,
+          "stop_lon": -43.5641
+        },
+        {
+          "stop_id": "5144O00286C9",
+          "stop_name": "Cotunduba",
+          "stop_lat": -22.919931,
+          "stop_lon": -43.529244
+        },
+        {
+          "stop_id": "5144O00281C9",
+          "stop_name": "Novo Aripuana",
+          "stop_lat": -22.913032,
+          "stop_lon": -43.544226
+        },
+        {
+          "stop_id": "5144O00282C9",
+          "stop_name": "Itápolis",
+          "stop_lat": -22.91403,
+          "stop_lon": -43.54259
+        },
+        {
+          "stop_id": "5144O00284C9",
+          "stop_name": "Sananduva",
+          "stop_lat": -22.916475,
+          "stop_lon": -43.537295
+        },
+        {
+          "stop_id": "5144O00279C9",
+          "stop_name": "Village Recanto do Sabiá",
+          "stop_lat": -22.94143,
+          "stop_lon": -43.56035
+        },
+        {
+          "stop_id": "5144O00277C9",
+          "stop_name": "Íris",
+          "stop_lat": -22.936138,
+          "stop_lon": -43.55769
+        },
+        {
+          "stop_id": "5144O00253C9",
+          "stop_name": "Gilberto Martins Ribeiro",
+          "stop_lat": -22.879689,
+          "stop_lon": -43.56333
+        },
+        {
+          "stop_id": "5144O00252C9",
+          "stop_name": "Luciara",
+          "stop_lat": -22.875447,
+          "stop_lon": -43.561285
+        },
+        {
+          "stop_id": "5144O00304C0",
+          "stop_name": "Manoel Porto Filho",
+          "stop_lat": -22.872,
+          "stop_lon": -43.55981
+        },
+        {
+          "stop_id": "5144O00305C9",
+          "stop_name": "Muzambinho",
+          "stop_lat": -22.86994,
+          "stop_lon": -43.55981
+        },
+        {
+          "stop_id": "5144O00250C9",
+          "stop_name": "Muzambinho",
+          "stop_lat": -22.869987,
+          "stop_lon": -43.559945
+        },
+        {
+          "stop_id": "5144O00249C9",
+          "stop_name": "Baluarte",
+          "stop_lat": -22.868554,
+          "stop_lon": -43.561076
+        },
+        {
+          "stop_id": "5144O00306C9",
+          "stop_name": "Camarugi",
+          "stop_lat": -22.86813,
+          "stop_lon": -43.56107
+        },
+        {
+          "stop_id": "5144O00248C9",
+          "stop_name": "Paulo Afonso",
+          "stop_lat": -22.866618,
+          "stop_lon": -43.561787
+        },
+        {
+          "stop_id": "5144O00313C0",
+          "stop_name": "Reserva do Campo",
+          "stop_lat": -22.87543,
+          "stop_lon": -43.61113
+        },
+        {
+          "stop_id": "5144O00314C0",
+          "stop_name": "Rio-São Paulo",
+          "stop_lat": -22.87029,
+          "stop_lon": -43.59983
+        },
+        {
+          "stop_id": "5144O00315C0",
+          "stop_name": "Cabritos",
+          "stop_lat": -22.86806,
+          "stop_lon": -43.59398
+        },
+        {
+          "stop_id": "5144O00316C0",
+          "stop_name": "Convenção",
+          "stop_lat": -22.86462,
+          "stop_lon": -43.5671
+        },
+        {
+          "stop_id": "5144O00317C9",
+          "stop_name": "Pedregoso",
+          "stop_lat": -22.86372,
+          "stop_lon": -43.56338
+        },
+        {
+          "stop_id": "5144O00319C9",
+          "stop_name": "Ritmos Cariocas",
+          "stop_lat": -22.86181,
+          "stop_lon": -43.54684
+        },
+        {
+          "stop_id": "5144O00327C0",
+          "stop_name": "Pimenteiras",
+          "stop_lat": -22.91126,
+          "stop_lon": -43.53819
+        },
+        {
+          "stop_id": "5144O00303C0",
+          "stop_name": "Josmar Mendez",
+          "stop_lat": -22.87426,
+          "stop_lon": -43.55697
+        },
+        {
+          "stop_id": "5144O00312C9",
+          "stop_name": "Baicuru",
+          "stop_lat": -22.912045,
+          "stop_lon": -43.556818
+        },
+        {
+          "stop_id": "5144O00285C9",
+          "stop_name": "Olivedos",
+          "stop_lat": -22.918353,
+          "stop_lon": -43.531302
+        },
+        {
+          "stop_id": "5144O00353C9",
+          "stop_name": "Lameirão Pequeno, 297",
+          "stop_lat": -22.917766,
+          "stop_lon": -43.525982
+        },
+        {
+          "stop_id": "5144O00351C0",
+          "stop_name": "Viegas, 835",
+          "stop_lat": -22.91765,
+          "stop_lon": -43.51809
+        },
+        {
+          "stop_id": "5144O00329C9",
+          "stop_name": "Praça Catulle Mendes",
+          "stop_lat": -22.908978,
+          "stop_lon": -43.53587
+        },
+        {
+          "stop_id": "5144O00318C0",
+          "stop_name": "Atacadão - Mendanha",
+          "stop_lat": -22.86217,
+          "stop_lon": -43.55342
+        },
+        {
+          "stop_id": "5144O00233C0",
+          "stop_name": "Homero Fortuna Carneiro",
+          "stop_lat": -22.896288,
+          "stop_lon": -43.576389
+        },
+        {
+          "stop_id": "5144O00229C0",
+          "stop_name": "Ana Barcelos",
+          "stop_lat": -22.901361,
+          "stop_lon": -43.571182
+        },
+        {
+          "stop_id": "5144O00232C0",
+          "stop_name": "Residencial Bela Vida",
+          "stop_lat": -22.897986,
+          "stop_lon": -43.57455
+        },
+        {
+          "stop_id": "5144O00274C9",
+          "stop_name": "Iraci Doyle",
+          "stop_lat": -22.905284,
+          "stop_lon": -43.576533
+        },
+        {
+          "stop_id": "5144O00275C9",
+          "stop_name": "Dom Pedrito",
+          "stop_lat": -22.904644,
+          "stop_lon": -43.573222
+        },
+        {
+          "stop_id": "5144O00273C9",
+          "stop_name": "Dom Pedrito",
+          "stop_lat": -22.904445,
+          "stop_lon": -43.57315
+        },
+        {
+          "stop_id": "5144O00298C9",
+          "stop_name": "Ivanete",
+          "stop_lat": -22.880046,
+          "stop_lon": -43.580954
+        },
+        {
+          "stop_id": "5144O00301C9",
+          "stop_name": "Alexandre Alves",
+          "stop_lat": -22.875164,
+          "stop_lon": -43.581145
+        },
+        {
+          "stop_id": "5144O00299C9",
+          "stop_name": "Odiléa Ribeiro da Silva",
+          "stop_lat": -22.878376,
+          "stop_lon": -43.581776
+        },
+        {
+          "stop_id": "5144O00307C9",
+          "stop_name": "Gilberto José Peixoto",
+          "stop_lat": -22.925147,
+          "stop_lon": -43.551985
+        },
+        {
+          "stop_id": "5144O00302C0",
+          "stop_name": "Mendanha",
+          "stop_lat": -22.875429,
+          "stop_lon": -43.555554
+        },
+        {
+          "stop_id": "5144O00228C0",
+          "stop_name": "Serralheiros",
+          "stop_lat": -22.902191,
+          "stop_lon": -43.569322
+        },
+        {
+          "stop_id": "5144O00293C0",
+          "stop_name": "Praça do Largo do Mendanha",
+          "stop_lat": -22.848384,
+          "stop_lon": -43.54405
+        },
+        {
+          "stop_id": "5144O00237C0",
+          "stop_name": "José Pedro Maduro",
+          "stop_lat": -22.895317,
+          "stop_lon": -43.584047
+        },
+        {
+          "stop_id": "5144O00384C0",
+          "stop_name": "Guandu",
+          "stop_lat": -22.844798,
+          "stop_lon": -43.51854
+        },
+        {
+          "stop_id": "5144O00397C9",
+          "stop_name": "Carobinha",
+          "stop_lat": -22.85968,
+          "stop_lon": -43.53402
+        },
+        {
+          "stop_id": "5144O00399C1",
+          "stop_name": "Rosas",
+          "stop_lat": -22.93816,
+          "stop_lon": -43.56844
+        },
+        {
+          "stop_id": "5144O00372C9",
+          "stop_name": "Pompílio da Rocha",
+          "stop_lat": -22.89353,
+          "stop_lon": -43.56524
+        },
+        {
+          "stop_id": "5144O00373C0",
+          "stop_name": "Cesário de Melo",
+          "stop_lat": -22.90725,
+          "stop_lon": -43.56431
+        },
+        {
+          "stop_id": "5144O00400C0",
+          "stop_name": "Vigílio Bahia",
+          "stop_lat": -22.92636,
+          "stop_lon": -43.52973
+        },
+        {
+          "stop_id": "5144O00287C0",
+          "stop_name": "Praça Elza Pinho Osborne",
+          "stop_lat": -22.92566,
+          "stop_lon": -43.51756
+        },
+        {
+          "stop_id": "5144O00367C0",
+          "stop_name": "Professor Carlos Boisson",
+          "stop_lat": -22.884496,
+          "stop_lon": -43.561176
+        },
+        {
+          "stop_id": "5144O00403C0",
+          "stop_name": "Ponto Final: Cantagalo",
+          "stop_lat": -22.92957,
+          "stop_lon": -43.58832
+        },
+        {
+          "stop_id": "5144O00350C9",
+          "stop_name": "Alba Valdez",
+          "stop_lat": -22.883621,
+          "stop_lon": -43.567428
+        },
+        {
+          "stop_id": "5144O00344C9",
+          "stop_name": "Francisco Mota",
+          "stop_lat": -22.908511,
+          "stop_lon": -43.543421
+        },
+        {
+          "stop_id": "5144O00343C9",
+          "stop_name": "Seridó",
+          "stop_lat": -22.906911,
+          "stop_lon": -43.541964
+        },
+        {
+          "stop_id": "5144O00389C0",
+          "stop_name": "Vinicius de Moraes",
+          "stop_lat": -22.874287,
+          "stop_lon": -43.579728
+        },
+        {
+          "stop_id": "5144O00339C9",
+          "stop_name": "José Siqueira Junior",
+          "stop_lat": -22.876404,
+          "stop_lon": -43.582763
+        },
+        {
+          "stop_id": "5144O00349C9",
+          "stop_name": "Rio-São Paulo",
+          "stop_lat": -22.884252,
+          "stop_lon": -43.569111
+        },
+        {
+          "stop_id": "5144O00352C9",
+          "stop_name": "Genival Londres",
+          "stop_lat": -22.915888,
+          "stop_lon": -43.51515
+        },
+        {
+          "stop_id": "5144O00310C9",
+          "stop_name": "San Marino",
+          "stop_lat": -22.919036,
+          "stop_lon": -43.551138
+        },
+        {
+          "stop_id": "5144O00309C9",
+          "stop_name": "Japaraíba",
+          "stop_lat": -22.921488,
+          "stop_lon": -43.550822
+        },
+        {
+          "stop_id": "5144O00308C9",
+          "stop_name": "Soldado Valdemar de Almeida",
+          "stop_lat": -22.923571,
+          "stop_lon": -43.5514
+        },
+        {
+          "stop_id": "5144O00324C9",
+          "stop_name": "Manuel Beckman",
+          "stop_lat": -22.930145,
+          "stop_lon": -43.554841
+        },
+        {
+          "stop_id": "5144O00323C9",
+          "stop_name": "Fernão de Magalhães",
+          "stop_lat": -22.932986,
+          "stop_lon": -43.555891
+        },
+        {
+          "stop_id": "5144O00311C9",
+          "stop_name": "Centro Esportivo Miécimo da Silva",
+          "stop_lat": -22.914356,
+          "stop_lon": -43.554154
+        },
+        {
+          "stop_id": "5144O00377C9",
+          "stop_name": "Filismino de Moura",
+          "stop_lat": -22.917249,
+          "stop_lon": -43.527132
+        },
+        {
+          "stop_id": "5144O00321C9",
+          "stop_name": "Village Recanto do Sabiá",
+          "stop_lat": -22.940796,
+          "stop_lon": -43.559778
+        },
+        {
+          "stop_id": "5144O00322C9",
+          "stop_name": "Íris",
+          "stop_lat": -22.935779,
+          "stop_lon": -43.557349
+        },
+        {
+          "stop_id": "5144O00345C9",
+          "stop_name": "Potirágua",
+          "stop_lat": -22.90997,
+          "stop_lon": -43.54479
+        },
+        {
+          "stop_id": "5144O00336C9",
+          "stop_name": "Alfredo Duque Méier",
+          "stop_lat": -22.877831,
+          "stop_lon": -43.562819
+        },
+        {
+          "stop_id": "5144O00335C9",
+          "stop_name": "Flor da Páscoa",
+          "stop_lat": -22.88077,
+          "stop_lon": -43.56349
+        },
+        {
+          "stop_id": "5144O00337C9",
+          "stop_name": "Altaneira",
+          "stop_lat": -22.874707,
+          "stop_lon": -43.560837
+        },
+        {
+          "stop_id": "5144O00409C9",
+          "stop_name": "Jaguaruna",
+          "stop_lat": -22.899311,
+          "stop_lon": -43.560793
+        },
+        {
+          "stop_id": "5144O00420C0",
+          "stop_name": "CIAMPA - Tonelero",
+          "stop_lat": -22.86636,
+          "stop_lon": -43.58471
+        },
+        {
+          "stop_id": "5144O00421C9",
+          "stop_name": "Hermes",
+          "stop_lat": -22.86561,
+          "stop_lon": -43.57482
+        },
+        {
+          "stop_id": "5144O00422C9",
+          "stop_name": "Restinga",
+          "stop_lat": -22.8602,
+          "stop_lon": -43.5215
+        },
+        {
+          "stop_id": "5144O00429C0",
+          "stop_name": "Ponto Final: Rio da Prata :: Linha 846",
+          "stop_lat": -22.9165,
+          "stop_lon": -43.50519
+        },
+        {
+          "stop_id": "5144O00432C0",
+          "stop_name": "Ponto Final: Rio da Prata :: Linha 847",
+          "stop_lat": -22.92537,
+          "stop_lon": -43.51774
+        },
+        {
+          "stop_id": "5144O00435C0",
+          "stop_name": "Ponto Final: West Shopping",
+          "stop_lat": -22.885856,
+          "stop_lon": -43.556815
+        },
+        {
+          "stop_id": "5144O00481C9",
+          "stop_name": "Ritmos Cariocas",
+          "stop_lat": -22.86131,
+          "stop_lon": -43.5478
+        },
+        {
+          "stop_id": "5144O00484C1",
+          "stop_name": "Jardim Santa Valéria",
+          "stop_lat": -22.9317,
+          "stop_lon": -43.56064
+        },
+        {
+          "stop_id": "5144O00381C0",
+          "stop_name": "Travessa do Viegas",
+          "stop_lat": -22.92044,
+          "stop_lon": -43.51685
+        },
+        {
+          "stop_id": "5144O00380C9",
+          "stop_name": "Lameirão Pequeno",
+          "stop_lat": -22.91536,
+          "stop_lon": -43.51858
+        },
+        {
+          "stop_id": "5144O00375C0",
+          "stop_name": "Mendanha",
+          "stop_lat": -22.87562,
+          "stop_lon": -43.555408
+        },
+        {
+          "stop_id": "5144O00354C9",
+          "stop_name": "CIEP 165 Brigadeiro Sergio Carvalho",
+          "stop_lat": -22.917234,
+          "stop_lon": -43.528911
+        },
+        {
+          "stop_id": "5144O00376C9",
+          "stop_name": "Glicinia",
+          "stop_lat": -22.917494,
+          "stop_lon": -43.530652
+        },
+        {
+          "stop_id": "5144O00378C9",
+          "stop_name": "Lameirão Pequeno, 180",
+          "stop_lat": -22.917815,
+          "stop_lon": -43.526136
+        },
+        {
+          "stop_id": "5144O00341C9",
+          "stop_name": "Santa Angelica",
+          "stop_lat": -22.880409,
+          "stop_lon": -43.580919
+        },
+        {
+          "stop_id": "5144O00340C9",
+          "stop_name": "Andradina",
+          "stop_lat": -22.878178,
+          "stop_lon": -43.582114
+        },
+        {
+          "stop_id": "5144O00338C9",
+          "stop_name": "Alexandre Alves",
+          "stop_lat": -22.875051,
+          "stop_lon": -43.581226
+        },
+        {
+          "stop_id": "5144O00334C9",
+          "stop_name": "Tinguí",
+          "stop_lat": -22.883983,
+          "stop_lon": -43.563034
+        },
+        {
+          "stop_id": "5144O00374C0",
+          "stop_name": "Caxias do Sul",
+          "stop_lat": -22.873907,
+          "stop_lon": -43.557817
+        },
+        {
+          "stop_id": "5144O00423C9",
+          "stop_name": "Major José Tinoco",
+          "stop_lat": -22.862029,
+          "stop_lon": -43.556502
+        },
+        {
+          "stop_id": "5144O00395C0",
+          "stop_name": "2° Colégio da Polícia Militar",
+          "stop_lat": -22.920094,
+          "stop_lon": -43.54411
+        },
+        {
+          "stop_id": "5144O00391C9",
+          "stop_name": "Genipapo",
+          "stop_lat": -22.841333,
+          "stop_lon": -43.566708
+        },
+        {
+          "stop_id": "5144O00486P9",
+          "stop_name": "Terminal Rodoviário de Campo Grande :: Plat. A.",
+          "stop_lat": -22.9016,
+          "stop_lon": -43.55535
+        },
+        {
+          "stop_id": "5144O00485P9",
+          "stop_name": "Terminal Rodoviário de Campo Grande :: Plat. B.",
+          "stop_lat": -22.90168,
+          "stop_lon": -43.55506
+        },
+        {
+          "stop_id": "5144O00394P9",
+          "stop_name": "Terminal Rodoviário de Campo Grande :: Plat. C.",
+          "stop_lat": -22.90197,
+          "stop_lon": -43.55501
+        },
+        {
+          "stop_id": "5144O00463C1",
+          "stop_name": "Amaral Costa",
+          "stop_lat": -22.90363,
+          "stop_lon": -43.56352
+        },
+        {
+          "stop_id": "5144O00457C9",
+          "stop_name": "Uruna",
+          "stop_lat": -22.907354,
+          "stop_lon": -43.560476
+        },
+        {
+          "stop_id": "5144O00461C0",
+          "stop_name": "Coronel Agostinho",
+          "stop_lat": -22.905703,
+          "stop_lon": -43.558953
+        },
+        {
+          "stop_id": "5144O00488C1",
+          "stop_name": "Iaciara",
+          "stop_lat": -22.928831,
+          "stop_lon": -43.567496
+        },
+        {
+          "stop_id": "5144O00467C0",
+          "stop_name": "Mato Alto",
+          "stop_lat": -22.939268,
+          "stop_lon": -43.576795
+        },
+        {
+          "stop_id": "5144O00483C9",
+          "stop_name": "Avio Rangel",
+          "stop_lat": -22.896717,
+          "stop_lon": -43.547014
+        },
+        {
+          "stop_id": "5144O00482C9",
+          "stop_name": "Senhora",
+          "stop_lat": -22.89629,
+          "stop_lon": -43.546651
+        },
+        {
+          "stop_id": "5144O00474C0",
+          "stop_name": "Tabelião Pinto",
+          "stop_lat": -22.903088,
+          "stop_lon": -43.551556
+        },
+        {
+          "stop_id": "5144O00473C0",
+          "stop_name": "Elias Lobo",
+          "stop_lat": -22.904038,
+          "stop_lon": -43.55413
+        },
+        {
+          "stop_id": "5144O00475C0",
+          "stop_name": "Camanducaia",
+          "stop_lat": -22.904893,
+          "stop_lon": -43.556172
+        },
+        {
+          "stop_id": "5144O00468C9",
+          "stop_name": "Alhambra",
+          "stop_lat": -22.923541,
+          "stop_lon": -43.566355
+        },
+        {
+          "stop_id": "5144O00493C9",
+          "stop_name": "Monteiro",
+          "stop_lat": -22.918287,
+          "stop_lon": -43.562709
+        },
+        {
+          "stop_id": "5144O00414C0",
+          "stop_name": "Professor Gonçalves",
+          "stop_lat": -22.91077,
+          "stop_lon": -43.5646
+        },
+        {
+          "stop_id": "5144O00419C0",
+          "stop_name": "Conjunto da Marinha",
+          "stop_lat": -22.92428,
+          "stop_lon": -43.54726
+        },
+        {
+          "stop_id": "5144O00440C0",
+          "stop_name": "Hospital Municipal Rocha Faria",
+          "stop_lat": -22.907505,
+          "stop_lon": -43.561657
+        },
+        {
+          "stop_id": "5144O00416C9",
+          "stop_name": "Monteiro",
+          "stop_lat": -22.90914,
+          "stop_lon": -43.566386
+        },
+        {
+          "stop_id": "5144O00439C9",
+          "stop_name": "Escola Especial Municipal Maria Montessori",
+          "stop_lat": -22.899296,
+          "stop_lon": -43.565347
+        },
+        {
+          "stop_id": "5144O00460C9",
+          "stop_name": "Ivo do Prado",
+          "stop_lat": -22.898653,
+          "stop_lon": -43.565879
+        },
+        {
+          "stop_id": "5144O00470C0",
+          "stop_name": "Daniel Santos",
+          "stop_lat": -22.942826,
+          "stop_lon": -43.577455
+        },
+        {
+          "stop_id": "5144O00471C0",
+          "stop_name": "Mato Alto",
+          "stop_lat": -22.94421,
+          "stop_lon": -43.577301
+        },
+        {
+          "stop_id": "5144O00472C0",
+          "stop_name": "Clínica da Família Agenor de Miranda Araújo Neto",
+          "stop_lat": -22.94607,
+          "stop_lon": -43.57675
+        },
+        {
+          "stop_id": "5144O00442C9",
+          "stop_name": "Iandara",
+          "stop_lat": -22.887788,
+          "stop_lon": -43.579412
+        },
+        {
+          "stop_id": "5144O00441C9",
+          "stop_name": "Iandara",
+          "stop_lat": -22.888066,
+          "stop_lon": -43.57931
+        },
+        {
+          "stop_id": "5144O00443C9",
+          "stop_name": "Antonio Lago",
+          "stop_lat": -22.889396,
+          "stop_lon": -43.579438
+        },
+        {
+          "stop_id": "5144O00444C9",
+          "stop_name": "Benedito Lacerda",
+          "stop_lat": -22.889483,
+          "stop_lon": -43.579589
+        },
+        {
+          "stop_id": "5144O00447C9",
+          "stop_name": "Manuel José Valente",
+          "stop_lat": -22.892273,
+          "stop_lon": -43.582405
+        },
+        {
+          "stop_id": "5144O00448C9",
+          "stop_name": "Manuel José Valente",
+          "stop_lat": -22.892503,
+          "stop_lon": -43.58257
+        },
+        {
+          "stop_id": "5144O00449C9",
+          "stop_name": "Aquitania",
+          "stop_lat": -22.893643,
+          "stop_lon": -43.584517
+        },
+        {
+          "stop_id": "5144O00450C9",
+          "stop_name": "Daniel Dinis da Fonseca",
+          "stop_lat": -22.893666,
+          "stop_lon": -43.584368
+        },
+        {
+          "stop_id": "5144O00491C9",
+          "stop_name": "Jupati",
+          "stop_lat": -22.91702,
+          "stop_lon": -43.560326
+        },
+        {
+          "stop_id": "5144O00492C9",
+          "stop_name": "Comari",
+          "stop_lat": -22.91883,
+          "stop_lon": -43.561098
+        },
+        {
+          "stop_id": "5144O00495C9",
+          "stop_name": "Costa Nunes",
+          "stop_lat": -22.917758,
+          "stop_lon": -43.55887
+        },
+        {
+          "stop_id": "5144O00496C9",
+          "stop_name": "Costa Nunes",
+          "stop_lat": -22.917849,
+          "stop_lon": -43.558955
+        },
+        {
+          "stop_id": "5144O00490C9",
+          "stop_name": "Iturbides Esteves",
+          "stop_lat": -22.915117,
+          "stop_lon": -43.558783
+        },
+        {
+          "stop_id": "5144O00509C0",
+          "stop_name": "Centro Educacional Palmieri",
+          "stop_lat": -22.92406,
+          "stop_lon": -43.52751
+        },
+        {
+          "stop_id": "5144O00510C0",
+          "stop_name": "Centro Educacional Palmieri",
+          "stop_lat": -22.92422,
+          "stop_lon": -43.52747
+        },
+        {
+          "stop_id": "5144O00513C9",
+          "stop_name": "Esperança",
+          "stop_lat": -22.84353,
+          "stop_lon": -43.56557
+        },
+        {
+          "stop_id": "5144O00514C9",
+          "stop_name": "Esperança",
+          "stop_lat": -22.84376,
+          "stop_lon": -43.56534
+        },
+        {
+          "stop_id": "5144O00515C0",
+          "stop_name": "Distrito Industrial",
+          "stop_lat": -22.86149,
+          "stop_lon": -43.57494
+        },
+        {
+          "stop_id": "5144O00550C9",
+          "stop_name": "Paraense",
+          "stop_lat": -22.85069,
+          "stop_lon": -43.54349
+        },
+        {
+          "stop_id": "5144O00551C9",
+          "stop_name": "Pernambucano",
+          "stop_lat": -22.85505,
+          "stop_lon": -43.54245
+        },
+        {
+          "stop_id": "5144O00552C9",
+          "stop_name": "Paraibano",
+          "stop_lat": -22.85703,
+          "stop_lon": -43.54164
+        },
+        {
+          "stop_id": "5144O00553C9",
+          "stop_name": "Sete Riachos",
+          "stop_lat": -22.86043,
+          "stop_lon": -43.54136
+        },
+        {
+          "stop_id": "5144O00554C9",
+          "stop_name": "Sete Riachos",
+          "stop_lat": -22.86042,
+          "stop_lon": -43.54121
+        },
+        {
+          "stop_id": "5144O00555C9",
+          "stop_name": "Guaracamp",
+          "stop_lat": -22.85858,
+          "stop_lon": -43.54138
+        },
+        {
+          "stop_id": "5144O00556C9",
+          "stop_name": "Piauiense",
+          "stop_lat": -22.85443,
+          "stop_lon": -43.5427
+        },
+        {
+          "stop_id": "5144O00542C9",
+          "stop_name": "Cândida Rosa",
+          "stop_lat": -22.916233,
+          "stop_lon": -43.521668
+        },
+        {
+          "stop_id": "5144O00541C9",
+          "stop_name": "CIEP 165 Brigadeiro Sergio Carvalho",
+          "stop_lat": -22.917347,
+          "stop_lon": -43.528837
+        },
+        {
+          "stop_id": "5144O00477C0",
+          "stop_name": "Estação Parque Esperança",
+          "stop_lat": -22.906899,
+          "stop_lon": -43.572276
+        },
+        {
+          "stop_id": "5144O00456C9",
+          "stop_name": "Estação Cândido Magalhães",
+          "stop_lat": -22.907814,
+          "stop_lon": -43.563654
+        },
+        {
+          "stop_id": "5144O00489C1",
+          "stop_name": "Residencial Alhambra",
+          "stop_lat": -22.932751,
+          "stop_lon": -43.567841
+        },
+        {
+          "stop_id": "5144O00546C9",
+          "stop_name": "Cachamorra",
+          "stop_lat": -22.914275,
+          "stop_lon": -43.548355
+        },
+        {
+          "stop_id": "5144O00545C9",
+          "stop_name": "Cabuçu",
+          "stop_lat": -22.91322,
+          "stop_lon": -43.5457
+        },
+        {
+          "stop_id": "5144O00480C9",
+          "stop_name": "Santo Estanislau",
+          "stop_lat": -22.862002,
+          "stop_lon": -43.549473
+        },
+        {
+          "stop_id": "5144O00438C9",
+          "stop_name": "André Vesálio",
+          "stop_lat": -22.900258,
+          "stop_lon": -43.566991
+        },
+        {
+          "stop_id": "5144O00415C9",
+          "stop_name": "Supermercados Guanabara - Campo Grande",
+          "stop_lat": -22.896077,
+          "stop_lon": -43.56228
+        },
+        {
+          "stop_id": "5144O00464C0",
+          "stop_name": "Ana Barcelos",
+          "stop_lat": -22.901581,
+          "stop_lon": -43.571049
+        },
+        {
+          "stop_id": "5144O00469C0",
+          "stop_name": "Residencial Bela Vida",
+          "stop_lat": -22.898023,
+          "stop_lon": -43.574822
+        },
+        {
+          "stop_id": "5144O00413C0",
+          "stop_name": "Padre Belizário",
+          "stop_lat": -22.912782,
+          "stop_lon": -43.564164
+        },
+        {
+          "stop_id": "5144O00446C9",
+          "stop_name": "Gastão Tojeiro",
+          "stop_lat": -22.890987,
+          "stop_lon": -43.579919
+        },
+        {
+          "stop_id": "5144O00417C0",
+          "stop_name": "ParkShopping Campo Grande",
+          "stop_lat": -22.928212,
+          "stop_lon": -43.573308
+        },
+        {
+          "stop_id": "5144O00445C9",
+          "stop_name": "Domingos Meireles",
+          "stop_lat": -22.890554,
+          "stop_lon": -43.57966
+        },
+        {
+          "stop_id": "5144O00465C0",
+          "stop_name": "Serralheiros",
+          "stop_lat": -22.902202,
+          "stop_lon": -43.569853
+        },
+        {
+          "stop_id": "5144O00494C9",
+          "stop_name": "Pora",
+          "stop_lat": -22.918448,
+          "stop_lon": -43.55954
+        },
+        {
+          "stop_id": "5144O00562C9",
+          "stop_name": "Genipapo",
+          "stop_lat": -22.841306,
+          "stop_lon": -43.56661
+        },
+        {
+          "stop_id": "5144O00512C9",
+          "stop_name": "Mendanha",
+          "stop_lat": -22.83699,
+          "stop_lon": -43.56276
+        },
+        {
+          "stop_id": "5144O00487P9",
+          "stop_name": "Terminal Rodoviário de Campo Grande :: Plat. D.",
+          "stop_lat": -22.90214,
+          "stop_lon": -43.55516
+        },
+        {
+          "stop_id": "5144O00518C0",
+          "stop_name": "Professor Carlos Boisson",
+          "stop_lat": -22.884381,
+          "stop_lon": -43.561469
+        },
+        {
+          "stop_id": "5144O00523C9",
+          "stop_name": "Ajurana",
+          "stop_lat": -22.887414,
+          "stop_lon": -43.56055
+        },
+        {
+          "stop_id": "5144O00524C9",
+          "stop_name": "Ajurana",
+          "stop_lat": -22.886263,
+          "stop_lon": -43.56122
+        },
+        {
+          "stop_id": "5144O00527C9",
+          "stop_name": "Carmen Miranda",
+          "stop_lat": -22.874143,
+          "stop_lon": -43.579208
+        },
+        {
+          "stop_id": "5144O00504C0",
+          "stop_name": "Caboclos, 320",
+          "stop_lat": -22.928715,
+          "stop_lon": -43.550464
+        },
+        {
+          "stop_id": "5144O00501C0",
+          "stop_name": "Cachamorra",
+          "stop_lat": -22.928057,
+          "stop_lon": -43.553579
+        },
+        {
+          "stop_id": "5144O00502C0",
+          "stop_name": "Residencial Beija-Flor",
+          "stop_lat": -22.928103,
+          "stop_lon": -43.551096
+        },
+        {
+          "stop_id": "5144O00503C0",
+          "stop_name": "Residencial Beija-Flor",
+          "stop_lat": -22.928023,
+          "stop_lon": -43.55093
+        },
+        {
+          "stop_id": "5144O00506C9",
+          "stop_name": "Condomínio Treviso",
+          "stop_lat": -22.930557,
+          "stop_lon": -43.54752
+        },
+        {
+          "stop_id": "5144O00505C0",
+          "stop_name": "Condomínio Treviso",
+          "stop_lat": -22.930702,
+          "stop_lon": -43.547784
+        },
+        {
+          "stop_id": "5144O00507C0",
+          "stop_name": "Condomínio Ferrara",
+          "stop_lat": -22.930536,
+          "stop_lon": -43.546738
+        },
+        {
+          "stop_id": "5144O00508C0",
+          "stop_name": "Condomínio Ferrara",
+          "stop_lat": -22.930353,
+          "stop_lon": -43.546417
+        },
+        {
+          "stop_id": "5144O00511C0",
+          "stop_name": "Recanto da Montanha",
+          "stop_lat": -22.928804,
+          "stop_lon": -43.534346
+        },
+        {
+          "stop_id": "5144O00569C9",
+          "stop_name": "Cabuçu",
+          "stop_lat": -22.922547,
+          "stop_lon": -43.526598
+        },
+        {
+          "stop_id": "5144O00567C9",
+          "stop_name": "Lucrécia",
+          "stop_lat": -22.920183,
+          "stop_lon": -43.529082
+        },
+        {
+          "stop_id": "5144O00570C9",
+          "stop_name": "Adauto da Câmara",
+          "stop_lat": -22.9252,
+          "stop_lon": -43.519115
+        },
+        {
+          "stop_id": "5144O00548C9",
+          "stop_name": "Cachamorra",
+          "stop_lat": -22.914295,
+          "stop_lon": -43.549128
+        },
+        {
+          "stop_id": "5144O00577C9",
+          "stop_name": "Padre Pauwels",
+          "stop_lat": -22.898406,
+          "stop_lon": -43.552613
+        },
+        {
+          "stop_id": "5144O00431C0",
+          "stop_name": "Carobinha",
+          "stop_lat": -22.85967,
+          "stop_lon": -43.53316
+        },
+        {
+          "stop_id": "5144O00559C0",
+          "stop_name": "Sampaio de Lacerda",
+          "stop_lat": -22.878642,
+          "stop_lon": -43.537768
+        },
+        {
+          "stop_id": "5144O00498C9",
+          "stop_name": "Ronerto Macedo",
+          "stop_lat": -22.916923,
+          "stop_lon": -43.558793
+        },
+        {
+          "stop_id": "5144O00497C9",
+          "stop_name": "Ronerto Macedo",
+          "stop_lat": -22.917256,
+          "stop_lon": -43.558926
+        },
+        {
+          "stop_id": "5144O00499C9",
+          "stop_name": "Cambota",
+          "stop_lat": -22.915538,
+          "stop_lon": -43.558675
+        },
+        {
+          "stop_id": "5144O00547C9",
+          "stop_name": "Acreúna",
+          "stop_lat": -22.914647,
+          "stop_lon": -43.552118
+        },
+        {
+          "stop_id": "5144O00549C9",
+          "stop_name": "Belmiro Valverde",
+          "stop_lat": -22.914174,
+          "stop_lon": -43.55167
+        },
+        {
+          "stop_id": "5144O00575C9",
+          "stop_name": "Mora",
+          "stop_lat": -22.910992,
+          "stop_lon": -43.547159
+        },
+        {
+          "stop_id": "5144O00572C9",
+          "stop_name": "Artur Barreiros",
+          "stop_lat": -22.916316,
+          "stop_lon": -43.53744
+        },
+        {
+          "stop_id": "5144O00566C9",
+          "stop_name": "Glicinia",
+          "stop_lat": -22.916981,
+          "stop_lon": -43.533476
+        },
+        {
+          "stop_id": "5144O00534C0",
+          "stop_name": "Dona Elisa",
+          "stop_lat": -22.868235,
+          "stop_lon": -43.585081
+        },
+        {
+          "stop_id": "5144O00535C0",
+          "stop_name": "Jornalista Mauricio Vaitsman",
+          "stop_lat": -22.872716,
+          "stop_lon": -43.580287
+        },
+        {
+          "stop_id": "5144O00531C0",
+          "stop_name": "Jornalista Mauricio Vaitsman",
+          "stop_lat": -22.872359,
+          "stop_lon": -43.580366
+        },
+        {
+          "stop_id": "5144O00536C0",
+          "stop_name": "Santa Maria",
+          "stop_lat": -22.87356,
+          "stop_lon": -43.579181
+        },
+        {
+          "stop_id": "5144O00540C9",
+          "stop_name": "Micronésia",
+          "stop_lat": -22.904414,
+          "stop_lon": -43.540369
+        },
+        {
+          "stop_id": "5144O00538C9",
+          "stop_name": "Potirágua",
+          "stop_lat": -22.910032,
+          "stop_lon": -43.544653
+        },
+        {
+          "stop_id": "5144O00539C9",
+          "stop_name": "Cabuçu",
+          "stop_lat": -22.911925,
+          "stop_lon": -43.545145
+        },
+        {
+          "stop_id": "5144O00574C9",
+          "stop_name": "Olinda Ellis",
+          "stop_lat": -22.9124,
+          "stop_lon": -43.544972
+        },
+        {
+          "stop_id": "5144O00564C9",
+          "stop_name": "Alfredo Duque Méier",
+          "stop_lat": -22.878017,
+          "stop_lon": -43.562965
+        },
+        {
+          "stop_id": "5144O00565C9",
+          "stop_name": "Pedregoso",
+          "stop_lat": -22.873005,
+          "stop_lon": -43.56003
+        },
+        {
+          "stop_id": "5144O00561C9",
+          "stop_name": "Manoel Porto Filho",
+          "stop_lat": -22.871774,
+          "stop_lon": -43.559925
+        },
+        {
+          "stop_id": "5144O00500C0",
+          "stop_name": "Monteiro",
+          "stop_lat": -22.922004,
+          "stop_lon": -43.562725
+        },
+        {
+          "stop_id": "5144O00557C0",
+          "stop_name": "Abel Ferreira",
+          "stop_lat": -22.884898,
+          "stop_lon": -43.553029
+        },
+        {
+          "stop_id": "5144O00558C0",
+          "stop_name": "Escola Municipal Visconde do Rio Branco",
+          "stop_lat": -22.884914,
+          "stop_lon": -43.551938
+        },
+        {
+          "stop_id": "5144O00614C0",
+          "stop_name": "José Pereira da Silva",
+          "stop_lat": -22.9322,
+          "stop_lon": -43.56194
+        },
+        {
+          "stop_id": "5144O00643C1",
+          "stop_name": "Guandu",
+          "stop_lat": -22.844832,
+          "stop_lon": -43.518733
+        },
+        {
+          "stop_id": "5144O00646C1",
+          "stop_name": "Ponto Final: Campo Grande :: Linha 826",
+          "stop_lat": -22.900892,
+          "stop_lon": -43.55443
+        },
+        {
+          "stop_id": "5144O00628C9",
+          "stop_name": "Travessa do Viegas",
+          "stop_lat": -22.92207,
+          "stop_lon": -43.514299
+        },
+        {
+          "stop_id": "5144O00630C9",
+          "stop_name": "Travessa do Viegas",
+          "stop_lat": -22.922034,
+          "stop_lon": -43.514405
+        },
+        {
+          "stop_id": "5144O00629C9",
+          "stop_name": "Projetada A",
+          "stop_lat": -22.920439,
+          "stop_lon": -43.513396
+        },
+        {
+          "stop_id": "5144O00625C0",
+          "stop_name": "Viegas, 1230",
+          "stop_lat": -22.917675,
+          "stop_lon": -43.518263
+        },
+        {
+          "stop_id": "5144O00611C0",
+          "stop_name": "Conceição das Alagoas",
+          "stop_lat": -22.929497,
+          "stop_lon": -43.562462
+        },
+        {
+          "stop_id": "5144O00627C0",
+          "stop_name": "Travessa do Viegas",
+          "stop_lat": -22.920467,
+          "stop_lon": -43.516665
+        },
+        {
+          "stop_id": "5144O00632C9",
+          "stop_name": "Lameirão Pequeno",
+          "stop_lat": -22.915188,
+          "stop_lon": -43.518628
+        },
+        {
+          "stop_id": "5144O00544C9",
+          "stop_name": "Clínica da Família Dra. Myrtes Amorelli Gonzaga",
+          "stop_lat": -22.916963,
+          "stop_lon": -43.527995
+        },
+        {
+          "stop_id": "5144O00571C9",
+          "stop_name": "Lameirão Pequeno",
+          "stop_lat": -22.918082,
+          "stop_lon": -43.531434
+        },
+        {
+          "stop_id": "5144O00568C9",
+          "stop_name": "Partido",
+          "stop_lat": -22.920967,
+          "stop_lon": -43.528176
+        },
+        {
+          "stop_id": "5144O00573C9",
+          "stop_name": "Itápolis",
+          "stop_lat": -22.916225,
+          "stop_lon": -43.53905
+        },
+        {
+          "stop_id": "5144O00620C0",
+          "stop_name": "Cantagalo, 726",
+          "stop_lat": -22.928235,
+          "stop_lon": -43.580963
+        },
+        {
+          "stop_id": "5144O00622C0",
+          "stop_name": "Cantagalo, 725",
+          "stop_lat": -22.928212,
+          "stop_lon": -43.581318
+        },
+        {
+          "stop_id": "5144O00621C0",
+          "stop_name": "Cantagalo, 1002",
+          "stop_lat": -22.928631,
+          "stop_lon": -43.583541
+        },
+        {
+          "stop_id": "5144O00626C0",
+          "stop_name": "Viegas, 268",
+          "stop_lat": -22.92275,
+          "stop_lon": -43.516956
+        },
+        {
+          "stop_id": "5144O00645C0",
+          "stop_name": "Major José Tinoco",
+          "stop_lat": -22.862281,
+          "stop_lon": -43.555514
+        },
+        {
+          "stop_id": "5144O00613C0",
+          "stop_name": "Gabarra",
+          "stop_lat": -22.93142,
+          "stop_lon": -43.563755
+        },
+        {
+          "stop_id": "5144O00618C0",
+          "stop_name": "Jiçara",
+          "stop_lat": -22.910319,
+          "stop_lon": -43.560726
+        },
+        {
+          "stop_id": "5144O00590C9",
+          "stop_name": "Pora",
+          "stop_lat": -22.92057,
+          "stop_lon": -43.560032
+        },
+        {
+          "stop_id": "5144O00591C9",
+          "stop_name": "Praça Cândido Abraão",
+          "stop_lat": -22.921669,
+          "stop_lon": -43.559991
+        },
+        {
+          "stop_id": "5144O00560C9",
+          "stop_name": "Levino Fanzeres",
+          "stop_lat": -22.905291,
+          "stop_lon": -43.577174
+        },
+        {
+          "stop_id": "5144O00532C0",
+          "stop_name": "Dona Elisa",
+          "stop_lat": -22.868251,
+          "stop_lon": -43.584009
+        },
+        {
+          "stop_id": "5144O00612C0",
+          "stop_name": "Erval Seco",
+          "stop_lat": -22.930704,
+          "stop_lon": -43.563676
+        },
+        {
+          "stop_id": "5144O00647C0",
+          "stop_name": "Escola Municipal Tóquio",
+          "stop_lat": -22.869187,
+          "stop_lon": -43.555568
+        },
+        {
+          "stop_id": "5144O00648C0",
+          "stop_name": "Bairro Monte Santo",
+          "stop_lat": -22.912533,
+          "stop_lon": -43.533245
+        },
+        {
+          "stop_id": "5144O00578C9",
+          "stop_name": "Minas de Prata",
+          "stop_lat": -22.897852,
+          "stop_lon": -43.549956
+        },
+        {
+          "stop_id": "5144O00634C9",
+          "stop_name": "Aguinaldo dos Santos",
+          "stop_lat": -22.930676,
+          "stop_lon": -43.574361
+        },
+        {
+          "stop_id": "5144O00597C0",
+          "stop_name": "Caboclos, 320",
+          "stop_lat": -22.928929,
+          "stop_lon": -43.550328
+        },
+        {
+          "stop_id": "5144O00602C9",
+          "stop_name": "Condomínio Completo Campo Grande",
+          "stop_lat": -22.884427,
+          "stop_lon": -43.571693
+        },
+        {
+          "stop_id": "5144O00603C9",
+          "stop_name": "Moreno Brandão",
+          "stop_lat": -22.890452,
+          "stop_lon": -43.589581
+        },
+        {
+          "stop_id": "5144O00607C0",
+          "stop_name": "Irajubá",
+          "stop_lat": -22.92993,
+          "stop_lon": -43.545338
+        },
+        {
+          "stop_id": "5144O00598C9",
+          "stop_name": "Bosque dos Caboclos",
+          "stop_lat": -22.928536,
+          "stop_lon": -43.544875
+        },
+        {
+          "stop_id": "5144O00606C0",
+          "stop_name": "Bosque dos Caboclos",
+          "stop_lat": -22.928436,
+          "stop_lon": -43.544623
+        },
+        {
+          "stop_id": "5144O00604C0",
+          "stop_name": "Moinho",
+          "stop_lat": -22.92929,
+          "stop_lon": -43.536232
+        },
+        {
+          "stop_id": "5144O00633C9",
+          "stop_name": "Genival Londres",
+          "stop_lat": -22.916003,
+          "stop_lon": -43.515525
+        },
+        {
+          "stop_id": "5144O00596C0",
+          "stop_name": "Luiz Otávio",
+          "stop_lat": -22.917292,
+          "stop_lon": -43.54995
+        },
+        {
+          "stop_id": "5144O00579C9",
+          "stop_name": "Gilberto José Peixoto",
+          "stop_lat": -22.924593,
+          "stop_lon": -43.551948
+        },
+        {
+          "stop_id": "5144O00585C9",
+          "stop_name": "Leão Gondim de Oliveira",
+          "stop_lat": -22.92711,
+          "stop_lon": -43.553586
+        },
+        {
+          "stop_id": "5144O00581C9",
+          "stop_name": "Fernão de Magalhães",
+          "stop_lat": -22.932472,
+          "stop_lon": -43.555788
+        },
+        {
+          "stop_id": "5144O00584C9",
+          "stop_name": "Lupércio",
+          "stop_lat": -22.938285,
+          "stop_lon": -43.558557
+        },
+        {
+          "stop_id": "5144O00599C0",
+          "stop_name": "Partido",
+          "stop_lat": -22.928415,
+          "stop_lon": -43.53238
+        },
+        {
+          "stop_id": "5144O00600C0",
+          "stop_name": "Pedreira",
+          "stop_lat": -22.928736,
+          "stop_lon": -43.541755
+        },
+        {
+          "stop_id": "5144O00594C9",
+          "stop_name": "Pora",
+          "stop_lat": -22.918511,
+          "stop_lon": -43.560329
+        },
+        {
+          "stop_id": "5144O00592C9",
+          "stop_name": "Comari",
+          "stop_lat": -22.918386,
+          "stop_lon": -43.559043
+        },
+        {
+          "stop_id": "5144O00619C0",
+          "stop_name": "Joaquim Ribeiro",
+          "stop_lat": -22.929106,
+          "stop_lon": -43.578207
+        },
+        {
+          "stop_id": "5144O00623C0",
+          "stop_name": "Joaquim Ribeiro",
+          "stop_lat": -22.929272,
+          "stop_lon": -43.578052
+        },
+        {
+          "stop_id": "5144O00601C9",
+          "stop_name": "Martin Pescador",
+          "stop_lat": -22.884206,
+          "stop_lon": -43.564077
+        },
+        {
+          "stop_id": "5144O00608C9",
+          "stop_name": "Punta del Este",
+          "stop_lat": -22.882223,
+          "stop_lon": -43.588704
+        },
+        {
+          "stop_id": "5144O00587C0",
+          "stop_name": "Condomínio Golden Garden",
+          "stop_lat": -22.917801,
+          "stop_lon": -43.548466
+        },
+        {
+          "stop_id": "5144O00595C0",
+          "stop_name": "Condomínio Golden Garden",
+          "stop_lat": -22.918153,
+          "stop_lon": -43.548141
+        },
+        {
+          "stop_id": "5144O00593C0",
+          "stop_name": "Domingos Alves Ribeiro",
+          "stop_lat": -22.91937,
+          "stop_lon": -43.546397
+        },
+        {
+          "stop_id": "5144O00588C0",
+          "stop_name": "Irajuba",
+          "stop_lat": -22.919525,
+          "stop_lon": -43.545961
+        },
+        {
+          "stop_id": "5144O00609C0",
+          "stop_name": "Guarabu da Serra",
+          "stop_lat": -22.926873,
+          "stop_lon": -43.559989
+        },
+        {
+          "stop_id": "5144O00615C0",
+          "stop_name": "Cambota",
+          "stop_lat": -22.913195,
+          "stop_lon": -43.557546
+        },
+        {
+          "stop_id": "5144O00227C9",
+          "stop_name": "Laudelino Vieira de Campos",
+          "stop_lat": -22.903146,
+          "stop_lon": -43.56652
+        },
+        {
+          "stop_id": "5144O00192C9",
+          "stop_name": "Rio Bonito",
+          "stop_lat": -22.901171,
+          "stop_lon": -43.56699
+        },
+        {
+          "stop_id": "5144O00412C0",
+          "stop_name": "Chico Moreira",
+          "stop_lat": -22.936804,
+          "stop_lon": -43.575821
+        },
+        {
+          "stop_id": "5144O00255C9",
+          "stop_name": "Oiticica",
+          "stop_lat": -22.883954,
+          "stop_lon": -43.565638
+        },
+        {
+          "stop_id": "5144O00586C9",
+          "stop_name": "Olinda Ellis",
+          "stop_lat": -22.91538,
+          "stop_lon": -43.550039
+        },
+        {
+          "stop_id": "5144OY0451C9",
+          "stop_name": "José Pedro Maduro",
+          "stop_lat": -22.895409,
+          "stop_lon": -43.584199
+        },
+        {
+          "stop_id": "5144O00073C0",
+          "stop_name": "Condomínio 2020",
+          "stop_lat": -22.908918,
+          "stop_lon": -43.57887
+        },
+        {
+          "stop_id": "5144O00009C9",
+          "stop_name": "Esculápio",
+          "stop_lat": -22.92686,
+          "stop_lon": -43.57192
+        },
+        {
+          "stop_id": "5144O00010C9",
+          "stop_name": "Rosa",
+          "stop_lat": -22.92512,
+          "stop_lon": -43.5702
+        },
+        {
+          "stop_id": "5144O00130C0",
+          "stop_name": "Alhambra",
+          "stop_lat": -22.92341,
+          "stop_lon": -43.5671
+        },
+        {
+          "stop_id": "5144O00127C0",
+          "stop_name": "Itueira",
+          "stop_lat": -22.922123,
+          "stop_lon": -43.564381
+        },
+        {
+          "stop_id": "5144O00015C9",
+          "stop_name": "Itueira",
+          "stop_lat": -22.92179,
+          "stop_lon": -43.56375
+        },
+        {
+          "stop_id": "5144O00016C0",
+          "stop_name": "Aroaquí",
+          "stop_lat": -22.91879,
+          "stop_lon": -43.56325
+        },
+        {
+          "stop_id": "5144O00519C0",
+          "stop_name": "Ponto Final: Campo Grande :: Linhas para Zona Norte",
+          "stop_lat": -22.90154,
+          "stop_lon": -43.55726
+        },
+        {
+          "stop_id": "la83",
+          "stop_name": "Clínica da Família Agenor de Miranda Araújo Neto",
+          "stop_lat": -22.946199,
+          "stop_lon": -43.576608
+        },
+        {
+          "stop_id": "axf5",
+          "stop_name": "Saquarema",
+          "stop_lat": -22.906693,
+          "stop_lon": -43.568287
+        },
+        {
+          "stop_id": "5144O00631C9",
+          "stop_name": "Soldado Américo Desambiago",
+          "stop_lat": -22.925743,
+          "stop_lon": -43.515917
+        },
+        {
+          "stop_id": "5144O00288C9",
+          "stop_name": "Batalha",
+          "stop_lat": -22.92575,
+          "stop_lon": -43.51564
+        },
+        {
+          "stop_id": "5144O00202C9",
+          "stop_name": "Vaivem",
+          "stop_lat": -22.92438,
+          "stop_lon": -43.514616
+        },
+        {
+          "stop_id": "5144O00543C9",
+          "stop_name": "Alves",
+          "stop_lat": -22.916022,
+          "stop_lon": -43.52134
+        },
+        {
+          "stop_id": "5144O00382C0",
+          "stop_name": "Viegas, 1302",
+          "stop_lat": -22.9227,
+          "stop_lon": -43.51711
+        },
+        {
+          "stop_id": "uhwn",
+          "stop_name": "Estação Prefeito Alim Pedro",
+          "stop_lat": -22.903735,
+          "stop_lon": -43.566528
+        },
+        {
+          "stop_id": "5144O00072C0",
+          "stop_name": "Estação Pina Rangel",
+          "stop_lat": -22.907526,
+          "stop_lon": -43.576342
+        },
+        {
+          "stop_id": "5144O00067C9",
+          "stop_name": "Rodoviária de Campo Grande.",
+          "stop_lat": -22.90144,
+          "stop_lon": -43.55557
+        },
+        {
+          "stop_id": "zz06",
+          "stop_name": "Cesário de Melo",
+          "stop_lat": -22.908018,
+          "stop_lon": -43.567022
+        },
+        {
+          "stop_id": "5144O00605C9",
+          "stop_name": "João Reis",
+          "stop_lat": -22.884109,
+          "stop_lon": -43.588939
+        },
+        {
+          "stop_id": "5144O00589C0",
+          "stop_name": "2° Colégio da Polícia Militar",
+          "stop_lat": -22.919975,
+          "stop_lon": -43.54417
+        },
+        {
+          "stop_id": "zan9",
+          "stop_name": "Jeceaba",
+          "stop_lat": -22.867347,
+          "stop_lon": -43.560685
+        },
+        {
+          "stop_id": "bq3t",
+          "stop_name": "Dorandia",
+          "stop_lat": -22.868631,
+          "stop_lon": -43.557224
+        },
+        {
+          "stop_id": "6riq",
+          "stop_name": "Pestalozzi",
+          "stop_lat": -22.868447,
+          "stop_lon": -43.557203
+        },
+        {
+          "stop_id": "szlx",
+          "stop_name": "Ponto Final: Serrinha :: Linha 895",
+          "stop_lat": -22.841363,
+          "stop_lon": -43.566795
+        },
+        {
+          "stop_id": "ajvl",
+          "stop_name": "Praça do Largo do Mendanha",
+          "stop_lat": -22.848336,
+          "stop_lon": -43.544299
+        },
+        {
+          "stop_id": "pr4l",
+          "stop_name": "Diderot",
+          "stop_lat": -22.86762,
+          "stop_lon": -43.559307
+        },
+        {
+          "stop_id": "aamz",
+          "stop_name": "Carobinha",
+          "stop_lat": -22.859772,
+          "stop_lon": -43.533935
+        },
+        {
+          "stop_id": "5144O00430C0",
+          "stop_name": "Ponto Final: Largo do Mendanha",
+          "stop_lat": -22.848365,
+          "stop_lon": -43.544398
+        },
+        {
+          "stop_id": "0nv3",
+          "stop_name": "Ponto Final: Carobinha",
+          "stop_lat": -22.849884,
+          "stop_lon": -43.532875
+        },
+        {
+          "stop_id": "p9qq",
+          "stop_name": "Cantagalo, 1545",
+          "stop_lat": -22.929042,
+          "stop_lon": -43.587278
+        },
+        {
+          "stop_id": "5144O00330C9",
+          "stop_name": "Assaí Atacadista - Campo Grande",
+          "stop_lat": -22.9066,
+          "stop_lon": -43.56553
+        },
+        {
+          "stop_id": "jx4h",
+          "stop_name": "Praça Elza Pinho Osborne",
+          "stop_lat": -22.925417,
+          "stop_lon": -43.517436
+        },
+        {
+          "stop_id": "5144O00401C9",
+          "stop_name": "Itauá",
+          "stop_lat": -22.92224,
+          "stop_lon": -43.54081
+        },
+        {
+          "stop_id": "5144O00402C9",
+          "stop_name": "Praça Pedro Veloso da Silveira",
+          "stop_lat": -22.92017,
+          "stop_lon": -43.5471
+        },
+        {
+          "stop_id": "rnxp",
+          "stop_name": "Ponto Final :: Mendanha",
+          "stop_lat": -22.843647,
+          "stop_lon": -43.534023
+        },
+        {
+          "stop_id": "5144O00217C9",
+          "stop_name": "DETRAN - Posto Mendanha",
+          "stop_lat": -22.863183,
+          "stop_lon": -43.545591
+        },
+        {
+          "stop_id": "5144O00063C9",
+          "stop_name": "Praça Filomena Del Cima",
+          "stop_lat": -22.901175,
+          "stop_lon": -43.544463
+        },
+        {
+          "stop_id": "5144O00178C9",
+          "stop_name": "Praça Filomena Del Cima",
+          "stop_lat": -22.90145,
+          "stop_lon": -43.544346
+        },
+        {
+          "stop_id": "5144O00061C9",
+          "stop_name": "DETRAN - Posto Mendanha",
+          "stop_lat": -22.86311,
+          "stop_lon": -43.544439
+        },
+        {
+          "stop_id": "lau6",
+          "stop_name": "Estação Campo Grande :: Norte",
+          "stop_lat": -22.90217,
+          "stop_lon": -43.560507
+        },
+        {
+          "stop_id": "5144BM0001U1",
+          "stop_name": "Campo Grande",
+          "stop_lat": -22.90172,
+          "stop_lon": -43.5548
+        },
+        {
+          "stop_id": "5144BM0001U2",
+          "stop_name": "Campo Grande",
+          "stop_lat": -22.90181,
+          "stop_lon": -43.55477
+        },
+        {
+          "stop_id": "5144BM0002U2",
+          "stop_name": "Prefeito Alim Pedro",
+          "stop_lat": -22.903663,
+          "stop_lon": -43.566408
+        },
+        {
+          "stop_id": "5144BM0004U2",
+          "stop_name": "Pina Rangel",
+          "stop_lat": -22.907539,
+          "stop_lon": -43.575991
+        },
+        {
+          "stop_id": "5144BM0004U1",
+          "stop_name": "Pina Rangel",
+          "stop_lat": -22.907485,
+          "stop_lon": -43.575619
+        },
+        {
+          "stop_id": "5144BM0005U1",
+          "stop_name": "Parque Esperança",
+          "stop_lat": -22.906941,
+          "stop_lon": -43.571604
+        },
+        {
+          "stop_id": "5144BM0006U1",
+          "stop_name": "Cândido Magalhães",
+          "stop_lat": -22.907712,
+          "stop_lon": -43.563965
+        },
+        {
+          "stop_id": "5144O00080C0",
+          "stop_name": "Aricuri",
+          "stop_lat": -22.891382,
+          "stop_lon": -43.564317
+        },
+        {
+          "stop_id": "5144O00079C0",
+          "stop_name": "Mirassol",
+          "stop_lat": -22.893876,
+          "stop_lon": -43.560904
+        },
+        {
+          "stop_id": "5144O00069C9",
+          "stop_name": "Manal",
+          "stop_lat": -22.902687,
+          "stop_lon": -43.561906
+        },
+        {
+          "stop_id": "5144O00081C0",
+          "stop_name": "Gralha",
+          "stop_lat": -22.885229,
+          "stop_lon": -43.569268
+        },
+        {
+          "stop_id": "5144O00190C0",
+          "stop_name": "Antonio Dias",
+          "stop_lat": -22.89291,
+          "stop_lon": -43.56247
+        },
+        {
+          "stop_id": "5144O00296C9",
+          "stop_name": "Manuel Caldeira de Alvarenga",
+          "stop_lat": -22.901005,
+          "stop_lon": -43.573279
+        },
+        {
+          "stop_id": "5144O00365C0",
+          "stop_name": "Jardim Letícia",
+          "stop_lat": -22.87671,
+          "stop_lon": -43.57466
+        },
+        {
+          "stop_id": "5144O00385C0",
+          "stop_name": "Bairro Amazonas",
+          "stop_lat": -22.88307,
+          "stop_lon": -43.570716
+        },
+        {
+          "stop_id": "5144O00342C9",
+          "stop_name": "Manuel Caldeira de Alvarenga",
+          "stop_lat": -22.901173,
+          "stop_lon": -43.573531
+        },
+        {
+          "stop_id": "5144O00406C0",
+          "stop_name": "Olavo Pereira dos Santos",
+          "stop_lat": -22.874854,
+          "stop_lon": -43.576511
+        },
+        {
+          "stop_id": "5144O00386C0",
+          "stop_name": "Jean Guériot",
+          "stop_lat": -22.879459,
+          "stop_lon": -43.573448
+        },
+        {
+          "stop_id": "5144O00388C0",
+          "stop_name": "Jardim Letícia",
+          "stop_lat": -22.87663,
+          "stop_lon": -43.57456
+        },
+        {
+          "stop_id": "5144O00436C0",
+          "stop_name": "Rio Manso",
+          "stop_lat": -22.89636,
+          "stop_lon": -43.568136
+        },
+        {
+          "stop_id": "5144O00408C0",
+          "stop_name": "Alfredo de Moraes",
+          "stop_lat": -22.89985,
+          "stop_lon": -43.55893
+        },
+        {
+          "stop_id": "5144O00454C0",
+          "stop_name": "São Gervásio",
+          "stop_lat": -22.893736,
+          "stop_lon": -43.574575
+        },
+        {
+          "stop_id": "5144O00426C0",
+          "stop_name": "Ponto Final: Campo Grande :: Linhas para Zona Oeste (via Rua Barcelos Domingos)",
+          "stop_lat": -22.902398,
+          "stop_lon": -43.561559
+        },
+        {
+          "stop_id": "5144O00433C0",
+          "stop_name": "Ponto Final: Campo Grande :: Rua Gianerini",
+          "stop_lat": -22.901446,
+          "stop_lon": -43.560665
+        },
+        {
+          "stop_id": "5144O00529C0",
+          "stop_name": "Beniamino Gigli",
+          "stop_lat": -22.888422,
+          "stop_lon": -43.567857
+        },
+        {
+          "stop_id": "5144O00525C0",
+          "stop_name": "Olavo Pereira dos Santos",
+          "stop_lat": -22.87496,
+          "stop_lon": -43.576549
+        },
+        {
+          "stop_id": "5144O00526C0",
+          "stop_name": "Santa Maria",
+          "stop_lat": -22.873853,
+          "stop_lon": -43.578323
+        },
+        {
+          "stop_id": "5144O00537C0",
+          "stop_name": "Jean Guériot",
+          "stop_lat": -22.879691,
+          "stop_lon": -43.573618
+        },
+        {
+          "stop_id": "5144O00521C9",
+          "stop_name": "Ponche Verde",
+          "stop_lat": -22.902681,
+          "stop_lon": -43.574319
+        },
+        {
+          "stop_id": "5144O00347C0",
+          "stop_name": "São Basílio",
+          "stop_lat": -22.89395,
+          "stop_lon": -43.57565
+        },
+        {
+          "stop_id": "5144O00452C2",
+          "stop_name": "André Gonçalves",
+          "stop_lat": -22.895458,
+          "stop_lon": -43.576681
+        },
+        {
+          "stop_id": "lvki",
+          "stop_name": "Bairro Amazonas",
+          "stop_lat": -22.883671,
+          "stop_lon": -43.570325
+        },
+        {
+          "stop_id": "5144O00522C9",
+          "stop_name": "Ponche Verde",
+          "stop_lat": -22.90299,
+          "stop_lon": -43.574216
+        },
+        {
+          "stop_id": "5144O00520C0",
+          "stop_name": "Ponto Final: Campo Grande :: Rua Aracaju",
+          "stop_lat": -22.90082,
+          "stop_lon": -43.56116
+        },
+        {
+          "stop_id": "5144O00640C0",
+          "stop_name": "Asa Branca",
+          "stop_lat": -22.879259,
+          "stop_lon": -43.594783
+        },
+        {
+          "stop_id": "lodg",
+          "stop_name": "Praça Daniel Lames",
+          "stop_lat": -22.894941,
+          "stop_lon": -43.569396
+        },
+        {
+          "stop_id": "27mw",
+          "stop_name": "Praça Daniel Lames",
+          "stop_lat": -22.895123,
+          "stop_lon": -43.569436
+        },
+        {
+          "stop_id": "n6kd",
+          "stop_name": "Sardoal",
+          "stop_lat": -22.897609,
+          "stop_lon": -43.566941
+        },
+        {
+          "stop_id": "g4m9",
+          "stop_name": "Sardoal",
+          "stop_lat": -22.897817,
+          "stop_lon": -43.566998
+        },
+        {
+          "stop_id": "27rb",
+          "stop_name": "Renato Gabizo",
+          "stop_lat": -22.87984,
+          "stop_lon": -43.592446
+        },
+        {
+          "stop_id": "gwjd",
+          "stop_name": "Constituinte",
+          "stop_lat": -22.879889,
+          "stop_lon": -43.592787
+        },
+        {
+          "stop_id": "wwxe",
+          "stop_name": "Serra da Canastra",
+          "stop_lat": -22.88068,
+          "stop_lon": -43.589729
+        },
+        {
+          "stop_id": "xz6j",
+          "stop_name": "Capios",
+          "stop_lat": -22.880441,
+          "stop_lon": -43.590934
+        },
+        {
+          "stop_id": "9rco",
+          "stop_name": "Oiticica",
+          "stop_lat": -22.884157,
+          "stop_lon": -43.565402
+        },
+        {
+          "stop_id": "1h51",
+          "stop_name": "CIEP Octavio Malta",
+          "stop_lat": -22.884476,
+          "stop_lon": -43.619081
+        },
+        {
+          "stop_id": "op9b",
+          "stop_name": "CIEP Octavio Malta",
+          "stop_lat": -22.884401,
+          "stop_lon": -43.619176
+        },
+        {
+          "stop_id": "x8gm",
+          "stop_name": "Roseira do Novo Campinho",
+          "stop_lat": -22.881723,
+          "stop_lon": -43.61789
+        },
+        {
+          "stop_id": "ve0b",
+          "stop_name": "Roseira do Novo Campinho",
+          "stop_lat": -22.881708,
+          "stop_lon": -43.618008
+        },
+        {
+          "stop_id": "h1ip",
+          "stop_name": "Vicente de Araújo",
+          "stop_lat": -22.878919,
+          "stop_lon": -43.616638
+        },
+        {
+          "stop_id": "b6l2",
+          "stop_name": "Vicente de Araújo",
+          "stop_lat": -22.878996,
+          "stop_lon": -43.616775
+        },
+        {
+          "stop_id": "31yx",
+          "stop_name": "Soldado Rafael Buzarelo",
+          "stop_lat": -22.894026,
+          "stop_lon": -43.575197
+        },
+        {
+          "stop_id": "c5ej",
+          "stop_name": "André Gonçalves",
+          "stop_lat": -22.89476,
+          "stop_lon": -43.576812
+        },
+        {
+          "stop_id": "bw19",
+          "stop_name": "Paulino de Oliveira",
+          "stop_lat": -22.893685,
+          "stop_lon": -43.573078
+        },
+        {
+          "stop_id": "oyys",
+          "stop_name": "São Tito",
+          "stop_lat": -22.893502,
+          "stop_lon": -43.57259
+        },
+        {
+          "stop_id": "xi4n",
+          "stop_name": "Bromélia",
+          "stop_lat": -22.873889,
+          "stop_lon": -43.578606
+        }
+      ]
+    }
+  ],
+  "exceptions": {
+    "boundaryOrAmbiguous": [
+      {
+        "stop_id": "5145O00023C9",
+        "stop_name": "Felixlândia",
+        "stop_lat": -22.90687,
+        "stop_lon": -43.53494,
+        "reason": "boundary",
+        "memberships": [
+          {
+            "code": 144,
+            "name": "Campo Grande"
+          }
+        ]
+      }
+    ],
+    "invalid": []
+  },
+  "reconciliation": {
+    "source": 7600,
+    "assignedPilot": 1112,
+    "outsidePilot": 6487,
+    "boundaryOrAmbiguous": 1,
+    "invalid": 0
+  }
+}

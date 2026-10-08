@@ -20,6 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run prepare:public-data
       - run: npm run validate:data
+      - run: npm run test:neighborhood-transport
       - run: node scripts/validate-cameras.mjs
       - run: python3 scripts/cameras/test_stream_identity_rebuild.py
       - run: npm test

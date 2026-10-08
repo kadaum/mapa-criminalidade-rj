@@ -1,6 +1,6 @@
 # Fontes, unidades e direitos de uso
 
-A licença MIT cobre o código, **não** os conjuntos de terceiros. Antes de redistribuir dados ou hospedar uma cópia, verifique os termos atuais de cada fonte. Este candidato versiona somente os snapshots estatísticos do ISP-RJ cuja publicação no catálogo estadual indica PDDL. As licenças específicas das geometrias, relações territoriais, população derivada e catálogo de câmeras ainda precisam ser confirmadas; esses arquivos ficam ignorados pelo Git.
+A licença MIT cobre o código, **não** os conjuntos de terceiros. Antes de redistribuir dados ou hospedar uma cópia, verifique os termos atuais de cada fonte. Este candidato versiona os snapshots estatísticos do ISP-RJ cuja publicação no catálogo estadual indica PDDL e o recorte derivado de transporte do SPPO cuja fonte oficial confirma CC BY 4.0. As licenças específicas das geometrias, relações territoriais, população derivada e catálogo de câmeras ainda precisam ser confirmadas; esses arquivos ficam ignorados pelo Git.
 
 | Conjunto | Fonte oficial | Uso e frequência |
 | --- | --- | --- |
@@ -10,6 +10,7 @@ A licença MIT cobre o código, **não** os conjuntos de terceiros. Antes de red
 | Bairros | [Prefeitura do Rio](https://services1.arcgis.com/OlP4dGNtIcnD3RYf/ArcGIS/rest/services/db_MI_Bairros/FeatureServer/0) | Camada de contexto, não unidade de contagem policial |
 | População | [IBGE Censo 2022](https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html?edicao=41852&t=resultados) | Derivação por setores censitários; denominador residente fixo, não população flutuante |
 | Câmeras | Catálogos e páginas públicas descritos em [docs/public-cameras.md](docs/public-cameras.md) | Referências e evidências de disponibilidade; não contém vídeo; disponibilidade muda |
+| Transporte | [Camada municipal Paradas do SPPO](https://www.arcgis.com/home/item.html?id=fd07613c9a1c45299389c0f7cff8e2a0) | Recorte derivado de pontos cadastrados nos cinco bairros piloto; fonte oficial confirma CC BY 4.0; não confirma operação |
 | Mapa-base | [OpenStreetMap](https://www.openstreetmap.org/copyright), [política de tiles](https://operations.osmfoundation.org/policies/tiles/) | Exige atribuição; serviço sem SLA para uso irrestrito, sem download em massa |
 
 ## Bootstrap local
@@ -23,7 +24,7 @@ A licença MIT cobre o código, **não** os conjuntos de terceiros. Antes de red
 - `neighborhoods-rio.geojson`
 - `public-cameras.json`
 
-O bootstrap não usa credenciais, não baixa mídia e não concede licença de redistribuição. Os metadados internos e a documentação de cada fonte preservam a proveniência. Esses seis artefatos, `neighborhood-context.json` e os cinco cards `bairro-*.png` são saídas locais ignoradas pelo Git.
+O bootstrap não usa credenciais, não baixa mídia e não concede licença de redistribuição. Os metadados internos e a documentação de cada fonte preservam a proveniência. Esses seis artefatos, `neighborhood-context.json` e os cinco cards `bairro-*.png` são saídas locais ignoradas pelo Git. O único derivado de terceiro versionado além dos três snapshots do ISP-RJ é `public/data/neighborhood-transport.json`; ele contém somente o recorte SPPO documentado em [docs/neighborhood-transport.md](docs/neighborhood-transport.md), não o snapshot bruto de 7.600 pontos nem arquivos de geometria, IBGE, câmeras, credenciais ou dados de usuário.
 
 ## Reprodução territorial
 

@@ -30,7 +30,7 @@ npm run dev
 
 ## Dados públicos do candidato
 
-O espelho público contém o código, a proveniência e os snapshots estatísticos do ISP-RJ com licença PDDL. Para executar localmente as telas que dependem de catálogo ou geometria, faça bootstrap somente dos caminhos allowlisted abaixo a partir do snapshot público existente do Site; não trate esse espelho como a fonte primária nem redistribua esses arquivos sem confirmar a licença do publicador:
+O espelho público contém o código, a proveniência, os snapshots estatísticos do ISP-RJ com licença PDDL e o recorte derivado de transporte do SPPO com licença CC BY 4.0 confirmada pela fonte oficial. Para executar localmente as telas que dependem de catálogo ou geometria, faça bootstrap somente dos caminhos allowlisted abaixo a partir do snapshot público existente do Site; não trate esse espelho como a fonte primária nem redistribua esses arquivos sem confirmar a licença do publicador:
 
 ```text
 https://mapa-criminalidade-rj.ricardoguia.com/data/camera-location-evidence.json
@@ -42,6 +42,8 @@ https://mapa-criminalidade-rj.ricardoguia.com/data/public-cameras.json
 ```
 
 Esses seis artefatos ficam fora do candidato por terem licença específica não confirmada (incluindo geometrias, catálogo CamerasRJ, evidências e população derivada). O bootstrap é local, sem credenciais e sem download de vídeo ou mídia; preserve a atribuição e as limitações documentadas no Site. As estatísticas ISP-RJ continuam reproduzíveis por `npm run sync:data` e `npm run validate:data`.
+
+Além dos três snapshots do ISP-RJ, o candidato publica somente `public/data/neighborhood-transport.json`, um recorte derivado de cinco bairros da camada municipal Paradas do SPPO. A fonte é a Prefeitura do Rio, item ArcGIS `fd07613c9a1c45299389c0f7cff8e2a0`, sob CC BY 4.0; o snapshot bruto de 7.600 pontos, geometrias, arquivos do IBGE, catálogo de câmeras, `.env`, `.openai`, dados de usuário e trilhas de auditoria permanecem fora do escopo público.
 
 ## Validação
 

@@ -42,7 +42,7 @@ Não publique endereços exatos de pessoas, protocolos de contribuição, IDs de
 
 ## Dados e fontes
 
-O escopo confirmado para o repositório público contém somente os três snapshots estatísticos do ISP-RJ. Os seis conjuntos de terceiros usados pelo bootstrap local, o contexto derivado do IBGE e os cinco cartões PNG de bairro permanecem dados locais ignorados, com licença específica ainda não confirmada; a presença desses arquivos no diretório de trabalho não os torna parte do conteúdo publicável.
+O escopo confirmado para o repositório público contém os três snapshots estatísticos do ISP-RJ e somente um derivado de terceiro: `public/data/neighborhood-transport.json`, recorte SPPO sob CC BY 4.0 confirmada pela fonte oficial. Os seis conjuntos de terceiros usados pelo bootstrap local, o contexto derivado do IBGE e os cinco cartões PNG de bairro permanecem dados locais ignorados, com licença específica ainda não confirmada; a presença desses arquivos no diretório de trabalho não os torna parte do conteúdo publicável.
 
 Cada atualização deve conservar a atribuição ao ISP-RJ, IBGE, Prefeitura ou operador correspondente. Para uma correção de fonte, registre o recorte temporal, o método de transformação, o hash quando aplicável e a limitação conhecida. A licença MIT cobre o código e não se estende automaticamente às estatísticas, ao catálogo de câmeras, às transmissões, às bases cartográficas ou às derivações de terceiros; confirme a licença específica antes de redistribuir um arquivo novo.
 
@@ -64,7 +64,7 @@ Na preparação histórica de 2026-10-07, a comparação somente leitura foi fei
 
 O inventário de mudanças deve ser obtido do diff atual; contagens anteriores de arquivos adicionados, modificados ou removidos foram descartadas por estarem desatualizadas. Também foram removidas deste registro referências a diretórios temporários e caminhos absolutos internos.
 
-Os três snapshots estatísticos do ISP-RJ são os únicos dados confirmados para o repositório público. Os seis artefatos de terceiros, o contexto IBGE e os cinco cartões de bairro podem continuar no diretório de trabalho para validação local, mas permanecem ignorados e fora do escopo publicável até que suas licenças sejam confirmadas. Nenhum ZIP, SHP, XLSX, dicionário ou outro arquivo bruto do IBGE faz parte do escopo público confirmado.
+Os três snapshots estatísticos do ISP-RJ e o recorte derivado SPPO são os únicos dados confirmados para o repositório público. Os seis artefatos de terceiros, o contexto IBGE e os cinco cartões de bairro podem continuar no diretório de trabalho para validação local, mas permanecem ignorados e fora do escopo publicável até que suas licenças sejam confirmadas. O snapshot bruto de 7.600 pontos, qualquer geometria, ZIP, SHP, XLSX, dicionário ou outro arquivo bruto do IBGE não faz parte do escopo público confirmado.
 
 O rascunho PR #9 acompanha a preparação, sem merge. A auditoria de dependências continua bloqueando o gate conforme o resultado atual v81 descrito abaixo; as contagens anteriores são registros históricos. A evidência detalhada da rodada local v66 está no relatório persistente da auditoria local.
 
