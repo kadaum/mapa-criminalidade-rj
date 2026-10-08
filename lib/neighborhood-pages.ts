@@ -18,6 +18,11 @@ export function neighborhoodBySlug(slug: string) {
   return pilotNeighborhoods.find((item) => item.slug === slug);
 }
 
+export function pilotForRelatedName(name: string) {
+  const normalized = name.replace(/\s*\(parte\)$/i, '').toLocaleLowerCase('pt-BR');
+  return pilotNeighborhoods.find((item) => item.name.toLocaleLowerCase('pt-BR') === normalized);
+}
+
 export function cispsForNeighborhood(name: string) {
   const expected = name.toLocaleLowerCase('pt-BR');
   return areas.filter((area) => area.neighborhoods.some((raw) =>

@@ -11,6 +11,7 @@ export function SiteHeader({ date }: { date?: string }) {
     [`/${query}`, 'Criminalidade'],
     [`/cameras${query}`, 'Câmeras'],
     [`/meu-bairro${query}`, 'Meu bairro'],
+    ['/bairros', 'Bairros'],
     ['/boletins', 'Boletins'],
   ];
   return (
@@ -38,13 +39,13 @@ export function SiteHeader({ date }: { date?: string }) {
         </a>
         <nav
           aria-label="Navegação principal"
-          className="order-3 grid w-full grid-cols-2 gap-1 sm:order-none sm:flex sm:w-auto sm:overflow-visible min-[360px]:flex min-[360px]:overflow-visible"
+          className="order-3 flex w-full flex-wrap justify-center gap-1 sm:order-none sm:w-auto sm:justify-start"
         >
           {primary.map(([href, label]) => (
             <a
               key={href}
               href={href}
-              className="inline-flex min-h-10 items-center justify-center rounded-lg px-1.5 text-sm font-semibold underline-offset-4 hover:bg-white/10 hover:underline sm:shrink-0 sm:px-3"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg px-3 text-sm font-semibold underline-offset-4 hover:bg-white/10 hover:underline"
             >
               {label}
             </a>

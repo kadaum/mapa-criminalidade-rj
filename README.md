@@ -47,6 +47,8 @@ Além dos três snapshots do ISP-RJ, o candidato publica somente `public/data/ne
 
 ## Validação
 
+Direção visual e decisões de composição: [DESIGN.md](DESIGN.md).
+
 `npm run validate:data` bloqueia a publicação se houver duplicidade de CISP/mês, valor negativo ou não inteiro, quebra no conjunto de colunas, CISP sem geometria, geometria sem CISP atual, menos de 41 áreas da capital, população sem reconciliação ou falta do hash da fonte.
 
 O workflow em `.github/workflows/update-data.yml` consulta a fonte diariamente, valida, recompila e versiona o snapshot apenas quando o arquivo muda.
