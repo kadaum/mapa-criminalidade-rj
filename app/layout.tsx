@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Analytics } from '@/components/analytics';
+import { PrivacyControls, PrivacyPreferencesButton } from '@/components/privacy-controls';
 import './globals.css';
 
 const geistSans = Geist({
@@ -13,8 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mapa-criminalidade-rj.ricardoguia.com'),
   title: 'Mapa da Criminalidade RJ — Registros policiais oficiais por região',
   description: 'Explore a criminalidade registrada por área de delegacia no município do Rio, com dados oficiais, período, população e limitações visíveis.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
   openGraph: {
     title: 'Mapa da Criminalidade RJ',
     description: 'Registros policiais oficiais por região do Rio, com contexto, período e limitações.',
@@ -40,7 +52,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a className="skip-content-link" href="#conteudo-principal">
+          Pular para o conteúdo principal
+        </a>
+        <Analytics />
         {children}
+        <footer className="mx-auto flex max-w-6xl flex-wrap gap-5 px-4 py-6 text-sm text-[#526078]"><Link className="underline" href="/privacidade">Privacidade (LGPD)</Link><Link className="underline" href="/termos">Termos de uso</Link><Link className="underline" href="/contribuir">Contribuir</Link><Link className="underline" href="/bairros">Bairros</Link><PrivacyPreferencesButton /></footer>
+        <PrivacyControls />
       </body>
     </html>
   );

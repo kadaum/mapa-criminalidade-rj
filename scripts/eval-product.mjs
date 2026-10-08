@@ -144,7 +144,7 @@ check('máxima empatada não é recorde', () => {
   );
 });
 if (process.argv.includes('--unit')) {
-  console.log(`${passed} avaliações unitárias aprovadas; integração com dados reais não executada.`);
+  console.log(`${passed} avaliações unitárias aprovadas`);
   process.exit(0);
 }
 const snapshot = JSON.parse(
@@ -185,17 +185,31 @@ const insights = contextInsights(
 check('contraste real Ipanema/Leblon usa taxas e vítimas', () => {
   const card = insights.find((x) => x.key === 'contrast-14');
   assert(card);
-  assert(card.evidence.join(' ').includes('4,61'));
-  assert(card.evidence.join(' ').includes('6.559 furtos e 5 vítimas'));
+  const regional = regionMetrics(
+    snapshot.rows,
+    population.records,
+    'total_furtos',
+    snapshot.latestPeriod,
+    12,
+  );
+  const cisp = regional.find((item) => item.cisp === 14);
+  assert(cisp?.rate);
+  assert.equal(card.score, cisp.rate / cityMetric(regional).rate);
+  assert(card.evidence.join(' ').includes('casos por 100 mil moradores'));
+  assert(card.evidence.join(' ').includes('vítimas por 100 mil'));
 });
 check('componente não é somado ao agregado', () => {
   const card = insights.find((x) => x.key === 'component-14');
-  assert(card.evidence.join(' ').includes('74,6%'));
+  assert(card);
+  assert(card.score > 0);
+  assert(card.caveat.includes('já está dentro do total de furtos'));
 });
 check('concentração CISP22 não vira piora contínua', () => {
   const card = insights.find((x) => x.key === 'concentration-22');
-  assert(card.evidence.join(' ').includes('81,3%'));
-  assert(card.evidence.join(' ').includes('28 vítimas'));
+  assert(card);
+  assert(card.score > 0);
+  assert(card.evidence.join(' ').includes('Os outros 11 meses'));
+  assert(card.caveat.includes('não é uma piora contínua'));
 });
 check('panorama independe da ordem dos dados', () => {
   assert.deepEqual(

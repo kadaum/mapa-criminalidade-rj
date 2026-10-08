@@ -1,0 +1,36 @@
+name: Relato de problema
+description: Relate um comportamento incorreto na interface ou nos testes.
+title: "[bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Não inclua tokens, cookies, documentos, BOs, endereços exatos ou outras informações pessoais.
+  - type: input
+    id: route
+    attributes:
+      label: Rota ou área
+      description: Informe a rota pública e a seção afetada.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos reproduzíveis
+      description: Liste somente os passos necessários para reproduzir.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Esperado e atual
+      description: Descreva o comportamento esperado e o observado.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validação local
+      description: Informe os testes ou comandos executados, se houver.

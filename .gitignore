@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+__pycache__/
 /.pnp
 .pnp.*
 .yarn/*
@@ -19,6 +20,7 @@
 # misc
 .DS_Store
 *.pem
+*.tsbuildinfo
 
 # debug
 npm-debug.log*
@@ -35,9 +37,46 @@ next-env.d.ts
 /dist/
 /.wrangler/
 /outputs/
+/output/playwright/
+/.playwright-cli/
 /work/
+
+# Hosting identity is local to the Sites project and is never part of the public mirror.
 /.openai/
-/public/data/
-/research/
-*.tsbuildinfo
+
+# Third-party runtime data with redistribution terms that have not been confirmed.
+/public/data/camera-location-evidence.json
+/public/data/cisp-neighborhoods.json
+/public/data/cisp-population.json
+/public/data/cisp-rio.geojson
+/public/data/neighborhoods-rio.geojson
+/public/data/neighborhood-labels.json
+/public/data/public-cameras.json
+
+# Generated IBGE context and neighborhood share cards; build locally from official compact sources.
+/public/data/neighborhood-context.json
+/public/share/bairro-barra-da-tijuca.png
+/public/share/bairro-campo-grande.png
+/public/share/bairro-centro.png
+/public/share/bairro-copacabana.png
+/public/share/bairro-tijuca.png
+
+# Mutable playback audit checkpoints; publish reviewed snapshots instead.
+/research/cameras/full-audit-camerasrj-*.jsonl
+/research/cameras/full-audit-camerasrj-*.json
+/research/cameras/full-audit-camerasrj-*.log
+/research/cameras/full-audit-camerasrj-*.stop
+/research/cameras/mapped-scenes-2026-09-26.jsonl
+/research/cameras/mapped-scenes-2026-09-26.json
+/.perf-tools/mapped-scenes/
+/.perf-tools/mapped-scenes.out.log
+/.perf-tools/mapped-scenes.err.log
+
+# Local research and logs are operational artifacts, never public release inputs.
+# The single camera identity manifest below is a reviewed, schema-validated
+# build input containing only stable public operator pages and public stream IDs.
+/research/*
+!/research/cameras/
+/research/cameras/*
+!/research/cameras/stream-identities.json
 *.log

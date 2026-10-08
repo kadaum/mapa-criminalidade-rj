@@ -178,8 +178,20 @@ function parseDelimited(text) {
 }
 
 function number(value) {
+  if (value === undefined || String(value).trim() === '')
+    throw new Error('Missing numeric field in source');
   const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : 0;
+  if (!Number.isSafeInteger(parsed) || parsed < 0)
+    throw new Error(`Invalid non-negative integer in source: ${value}`);
+  return parsed;
+}
+
+function decodeCsv(buffer) {
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(buffer);
+  } catch {
+    return new TextDecoder('windows-1252').decode(buffer);
+  }
 }
 
 const headers = {
@@ -198,7 +210,7 @@ if (!neighborhoodResponse.ok)
     `Rio neighborhood download failed: ${neighborhoodResponse.status}`,
   );
 const buffer = await response.arrayBuffer();
-const text = new TextDecoder('windows-1252').decode(buffer);
+const text = decodeCsv(buffer);
 const all = parseDelimited(text).filter(
   (row) => row.munic === 'Rio de Janeiro',
 );
@@ -210,6 +222,14 @@ const periods = [
   ),
 ].sort();
 const selectedPeriods = periods.slice(-KEEP_MONTHS);
+if (selectedPeriods.length !== KEEP_MONTHS)
+  throw new Error(`Expected ${KEEP_MONTHS} consecutive months`);
+for (let i = 1; i < selectedPeriods.length; i++) {
+  const [year, month] = selectedPeriods[i - 1].split('-').map(Number);
+  const expected = new Date(Date.UTC(year, month, 1)).toISOString().slice(0, 7);
+  if (selectedPeriods[i] !== expected)
+    throw new Error(`Missing month after ${selectedPeriods[i - 1]}`);
+}
 const selected = new Set(selectedPeriods);
 const rows = all
   .filter((row) =>
@@ -238,6 +258,16 @@ if (
   latestRows.some((row) => Object.values(row.values).some((value) => value < 0))
 )
   throw new Error('Negative indicator found');
+const seen = new Set();
+for (const row of rows) {
+  const key = `${row.cisp}:${row.period}`;
+  if (seen.has(key) || !uniqueCisps.has(row.cisp))
+    throw new Error(`Duplicate or unexpected CISP: ${key}`);
+  seen.add(key);
+}
+for (const period of selectedPeriods)
+  if (rows.filter((row) => row.period === period).length !== 41)
+    throw new Error(`Incomplete CISP coverage: ${period}`);
 
 const payload = {
   schemaVersion: 1,
@@ -265,9 +295,7 @@ const payload = {
 };
 
 const territoryBuffer = await territoryResponse.arrayBuffer();
-const territoryRows = parseDelimited(
-  new TextDecoder('windows-1252').decode(territoryBuffer),
-)
+const territoryRows = parseDelimited(decodeCsv(territoryBuffer))
   .filter((row) => row['Município'] === 'Rio de Janeiro')
   .map((row) => ({
     cisp: number(row.CISP),
@@ -300,7 +328,7 @@ const neighborhoodFeatures = (neighborhoodGeo.features ?? [])
       code: number(feature.properties.Codigo),
       name: String(feature.properties.NOME).trim(),
       ra: number(feature.properties.RA),
-      areaM2: number(feature.properties.AreaBairro),
+      areaM2: Number(feature.properties.AreaBairro),
     },
   }))
   .sort((a, b) => a.properties.code - b.properties.code);
@@ -333,9 +361,28 @@ const neighborhoodPayload = {
     title: 'Limite de Bairros',
     publisher: 'Prefeitura da Cidade do Rio de Janeiro',
     url: NEIGHBORHOOD_SOURCE,
+    sha256: createHash('sha256').update(JSON.stringify(neighborhoodFeatures)).digest('hex'),
   },
   features: neighborhoodFeatures,
 };
+
+try {
+  const [oldSnapshot, oldTerritories, oldNeighborhoods] = await Promise.all([
+    fs.readFile(OUTPUT, 'utf8').then(JSON.parse),
+    fs.readFile(TERRITORY_OUTPUT, 'utf8').then(JSON.parse),
+    fs.readFile(NEIGHBORHOOD_OUTPUT, 'utf8').then(JSON.parse),
+  ]);
+  if (
+    oldSnapshot.source.sha256 === payload.source.sha256 &&
+    oldTerritories.source.sha256 === territoryPayload.source.sha256 &&
+    oldNeighborhoods.source.sha256 === neighborhoodPayload.source.sha256
+  ) {
+    console.log(JSON.stringify({ status: 'unchanged', latestPeriod, sha256: payload.source.sha256 }));
+    process.exit(0);
+  }
+} catch {
+  // A missing or unreadable previous snapshot is replaced only after all inputs validate.
+}
 
 await fs.mkdir(new URL('../public/data/', import.meta.url), {
   recursive: true,

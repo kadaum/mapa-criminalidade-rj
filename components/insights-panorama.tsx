@@ -13,6 +13,7 @@ export function InsightsPanorama({
   range,
   prior,
   followLatest,
+  comparison = 'previous',
 }: {
   rows: CrimeRow[];
   populations: { cisp: number; population: number }[];
@@ -23,8 +24,9 @@ export function InsightsPanorama({
   range: string;
   prior: string;
   followLatest: boolean;
+  comparison?: 'previous' | 'year' | 'none';
 }) {
-  const insights = contextInsights(rows, populations, end, months);
+  const insights = contextInsights(rows, populations, end, months, comparison);
   const fmt = (n: number | null, digits = 0) =>
     n === null
       ? 'Indisponível'
@@ -34,7 +36,7 @@ export function InsightsPanorama({
       <div className="mb-8 grid divide-y divide-[#dce2ed] border-y border-[#dce2ed] md:grid-cols-3 md:divide-x md:divide-y-0">
         {['total_roubos', 'total_furtos', 'letalidade_violenta'].map((id) => {
           const m = cityMetric(
-            regionMetrics(rows, populations, id, end, months),
+            regionMetrics(rows, populations, id, end, months, comparison),
           );
           const meta = indicators.find((i) => i.id === id);
           return (
@@ -53,14 +55,18 @@ export function InsightsPanorama({
                   {meta?.unit}
                 </span>
               </p>
-              <p className="mt-2 text-sm font-medium text-[#526078]">Período: {range}</p>
+              <p className="mt-2 text-sm font-medium text-[#526078]">
+                Período: {range}
+              </p>
               <p className="mt-3 text-sm text-[#526078]">
-                Período anterior ({prior}): {fmt(m.previous)} {meta?.unit}.
+                Referência ({prior}): {fmt(m.previous)} {meta?.unit}.
               </p>
               <p className="mt-2 text-sm font-semibold text-[#324c86]">
                 {m.change === null
                   ? 'Sem dados suficientes para comparar esses períodos.'
-                  : m.change === 0 ? `Sem mudança em relação a ${prior}.` : `${fmt(Math.abs(m.change), 1)}% ${m.change > 0 ? 'a mais' : 'a menos'} em relação a ${prior}.`}
+                  : m.change === 0
+                    ? `Sem mudança em relação a ${prior}.`
+                    : `${fmt(Math.abs(m.change), 1)}% ${m.change > 0 ? 'a mais' : 'a menos'} em relação a ${prior}.`}
               </p>
             </div>
           );
@@ -122,7 +128,7 @@ export function InsightsPanorama({
               </p>
             )}
             <a
-              href={`/${x.kind === 'concentration' ? 'meu-bairro' : 'comparar'}?cisp=${x.cisp}&indicador=${x.indicator}&meses=${months}&fim=${followLatest ? 'latest' : end}&visualizacao=${x.kind === 'contrast' ? 'taxa' : 'quantidade'}`}
+              href={`/${x.kind === 'concentration' ? 'meu-bairro' : 'comparar'}?cisp=${x.cisp}&indicador=${x.indicator}&meses=${months}&fim=${followLatest ? 'latest' : end}&comparacao=${comparison}&visualizacao=${x.kind === 'contrast' ? 'taxa' : 'quantidade'}`}
               className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#2455dc]"
             >
               {x.kind === 'concentration'

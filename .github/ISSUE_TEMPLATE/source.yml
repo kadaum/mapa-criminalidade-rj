@@ -1,0 +1,39 @@
+name: Correção de fonte ou dado
+description: Relate um problema reproduzível em fonte, recorte ou transformação de dados.
+title: "[source] "
+labels:
+  - data
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Aponte a fonte original e descreva a limitação. Não envie planilhas com dados pessoais nem substitua uma ausência por zero.
+  - type: input
+    id: source
+    attributes:
+      label: Fonte original
+      description: URL, publicador e arquivo ou tabela consultada.
+    validations:
+      required: true
+  - type: input
+    id: period
+    attributes:
+      label: Recorte temporal
+      description: Informe competência inicial e final ou o período exato afetado.
+      placeholder: 2025-01 a 2026-08
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Método e resultado esperado
+      description: Explique colunas, junções, filtros e a diferença observada.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reprodução
+      description: Inclua o comando ou passos locais que reproduzem o problema.
+    validations:
+      required: true
