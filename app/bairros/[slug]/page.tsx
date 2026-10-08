@@ -123,12 +123,19 @@ export default async function Neighborhood({ params }: Params) {
           >
             {item.name}
           </h1>
+          {transport && (
+            <p className="mt-4 text-sm leading-6 text-[#d5deed] lg:hidden">
+              <strong className="mr-1 text-2xl text-white tabular-nums">
+                {fmt(transport.count)}
+              </strong>
+              pontos no cadastro municipal de ônibus (SPPO)
+            </p>
+          )}
           <p className="mt-4 max-w-2xl text-base leading-7 text-[#d5deed]">
             {cisps.length === 1
-              ? 'Uma região policial se relaciona'
-              : `${cisps.length} regiões policiais se relacionam`}{' '}
-            ao bairro. Consulte os registros por CISP, o contexto urbano do IBGE
-            e o cadastro municipal de transporte.
+              ? '1 região policial relacionada.'
+              : `${cisps.length} regiões policiais relacionadas.`}{' '}
+            Consulte registros por CISP e contexto urbano do bairro.
           </p>
           <nav
             aria-label="Seções desta página"
